@@ -15,9 +15,13 @@ This opens up vim to edit the text
 sub via_editor {
     my ($content) = @_;
 
+    # Create a tmp directory if it doesn't exist
+    my $folder = 'tmp';
+    mkdir $folder unless -d $folder;
+
     # Make a temporary file
     my ($fh, $filename) = tempfile("update-XXXX",
-        DIR    => 'tmp',
+        DIR    => $folder,
         SUFFIX => '.txt',
     );
 
