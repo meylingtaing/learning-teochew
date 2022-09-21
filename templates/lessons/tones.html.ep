@@ -1,0 +1,119 @@
+% layout 'wrapper-left';
+<style>
+.play-teochew { font-size: 1.5em }
+</style>
+
+<h1>Tones</h1>
+
+<p>
+There are 8 tones in Teochew. In many resources, you will see a number after
+each syllable, indicating which tone it is.
+</p>
+<div class="row"><div class="col-md-6 offset-md-3">
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Tone</th>
+      <th>Description</th>
+      <th colspan="4">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Middle</td>
+      %= include 'elements/translation-row', word => 'shirt'
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Falling</td>
+      %= include 'elements/translation-row', word => 'hand'
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Low Falling, Rising</td>
+      %= include 'elements/translation-row', word => 'vegetables'
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Middle Short</td>
+      %= include 'elements/translation-row', word => 'meat'
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>High</td>
+      %= include 'elements/translation-row', word => 'head'
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Rising</td>
+      %= include 'elements/translation-row', word => 'old'
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Low</td>
+      %= include 'elements/translation-row', word => 'big'
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>High Short</td>
+      %= include 'elements/translation-row', word => 'white'
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>
+Many words undergo tone change when placed in front of another word. The table
+below shows the same words as above, but placed in front of another word to
+demonstrate how their tones change.
+</p>
+<div class="row"><div class="col-md-6 offset-md-3">
+<table class="table table-sm">
+  <thead>
+    <th>Original Tone</th>
+    <th>Changed Tone</th>
+    <th colspan="4">Example</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td><td>1</td>
+      %= include 'elements/translation-row', word => 'clothes'
+    </tr>
+    <tr>
+      <td>2</td><td>6</td>
+      %= include 'elements/translation-row', word => 'finger'
+    </tr>
+    <tr>
+      <td>3</td><td>2 (or 5)</td>
+      %= include 'elements/translation-row', word => 'radish'
+    </tr>
+    <tr>
+      <td>4</td><td>8</td>
+      %= include 'elements/translation-row', word => 'dried, shredded pork'
+    </tr>
+    <tr>
+      <td>5</td><td>7</td>
+      %= include 'elements/translation-row', word => 'hair (on your head)'
+    </tr>
+    <tr>
+      <td>6</td><td>7</td>
+      %= include 'elements/translation-row', word => 'great grandmother'
+    </tr>
+    <tr>
+      <td>7</td><td>7</td>
+      <%= include 'elements/translation-row',
+            word => "aunt (dad's oldest sister)" %>
+    </tr>
+    <tr>
+      <td>8</td><td>4</td>
+      %= include 'elements/translation-row', word => 'napa cabbage'
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>In the translations on this site, if a word has undergone tone change, the
+spoken tone will be displayed in parentheses. If a word originally has tone 3 and undergoes tone change, I will always display tone 2 for it, but my audio clips will vary between actually saying it with tone 2 or tone 5. I'm not consistent 😅
+</p> 
+%= include 'elements/play_teochew'

@@ -1,0 +1,38 @@
+% layout 'wrapper-left';
+<style>
+.notes {
+    font-size: 1.2em;
+}
+</style>
+
+% if ($chinese and scalar @$chinese) {
+  <div class="text-sm-left text-center">
+  <h1>
+    <%= $chinese->[0]->{simplified} %>
+    % if ($chinese->[0]->{traditional}) {
+        (<%= $chinese->[0]->{traditional} %>)
+    % }
+  </h1>
+
+  <h2>
+  % for my $row (@$chinese) {
+      <%= $row->{pengim} %>
+      % if ($row->{audio}) {
+        %= include 'elements/play-teochew'
+        <audio src="/audio/<%= $row->{audio} %>"></audio>
+
+      % }
+      % unless (\$row == \$chinese->[-1]) {
+        |
+      % }
+  % }
+  </h2>
+  </div>
+
+%= include 'elements/play_teochew'
+
+<hr>
+% }
+
+<h5>Words containing <%= $character %>:</h5>
+%= include 'elements/all-translations-table', translations => $words

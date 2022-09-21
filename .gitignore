@@ -1,0 +1,8 @@
+local/*
+log/*
+tmp/*
+*.swp
+icons/*
+bin/hypnotoad.pid
+Teochew.sqlite
+Updates.sqlite

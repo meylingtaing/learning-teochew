@@ -1,0 +1,21 @@
+% layout 'wrapper-left';
+
+% for my $update (@$updates) {
+<h3><%= $update->{time_stamp} %></h3>
+<%== $update->{content} %>
+%   unless (\$update == \$updates->[-1]) {
+      <hr>
+%   }
+% }
+
+% if (defined $prev) {
+    <a href="/updates/<%= $prev %>" style="float:left">
+      << More Recent
+    </a>
+% }
+
+% if ($next) {
+    <a href="/updates/<%= $next %>" style="float:right">
+      Older >>
+    </a>
+% }

@@ -1,0 +1,16 @@
+% my $parent = stash('parent-elt') || 'body';
+<script>
+$(function() {
+  $("<%= $parent %>").on('click', '.play-teochew', function() {
+    var audio = $(this).next("audio");
+    if (audio.length) {
+        audio[0].play();
+    }
+    else {
+        var file = $(this).attr('data-audio');
+        audio = new Audio(file);
+        audio.play();
+    }
+  });
+});
+</script>

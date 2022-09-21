@@ -1,0 +1,19 @@
+% layout 'wrapper-left';
+% if (scalar @$results) {
+  <h5>
+    <%= scalar @$results %> result<%= scalar @$results == 1 ? '' : 's' %>
+    for "<%= $search %>"
+  </h5>
+
+<ul>
+%   for my $row (@$results) {
+      <li>
+        <a href="/english/<%= $row->{word} %>"><%= $row->{word} %></a>
+      </li>
+%   }
+</ul>
+
+% } else {
+    <h5>Sorry! I don't know how to translate any words like
+    "<%= $search %>".</h5>
+% }

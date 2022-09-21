@@ -1,0 +1,18 @@
+%# A single translation, as shown on the English page, or in the Flashcards
+%# Must have 'row' stashed
+% my $style = stash('hidden') ? 'style="display:none"' : '';
+% my $id = stash('id') ? 'id="' . stash('id') . '"' : '';
+<div class="translation" <%== $id %> <%== $style %>>
+  <span class="chinese nowrap mr-2 align-middle"><%= $row->{chinese} %></span>
+  % for my $pronunciation (@{ $row->{pronunciations} }) {
+    <span class="pengim nowrap mr-2 align-middle">
+      <%= $pronunciation->{pengim} %>
+    </span>
+    % if ($pronunciation->{audio}) {
+      %= include 'elements/play-teochew', audio => $pronunciation->{audio}
+    % }
+    % unless (\$pronunciation == \$row->{pronunciations}[-1]) {
+       | 
+    % }
+  % }
+</div>

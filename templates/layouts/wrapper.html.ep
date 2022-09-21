@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport"
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/ionicons.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <title>Teochew Flashcards</title>
+
+</head>
+
+<body>
+  <script src="/js/jquery-3.2.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+
+  %= include 'flashcard_selection'
+
+  %= content html => begin
+  <%= content %>
+  % end
+
+  %= include 'footer'
+</body>
+</html>

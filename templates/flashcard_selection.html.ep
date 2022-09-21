@@ -1,0 +1,117 @@
+<style>
+.nav-link { color: #0056b3; }
+.navbar-toggler { font-size: 1.5em }
+</style>
+<div class="container-fluid">
+
+  <div class="row mx-sm-1 my-2">
+    <div class="col">
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="/flashcards">Flashcards</a>
+
+        <span class="navbar-buttons">
+        <button class="navbar-toggler" type="button"
+         data-toggle="collapse" data-target="#search-form"
+         aria-controls="search-form" aria-expanded="false"
+         aria-label="Toggle search">
+          <i class="ion-search"></i>
+        </button>
+
+        <button class="navbar-toggler" type="button"
+         data-toggle="collapse" data-target="#flashcards-navbar"
+         aria-controls="flascards-navbar" aria-expanded="false"
+         aria-label="Toggle navigation">
+          <i class="ion-android-menu"></i>
+        </button>
+        </span>
+
+        <div id="flashcards-navbar" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" href="#">
+                Words
+              </a>
+              <div class="dropdown-menu">
+                % my @categories = Teochew::flashcard_sets;
+                % for my $category (@categories) {
+                    % my $name    = $category->{name};
+                    % my $display = $category->{display_name};
+                    <a class="dropdown-item" href="/flashcards/<%= $name %>">
+                      %= $display
+                    </a>
+                % }
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" href="#">
+                Numbers
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/flashcards/number/20">
+                  Up to 20
+                </a>
+                <a class="dropdown-item" href="/flashcards/number/100">
+                  Up to 100
+                </a>
+                <a class="dropdown-item" href="/flashcards/number/1000">
+                  Up to 1000
+                </a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/flashcards/time">
+                Clock Time
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/flashcards/phrase">
+                Sentences
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" href="#">
+                Lessons
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/lesson/numbers">
+                  Numbers (1-100)
+                </a>
+                <a class="dropdown-item" href="/lesson/tones">
+                  Tones
+                </a>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </nav>
+      <div id="search-form" class="d-md-block collapse">
+      <form class="form-row mt-3"
+       method="get" action="/translate">
+        <div class="col-sm-auto col-12">
+          <input id="translate" name="search" type="text"
+           placeholder="Enter english or chinese word"
+           class="mr-0 mr-sm-2 mb-2 mb-md-0 form-control">
+        </div>
+        <div class="col-sm-auto col-6">
+          <button type="submit"
+           class="btn btn-info form-control mr-0 mr-sm-2 mb-2 mb-md-0">
+            Translate
+          </button>
+        </div>
+        <div class="col-sm-auto col-6">
+          <button formaction="/search"
+           class="btn btn-info form-control mr-0 mb-2 mb-md-0">
+            Search
+          </button>
+        </div>
+      </form>
+      </div>
+
+      <hr>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+% layout 'wrapper-left';
+<style>
+.play-teochew { font-size: 1.5em }
+</style>
+
+<h1>Numbers (1-100)</h1>
+
+<p>
+Here are the numbers 1-10. If you're familiar with Mandarin, you'll notice that
+the Chinese characters are exactly the same in Teochew.
+</p>
+<%= include 'elements/translation-table',
+        words => [1,2,3,4,5,6,7,8,9,10] %>
+
+<p>
+And here are the numbers 11-19:
+</p>
+<%= include 'elements/translation-table',
+        words => [11,12,13,14,15,16,17,18,19] %>
+
+<p>
+You should notice a pattern here. For the most part, the numbers 11-19 can be
+formed by combining <b>jāp 十</b> and the ones digit. However, the "1" in 11
+and the "2" in 12 use a different translation than what's in the first table.
+Except for the actual numbers 1 and 2,
+<ul>
+  <li>A "1" in the ones digit should be pronounced <b>ik</b></li>
+  <li>A "2" in the ones digit should be pronounced <b>yí</b></li>
+</ul>
+</p>
+<p>
+Note that if a number has multiple syllables, every syllable except the last
+undergoes <a href="/lesson/tones">tone change</a>.
+</p>
+
+<p>
+We'll continue with the multiples of ten up to 100:
+</p>
+<%= include 'elements/translation-table',
+        words => [20,30,40,50,60,70,80,90,100] %>
+
+<p>
+This also follows a very simple formula. You just place the number in the tens
+digit before <b>jāp 十</b>. A "2" in the tens digit is always pronounced
+<b>yí</b>.
+</p>
+
+<p>
+For all the other numbers below 100, you can use this formula:
+<b>(tens digit) jap (ones digit)</b>. Here are some examples:
+</p>
+<%= include 'elements/translation-table',
+        words => [25,42,68,71,99] %>
+
+<p>
+You can view a list of all of the numbers up to 100
+<a href="/category/number/100">here</a>.
+</p>
+
+%= include 'elements/play_teochew'

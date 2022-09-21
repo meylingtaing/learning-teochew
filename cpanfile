@@ -1,0 +1,12 @@
+requires 'DBD::SQLite';
+requires 'Mojolicious';
+requires 'Date::Parse';
+requires 'Date::Format';
+requires 'Text::MultiMarkdown';
+requires 'String::Util';
+requires 'Lingua::EN::FindNumber';
+requires 'JSON';
+requires 'Test::Deep';
+requires 'Set::CrossProduct';
+requires 'URI::Escape';
+requires 'List::MoreUtils';

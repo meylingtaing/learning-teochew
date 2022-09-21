@@ -1,0 +1,7 @@
+% layout 'card', id => 'flashcard-teochew', hidden => 1;
+<div class="card-body">
+% for my $row (@$teochew) {
+  <%= include 'elements/translation',
+        id => $row->{pronunciations}[0]{pengim}, row => $row %>
+% }
+</div>

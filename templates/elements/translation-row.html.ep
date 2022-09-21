@@ -1,0 +1,10 @@
+% my $translation = Teochew::translate($word)->[0];
+<td><%= $word %></td>
+<td><%= $translation->{pronunciations}[0]{pengim} %></td>
+<td><%= $translation->{chinese} %></td>
+<td>
+  % if ($translation->{pronunciations}[0]{audio}) {
+  <%= include 'elements/play-teochew',
+        audio => $translation->{pronunciations}[0]{audio} %>
+  % }
+</td>

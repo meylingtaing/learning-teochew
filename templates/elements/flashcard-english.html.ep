@@ -1,0 +1,9 @@
+% layout 'card', id => 'flashcard-english';
+<div class="card-header">
+  <%= $flashcard_set_name %>:
+  <span id="flashcard-index">1/</span>
+</div>
+<div class="card-body">
+  <span class="english nowrap"><%= $english %></span>
+  <div class="notes"><%= $notes %></div>
+</div>

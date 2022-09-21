@@ -1,0 +1,42 @@
+%# Requires 'translations' to be stashed
+<div class="table-responsive">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>English</th>
+      <th>Peng'im</th>
+      <th>Chinese</th>
+      <th>Audio</th>
+    </tr>
+  </thead>
+  <tbody>
+    % for my $row (@{ stash('translations') }) {
+        <tr>
+        <td class="align-middle" rowspan="<%= scalar @{ $row->{teochew} } %>">
+          % if (stash('hide_links')) {
+            <%= $row->{english} %>
+          % } else {
+            <a href="/english/<%= $row->{english} %>"><%= $row->{english} %></a>
+          % }
+          % if ($row->{notes}) {
+          (<%= $row->{notes} %>)
+          % }
+        </td>
+        % for my $inner_row (@{ $row->{teochew} }) {
+          % unless (\$inner_row == \$row->{teochew}->[0]) {
+              <tr>
+          % }
+          <td><%= $inner_row->{pronunciations}[0]{pengim} %></td>
+          <td><%= $inner_row->{chinese} %></td>
+          <td>
+            % if ($inner_row->{pronunciations}[0]{audio}) {
+              <%= include 'elements/play-teochew',
+                    audio => $inner_row->{pronunciations}[0]{audio} %>
+            % }
+          </td>
+        </tr>
+        % }
+    % }
+  </tbody>
+</table>
+</div>

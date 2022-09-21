@@ -1,0 +1,46 @@
+% layout 'wrapper-left';
+<h2>Resources for learning</h2>
+<ul>
+  <li>
+    <a target="_blank" href="https://www.theteochewstore.org">The Teochew Store</a>
+  </li>
+  <li>
+    <a target="_blank" href="https://tcknow.com/">What Teochew Say</a>
+  </li>
+  <li>
+    <a target="_blank" href="http://teochewinenglish.weebly.com/">Teochew videos</a>
+  </li>
+  <li>
+    <a target="_blank" href="https://www.facebook.com/groups/2210341598/">im teochew!! facebook group</a>
+  </li>
+  <li>
+    <a target="_blank" href="https://disboard.org/server/632704143257108483">Gaginang discord server</a>
+  </li>
+  <ul>
+    <li>
+      <a target="_blank" href="https://docs.google.com/document/d/187VokH_NLN4H_fZntbEfFFMdiqZKhZBQUEhI9y7-8vo/edit?usp=sharing">GGN Pengim System Guide</a>
+    </li>
+  </ul>
+</ul>
+
+<h2>Online dictionaries</h2>
+<ul>
+  <li>
+    <a target="_blank" href="https://www.mogher.com">Mogher</a>
+  </li>
+  <li>
+    <a target="_blank" href="http://www.czyzd.com">CZYZD</a>
+  </li>
+</ul>
+<h2>Relevant Wikipedia pages</h2>
+<ul>
+  <li>
+    <a targer="_blank" href="https://en.wikipedia.org/wiki/Chaoshan_Min">Chaoshan Min</a>
+  </li>
+  <li>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Teochew_dialect">Teochew dialect</a>
+  </li>
+  <li>
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Peng%27im">Peng'im</a>
+  </li>
+</ul>

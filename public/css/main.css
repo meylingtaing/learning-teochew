@@ -1,0 +1,15 @@
+.play-teochew {
+    cursor: pointer;
+    color: white;
+    border-radius: 50%;
+    height: 1em; width: 1em;
+    background-color: midnightblue;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+}
+
+/* Make the audio icon larger in tables */
+.table-responsive .play-teochew {
+    font-size: 1.5em;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport"
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/ionicons.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <title>My Blog</title>
+
+<style>
+body {
+    background-color: #333;
+    color: #CCC;
+    font-family: monospace;
+}
+
+h3 {
+    color: #EEE;
+}
+
+h6 {
+    color: #999;
+}
+
+hr {
+    border: 0;
+    border-top: 3px dashed #37E;
+}
+
+a {
+    color: #8DF;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #8DF;
+}
+
+table, tr, td, th {
+    border: 1px solid #999;
+    padding: 3px;
+}
+
+table {
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+strong {
+    color: #EEE;
+}
+</style>
+</head>
+
+<body>
+  <div class="container-fluid my-1">
+  <div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+    % for my $update (@$updates) {
+    <h6><%= $update->{time_stamp} %> <%= $update->{time} %></h6>
+    <h3><%= $update->{title} %></h3>
+    <%== $update->{content} %>
+    %   unless (\$update == \$updates->[-1]) {
+          <hr>
+    %   }
+    % }
+
+    % if (defined $prev) {
+        <a href="/blog/<%= $prev %>" style="float:left">
+          << More Recent
+        </a>
+    % }
+
+    % if ($next) {
+        <a href="/blog/<%= $next %>" style="float:right">
+          Older >>
+        </a>
+    % }
+
+  </div>
+  </div>
+  </div>
+</body>
+</html>

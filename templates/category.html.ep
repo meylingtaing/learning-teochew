@@ -1,0 +1,12 @@
+% layout 'wrapper-left';
+
+% for my $row (@$categories) {
+  % my $category = $row->{name};
+  <h1 id="<%= $category %>">
+    <%= $category_translations->{$category}{category_name} %>
+  </h1>
+  <%= include 'elements/all-translations-table',
+        translations => $category_translations->{$category}{translations} %>
+% }
+
+%= include 'elements/play_teochew'

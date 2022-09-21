@@ -1,0 +1,11 @@
+% extends 'layouts/wrapper';
+% content html => begin
+
+  <div class="container-fluid">
+    <div class="row mx-sm-1 my-1">
+      <div class="col">
+        <%= content %>
+      </div>
+    </div>
+  </div>
+% end

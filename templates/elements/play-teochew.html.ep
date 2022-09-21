@@ -1,0 +1,7 @@
+%# Requires 'audio' to be stashed
+<i class="play-teochew ion-volume-medium align-middle"
+% if (my $audio_file = stash('audio')) {
+   data-audio="/audio/<%= $audio_file %>"
+% }
+>
+</i>

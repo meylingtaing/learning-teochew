@@ -1,0 +1,220 @@
+% layout 'wrapper';
+
+<style>
+#flashcard-english, .large-arrows {
+    cursor: pointer
+}
+
+.flashcard {
+    background-color: var(--primary);
+    min-width: 15rem;
+    line-height: 1;
+    -webkit-box-shadow: 3px 3px 5px 0px #999;
+    -moz-box-shadow:    3px 3px 5px 0px #999;
+    box-shadow:         3px 3px 5px 0px #999;
+}
+
+.card-body {
+    font-size: 3em;
+}
+
+#flashcard-teochew {
+    line-height: 1.5
+}
+
+#flashcard-navigation > svg {
+    color: #6c757d;
+    cursor: pointer;
+}
+
+#flashcard-navigation > svg:hover {
+    color: #5a6268;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.notes {
+    font-size: .75em;
+    line-height: 1.5
+}
+
+</style>
+
+  <div class="container-fluid text-center">
+
+    <div class="row">
+      <div class="col-8 offset-2">
+        <span id="flashcard-navigation">
+          %= include 'elements/arrow-prev'
+          %= include 'elements/reload-page'
+          %= include 'elements/arrow-next'
+        </span>
+      </div>
+    </div>
+
+    <%= include 'elements/flashcard-english',
+            english => $flashcard->{english},
+            notes   => $flashcard->{notes} %>
+
+    <%= include 'elements/flashcard-teochew',
+            teochew => $flashcard->{teochew} %>
+
+    <%= include 'elements/translation', hidden => 1, id => 'teochew-template',
+        row => {
+            pronunciations => [{ pengim => 'dummy', chinese => 'dummy' }]
+        } %>
+
+  </div>
+
+  % if ($type) {
+  <div class="container-fluid">
+    <div class="row mx-sm-1 my-1">
+      <div class="col">
+        <a href="/category/<%= $type %>/<%= $subtype %>">
+          All translations in <%= $flashcard_set_name %>
+        </a>
+      </div>
+    </div>
+  </div>
+  % }
+
+  <script>
+    // Store all of the flashcards
+    var flashcards = <%== $flashcard_list %>;
+    var max        = flashcards.length;
+    var index      = 0;
+
+    function update_header() {
+        $('#flashcard-index').html((index+1) + "/" + max);
+    }
+
+    function show_translation() {
+        $('#flashcard-teochew').find('.translation').show();
+        $('#flashcard-teochew').show();
+
+        resize_teochew_text($('#flashcard-teochew').find('.card-body'));
+    }
+
+    function show_next_flashcard() {
+        if (index == max - 1) {
+            index = 0;
+        }
+        else {
+            index++;
+        }
+
+        // Prep the flashcard with the new data
+        show_flashcard(flashcards[index]);
+    }
+
+    function show_prev_flashcard() {
+        if (index == 0) {
+            index = max - 1;
+        }
+        else {
+            index--;
+        }
+
+        show_flashcard(flashcards[index]);
+    }
+
+    function show_flashcard(flashcard) {
+        var translations = flashcard.teochew;
+
+        // Hide the translation
+        $('#flashcard-teochew').hide();
+        $('#flashcard-teochew').find('.card-body').html('');
+
+        // Create the new translation
+        translations.forEach(function(translation) {
+            var elt = $('#teochew-template').clone();
+            elt.attr('id', '');
+
+            elt.find('.pengim').html(translation.pronunciations[0].pengim);
+            elt.find('.chinese').html(translation.chinese);
+            if (translation.pronunciations[0].audio) {
+                var play_elt = `<%= include 'elements/play-teochew' =%>`;
+                var audio = $(play_elt.trim());
+                audio.addClass('align-middle');
+                audio.attr('data-audio',
+                    "/audio/" + translation.pronunciations[0].audio);
+                elt.append(audio);
+            }
+
+            $('#flashcard-teochew').find('.card-body').append(elt);
+        });
+
+        // Change the English card
+        var english_elt = $('#flashcard-english').find('.english');
+        english_elt.html(flashcard.english);
+
+        var notes_elt = $('#flashcard-english').find('.notes');
+        notes_elt.html(flashcard.notes);
+        notes_elt.css('font-size', '.75em');
+
+        resize_text(english_elt, $('#flashcard-english').find('.card-body'));
+        update_header();
+    }
+
+    function resize_text(text_elt, container_elt) {
+        var english_text_size = 1;
+        var notes_text_size   = .75;
+        text_elt.css('font-size', '1em');
+        text_elt.addClass('nowrap');
+        while ((text_elt.width() > (container_elt.width() + 1)) &&
+                english_text_size > .6)
+        {
+            english_text_size = english_text_size - .05;
+            text_elt.css('font-size', english_text_size + 'em');
+
+            // Should also resize the notes
+            notes_text_size = notes_text_size - .05;
+            text_elt.next('.notes').css('font-size', notes_text_size + 'em');
+        }
+
+        // Turn on word wrapping if we hit the min size
+        if (text_elt.width() > (container_elt.width() + 1)) {
+            text_elt.removeClass('nowrap');
+        }
+    }
+
+    function resize_teochew_text(container_elt) {
+        var teochew_text_size = 3;
+        container_elt.css('font-size', '3em');
+
+        container_elt.find('.chinese, .pengim').each(function (index, elt) {
+            while ($(elt).width() > container_elt.width()) {
+                teochew_text_size = teochew_text_size - .05;
+                container_elt.css('font-size', teochew_text_size + 'em');
+            }
+        });
+    }
+
+    $(function() {
+      update_header();
+      resize_text(
+        $('#flashcard-english').find('.english'),
+        $('#flashcard-english').find('.card-body')
+      );
+      $('[data-toggle="tooltip"]').tooltip();
+
+      // When we click on the button, show the teochew
+      // When we click it again, go to the next english word
+      $('#flashcard-english').click(function() {
+        if ($('#flashcard-teochew').is(':visible')) {
+            show_next_flashcard();
+        }
+        else {
+            show_translation();
+        }
+      });
+    });
+
+    // Arrows should navigate to other flashards
+    $('#arrow-prev').click(show_prev_flashcard);
+    $('#arrow-next').click(show_next_flashcard);
+    $('#reload-page').click(function() { location.reload() });
+  </script>
+  %= include 'elements/play_teochew', parent_elt => '#flashcard-teochew'
