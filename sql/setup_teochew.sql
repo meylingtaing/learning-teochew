@@ -1624,9 +1624,6 @@ INSERT INTO PengimAlt VALUES(8,207,'p','peng');
 INSERT INTO PengimAlt VALUES(9,186,'m','meng');
 INSERT INTO PengimAlt VALUES(10,23,'bh','bhek');
 INSERT INTO PengimAlt VALUES(11,223,'s','seng');
-INSERT INTO PengimAlt VALUES(12,253,'ch','chik');
-INSERT INTO PengimAlt VALUES(13,261,'e','ik');
-INSERT INTO PengimAlt VALUES(14,263,'g','ging');
 CREATE TABLE Pengim (
     id          integer primary key,
     beginning   text,
