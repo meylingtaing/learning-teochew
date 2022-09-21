@@ -498,6 +498,7 @@ INSERT INTO English VALUES(462,13,'to lose',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(463,18,'wristwatch',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(464,18,'bracelet',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(465,18,'ring',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(466,18,'dress',0,'',0,NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1025,6 +1026,7 @@ INSERT INTO Teochew VALUES(534,462,'su1','输',0,0,NULL);
 INSERT INTO Teochew VALUES(535,463,'chiu26 bio1','手表',0,0,NULL);
 INSERT INTO Teochew VALUES(536,464,'chiu26 soh4','手索',0,0,NULL);
 INSERT INTO Teochew VALUES(537,465,'chiu26 ji2','手只',0,0,NULL);
+INSERT INTO Teochew VALUES(538,466,'gung5','裙',0,0,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1478,6 +1480,7 @@ INSERT INTO Chinese VALUES(452,'布',NULL,NULL,'bou3');
 INSERT INTO Chinese VALUES(453,'输','輸',NULL,'su1');
 INSERT INTO Chinese VALUES(454,'表','錶',NULL,'bio1');
 INSERT INTO Chinese VALUES(455,'索',NULL,NULL,'soh4');
+INSERT INTO Chinese VALUES(456,'裙',NULL,NULL,'gung5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,

@@ -1,12 +1,26 @@
-test:
+clean-teochew-db:
+	sqlite3 Teochew.sqlite < sql/setup_teochew.sql
+
+test: setup-db
 	carton exec -- prove -lr t
 
-sandbox:
+sandbox: setup-db
 	carton exec -- morbo bin/webapp.pl
 
-connect-db:
+prod: clean-teochew-db Updates.sqlite
+	carton install
+	carton exec -- hypnotoad bin/webapp.pl
+
+connect-db: Teochew.sqlite
 	sqlite3 Teochew.sqlite -column -header
 
-setup-db:
+setup-db: Teochew.sqlite Updates.sqlite
+
+Teochew.sqlite:
 	sqlite3 Teochew.sqlite < sql/setup_teochew.sql
+
+Updates.sqlite:
 	sqlite3 Updates.sqlite < sql/setup_updates.sql
+
+db-dump:
+	sqlite3 Teochew.sqlite .dump > sql/setup_teochew.sql
