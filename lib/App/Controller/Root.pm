@@ -194,7 +194,7 @@ sub updates {
     $page = 0 unless $page =~ /^\d+$/;
 
     # Need to convert the markdown to html
-    my $updates = Updates::get_updates($page);
+    my $updates = Updates->new->get_updates($page);
     $_->{content} = markdown($_->{content}) for @$updates;
 
     # See if we should add More Recent and Older

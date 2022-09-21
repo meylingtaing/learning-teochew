@@ -16,20 +16,36 @@ Updates
 
 =head1 METHODS
 
+=head2 new
+
+=cut
+
+sub new {
+    my $class = shift;
+
+    # Just hardcoding the name of the database file for now, but maybe I should
+    # add a configuration file later, and put it there
+    my $dbh = DBI->connect("DBI:SQLite:dbname=Updates.sqlite")
+        or die $DBI::errstr;
+    $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
+
+    my $self = { dbh => $dbh };
+    bless $self, $class;
+    return $self;
+}
+
 =head2 get_updates
 
 Gets the updates from the database
 
 =cut
 
-my $dbh = DBI->connect("DBI:SQLite:dbname=Updates.sqlite");
-$dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
-
 sub get_updates {
-    my $page = shift || 0;
+    my ($self, $page) = @_;
+    $page ||= 0;
 
     # Fetch updates from the database
-    my @rows = $dbh->selectall_array(
+    my @rows = $self->{dbh}->selectall_array(
         "select time_stamp, content from Updates " .
         "order by time_stamp desc limit 6 offset ?",
         { Slice => {} }, $page * 5
@@ -43,3 +59,5 @@ sub get_updates {
 
     return \@rows;
 }
+
+1;
