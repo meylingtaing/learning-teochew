@@ -1,6 +1,7 @@
 local/*
 log/*
 tmp/*
+secrets/*
 *.swp
 icons/*
 bin/hypnotoad.pid
