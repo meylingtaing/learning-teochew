@@ -422,6 +422,7 @@ sub generate_english_from_database {
         select English.id, word, notes from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
+        join Teochew on English.id = english_id
         where English.hidden = 0 and hidden_from_flashcards = 0
         $category_condition
         order by english.sort, word collate nocase
