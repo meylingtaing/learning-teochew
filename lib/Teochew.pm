@@ -204,18 +204,23 @@ translation tables.
 
 sub translate {
     my ($english, %params) = @_;
+
     my $show_all_accents = $params{show_all_accents};
+    my $for_flashcards   = $params{for_flashcards};
 
     my @translations;
 
     # Hash reference means we get the id and the word passed in
-    # XXX When is this used?
+    # This is used on the flashcards and categories page
+    # XXX I should just pull this out completely and not include it in
+    # this method
     if (ref $english eq 'HASH') {
         if ($english->{sentence}) {
             @translations = (_translate_phrase($english));
         }
         else {
-            @translations = get_all_translations_by_id($english->{id});
+            @translations = get_all_translations_by_id(
+                $english->{id}, for_flashcards => $for_flashcards);
         }
     }
     # If not, then we're getting a string to translate
@@ -231,7 +236,10 @@ sub translate {
         }
         else {
             @translations = get_all_translations($english,
-                not_hidden => 1, include_alternates => 1);
+                not_hidden         => 1,
+                include_alternates => 1,
+                for_flashcards     => $for_flashcards
+            );
         }
     }
 
@@ -295,6 +303,9 @@ Parameters:
     subcategory => Str,  the name of the subcategory
     shuffle     => Bool, set to true if you want random order
     count       => Int,  number of translations to return, default all
+    for_flashcards => Bool, to filter out hidden_from_flashcards
+
+This is used by the Flashcards and the Category pages.
 
 =cut
 
@@ -305,6 +316,8 @@ sub generate_full_translations {
     my $subtype  = $params{subcategory};  # only used for numbers right now
     my $category = $params{category};
     my $count    = $params{count};
+
+    my $for_flashcards = $params{for_flashcards};
 
     my @english_list;
 
@@ -317,8 +330,9 @@ sub generate_full_translations {
         $type eq 'time'   ? _generate_english_times() :
         $type eq 'phrase' ? _generate_english_phrases($subtype) :
                             generate_english_from_database(
-                                flashcard_set => $type,
-                                category      => $category);
+                                flashcard_set  => $type,
+                                category       => $category,
+                                for_flashcards => $for_flashcards);
 
     @english_list = shuffle @english_list
         if $params{shuffle};
@@ -330,7 +344,9 @@ sub generate_full_translations {
     my @flashcards;
     for my $english (@english_list) {
 
-        my %flashcard = ( teochew => translate($english) );
+        my %flashcard = (
+            teochew => translate($english, for_flashcards => $for_flashcards)
+        );
 
         if (ref $english eq 'HASH') {
             $flashcard{english} = $english->{word} || $english->{sentence};
@@ -363,23 +379,22 @@ sub generate_flashcards {
     my ($type, $subtype) = @_;
     my @flashcards;
 
+    my %params = (shuffle => 1, count => 20, for_flashcards => 1);
+
     # If we have a specific type of flashcard that we want, just get those
     if ($type) {
         @flashcards = generate_full_translations(
             flashcard_set => $type,
             subcategory   => $subtype,
-            shuffle       => 1,
-            count         => 20,
+            %params
         );
     }
 
     # Else just grab a random set of words from the database
     else {
-        my @other = generate_full_translations(
-            shuffle => 1,
-            count   => 20,
-        );
+        my @other = generate_full_translations(%params);
 
+        # XXX ...why am I shuffling twice?
         @flashcards = shuffle(@other);
     }
 
@@ -418,13 +433,17 @@ sub generate_english_from_database {
         push @binds, ucfirst $category;
     }
 
+    my $hidden_from_flashcards = $params{for_flashcards} ?
+        "and hidden_from_flashcards = 0" : "";
+
     my $sql = qq{
         select English.id, word, notes from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
         join Teochew on English.id = english_id
-        where English.hidden = 0 and hidden_from_flashcards = 0
+        where English.hidden = 0 $hidden_from_flashcards
         $category_condition
+        group by English.id
         order by english.sort, word collate nocase
     };
 
@@ -897,6 +916,7 @@ This takes these parameters:
     include_alternates => Bool, enable if we can include partial matches
     not_hidden         => Bool, enable if we should ignore hidden words
     pengim             => Str, set if we want a certain pengim first
+    for_flashcards     => Bool, to filter out 'hidden_from_flashcards'
 
 Returns all the translations in an arrayref for the english word given. Each
 arrayref contains a hashref with these fields:
@@ -934,6 +954,8 @@ sub get_all_translations {
     }
 
     $cond .= " and English.hidden = 0" if $params{not_hidden};
+    $cond .= " and Teochew.hidden_from_flashcards = 0"
+        if $params{for_flashcards};
 
     if ($params{notes}) {
         $cond .= " and notes like ?";
@@ -1034,27 +1056,18 @@ Returns rows with
 =cut
 
 sub get_all_translations_by_id {
-    my (@english_ids) = @_;
+    my ($english_id, %params) = @_;
+    my $for_flashcards = $params{for_flashcards};
 
-    # XXX: This doesn't handle 0 args correctly
-    if (scalar @english_ids == 1) {
-        my $sql = qq{
-            select id teochew_id, pengim, chinese, dialect
-            from Teochew where english_id = ?
-        } . _order_by_gekion_first();
-        return $dbh->selectall_array($sql, { Slice => {} }, $english_ids[0]);
-    }
+    my $hidden_from_flashcards = $params{for_flashcards} ?
+        "and hidden_from_flashcards = 0" : "";
 
-    # XXX: This is vulnerable to SQL injection!!!
-    else {
-        my $id_str = join ", ", @english_ids;
-        my $sql = qq{
-            select id teochew_id, pengim, chinese, dialect from Teochew
-            where english_id in ($id_str)
-        } . _order_by_gekion_first();
-
-        return $dbh->selectall_array($sql, { Slice => {} });
-    }
+    my $sql = qq{
+        select id teochew_id, pengim, chinese, dialect
+        from Teochew where english_id = ?
+        $hidden_from_flashcards
+    } . _order_by_gekion_first();
+    return $dbh->selectall_array($sql, { Slice => {} }, $english_id);
 }
 
 =head2 find_audio
