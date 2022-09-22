@@ -509,6 +509,7 @@ INSERT INTO English VALUES(469,15,'squirrel',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(470,31,'to brush teeth',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(471,31,'toothbrush',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(472,31,'toothpaste',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(473,32,'must',0,'',0,NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1045,6 +1046,7 @@ INSERT INTO Teochew VALUES(541,469,'song57 cheu2','松鼠',0,0,NULL);
 INSERT INTO Teochew VALUES(542,470,'chiu32 ki2','漱齿',0,0,NULL);
 INSERT INTO Teochew VALUES(543,471,'ki26 chiu3','齿漱',0,0,NULL);
 INSERT INTO Teochew VALUES(544,472,'ghe57 go1','牙膏',0,0,NULL);
+INSERT INTO Teochew VALUES(545,473,'dioh8','着',0,0,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1502,6 +1504,7 @@ INSERT INTO Chinese VALUES(456,'裙',NULL,NULL,'gung5');
 INSERT INTO Chinese VALUES(457,'松',NULL,NULL,'song5');
 INSERT INTO Chinese VALUES(458,'漱',NULL,NULL,'chiu3');
 INSERT INTO Chinese VALUES(459,'膏',NULL,NULL,'go1');
+INSERT INTO Chinese VALUES(460,'着','著',NULL,'dioh8');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1552,6 +1555,7 @@ INSERT INTO Synonyms VALUES(41,450,'to watch');
 INSERT INTO Synonyms VALUES(42,450,'to read');
 INSERT INTO Synonyms VALUES(43,195,'to try');
 INSERT INTO Synonyms VALUES(44,451,'availability');
+INSERT INTO Synonyms VALUES(45,473,'have to');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
