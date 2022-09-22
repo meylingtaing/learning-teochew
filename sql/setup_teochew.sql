@@ -38,7 +38,11 @@ CREATE TABLE English (
     id integer primary key,
     category_id integer,
     word text,
-    hidden boolean default 0, notes text collate nocase, hidden_from_flashcards boolean default 0, part_of_speech_id integer references PartOfSpeech(id), sort integer,
+    hidden boolean default 0,
+    notes text collate nocase,
+    hidden_from_flashcards boolean default 0,
+    part_of_speech_id integer references PartOfSpeech(id),
+    sort integer,
     foreign key(category_id) references Categories(id)
 );
 INSERT INTO English VALUES(1,1,'hello',0,NULL,0,NULL,NULL);
@@ -499,11 +503,19 @@ INSERT INTO English VALUES(463,18,'wristwatch',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(464,18,'bracelet',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(465,18,'ring',0,'',0,NULL,NULL);
 INSERT INTO English VALUES(466,18,'dress',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(467,7,'day before yesterday',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(468,5,'cousin',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(469,15,'squirrel',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(470,31,'to brush teeth',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(471,31,'toothbrush',0,'',0,NULL,NULL);
+INSERT INTO English VALUES(472,31,'toothpaste',0,'',0,NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
     pengim     text,
-    chinese    text, no_tone_change boolean default 0, tag_question boolean default 0, dialect text,
+    chinese    text, no_tone_change boolean default 0,
+    tag_question boolean default 0,
+    dialect text,
     foreign key(english_id) references English(id)
 );
 INSERT INTO Teochew VALUES(1,1,'leu2 ho2','汝好',0,0,NULL);
@@ -1027,6 +1039,12 @@ INSERT INTO Teochew VALUES(535,463,'chiu26 bio1','手表',0,0,NULL);
 INSERT INTO Teochew VALUES(536,464,'chiu26 soh4','手索',0,0,NULL);
 INSERT INTO Teochew VALUES(537,465,'chiu26 ji2','手只',0,0,NULL);
 INSERT INTO Teochew VALUES(538,466,'gung5','裙',0,0,NULL);
+INSERT INTO Teochew VALUES(539,467,'jain5 yik84','前日',0,0,NULL);
+INSERT INTO Teochew VALUES(540,468,'bio2','表',0,0,NULL);
+INSERT INTO Teochew VALUES(541,469,'song57 cheu2','松鼠',0,0,NULL);
+INSERT INTO Teochew VALUES(542,470,'chiu32 ki2','漱齿',0,0,NULL);
+INSERT INTO Teochew VALUES(543,471,'ki26 chiu3','齿漱',0,0,NULL);
+INSERT INTO Teochew VALUES(544,472,'ghe57 go1','牙膏',0,0,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1481,6 +1499,9 @@ INSERT INTO Chinese VALUES(453,'输','輸',NULL,'su1');
 INSERT INTO Chinese VALUES(454,'表','錶',NULL,'bio1');
 INSERT INTO Chinese VALUES(455,'索',NULL,NULL,'soh4');
 INSERT INTO Chinese VALUES(456,'裙',NULL,NULL,'gung5');
+INSERT INTO Chinese VALUES(457,'松',NULL,NULL,'song5');
+INSERT INTO Chinese VALUES(458,'漱',NULL,NULL,'chiu3');
+INSERT INTO Chinese VALUES(459,'膏',NULL,NULL,'go1');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1542,8 +1563,9 @@ INSERT INTO SubCategories VALUES(2,NULL,'personadjective');
 INSERT INTO SubCategories VALUES(3,NULL,'drink');
 CREATE TABLE Phrases (
     id integer primary key,
-    words text
-, sentence text, hidden boolean default 0);
+    words text,
+    sentence text,
+    hidden boolean default 0);
 INSERT INTO Phrases VALUES(1,'I to_know','I know',0);
 INSERT INTO Phrases VALUES(2,'I name','My name is...',0);
 INSERT INTO Phrases VALUES(3,'you name what','What is your name?',0);
@@ -1931,8 +1953,9 @@ INSERT INTO Pengim VALUES(299,'y','yuah');
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
-    display_name text
-, hidden boolean default 0, sort integer);
+    display_name text,
+    hidden boolean default 0,
+    sort integer);
 INSERT INTO FlashcardSet VALUES(1,'Colors','Colors',0,10);
 INSERT INTO FlashcardSet VALUES(2,'Family','Family',0,2);
 INSERT INTO FlashcardSet VALUES(3,'Datetime','Date/Time',0,10);
