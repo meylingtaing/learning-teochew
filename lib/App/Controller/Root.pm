@@ -45,7 +45,9 @@ sub flashcards {
 =head2 translate
 
 When you click on 'Translate' from the search bar. This is also what happens
-when you press Enter from the search bar.
+when you press Enter from the search bar. This will attempt to translate the
+word that's being searched, but if that word can't be found, then it will do
+a search for similar words.
 
 =cut
 
@@ -71,6 +73,13 @@ sub translate {
     }
 };
 
+=head2 search
+
+This is what happens when you click on Search. The list of English words will
+be searched using the input that was entered.
+
+=cut
+
 sub search {
     my $c = shift;
     my $search = trim $c->param('search');
@@ -89,7 +98,9 @@ sub search {
 
 =head2 category
 
-The Category page, which is accessed with a path like C</category/colors>
+The Category page, which is accessed with a path like C</category/colors>. This
+displays a table of all of the words within a "flashcard set", which actually
+can contain subcategories within it.
 
 =cut
 
