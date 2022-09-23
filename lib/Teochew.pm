@@ -237,9 +237,9 @@ sub translate {
                 @translations = ( translate_time($word) );
             }
             else {
-                # XXX Maybe support this?
-                die "Translate with a word " .
-                    "that's not a number/time isn't supported!";
+                $word = lc $word;
+                ($english) = get_english_from_database(word => $word);
+                return translate($english) if $english;
             }
         }
         else {
@@ -382,22 +382,14 @@ sub generate_flashcards {
     my @flashcards;
 
     my %params = (shuffle => 1, count => 20, for_flashcards => 1);
+    if ($type) {
+        $params{flashcard_set} = $type;
+        $params{subcategory}   = $subtype;
+    }
 
     # If we have a specific type of flashcard that we want, just get those
-    if ($type) {
-        @flashcards = generate_translation_word_list(
-            flashcard_set => $type,
-            subcategory   => $subtype,
-            %params
-        );
-    }
-
     # Else just grab a random set of words from the database
-    else {
-        my @other = generate_translation_word_list(%params);
-    }
-
-    return \@flashcards;
+    return [generate_translation_word_list(%params)];
 }
 
 =head1 MISC DATA RETRIEVAL FUNCTIONS
@@ -648,7 +640,7 @@ sub _translate_phrase {
             ($translation) = translate_number($word);
         }
         else {
-            $translation = lookup($word, pengim => $pengim);
+            $translation = _lookup($word, $pengim);
         }
         $translation->{no_tone_change} ||= $no_tone_change;
         push @components, $translation;
@@ -926,16 +918,16 @@ sub translate_time {
 
 =head1 DATABASE/FILESYSTEM FUNCTIONS
 
-=head2 lookup
+=head2 _lookup
 
 Returns the first translation found for the english word given.
 
 =cut
 
 sub _lookup {
-    my ($english, %params) = @_;
+    my ($english) = @_;
 
-    my ($row) = _lookup_all($english, %params);
+    my ($row) = _lookup_all(@_);
     die "Translation for \"$english\" doesn't exist!\n" unless $row;
     return $row;
 }
@@ -968,7 +960,7 @@ sub _lookup_all {
         push @binds, $notes;
     }
     else {
-        $cond .= " and notes is null";
+        $cond .= " and (notes is null or notes = '')";
     }
 
     if ($pengim) {
