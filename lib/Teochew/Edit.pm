@@ -21,6 +21,75 @@ use DBI qw(:sql_types);
 
 sub new { shift->create_db_object('Teochew.sqlite') }
 
+=head2 insert_translation
+
+    my $success = $teochew->insert_word(
+        category_id => $category_id,
+        english     => $english_main,
+        notes       => $notes,
+        pengim      => $pengim,
+        chinese     => $simplified,
+        hidden      => $hidden,
+        hidden_from_flashcards => 1,
+    );
+
+=cut
+
+sub insert_translation {
+    my ($self, %params) = @_;
+    my $sth;
+
+    # Insert into the English table. It's possible this is a dupe, so check for
+    # that first
+    my %english_params =
+        map { $_ => $params{$_} } qw(english notes category_id hidden);
+
+    my $english_id = $self->_get_english_id(%english_params) ||
+                     $self->insert_english(%english_params);
+
+    # Now insert the translation
+    $sth = $self->dbh->prepare(qq{
+        insert into Teochew
+        (english_id, pengim, chinese, hidden_from_flashcards)
+        values (?, ?, ?, ?)
+    });
+
+    $sth->bind_param(1, $english_id);
+    $sth->bind_param(2, $params{pengim});
+    $sth->bind_param(3, $params{chinese});
+    $sth->bind_param(4, $params{hidden_from_flashcards} ? 1 : 0);
+
+    $sth->execute;
+}
+
+=head2 insert_english
+
+    $teochew->insert_english(
+        category_id => $category_id,
+        english     => $english_main,
+        notes       => $notes,
+        hidden      => $hidden,
+    );
+
+=cut
+
+sub insert_english {
+    my ($self, %params) = @_;
+
+    my $dbh = $self->dbh;
+    my $sth = $dbh->prepare(
+        "insert into English (category_id, word, notes, hidden) " .
+        "values (?,?,?,?)"
+    );
+    $sth->bind_param(1, $params{category_id}, SQL_INTEGER);
+    $sth->bind_param(2, $params{english});
+    $sth->bind_param(3, $params{notes});
+    $sth->bind_param(4, $params{hidden} ? 1 : 0, SQL_INTEGER);
+    $sth->execute;
+
+    return $dbh->sqlite_last_insert_rowid;
+}
+
 =head2 insert_synonym
 
     $teochew->insert_synonym(
@@ -45,6 +114,58 @@ sub insert_synonym {
     return $sth->execute;
 }
 
+=head2 insert_category
+
+    my $id = $teochew->insert_category('NewCategoryName');
+
+Returns the id of the Categories row that was inserted
+
+=cut
+
+sub insert_category {
+    my ($self, $category) = @_;
+    $self = $self->new unless ref $self;
+
+    my $dbh = $self->dbh;
+    $dbh->do("insert into Categories (name) values (?)", undef, $category);
+    return $dbh->sqlite_last_insert_rowid;
+}
+
+=head2 insert_chinese
+
+    $teochew->insert_chinese(
+        pengim      => '',
+        simplified  => '',
+        traditional => '',
+        meaning     => '',
+    );
+
+=cut
+
+sub insert_chinese {
+    my ($self, %params) = @_;
+
+    my @columns = qw(simplified pengim);
+    my @binds = ($params{simplified}, $params{pengim});
+
+    if ($params{traditional}) {
+        push @columns, 'traditional';
+        push @binds, $params{traditional};
+    }
+
+    if ($params{meaning}) {
+        push @columns, 'meaning';
+        push @binds, $params{meaning};
+    }
+
+    my $col_str  = join ', ', @columns;
+    my $bind_str = join ', ', ('?') x scalar @columns;
+
+    my $sql = "insert into Chinese ($col_str) values ($bind_str)";
+    my $sth = $self->dbh->prepare($sql);
+    $sth->execute(@binds);
+}
+
 =head2 make_fully_hidden
 
     $teochew->make_fully_hidden('hello');
@@ -67,8 +188,9 @@ sub _get_english_id {
     my ($self, %params) = @_;
 
     my $english = $params{english};
-    my $note    = undef;
+    my $note    = $params{notes};
 
+    # Split out notes if it hasn't been done yet
     if ($english =~ /(.*) \((.*)\)/) {
         $english = $1;
         $note    = $2;
