@@ -33,121 +33,7 @@ my %categories = map { $_->[1] => $_->[0] } @category_rows;
 # Determine what the user wants to do
 my $command = (shift @ARGV) || '';
 if ($command eq 'insert') {
-    my ($category, $english, $teochew, $characters, $hidden) = @ARGV;
-
-    # Display all the categories
-
-    unless (defined $category) {
-        # Prompt for category
-        say "$_->[0]: $_->[1]" for @category_rows;
-        print "Category: ";
-        $category = <STDIN>;
-        chomp $category;
-    }
-
-    unless (defined $english) {
-        # Prompt for english
-        print "English: ";
-        $english = <STDIN>;
-        chomp $english;
-    }
-
-    unless (defined $teochew) {
-        # Prompt for teochew
-        print "Teochew: ";
-        $teochew = <STDIN>;
-        chomp $teochew;
-        warn "Typed teochew: $teochew\n";
-    }
-
-    # Determine the category
-    my $category_id = $categories{$category};
-
-    unless ($category_id) {
-        say "Creating new category: $category";
-    }
-
-    $characters ||= '';
-    $hidden = ($hidden and $hidden eq 'hidden') ? 1 : 0;
-
-    # Split up Chinese character with simpl. and trad.
-    my ($simplified, $traditional) = split_out_parens($characters);
-    my @simplified_chars = split //, $simplified;
-    my @traditional_chars = split //, $traditional;
-    my @pengim_syllables = split / /, $teochew;
-
-    # Look at the Chinese character by character
-    for (my $i = 0; $i < scalar @simplified_chars; $i++) {
-        next if $simplified_chars[$i] eq '?';
-
-        # XXX: Check if pengim exists in the pengim portion of the database?
-
-        # The pengim might have had tone change?
-        my ($pengim_orig, $changed_tone) = split_out_parens($pengim_syllables[$i]);
-
-        # Check if the Chinese character exists in the database
-        unless (scalar Teochew::chinese_character_details(
-                $simplified_chars[$i], $pengim_orig))
-        {
-            my $insert_traditional =
-                scalar @traditional_chars == 0                  ? '' :
-                $simplified_chars[$i] eq $traditional_chars[$i] ? '' :
-                $traditional_chars[$i];
-
-            say sprintf "Inserting Chinese [%s (%s), %s]",
-                $simplified_chars[$i],
-                $insert_traditional,
-                $pengim_orig;
-
-            unless ($pengim_orig =~ /(1|2|3|4|5|6|7|8)$/) {
-                say "Poorly formatted pengim! [$pengim_orig]";
-                exit;
-            }
-
-            if (confirm()) {
-                insert_chinese(
-                    simplified  => $simplified_chars[$i],
-                    traditional => $insert_traditional,
-                    pengim      => $pengim_orig,
-                );
-            }
-            else {
-                exit;
-            }
-        }
-    }
-
-    # Split notes out of english if applicable
-    my ($english_main, $notes) = split_out_parens($english);
-
-    # Remove any parens things from the pengim - this turns lao6(7) to lao67
-    $teochew =~ s/(\d) \( (\d) \)/$1$2/gx;
-    #$teochew =~ s/\((.*?)\)//g;
-
-    # Display the category, english, and teochew to confirm
-    say "Inserting into $category ";
-    say "\tEnglish: $english_main ($notes)";
-    say "\tTeochew: $teochew";
-    say "\tSimplified Chinese: $simplified";
-
-    if (confirm()) {
-        unless ($category_id) {
-            $category_id = insert_category($category);
-        }
-        # Insert
-        my $success = insert_word(
-            category   => $category_id,
-            english    => $english_main,
-            notes      => $notes,
-            teochew    => $teochew,
-            characters => $simplified,
-            hidden     => $hidden,
-        );
-        if ($success) {
-            say colored("Successfully added $english_main", "green");
-        }
-    }
-
+    die "This is not supported anymore. Use insert-flashcard.pl instead\n";
 }
 elsif ($command eq 'update') {
     my ($english) = @ARGV;
@@ -508,14 +394,6 @@ sub insert_chinese {
     my $sql = "insert into Chinese ($col_str) values ($bind_str)";
     my $sth = $dbh->prepare($sql);
     $sth->execute(@binds);
-}
-
-sub insert_category {
-    my $category = shift;
-    my $sth = $dbh->prepare("insert into Categories (name) values (?)");
-    $sth->bind_param(1, $category);
-    $sth->execute;
-    return $dbh->sqlite_last_insert_rowid;
 }
 
 sub get_info {
