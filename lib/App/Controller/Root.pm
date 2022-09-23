@@ -115,7 +115,7 @@ sub category {
     my %category_translations = map { $_->{name} => {
         category_name => $_->{display_name},
         translations  => [
-            Teochew::generate_full_translations(
+            Teochew::generate_translation_word_list(
                 flashcard_set => $flashcard_set,
                 category      => $_->{name},
                 subcategory   => $subcategory

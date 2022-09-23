@@ -299,7 +299,7 @@ sub translate {
     return \@ret;
 }
 
-=head2 generate_full_translations
+=head2 generate_translation_word_list
 
 Given some parameters, this will return a list of english words with
 translations, each as a hashref of this form:
@@ -325,7 +325,7 @@ This is used by the Flashcards and the Category pages.
 
 =cut
 
-sub generate_full_translations {
+sub generate_translation_word_list {
     my %params = @_;
 
     my $type     = $params{flashcard_set} || '';
@@ -386,7 +386,7 @@ Returns a random english word and teochew translation in a hashref. You can
 optionally provide a category name to limit the bank of words chosen to a
 single category.
 
-This is just a helper to call L</generate_full_translations> with random
+This is just a helper to call L</generate_translation_word_list> with random
 words selected.
 
 =cut
@@ -399,7 +399,7 @@ sub generate_flashcards {
 
     # If we have a specific type of flashcard that we want, just get those
     if ($type) {
-        @flashcards = generate_full_translations(
+        @flashcards = generate_translation_word_list(
             flashcard_set => $type,
             subcategory   => $subtype,
             %params
@@ -408,10 +408,7 @@ sub generate_flashcards {
 
     # Else just grab a random set of words from the database
     else {
-        my @other = generate_full_translations(%params);
-
-        # XXX ...why am I shuffling twice?
-        @flashcards = shuffle(@other);
+        my @other = generate_translation_word_list(%params);
     }
 
     return \@flashcards;
