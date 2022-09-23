@@ -158,6 +158,22 @@ sub flashcard_set_categories {
     return @rows;
 }
 
+=head2 categories
+
+Returns a list of all the categories in this form:
+
+    { id => 1, name => 'Basics' },
+    { id => 2, name => 'Colors' }, ...
+
+=cut
+
+sub categories {
+    my @rows = $dbh->selectall_array(
+        "select id, name from Categories", { Slice => {} }
+    );
+    return @rows;
+}
+
 =head1 TRANSLATE FUNCTIONS
 
 =cut
