@@ -146,18 +146,55 @@ sub english {
     # All of the verbs in the database are stored like "to eat", but we should
     # allow someone to see the translation without typing the "to" part of it
     for ($english, "to $english") {
-        my $teochew = Teochew::translate($_, show_all_accents => 1);
-        next unless scalar @$teochew;
 
-        # Organize this by category
+        # First, look for english words in the database that match. There might
+        # be multiple
+        my @english_rows = Teochew::get_english_from_database(
+            word => $_, include_category_in_output => 1
+        );
+
+        # This also could be a number or a clock time, and we don't have
+        # entries for those, but we have special translate functions for them
+        unless (@english_rows) {
+            if ($_ =~ /^\d+$/) {
+                push @english_rows, {
+                    word => $_,
+                    category_display   => 'Numbers',
+                    flashcard_set_name => 'number',
+                };
+            }
+            elsif ($_ =~ /^\d+:\d+$/) {
+                push @english_rows, {
+                    word => $_,
+                    category_display   => 'Clock Time',
+                    flashcard_set_name => 'time',
+                };
+            }
+        }
+
+        next unless scalar @english_rows;
+
+        # Organize this by category. Also keep track of chinese characters.
         my %categories;
-        for my $translation (@$teochew) {
-            my $name = $translation->{category}{name} // '';
-            $categories{$name} //= {
-                display       => $translation->{category}{display},
-                flashcard_set => $translation->{category}{flashcard_set},
+        my @chinese;
+        for my $english_row (@english_rows) {
+            my $category = $english_row->{category_name} // '';
+            $categories{$category} //= {
+                display       => $english_row->{category_display},
+                flashcard_set => $english_row->{flashcard_set_name},
             };
-            push @{ $categories{$name}{teochew} }, $translation;
+
+            # Get the translation
+            my $translation_rows =
+                Teochew::translate($english_row, show_all_accents => 1);
+
+            for my $translation_row (@$translation_rows) {
+                push @chinese, $translation_row->{chinese};
+                push @{ $categories{$category}{teochew} }, {
+                    %$translation_row,
+                    notes => $english_row->{notes},
+                };
+            }
         }
 
         $c->stash(teochew_by_category => \%categories);
@@ -167,7 +204,6 @@ sub english {
             Teochew::extra_information($english) // ''
         ));
 
-        my @chinese = map { $_->{chinese} } @$teochew;
         $c->stash(words_containing =>
             Teochew::find_words_using_character(\@chinese, exclude_itself => 1)
         );

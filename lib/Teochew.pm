@@ -8,8 +8,10 @@ use DBI qw(:sql_types);
 use DBD::SQLite::Constants qw(:dbd_sqlite_string_mode);
 use POSIX;
 use List::Util qw(shuffle);
-use Data::Dumper;
 use Set::CrossProduct;
+
+use Carp;
+use Data::Dumper;
 
 use Teochew::Utils qw(
     add_tone_marks
@@ -188,26 +190,16 @@ example given, using C<show_all_accents>:
 
     [{
         chinese => '银',
-        notes   => 'silver, coins',
         pronunciations => [
             { pengim => 'ngeng5', audio => 'ngeng5.mp3' },
             { pengim => 'nging5', audio => 'nging5.mp3' },
         ],
-        category => {
-            name => 'shopping',
-            display => 'Shopping',
-            flashcard_set => 'misc',
-        },
     }, {
         chinese => '钱',
-        notes   => undef,
         pronunciations => [{ pengim => 'jin5', audio => 'jin5.mp3' }],
-        category => { name => 'shopping', display => 'Shopping' },
     }, {
         chinese => '镭',
-        notes   => undef,
         pronunciations => [{ pengim => 'lui1', audio => 'lui1.mp3' }],
-        category => { name => 'shopping', display => 'Shopping' },
     }]
 
 If C<show_all_accents> is not given, each element's C<pronunciation> will only
@@ -226,37 +218,37 @@ sub translate {
 
     my @translations;
 
-    # Hash reference means we get the id and the word passed in
-    # This is used on the flashcards and categories page
-    # XXX I should just pull this out completely and not include it in
-    # this method
+    # If the data was passed as a hash, either a "sentence" or "id" should
+    # be stored
     if (ref $english eq 'HASH') {
         if ($english->{sentence}) {
             @translations = (_translate_phrase($english));
         }
-        else {
+        elsif ($english->{id}) {
             @translations = get_all_translations_by_id(
                 $english->{id}, for_flashcards => $for_flashcards);
         }
-    }
-    # If not, then we're getting a string to translate
-    # This is what gets used when we're on an English page
-    else {
-        $english = lc $english;
-
-        if ($english =~ /^\d+$/) {
-            @translations = ( translate_number($english) );
-        }
-        elsif ($english =~ /^\d+:\d+$/) {
-            @translations = ( translate_time($english) );
+        elsif (defined $english->{word}) {
+            my $word = $english->{word};
+            if ($word =~ /^\d+$/) {
+                @translations = ( translate_number($word) );
+            }
+            elsif ($word =~ /^\d+:\d+$/) {
+                @translations = ( translate_time($word) );
+            }
+            else {
+                # XXX Maybe support this?
+                die "Translate with a word " .
+                    "that's not a number/time isn't supported!";
+            }
         }
         else {
-            @translations = get_all_translations($english,
-                not_hidden         => 1,
-                include_alternates => 1,
-                for_flashcards     => $for_flashcards
-            );
+            warn Dumper($english);
+            croak "Called `translate` without a valid hash!";
         }
+    }
+    else {
+        return translate({ word => $english }, %params);
     }
 
     my @ret;
@@ -287,12 +279,6 @@ sub translate {
         push @ret, {
             chinese        => $_->{chinese} =~ s/\?/[?]/gr,
             pronunciations => $pronunciation,
-            notes          => $_->{notes},
-            category       => {
-                name    => $_->{category_name},
-                display => $_->{category_display},
-                flashcard_set => $_->{flashcard_set_name},
-            },
         }
     }
 
@@ -342,10 +328,10 @@ sub generate_translation_word_list {
     # If we don't specify a type, just assume we want to pick from the english
     # words in the database
     push @english_list,
-        $type eq 'number' ? (0..$subtype) :
+        $type eq 'number' ? (0..($subtype||20)) :
         $type eq 'time'   ? _generate_english_times() :
         $type eq 'phrase' ? _generate_english_phrases($subtype) :
-                            generate_english_from_database(
+                            get_english_from_database(
                                 flashcard_set  => $type,
                                 category       => $category,
                                 for_flashcards => $for_flashcards);
@@ -416,46 +402,78 @@ sub generate_flashcards {
 
 =head1 MISC DATA RETRIEVAL FUNCTIONS
 
-=head2 generate_english_from_database
+=head2 get_english_from_database
 
-Returns a list of english words and their ids from the database in the
-form of
+Returns a list of english words as a hashref like so:
 
-    { word => 'hello', id => 1 }
+    # These are always included:
+    word  => 'hello',
+    id    => 1,
+    notes => undef,
+
+    # These are included if you provide 'include_category_in_output'
+    category_name      => 'basics',
+    category_display   => 'Basics',
+    flashcard_set_name => 'Basics',
 
 You can optionally provide a category to limit the types of words that can be
 generated.
 
+Params:
+
+    flashcard_set
+    category
+    for_flashcards
+    word
+    include_category_in_output
+
 =cut
 
-sub generate_english_from_database {
+sub get_english_from_database {
     my (%params) = @_;
 
-    my $flashcard_set = $params{flashcard_set};
-    my $category      = $params{category};
+    my $flashcard_set  = $params{flashcard_set};
+    my $category       = $params{category};
+    my $word           = $params{word};
+    my $for_flashcards = $params{for_flashcards};
 
     my @binds;
-    my $category_condition = '';
+
+    my $extra_where = '';
 
     if ($flashcard_set) {
-        $category_condition .= "and FlashcardSet.name = ? ";
+        $extra_where .= "and FlashcardSet.name = ? ";
         push @binds, ucfirst $flashcard_set;
     }
     if ($category) {
-        $category_condition .= "and Categories.name = ? ";
+        $extra_where .= "and Categories.name = ? ";
         push @binds, ucfirst $category;
     }
+    if ($word) {
+        $extra_where .= "and word = ? ";
+        push @binds, $word;
+    }
 
-    my $hidden_from_flashcards = $params{for_flashcards} ?
-        "and hidden_from_flashcards = 0" : "";
+    $extra_where .= "and hidden_from_flashcards = 0 " if $for_flashcards;
+
+    my $category_columns = $params{include_category_in_output} ? qq{
+        ,
+        lower(Categories.name) as category_name,
+        coalesce(Categories.display_name, Categories.name)
+            as category_display,
+        lower(FlashcardSet.name) as flashcard_set_name
+    } : '';
 
     my $sql = qq{
-        select English.id, word, notes from English
+        select
+            English.id, word, notes$category_columns
+        from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
         join Teochew on English.id = english_id
-        where English.hidden = 0 $hidden_from_flashcards
-        $category_condition
+        where
+            English.hidden = 0
+            $extra_where
         group by English.id
         order by english.sort, word collate nocase
     };
@@ -816,13 +834,13 @@ sub translate_number {
 
     # Simple lookup for numbers less than 10
     if ($number <= 10 || $number == 1000) {
-        return get_all_translations($number);
+        return _lookup($number);
     }
 
     # Hundreds digit
     if ($hundreds_digit >= 1) {
-        push @components, lookup($hundreds_digit);
-        push @components, lookup(100);
+        push @components, _lookup($hundreds_digit);
+        push @components, _lookup(100);
 
         # 100, 200, 300, etc
         if ($tens_digit == 0 and $ones_digit == 0) {
@@ -832,32 +850,32 @@ sub translate_number {
         # Can ignore ones digit if it's 0
         if ($ones_digit == 0) {
             if ($tens_digit == 1 or $tens_digit == 2) {
-                push @components, lookup("$tens_digit (alt)");
+                push @components, _lookup("$tens_digit (alt)");
                 return link_teochew_words(\@components);
             }
             else {
-                push @components, lookup($tens_digit);
+                push @components, _lookup($tens_digit);
                 return link_teochew_words(\@components);
             }
         }
 
         # Need to say "zero" if it's in the middle
         if ($tens_digit == 0) {
-            push @components, lookup(0);
+            push @components, _lookup(0);
         }
     }
 
     # Tens Digit
     if ($tens_digit >= 1) {
         if ($tens_digit == 2) {
-            push @components, lookup("2 (alt)");
+            push @components, _lookup("2 (alt)");
         }
         elsif ($tens_digit > 2) {
-            push @components, lookup($tens_digit);
+            push @components, _lookup($tens_digit);
         }
 
         # "Ten"
-        push @components, lookup(10);
+        push @components, _lookup(10);
         if ($ones_digit == 0) {
             return link_teochew_words(\@components);
         }
@@ -865,7 +883,7 @@ sub translate_number {
 
     # Ones Digit
     $ones_digit .= " (alt)" if $ones_digit == 1 || $ones_digit == 2;
-    push @components, lookup($ones_digit);
+    push @components, _lookup($ones_digit);
 
     return link_teochew_words(\@components);
 }
@@ -882,22 +900,22 @@ sub translate_time {
 
     my @components;
 
-    push @components, lookup($hour);
-    push @components, lookup('time (hour)');
+    push @components, _lookup($hour);
+    push @components, _lookup('time (hour)');
 
     if ($minute eq '00') {
         return link_teochew_words(\@components);
     }
 
     if ($minute eq '30') {
-        push @components, lookup('time (30 min)');
+        push @components, _lookup('time (30 min)');
     }
     elsif ($minute % 5 == 0) {
         my $minute_hand = $minute / 5;
         $minute_hand .= " (alt)" if $minute_hand == 1 || $minute_hand == 2;
 
-        push @components, lookup('time (5 min)');
-        push @components, lookup($minute_hand);
+        push @components, _lookup('time (5 min)');
+        push @components, _lookup($minute_hand);
     }
     else {
         # XXX: implement this part
@@ -914,92 +932,59 @@ Returns the first translation found for the english word given.
 
 =cut
 
-sub lookup {
+sub _lookup {
     my ($english, %params) = @_;
 
-    my ($row) = get_all_translations($english, %params);
+    my ($row) = _lookup_all($english, %params);
     die "Translation for \"$english\" doesn't exist!\n" unless $row;
     return $row;
 }
 
-=head2 get_all_translations
+=head2 _lookup_all
 
-This takes these parameters:
-
-    include_alternates => Bool, enable if we can include partial matches
-    not_hidden         => Bool, enable if we should ignore hidden words
-    pengim             => Str, set if we want a certain pengim first
-    for_flashcards     => Bool, to filter out 'hidden_from_flashcards'
+    _lookup_all('hello');
+    _lookup_all('hello', 'leu2 ho2');
 
 Returns all the translations in an arrayref for the english word given. Each
 arrayref contains a hashref with these fields:
 
     pengim
     chinese
-    word (English)
-    notes
     no_tone_change
     tag_question
-    info
-    dialect
-    category
-    category_display
-    flashcard_set_name
 
 =cut
 
-sub get_all_translations {
-    my ($english, %params) = @_;
+sub _lookup_all {
+    my ($english, $pengim) = @_;
 
     my ($word, $notes) = split_out_parens($english);
     my @binds = ($word);
-    $params{notes} = $notes if $notes;
 
-    my $cond;
-    if ($params{include_alternates}) {
-        $cond =
-            "(English.word = ? collate nocase or " .
-            "English.word like ? collate nocase)";
-        push @binds, "$word (%";
+    my $cond = "English.word = ? collate nocase";
+
+    if ($notes) {
+        $cond .= " and notes = ?";
+        push @binds, $notes;
     }
     else {
-        $cond = "English.word = ? collate nocase"
+        $cond .= " and notes is null";
     }
 
-    $cond .= " and English.hidden = 0" if $params{not_hidden};
-    $cond .= " and Teochew.hidden_from_flashcards = 0"
-        if $params{for_flashcards};
-
-    if ($params{notes}) {
-        $cond .= " and notes like ?";
-        push @binds, "%$params{notes}%";
+    if ($pengim) {
+        $cond .= " and pengim = ?";
+        push @binds, $pengim;
     }
 
     my $sql = qq{
         select
-            English.word as english, notes,
             pengim, chinese,
-            no_tone_change, tag_question, info, dialect,
-            lower(Categories.name) as category_name,
-            coalesce(Categories.display_name, Categories.name)
-                as category_display,
-            lower(FlashcardSet.name) as flashcard_set_name
+            no_tone_change, tag_question
         from Teochew join English on English.id = Teochew.english_id
-        join Categories on English.category_id = Categories.id
-        left join FlashcardSet on Categories.flashcardset_id = FlashcardSet.id
-        left join Extra on English.id = Extra.english_id
         where $cond
-    } . _order_by_gekion_first();
+    };
 
-    if ($params{pengim}) {
-        $sql .= ", pengim = ? desc";
-        push @binds, $params{pengim};
-    }
-    elsif (!$params{notes}) {
-        $sql .= ", notes";
-    }
-
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
 
     return @rows;
 }
