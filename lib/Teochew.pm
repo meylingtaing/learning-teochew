@@ -1233,7 +1233,7 @@ sub find_words_using_character {
         $pengim =~ s/\d(\d)/($1)/g;
         my $audio;
         if ($preferred_accent eq 'alt') {
-            my $alt = _alternate_pronunciation($_->{pengim});
+            my $alt = _alternate_pronunciation($pengim);
             if ($alt) {
                 $audio  = find_audio($alt);
                 $pengim = $alt if $audio;
