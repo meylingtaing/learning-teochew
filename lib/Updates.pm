@@ -3,8 +3,6 @@ package Updates;
 use strict;
 use warnings;
 
-use DBI;
-use DBD::SQLite::Constants qw(:dbd_sqlite_string_mode);
 use Date::Format;
 use Date::Parse;
 
@@ -12,27 +10,18 @@ use Date::Parse;
 
 Updates
 
-=head1 SYNOPSIS
+=head1 DESCRIPTION
 
-=head1 METHODS
-
-=head2 new
+A class for handling operations on the Updates database
 
 =cut
 
-sub new {
-    my $class = shift;
+use parent 'SqliteDB';
+use DBI qw(:sql_types);
 
-    # Just hardcoding the name of the database file for now, but maybe I should
-    # add a configuration file later, and put it there
-    my $dbh = DBI->connect("DBI:SQLite:dbname=Updates.sqlite")
-        or die $DBI::errstr;
-    $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
+sub new { shift->create_db_object('Updates.sqlite') }
 
-    my $self = { dbh => $dbh };
-    bless $self, $class;
-    return $self;
-}
+=head1 METHODS
 
 =head2 get_updates
 
@@ -45,7 +34,7 @@ sub get_updates {
     $page ||= 0;
 
     # Fetch updates from the database
-    my @rows = $self->{dbh}->selectall_array(
+    my @rows = $self->dbh->selectall_array(
         "select time_stamp, content from Updates " .
         "order by time_stamp desc limit 6 offset ?",
         { Slice => {} }, $page * 5

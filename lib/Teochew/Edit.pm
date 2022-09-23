@@ -1,17 +1,29 @@
 package Teochew::Edit;
 
+=head1 NAME
+
+Teochew::Edit
+
+=head1 DESCRIPTION
+
+Class for modifying the Teochew database
+
+    my $db = Teochew::Edit->new;
+    $db->insert_synonym('hello', 'hi');
+
+=cut
+
 use strict;
 use warnings;
 
+use parent 'SqliteDB';
 use DBI qw(:sql_types);
-use DBD::SQLite::Constants qw(:dbd_sqlite_string_mode);
 
-my $dbh = DBI->connect("DBI:SQLite:dbname=Teochew.sqlite");
-$dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
+sub new { shift->create_db_object('Teochew.sqlite') }
 
 =head2 insert_synonym
 
-    Teochew::Edit::insert_synonym(
+    $teochew->insert_synonym(
         english => 'hello',
         synonym => 'hi'
     );
@@ -19,12 +31,13 @@ $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
 =cut
 
 sub insert_synonym {
-    my %params = @_;
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
 
     my $english_id = $params{english_id} || _get_english_id(%params);
     return unless $english_id;
 
-    my $sth = $dbh->prepare(
+    my $sth = $self->dbh->prepare(
         "insert into Synonyms (english_id, word) values (?,?)"
     );
     $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
@@ -34,15 +47,16 @@ sub insert_synonym {
 
 =head2 make_fully_hidden
 
-    Teochew::Edit::make_fully_hidden('hello');
+    $teochew->make_fully_hidden('hello');
 
 =cut
 
 sub make_fully_hidden {
-    my %params = @_;
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
 
     my $english_id = $params{english_id} || _get_english_id(%params);
-    my $sth = $dbh->prepare(qq{
+    my $sth = $self->dbh->prepare(qq{
         update English set hidden = 1, hidden_from_flashcards = 1 where id = ?
     });
     $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
@@ -50,7 +64,7 @@ sub make_fully_hidden {
 }
 
 sub _get_english_id {
-    my %params = @_;
+    my ($self, %params) = @_;
 
     my $english = $params{english};
     my $note    = undef;
@@ -66,8 +80,10 @@ sub _get_english_id {
         $sql .= "and notes = ?";
         push @binds, $note;
     }
-    my @rows = $dbh->selectall_array($sql, {}, @binds);
+    my @rows = $self->dbh->selectall_array($sql, {}, @binds);
 
     return unless scalar @rows;
     return $rows[0]->[0];
 }
+
+1;

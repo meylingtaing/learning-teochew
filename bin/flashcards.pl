@@ -303,7 +303,7 @@ elsif ($command eq 'insert_synonym') {
 
     say "Inserting $synonym as synonym for $english";
     if (confirm()) {
-        insert_synonym(english_id => $english_id, synonym => $synonym);
+        Teochew::Edit->insert_synonym(english_id => $english_id, synonym => $synonym);
     }
 }
 elsif ($command eq 'hide') {
@@ -312,12 +312,12 @@ elsif ($command eq 'hide') {
     die "Must include English!\n" unless $english;
 
     # Make sure the english word exists already
-    my $english_id = Teochew::Edit::_get_english_id(english => $english);
+    my $english_id = Teochew::Edit->_get_english_id(english => $english);
     die "$english does not exist!\n" unless $english_id;
 
     say "Hiding English word '$english'";
     if (confirm()) {
-        Teochew::Edit::make_fully_hidden(english_id => $english_id);
+        Teochew::Edit->make_fully_hidden(english_id => $english_id);
     }
 }
 elsif ($command eq 'insert_extra') {
