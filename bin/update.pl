@@ -5,7 +5,7 @@ use warnings;
 
 use lib 'lib';
 
-use Input;
+use Input qw(input_via_editor);
 use DBI;
 
 my $command = (shift @ARGV) || 'new';
@@ -27,7 +27,7 @@ if ($command eq 'edit') {
     }
 }
 
-$content = Input::via_editor($content);
+$content = input_via_editor($content);
 
 # Save it to the database
 my $sth;
