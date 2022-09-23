@@ -1048,7 +1048,7 @@ INSERT INTO Teochew VALUES(541,469,'song57 cheu2','松鼠',0,0,NULL,0);
 INSERT INTO Teochew VALUES(542,470,'chiu32 ki2','漱齿',0,0,NULL,0);
 INSERT INTO Teochew VALUES(543,471,'ki26 chiu3','齿漱',0,0,NULL,0);
 INSERT INTO Teochew VALUES(544,472,'ghe57 go1','牙膏',0,0,NULL,0);
-INSERT INTO Teochew VALUES(545,473,'dioh8','着',0,0,NULL,0);
+INSERT INTO Teochew VALUES(545,473,'dioh8','着',0,0,NULL,1);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
