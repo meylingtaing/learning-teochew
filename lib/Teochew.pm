@@ -1236,22 +1236,3 @@ sub find_words_using_character {
 #sub find_phrases_using_word {
 #}
 
-=head1 OTHER HELPERS
-
-=head2 finalize_output
-
-Given a teochew translation, this will add tone marks and look up the audio
-if it exists. This is a helper for getting the data to look nice before
-displaying it to the user.
-
-=cut
-
-sub finalize_output {
-    return map {{
-        pengim  => add_tone_marks($_->{pengim}),
-        chinese => $_->{chinese} =~ s/\?/[?]/gr,
-        audio   => find_audio($_->{pengim}),
-        notes   => $_->{notes},
-        dialect => _dialect_characters($_->{dialect}),
-    }} @_;
-}
