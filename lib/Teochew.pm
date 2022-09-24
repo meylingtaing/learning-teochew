@@ -643,6 +643,7 @@ sub _translate_phrase {
             $translation = _lookup($word, $pengim);
         }
         $translation->{no_tone_change} ||= $no_tone_change;
+        $translation->{pengim} =~ s/\d(\d)/($1)/;
         push @components, $translation;
     }
 
