@@ -477,6 +477,23 @@ sub get_english_from_database {
     return @rows;
 }
 
+=head2 get_synonyms
+
+Given an English word, returns the synonyms for that word
+
+=cut
+
+sub get_synonyms {
+    my ($word) = @_;
+    my $sql =
+        'select Synonyms.word as word ' .
+        'from Synonyms join English on English.id = english_id ' .
+        'where English.word = ?';
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
+    return map { $_->{word} } @rows;
+}
+
 =head1 INTERNALS
 
 These functions are not typically meant to be called outside of this file, but
@@ -575,23 +592,6 @@ sub _generate_english_times {
     }
 
     return @times;
-}
-
-=head2 get_synonyms
-
-Given an English word, returns the synonyms for that word
-
-=cut
-
-sub get_synonyms {
-    my ($word) = @_;
-    my $sql =
-        'select Synonyms.word as word ' .
-        'from Synonyms join English on English.id = english_id ' .
-        'where English.word = ?';
-
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
-    return map { $_->{word} } @rows;
 }
 
 =head2 get_tags
