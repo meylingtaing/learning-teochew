@@ -515,6 +515,12 @@ INSERT INTO English VALUES(474,32,'then',0,'',NULL,NULL);
 INSERT INTO English VALUES(475,15,'rabbit',0,'',NULL,NULL);
 INSERT INTO English VALUES(476,13,'to wait',0,'',NULL,NULL);
 INSERT INTO English VALUES(477,14,'to work a job',0,'',NULL,NULL);
+INSERT INTO English VALUES(478,15,'fly',0,'insect',NULL,NULL);
+INSERT INTO English VALUES(479,13,'to wipe',0,'',NULL,NULL);
+INSERT INTO English VALUES(480,31,'toilet paper',0,'',NULL,NULL);
+INSERT INTO English VALUES(481,16,'pound',0,'lb.',NULL,NULL);
+INSERT INTO English VALUES(482,8,'far',0,'',NULL,NULL);
+INSERT INTO English VALUES(483,32,'quite',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1059,6 +1065,12 @@ INSERT INTO Teochew VALUES(548,475,'beh84 tou3','白兔',0,0,NULL,0);
 INSERT INTO Teochew VALUES(549,476,'dang2','等',0,0,NULL,0);
 INSERT INTO Teochew VALUES(550,477,'joh48 gang1','作工',0,0,NULL,0);
 INSERT INTO Teochew VALUES(551,477,'joh48 kang1 kue3','作工课',0,0,NULL,0);
+INSERT INTO Teochew VALUES(552,478,'hou57 sing5','胡蝇',0,0,NULL,0);
+INSERT INTO Teochew VALUES(553,479,'chik4','拭',0,0,NULL,0);
+INSERT INTO Teochew VALUES(554,480,'chik48 ka1 cheung1 jua2','拭尻川纸',0,0,NULL,0);
+INSERT INTO Teochew VALUES(555,481,'bong7','磅',0,0,NULL,0);
+INSERT INTO Teochew VALUES(556,482,'heung6','远',0,0,NULL,0);
+INSERT INTO Teochew VALUES(557,483,'hoh4','好',0,0,NULL,1);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1523,6 +1535,11 @@ INSERT INTO Chinese VALUES(463,'作',NULL,NULL,'joh4');
 INSERT INTO Chinese VALUES(464,'工',NULL,NULL,'gang1');
 INSERT INTO Chinese VALUES(465,'工',NULL,NULL,'kang1');
 INSERT INTO Chinese VALUES(466,'课','課',NULL,'kue3');
+INSERT INTO Chinese VALUES(467,'蝇','蠅',NULL,'sing5');
+INSERT INTO Chinese VALUES(468,'拭',NULL,NULL,'chik4');
+INSERT INTO Chinese VALUES(469,'磅',NULL,NULL,'bong7');
+INSERT INTO Chinese VALUES(470,'远','遠',NULL,'heung6');
+INSERT INTO Chinese VALUES(471,'好',NULL,NULL,'hoh4');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1574,6 +1591,11 @@ INSERT INTO Synonyms VALUES(42,450,'to read');
 INSERT INTO Synonyms VALUES(43,195,'to try');
 INSERT INTO Synonyms VALUES(44,451,'availability');
 INSERT INTO Synonyms VALUES(45,473,'have to');
+INSERT INTO Synonyms VALUES(46,475,'bunny');
+INSERT INTO Synonyms VALUES(47,478,'housefly');
+INSERT INTO Synonyms VALUES(49,473,'need to');
+INSERT INTO Synonyms VALUES(50,483,'very');
+INSERT INTO Synonyms VALUES(51,483,'so');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
