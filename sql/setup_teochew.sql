@@ -19,8 +19,8 @@ INSERT INTO Categories VALUES(9,'House','Around the House',1,4);
 INSERT INTO Categories VALUES(10,'Food','Food/Drink',1,5);
 INSERT INTO Categories VALUES(11,'Body','Body Parts',1,6);
 INSERT INTO Categories VALUES(13,'Actions',NULL,0,8);
-INSERT INTO Categories VALUES(14,'School','School',1,7);
-INSERT INTO Categories VALUES(15,'Animals',NULL,0,8);
+INSERT INTO Categories VALUES(14,'School','School/Work',1,7);
+INSERT INTO Categories VALUES(15,'Animals',NULL,0,14);
 INSERT INTO Categories VALUES(16,'Misc','Miscellaneous',0,8);
 INSERT INTO Categories VALUES(17,'Shopping',NULL,0,8);
 INSERT INTO Categories VALUES(18,'Clothing',NULL,0,8);
@@ -28,7 +28,7 @@ INSERT INTO Categories VALUES(19,'','All',0,NULL);
 INSERT INTO Categories VALUES(20,'Time','Clock Time',0,11);
 INSERT INTO Categories VALUES(21,'Phrase','Sentences',0,10);
 INSERT INTO Categories VALUES(22,'Weather',NULL,0,NULL);
-INSERT INTO Categories VALUES(23,'Outside',NULL,0,8);
+INSERT INTO Categories VALUES(23,'Outside',NULL,0,14);
 INSERT INTO Categories VALUES(26,'Months',NULL,0,3);
 INSERT INTO Categories VALUES(27,'Weekdays','Days of the Week',0,3);
 INSERT INTO Categories VALUES(28,'Produce','Fruits/Vegetables',0,5);
@@ -514,6 +514,7 @@ INSERT INTO English VALUES(473,32,'must',0,'',NULL,NULL);
 INSERT INTO English VALUES(474,32,'then',0,'',NULL,NULL);
 INSERT INTO English VALUES(475,15,'rabbit',0,'',NULL,NULL);
 INSERT INTO English VALUES(476,13,'to wait',0,'',NULL,NULL);
+INSERT INTO English VALUES(477,14,'to work a job',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -633,7 +634,7 @@ INSERT INTO Teochew VALUES(113,108,'ma32 ki2','明起',0,0,NULL,0);
 INSERT INTO Teochew VALUES(114,108,'ma32 yik8','明日',0,0,NULL,0);
 INSERT INTO Teochew VALUES(115,109,'ja1 yik8','昨日',0,0,NULL,0);
 INSERT INTO Teochew VALUES(116,109,'jao1 yik8','昨日',0,0,NULL,0);
-INSERT INTO Teochew VALUES(118,110,'gim1 yik8','今日',0,0,'diojiu',0);
+INSERT INTO Teochew VALUES(118,110,'gim1 yik8','今日',0,0,'diojiu',1);
 INSERT INTO Teochew VALUES(119,111,'chu3','厝',0,0,NULL,0);
 INSERT INTO Teochew VALUES(120,111,'lai6','内',0,0,NULL,0);
 INSERT INTO Teochew VALUES(121,112,'gue26 diao5','粿条',0,0,NULL,0);
@@ -1056,6 +1057,8 @@ INSERT INTO Teochew VALUES(546,474,'dioh8','着',0,0,NULL,1);
 INSERT INTO Teochew VALUES(547,475,'tou3','兔',0,0,NULL,0);
 INSERT INTO Teochew VALUES(548,475,'beh84 tou3','白兔',0,0,NULL,0);
 INSERT INTO Teochew VALUES(549,476,'dang2','等',0,0,NULL,0);
+INSERT INTO Teochew VALUES(550,477,'joh48 gang1','作工',0,0,NULL,0);
+INSERT INTO Teochew VALUES(551,477,'joh48 kang1 kue3','作工课',0,0,NULL,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1516,6 +1519,10 @@ INSERT INTO Chinese VALUES(459,'膏',NULL,NULL,'go1');
 INSERT INTO Chinese VALUES(460,'着','著',NULL,'dioh8');
 INSERT INTO Chinese VALUES(461,'兔',NULL,NULL,'tou3');
 INSERT INTO Chinese VALUES(462,'等',NULL,NULL,'dang2');
+INSERT INTO Chinese VALUES(463,'作',NULL,NULL,'joh4');
+INSERT INTO Chinese VALUES(464,'工',NULL,NULL,'gang1');
+INSERT INTO Chinese VALUES(465,'工',NULL,NULL,'kang1');
+INSERT INTO Chinese VALUES(466,'课','課',NULL,'kue3');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1607,6 +1614,7 @@ INSERT INTO Phrases VALUES(23,'you to_have free_time no_(don''t_have)','Do you h
 INSERT INTO Phrases VALUES(24,'I busy','I''m busy',0);
 INSERT INTO Phrases VALUES(25,'I 30 age','I''m thirty years old',0);
 INSERT INTO Phrases VALUES(26,'I to_wash bowl','I am washing dishes',0);
+INSERT INTO Phrases VALUES(27,'I must to_brush_teeth','I have to brush my teeth',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1977,11 +1985,12 @@ INSERT INTO FlashcardSet VALUES(3,'Datetime','Date/Time',0,10);
 INSERT INTO FlashcardSet VALUES(4,'House','Around the House',0,10);
 INSERT INTO FlashcardSet VALUES(5,'Food','Food/Drink',0,10);
 INSERT INTO FlashcardSet VALUES(6,'Body','Body Parts',0,10);
-INSERT INTO FlashcardSet VALUES(7,'School','School',0,10);
-INSERT INTO FlashcardSet VALUES(8,'Misc','Miscellaneous',0,10);
+INSERT INTO FlashcardSet VALUES(7,'School','School/Work',0,10);
+INSERT INTO FlashcardSet VALUES(8,'Misc','Miscellaneous',0,11);
 INSERT INTO FlashcardSet VALUES(9,'','All',1,10);
 INSERT INTO FlashcardSet VALUES(10,'Phrase','Sentences',1,10);
 INSERT INTO FlashcardSet VALUES(11,'Time','Clock Time',1,10);
 INSERT INTO FlashcardSet VALUES(12,'Basics','Basics',0,1);
 INSERT INTO FlashcardSet VALUES(13,'Number','Numbers',1,NULL);
+INSERT INTO FlashcardSet VALUES(14,'Nature','Nature',0,10);
 COMMIT;
