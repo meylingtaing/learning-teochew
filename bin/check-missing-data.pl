@@ -54,15 +54,19 @@ if (grep /^audio$/, @commands_to_run) {
         "select English.word as english, Teochew.pengim as teochew " .
         "from Teochew " .
         "join English on English.id = english_id " .
-        "where hidden = 0",
+        "where hidden = 0 and hidden_from_flashcards = 0",
         { Slice => {} }
     );
 
     say "Missing audio:";
     for (@rows) {
+
+        # Look for the alt pronunication because that's the one I care about
         $_->{teochew} =~ s/\d(\d)/$1/g;
+        my $alt = Teochew::_alternate_pronunciation($_->{teochew});
+
         say $_->{english} . " " . $_->{teochew}
-            unless Teochew::find_audio($_->{teochew});
+            unless Teochew::find_audio($alt || $_->{teochew});
     }
     print "\n";
 }
