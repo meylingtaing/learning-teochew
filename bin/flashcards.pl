@@ -176,21 +176,7 @@ elsif ($command eq 'insert_chinese') {
     }
 }
 elsif ($command eq 'insert_synonym') {
-    my ($english, $synonym) = @ARGV;
-
-    die "Must include English and synonym!\n" unless $english and $synonym;
-
-    my ($word, $notes) = split_out_parens($english);
-
-    # Make sure the english word exists already
-    my $english_id = get_english_id(
-        english => $word, notes => $notes, no_insert => 1);
-    die "$english does not exist!\n" unless $english_id;
-
-    say "Inserting $synonym as synonym for $english";
-    if (confirm()) {
-        Teochew::Edit->insert_synonym(english_id => $english_id, synonym => $synonym);
-    }
+    die "This is not supported anymore. Use insert-synonym.pl instead\n";
 }
 elsif ($command eq 'hide') {
     my ($english) = @ARGV;
@@ -241,27 +227,6 @@ sub confirm {
     return 0;
 }
 
-sub add_accents {
-    my $word = shift;
-
-    # Add grave accent
-    $word =~ s/([a-z])`/$1\N{U+0340}/g;
-
-    # Add acute accent
-    $word =~ s/([a-z])'/$1\N{U+0341}/g;
-
-    # Add dot
-    $word =~ s/([a-z])\./$1\N{U+0323}/g;
-
-    # Add macron
-    $word =~ s/([a-z])-/$1\N{U+0304}/g;
-
-    # Add breve
-    $word =~ s/([a-z])3/$1\N{U+0306}/g;
-
-    return $word;
-}
-
 sub get_english_id {
     my %params = @_;
     my $english_id;
@@ -303,16 +268,6 @@ sub get_english_id {
     }
 
     return $english_id;
-}
-
-sub insert_synonym {
-    my %params = @_;
-    my $sth = $dbh->prepare(
-        "insert into Synonyms (english_id, word) values (?,?)"
-    );
-    $sth->bind_param(1, $params{english_id});
-    $sth->bind_param(2, $params{synonym});
-    $sth->execute;
 }
 
 sub insert_extra {
