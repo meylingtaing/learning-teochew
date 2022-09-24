@@ -467,7 +467,10 @@ sub get_english_from_database {
             English.hidden = 0
             $extra_where
         group by English.id
-        order by english.sort, word collate nocase
+        order by
+            english.sort,
+            word collate nocase,
+            case when notes is null or notes = '' then 1 else 2 end
     };
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
