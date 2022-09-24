@@ -18,6 +18,7 @@
     Sorry! I don't know how to translate "<%= $english %>".
 % } else {
     <h1><%= $english %></h1>
+    <p class="text-muted"><%= join(', ', @$synonyms) %></p>
     <ul id="translate-table" class="list-group">
 
     % for my $key (keys %$teochew_by_category) {

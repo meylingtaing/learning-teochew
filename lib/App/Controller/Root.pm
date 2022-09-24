@@ -198,8 +198,9 @@ sub english {
         }
 
         $c->stash(teochew_by_category => \%categories);
+        $c->stash(english  => $_);
+        $c->stash(synonyms => [Teochew::get_synonyms($_)]);
 
-        $c->stash(english    => $_);
         $c->stash(extra_info => markdown(
             Teochew::extra_information($english) // ''
         ));
