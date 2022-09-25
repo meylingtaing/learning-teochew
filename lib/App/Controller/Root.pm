@@ -185,8 +185,12 @@ sub english {
             };
 
             # Get the translation
-            my $translation_rows =
-                Teochew::translate($english_row, show_all_accents => 1);
+            my $translation_rows = Teochew::translate(
+                $english_row,
+                # XXX: I might try this again later, but I find that showing
+                # multiple accents makes the page look cluttered
+                #show_all_accents => 1
+            );
 
             for my $translation_row (@$translation_rows) {
                 push @chinese, $translation_row->{chinese};

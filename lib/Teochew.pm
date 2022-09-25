@@ -265,12 +265,14 @@ sub translate {
             my $audio = find_audio($alt);
 
             # Whooooo this is hacky
-            my $new_pronunciation = { pengim => $alt, audio => $audio };
-            if ($preferred_accent eq 'alt') {
-                unshift @$pronunciation, $new_pronunciation;
-            }
-            else {
-                push @$pronunciation, $new_pronunciation;
+            if ($audio) {
+                my $new_pronunciation = { pengim => $alt, audio => $audio };
+                if ($preferred_accent eq 'alt') {
+                    unshift @$pronunciation, $new_pronunciation;
+                }
+                else {
+                    push @$pronunciation, $new_pronunciation;
+                }
             }
         }
 
