@@ -145,7 +145,7 @@ elsif ($command eq 'insert_phrase') {
     my $phrase = Teochew::replace_variables({
         sentence => $sentence, words => $words });
 
-    my $translation = Teochew::_translate_phrase($phrase);
+    my $translation = Teochew::translate_phrase($phrase);
 
     say "Inserting phrase \"$sentence\" with translation \"" .
         $translation->{pengim} . "\"";

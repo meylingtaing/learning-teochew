@@ -223,7 +223,7 @@ sub translate {
     # be stored
     if (ref $english eq 'HASH') {
         if ($english->{sentence}) {
-            @translations = (_translate_phrase($english));
+            @translations = (translate_phrase($english));
         }
         elsif ($english->{id}) {
             @translations = get_all_translations_by_id(
@@ -291,6 +291,168 @@ sub translate {
     }
 
     return \@ret;
+}
+
+=head2 translate_number
+
+Given a number from 0-999, returns the translation
+
+=cut
+
+sub translate_number {
+    my $number = shift;
+    return if $number > 1000;
+
+    my $hundreds_digit = floor($number / 100);
+    my $tens_digit     = ($number / 10) % 10;
+    my $ones_digit     = $number % 10;
+
+    my @components;
+
+    # Simple lookup for numbers less than 10
+    if ($number <= 10 || $number == 1000) {
+        return _lookup($number);
+    }
+
+    # Hundreds digit
+    if ($hundreds_digit >= 1) {
+        push @components, _lookup($hundreds_digit);
+        push @components, _lookup(100);
+
+        # 100, 200, 300, etc
+        if ($tens_digit == 0 and $ones_digit == 0) {
+            return link_teochew_words(\@components);
+        }
+
+        # Can ignore ones digit if it's 0
+        if ($ones_digit == 0) {
+            if ($tens_digit == 1 or $tens_digit == 2) {
+                push @components, _lookup("$tens_digit (alt)");
+                return link_teochew_words(\@components);
+            }
+            else {
+                push @components, _lookup($tens_digit);
+                return link_teochew_words(\@components);
+            }
+        }
+
+        # Need to say "zero" if it's in the middle
+        if ($tens_digit == 0) {
+            push @components, _lookup(0);
+        }
+    }
+
+    # Tens Digit
+    if ($tens_digit >= 1) {
+        if ($tens_digit == 2) {
+            push @components, _lookup("2 (alt)");
+        }
+        elsif ($tens_digit > 2) {
+            push @components, _lookup($tens_digit);
+        }
+
+        # "Ten"
+        push @components, _lookup(10);
+        if ($ones_digit == 0) {
+            return link_teochew_words(\@components);
+        }
+    }
+
+    # Ones Digit
+    $ones_digit .= " (alt)" if $ones_digit == 1 || $ones_digit == 2;
+    push @components, _lookup($ones_digit);
+
+    return link_teochew_words(\@components);
+}
+
+=head2 translate_time
+
+Given a time, returns the translation
+
+=cut
+
+sub translate_time {
+    my $time = shift;
+    my ($hour, $minute) = split /:/, $time;
+
+    my @components;
+
+    push @components, _lookup($hour);
+    push @components, _lookup('time (hour)');
+
+    if ($minute eq '00') {
+        return link_teochew_words(\@components);
+    }
+
+    if ($minute eq '30') {
+        push @components, _lookup('time (30 min)');
+    }
+    elsif ($minute % 5 == 0) {
+        my $minute_hand = $minute / 5;
+        $minute_hand .= " (alt)" if $minute_hand == 1 || $minute_hand == 2;
+
+        push @components, _lookup('time (5 min)');
+        push @components, _lookup($minute_hand);
+    }
+    else {
+        # XXX: implement this part
+    }
+
+    return link_teochew_words(\@components);
+}
+
+=head2 translate_phrase
+
+Translates a phrase. Expects a hashref in the form of
+
+    { sentence => 'I'm going to the store', words => 'I to_go store' }
+
+=cut
+
+sub translate_phrase {
+    my ($english) = @_;
+    # Split up each word into components
+    my @words = split / /, $english->{words};
+    my @components;
+
+    for my $word (@words) {
+
+        my $no_tone_change = $word =~ s/\|$//g ? 1 : 0;
+
+        my $pengim = undef;
+        if ($word =~ /\-(.*)$/) {
+            $pengim = $1;
+            $word =~ s/\-(.*)$//;
+        }
+
+        $word =~ s/_/ /g;
+
+        my $translation;
+        if ($word =~ /\d+/) {
+            ($translation) = translate_number($word);
+        }
+        else {
+            $translation = _lookup($word, $pengim);
+        }
+        $translation->{no_tone_change} ||= $no_tone_change;
+        $translation->{pengim} =~ s/\d(\d)/($1)/;
+        push @components, $translation;
+    }
+
+    # "..." indicates that it's an incomplete sentence so we need
+    # to make sure all the words go through tone change
+    my $incomplete = $english->{sentence} =~ /\.\.\.$/;
+
+    # No tone change for words that come before tag questions
+    if ($english->{sentence} =~ /\?$/ and
+        $components[-1]->{tag_question})
+    {
+        $components[-2]->{no_tone_change} = 1;
+    }
+
+    return link_teochew_words(
+        \@components, { tone_change_last_word => $incomplete }
+    );
 }
 
 =head2 generate_translation_word_list
@@ -502,6 +664,24 @@ sub get_synonyms {
     return map { $_->{word} } @rows;
 }
 
+=head2 get_tags
+
+Given an English word, returns the tags for that word
+
+=cut
+
+sub get_tags {
+    my ($word) = @_;
+    my $sql =
+        "select Tags.name from Tags " .
+        "join TagLinks on Tags.id = TagLinks.tag_id " .
+        "join English on English.id = TagLinks.english_id " .
+        "where English.word = ?";
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
+    return map { $_->{name} } @rows;
+}
+
 =head1 INTERNALS
 
 These functions are not typically meant to be called outside of this file, but
@@ -581,78 +761,6 @@ sub _generate_english_times {
     }
 
     return @times;
-}
-
-=head2 get_tags
-
-Given an English word, returns the tags for that word
-
-=cut
-
-sub get_tags {
-    my ($word) = @_;
-    my $sql =
-        "select Tags.name from Tags " .
-        "join TagLinks on Tags.id = TagLinks.tag_id " .
-        "join English on English.id = TagLinks.english_id " .
-        "where English.word = ?";
-
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
-    return map { $_->{name} } @rows;
-}
-
-=head2 _translate_phrase
-
-Translates a phrase. Expects a hashref in the form of
-
-    { sentence => 'I'm going to the store', words => 'I to_go store' }
-
-=cut
-
-sub _translate_phrase {
-    my ($english) = @_;
-    # Split up each word into components
-    my @words = split / /, $english->{words};
-    my @components;
-
-    for my $word (@words) {
-
-        my $no_tone_change = $word =~ s/\|$//g ? 1 : 0;
-
-        my $pengim = undef;
-        if ($word =~ /\-(.*)$/) {
-            $pengim = $1;
-            $word =~ s/\-(.*)$//;
-        }
-
-        $word =~ s/_/ /g;
-
-        my $translation;
-        if ($word =~ /\d+/) {
-            ($translation) = translate_number($word);
-        }
-        else {
-            $translation = _lookup($word, $pengim);
-        }
-        $translation->{no_tone_change} ||= $no_tone_change;
-        $translation->{pengim} =~ s/\d(\d)/($1)/;
-        push @components, $translation;
-    }
-
-    # "..." indicates that it's an incomplete sentence so we need
-    # to make sure all the words go through tone change
-    my $incomplete = $english->{sentence} =~ /\.\.\.$/;
-
-    # No tone change for words that come before tag questions
-    if ($english->{sentence} =~ /\?$/ and
-        $components[-1]->{tag_question})
-    {
-        $components[-2]->{no_tone_change} = 1;
-    }
-
-    return link_teochew_words(
-        \@components, { tone_change_last_word => $incomplete }
-    );
 }
 
 # XXX Change this to not use cross product...just have one alternate, it's
@@ -795,113 +903,6 @@ sub replace_variables_all {
     return @new_rows;
 }
 
-=head2 translate_number
-
-Given a number from 0-999, returns the translation
-
-=cut
-
-sub translate_number {
-    my $number = shift;
-    return if $number > 1000;
-
-    my $hundreds_digit = floor($number / 100);
-    my $tens_digit     = ($number / 10) % 10;
-    my $ones_digit     = $number % 10;
-
-    my @components;
-
-    # Simple lookup for numbers less than 10
-    if ($number <= 10 || $number == 1000) {
-        return _lookup($number);
-    }
-
-    # Hundreds digit
-    if ($hundreds_digit >= 1) {
-        push @components, _lookup($hundreds_digit);
-        push @components, _lookup(100);
-
-        # 100, 200, 300, etc
-        if ($tens_digit == 0 and $ones_digit == 0) {
-            return link_teochew_words(\@components);
-        }
-
-        # Can ignore ones digit if it's 0
-        if ($ones_digit == 0) {
-            if ($tens_digit == 1 or $tens_digit == 2) {
-                push @components, _lookup("$tens_digit (alt)");
-                return link_teochew_words(\@components);
-            }
-            else {
-                push @components, _lookup($tens_digit);
-                return link_teochew_words(\@components);
-            }
-        }
-
-        # Need to say "zero" if it's in the middle
-        if ($tens_digit == 0) {
-            push @components, _lookup(0);
-        }
-    }
-
-    # Tens Digit
-    if ($tens_digit >= 1) {
-        if ($tens_digit == 2) {
-            push @components, _lookup("2 (alt)");
-        }
-        elsif ($tens_digit > 2) {
-            push @components, _lookup($tens_digit);
-        }
-
-        # "Ten"
-        push @components, _lookup(10);
-        if ($ones_digit == 0) {
-            return link_teochew_words(\@components);
-        }
-    }
-
-    # Ones Digit
-    $ones_digit .= " (alt)" if $ones_digit == 1 || $ones_digit == 2;
-    push @components, _lookup($ones_digit);
-
-    return link_teochew_words(\@components);
-}
-
-=head2 translate_time
-
-Given a time, returns the translation
-
-=cut
-
-sub translate_time {
-    my $time = shift;
-    my ($hour, $minute) = split /:/, $time;
-
-    my @components;
-
-    push @components, _lookup($hour);
-    push @components, _lookup('time (hour)');
-
-    if ($minute eq '00') {
-        return link_teochew_words(\@components);
-    }
-
-    if ($minute eq '30') {
-        push @components, _lookup('time (30 min)');
-    }
-    elsif ($minute % 5 == 0) {
-        my $minute_hand = $minute / 5;
-        $minute_hand .= " (alt)" if $minute_hand == 1 || $minute_hand == 2;
-
-        push @components, _lookup('time (5 min)');
-        push @components, _lookup($minute_hand);
-    }
-    else {
-        # XXX: implement this part
-    }
-
-    return link_teochew_words(\@components);
-}
 
 =head1 DATABASE/FILESYSTEM FUNCTIONS
 
