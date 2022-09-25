@@ -507,25 +507,6 @@ sub get_synonyms {
 These functions are not typically meant to be called outside of this file, but
 they're documented if you want to.
 
-=head2 _dialect_characters
-
-Given the romanization of a dialect, this will return the Chinese characters
-for it. The list of dialects it understands is
-
-    diojiu
-    gekion
-
-=cut
-
-sub _dialect_characters {
-    my ($given_dialect) = @_;
-
-    return undef unless $given_dialect;
-
-    my %characters = ( diojiu => '潮州', gekion => '揭阳' );
-    return $characters{$given_dialect};
-}
-
 =head2 _generate_english_in_subcategory
 
 Returns a random English word in a given SubCategory.
