@@ -174,10 +174,18 @@ sub english {
 
         next unless scalar @english_rows;
 
+        my $english_display = $_;
+
         # Organize this by category. Also keep track of chinese characters.
         my %categories;
         my @chinese;
         for my $english_row (@english_rows) {
+
+            if (scalar @english_rows == 1 && $english_row->{notes}) {
+                $english_display .= " ($english_row->{notes})";
+                $english_row->{notes} = undef;
+            }
+
             my $category = $english_row->{category_name} // '';
             $categories{$category} //= {
                 display       => $english_row->{category_display},
@@ -202,7 +210,7 @@ sub english {
         }
 
         $c->stash(teochew_by_category => \%categories);
-        $c->stash(english  => $_);
+        $c->stash(english  => $english_display);
         $c->stash(synonyms => [Teochew::get_synonyms($_)]);
 
         $c->stash(extra_info => markdown(
