@@ -521,6 +521,10 @@ INSERT INTO English VALUES(480,31,'toilet paper',0,'',NULL,NULL);
 INSERT INTO English VALUES(481,16,'pound',0,'lb.',NULL,NULL);
 INSERT INTO English VALUES(482,8,'far',0,'',NULL,NULL);
 INSERT INTO English VALUES(483,32,'quite',0,'',NULL,NULL);
+INSERT INTO English VALUES(484,32,'done',0,'',NULL,NULL);
+INSERT INTO English VALUES(485,32,'no',0,'not yet',NULL,NULL);
+INSERT INTO English VALUES(486,13,'to look for',0,'',NULL,NULL);
+INSERT INTO English VALUES(487,8,'difficult',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1071,6 +1075,10 @@ INSERT INTO Teochew VALUES(554,480,'chik48 ka1 cheung1 jua2','拭尻川纸',0,0,
 INSERT INTO Teochew VALUES(555,481,'bong7','磅',0,0,NULL,0);
 INSERT INTO Teochew VALUES(556,482,'heung6','远',0,0,NULL,0);
 INSERT INTO Teochew VALUES(557,483,'hoh4','好',0,0,NULL,1);
+INSERT INTO Teochew VALUES(558,484,'ho2','好',0,0,NULL,0);
+INSERT INTO Teochew VALUES(559,485,'bhue7','未',0,0,NULL,0);
+INSERT INTO Teochew VALUES(560,486,'chue7','觅',0,0,NULL,0);
+INSERT INTO Teochew VALUES(561,487,'gang1 kou2','艰苦',0,0,NULL,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1540,6 +1548,9 @@ INSERT INTO Chinese VALUES(468,'拭',NULL,NULL,'chik4');
 INSERT INTO Chinese VALUES(469,'磅',NULL,NULL,'bong7');
 INSERT INTO Chinese VALUES(470,'远','遠',NULL,'heung6');
 INSERT INTO Chinese VALUES(471,'好',NULL,NULL,'hoh4');
+INSERT INTO Chinese VALUES(472,'未',NULL,NULL,'bhue7');
+INSERT INTO Chinese VALUES(473,'觅','覓',NULL,'chue7');
+INSERT INTO Chinese VALUES(474,'艰','艱',NULL,'gang1');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1596,6 +1607,9 @@ INSERT INTO Synonyms VALUES(47,478,'housefly');
 INSERT INTO Synonyms VALUES(49,473,'need to');
 INSERT INTO Synonyms VALUES(50,483,'very');
 INSERT INTO Synonyms VALUES(51,483,'so');
+INSERT INTO Synonyms VALUES(52,486,'to find');
+INSERT INTO Synonyms VALUES(53,486,'to search');
+INSERT INTO Synonyms VALUES(54,487,'hard');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
