@@ -655,12 +655,6 @@ sub _translate_phrase {
     );
 }
 
-sub _order_by_gekion_first {
-    "order by case " .
-    "   when dialect is null then 1 " .
-    "   when dialect = 'gekion' then 2 else 3 end";
-}
-
 # XXX Change this to not use cross product...just have one alternate, it's
 # a lot easier that way
 sub _alternate_pronunciation {
@@ -1034,7 +1028,6 @@ Returns rows with
     teochew_id
     pengim
     chinese
-    dialect
 
 =cut
 
@@ -1046,10 +1039,10 @@ sub get_all_translations_by_id {
         "and hidden_from_flashcards = 0" : "";
 
     my $sql = qq{
-        select id teochew_id, pengim, chinese, dialect
+        select id teochew_id, pengim, chinese
         from Teochew where english_id = ?
         $hidden_from_flashcards
-    } . _order_by_gekion_first();
+    };
     return $dbh->selectall_array($sql, { Slice => {} }, $english_id);
 }
 
@@ -1174,7 +1167,7 @@ sub find_words_using_character {
     my $sql =
         "select English.word as english, notes, chinese, pengim from Teochew " .
         "join English on English.id = english_id " .
-        "where hidden = 0 and (dialect is null or dialect != 'diojiu')";
+        "where hidden = 0";
 
     my @binds = map { "%$_%" } @$characters;
     my $chinese_like_sql = join " or ", ("chinese like ?") x scalar @$characters;
