@@ -217,6 +217,7 @@ sub translate {
     my $for_flashcards   = $params{for_flashcards};
 
     my @translations;
+    my $translate_number = 0;
 
     # If the data was passed as a hash, either a "sentence" or "id" should
     # be stored
@@ -231,9 +232,11 @@ sub translate {
         elsif (defined $english->{word}) {
             my $word = $english->{word};
             if ($word =~ /^\d+$/) {
+                $translate_number = 1;
                 @translations = ( translate_number($word) );
             }
             elsif ($word =~ /^\d+:\d+$/) {
+                $translate_number = 1;
                 @translations = ( translate_time($word) );
             }
             else {
@@ -264,8 +267,11 @@ sub translate {
         if ($alt) {
             my $audio = find_audio($alt);
 
-            # Whooooo this is hacky
-            if ($audio) {
+            # Whooooo this is hacky -- if I only have audio for one of the
+            # accents, show that one, BUUUT if this is a number/clock time,
+            # then always use the alternate pronunciation, for consistency's
+            # sake
+            if ($audio || $translate_number) {
                 my $new_pronunciation = { pengim => $alt, audio => $audio };
                 if ($preferred_accent eq 'alt') {
                     unshift @$pronunciation, $new_pronunciation;
