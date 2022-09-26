@@ -138,21 +138,7 @@ elsif ($command eq 'update') {
     }
 }
 elsif ($command eq 'insert_phrase') {
-    my ($sentence, $words) = @ARGV;
-
-    # First check and make sure this is translatable using the words we
-    # already have. This will die if we can't translate it.
-    my $phrase = Teochew::replace_variables({
-        sentence => $sentence, words => $words });
-
-    my $translation = Teochew::translate_phrase($phrase);
-
-    say "Inserting phrase \"$sentence\" with translation \"" .
-        $translation->{pengim} . "\"";
-
-    if (confirm()) {
-        insert_phrase(sentence => $sentence, words => $words);
-    }
+    die "This is not supported anymore. Use insert-phrase.pl instead\n";
 }
 elsif ($command eq 'insert_chinese') {
     my ($chinese, $pengim, $meaning) = @ARGV;
@@ -285,16 +271,6 @@ sub insert_extra {
     }
     $sth->bind_param(1, $params{info});
     $sth->bind_param(2, $params{english_id});
-    $sth->execute;
-}
-
-sub insert_phrase {
-    my %params = @_;
-    my $sth = $dbh->prepare(
-        "insert into Phrases (sentence, words) values (?,?)"
-    );
-    $sth->bind_param(1, $params{sentence});
-    $sth->bind_param(2, $params{words});
     $sth->execute;
 }
 

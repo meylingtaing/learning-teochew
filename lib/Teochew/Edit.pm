@@ -166,6 +166,27 @@ sub insert_chinese {
     $sth->execute(@binds);
 }
 
+=head2 insert_phrase
+
+    $teochew->insert_phrase(
+        sentence => '',
+        words    => '',
+    );
+
+=cut
+
+sub insert_phrase {
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    my $sth = $self->dbh->prepare(
+        "insert into Phrases (sentence, words) values (?,?)"
+    );
+    $sth->bind_param(1, $params{sentence});
+    $sth->bind_param(2, $params{words});
+    $sth->execute;
+}
+
 =head2 make_fully_hidden
 
     $teochew->make_fully_hidden('hello');
