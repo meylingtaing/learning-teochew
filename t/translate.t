@@ -11,6 +11,8 @@ sub check_translation {
 
     my ($english, $teochew) = @_;
     my $translation = Teochew::translate($english);
+
+    $english = $english->{sentence} if ref $english && $english->{sentence};
     is $translation->[0]{pronunciations}[0]{pengim}, $teochew,
         "translation: $english -> $teochew";
 }
@@ -38,5 +40,22 @@ check_translation('10:10', "jap(4) diam(6) dah(8) yi6");
 check_translation('10:15', "jap(4) diam(6) dah(8) san1");
 
 check_translation('Red', "ang5");
+
+check_translation(
+    { sentence => 'What are you doing?', words => 'you to_do what' },
+    "leu2 mueh(4) mih(8) gai5"
+);
+
+# Make sure we don't tone change before a tag question thingy
+check_translation({
+    sentence => 'Did you eat yet?',
+    words    => 'you to_eat done no_(not_yet)'
+}, "leu2 jiah(4) ho2 bhue7");
+
+# Make sure we don't tone change when we have the '|'
+check_translation({
+    sentence => '1, 2, 3',
+    words    => '1| 2| 3'
+}, 'jek8 no6 san1');
 
 done_testing;

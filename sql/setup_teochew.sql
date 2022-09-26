@@ -1075,7 +1075,7 @@ INSERT INTO Teochew VALUES(555,481,'bong7','磅',0,0,0);
 INSERT INTO Teochew VALUES(556,482,'heung6','远',0,0,0);
 INSERT INTO Teochew VALUES(557,483,'hoh4','好',0,0,1);
 INSERT INTO Teochew VALUES(558,484,'ho2','好',0,0,0);
-INSERT INTO Teochew VALUES(559,485,'bhue7','未',0,0,0);
+INSERT INTO Teochew VALUES(559,485,'bhue7','未',0,1,0);
 INSERT INTO Teochew VALUES(560,486,'chue7','觅',0,0,0);
 INSERT INTO Teochew VALUES(561,487,'gang1 kou2','艰苦',0,0,0);
 CREATE TABLE Chinese (
