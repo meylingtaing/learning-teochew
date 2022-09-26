@@ -1650,6 +1650,8 @@ INSERT INTO Phrases VALUES(24,'I busy','I''m busy',0);
 INSERT INTO Phrases VALUES(25,'I 30 age','I''m thirty years old',0);
 INSERT INTO Phrases VALUES(26,'I to_wash bowl','I am washing dishes',0);
 INSERT INTO Phrases VALUES(27,'I must to_brush_teeth','I have to brush my teeth',0);
+INSERT INTO Phrases VALUES(28,'you to_eat rice done| no_(not_yet)','Have you eaten rice yet?',0);
+INSERT INTO Phrases VALUES(29,'I done no_(not_yet) to_eat','I did not finish eating yet',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
