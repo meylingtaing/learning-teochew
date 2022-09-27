@@ -1,0 +1,15 @@
+% layout 'wrapper-left';
+% if (scalar @$results) {
+  <h5>
+    <%= scalar @$results %> result<%= scalar @$results == 1 ? '' : 's' %>
+    for "<%= $search %>"
+  </h5>
+
+  <%= include 'elements/all-translations-table', translations => $results %>
+
+% } else {
+    <h5>Sorry! I couldn't find any words whose Peng'im contain
+    "<%= $search %>".</h5>
+% }
+
+%= include 'elements/play_teochew'

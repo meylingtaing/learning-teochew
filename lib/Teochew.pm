@@ -998,7 +998,7 @@ sub extra_information {
 
 =head2 search_english_words
 
-Given an string, this checks the database to see if we have any English words
+Given a string, this checks the database to see if we have any English words
 that are similar to it. This returns a list of words with their row ids like
 so:
 
@@ -1018,6 +1018,31 @@ sub search_english_words {
     my @rows = $dbh->selectall_array(
         $sql, { Slice => {} }, "%$input%", "%$input%", "%$input%");
     return @rows;
+}
+
+=head2 search_pengim
+
+Given a string, this checks the database to see if we have any Teochew words
+that contain that string in the pengim. This returns a data structure that can
+be used directly in the C<all-translations-table> element.
+
+=cut
+
+sub search_pengim {
+    my ($input) = @_;
+
+    my $sql = qq{
+        select
+            English.word as english,
+            English.notes,
+            Teochew.pengim,
+            Teochew.chinese
+        from Teochew join English on english_id = English.id
+        where pengim like ? and hidden = 0
+        order by pengim
+    };
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, "%$input%");
+    return _format_for_translations_table(@rows);
 }
 
 =head2 get_all_translations_by_id
@@ -1186,6 +1211,26 @@ sub find_words_using_character {
     }
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+
+    return _format_for_translations_table(@rows);
+}
+
+=head2 _format_for_translations_table
+
+Given a set of rows that came directly from the database, returns the format
+needed to display in translation tables
+
+Expects a list of hashrefs, each with these fields
+
+    english
+    notes
+    chinese
+    pengim
+
+=cut
+
+sub _format_for_translations_table {
+    my @rows = @_;
 
     my @ret;
     for (@rows) {
