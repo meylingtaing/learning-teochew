@@ -525,6 +525,10 @@ INSERT INTO English VALUES(484,32,'done',0,'',NULL,NULL);
 INSERT INTO English VALUES(485,32,'no',0,'not yet',NULL,NULL);
 INSERT INTO English VALUES(486,13,'to look for',0,'',NULL,NULL);
 INSERT INTO English VALUES(487,8,'difficult',0,'',NULL,NULL);
+INSERT INTO English VALUES(488,13,'to think',0,'',NULL,NULL);
+INSERT INTO English VALUES(489,10,'rice',0,'uncooked',NULL,NULL);
+INSERT INTO English VALUES(490,10,'rice vermicelli',0,'',NULL,NULL);
+INSERT INTO English VALUES(491,13,'to walk',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1078,6 +1082,10 @@ INSERT INTO Teochew VALUES(558,484,'ho2','好',0,0,0);
 INSERT INTO Teochew VALUES(559,485,'bhue7','未',0,1,0);
 INSERT INTO Teochew VALUES(560,486,'chue7','觅',0,0,0);
 INSERT INTO Teochew VALUES(561,487,'gang1 kou2','艰苦',0,0,0);
+INSERT INTO Teochew VALUES(562,488,'sion6','想',0,0,0);
+INSERT INTO Teochew VALUES(563,489,'bhi2','米',0,0,0);
+INSERT INTO Teochew VALUES(564,490,'bhi26 hung2','米粉',0,0,0);
+INSERT INTO Teochew VALUES(565,491,'gian5','行',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1550,6 +1558,9 @@ INSERT INTO Chinese VALUES(471,'好',NULL,NULL,'hoh4');
 INSERT INTO Chinese VALUES(472,'未',NULL,NULL,'bhue7');
 INSERT INTO Chinese VALUES(473,'觅','覓',NULL,'chue7');
 INSERT INTO Chinese VALUES(474,'艰','艱',NULL,'gang1');
+INSERT INTO Chinese VALUES(475,'想',NULL,NULL,'sion6');
+INSERT INTO Chinese VALUES(476,'米',NULL,NULL,'bhi2');
+INSERT INTO Chinese VALUES(477,'行',NULL,NULL,'gian5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
