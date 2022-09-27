@@ -1020,16 +1020,22 @@ sub search_english_words {
     return @rows;
 }
 
-=head2 search_pengim
+=head2 search
 
 Given a string, this checks the database to see if we have any Teochew words
-that contain that string in the pengim. This returns a data structure that can
-be used directly in the C<all-translations-table> element.
+that contain that string in the pengim, OR if we have English words that are
+similar to it. This returns a data structure that can be used directly in the
+C<all-translations-table> element.
 
 =cut
 
-sub search_pengim {
+sub search {
     my ($input) = @_;
+
+    # If multiple words were provided, try to do a pengim search on each word
+    # individually, but require that all of them exist
+    my @pengim = map { "%$_%" } split /\s+/, $input;
+    my $pengim_where = join ' and ', ("pengim like ?") x scalar @pengim;
 
     my $sql = qq{
         select
@@ -1037,11 +1043,20 @@ sub search_pengim {
             English.notes,
             Teochew.pengim,
             Teochew.chinese
-        from Teochew join English on english_id = English.id
-        where pengim like ? and hidden = 0
-        order by pengim
+        from Teochew join English on Teochew.english_id = English.id
+        left join Synonyms on English.id = Synonyms.english_id
+        where hidden = 0 and (
+            English.word like ? or notes like ? or
+            Synonyms.word like ? or
+            ($pengim_where)
+        )
+        order by
+            case when English.word = ? or Synonyms.word = ? then 1 else 2 end,
+            pengim
     };
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, "%$input%");
+    my @rows = $dbh->selectall_array($sql, { Slice => {} },
+        ("%$input%") x 3, @pengim, ($input) x 2);
+
     return _format_for_translations_table(@rows);
 }
 

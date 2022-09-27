@@ -5,15 +5,36 @@
     for "<%= $search %>"
   </h5>
 
-<ul>
-%   for my $row (@$results) {
-      <li>
-        <a href="/english/<%= $row->{word} %>"><%= $row->{word} %></a>
-      </li>
-%   }
-</ul>
+  <%= include 'elements/all-translations-table', translations => $results %>
 
 % } else {
-    <h5>Sorry! I don't know how to translate any words like
+    <h5>Sorry! I couldn't find any words that contain
     "<%= $search %>".</h5>
 % }
+
+%= include 'elements/play_teochew'
+
+<script>
+
+// Highlight search terms in English
+var search_term = "<%= $search %>";
+var regex       = new RegExp(search_term, "ig");
+var highlighted = "<mark class='p-0'>" + search_term + "</mark>";
+$('table.all-translations-table').find('td.english').children().each(
+    function () { $(this).html($(this).html().replace(regex, highlighted)); }
+);
+
+// Highlight search terms in Peng'im -- we'll ignore the number because there
+// could be tone change. This isn't completely accurate, but I think it's good
+// enough for now.
+search_term.split(/\s+/).forEach(search_term => {
+    search_term = search_term.replace(RegExp(/\d/, "g"), '');
+    regex       = new RegExp(search_term, "ig");
+    highlighted = "<mark class='p-0'>" + search_term + "</mark>";
+    $('table.all-translations-table').find('td.pengim').each(
+        function () {
+            $(this).html($(this).html().replace(regex, highlighted));
+        }
+    );
+});
+</script>

@@ -1,6 +1,6 @@
 %# Requires 'translations' to be stashed
 <div class="table-responsive">
-<table class="table table-bordered">
+<table class="table table-bordered all-translations-table">
   <thead>
     <tr>
       <th>English</th>
@@ -12,21 +12,24 @@
   <tbody>
     % for my $row (@{ stash('translations') }) {
         <tr>
-        <td class="align-middle" rowspan="<%= scalar @{ $row->{teochew} } %>">
+        <td class="align-middle english"
+            rowspan="<%= scalar @{ $row->{teochew} } %>">
           % if (stash('hide_links')) {
             <%= $row->{english} %>
           % } else {
             <a href="/english/<%= $row->{english} %>"><%= $row->{english} %></a>
           % }
           % if ($row->{notes}) {
-          (<%= $row->{notes} %>)
+          <span class="notes">(<%= $row->{notes} %>)</span>
           % }
         </td>
         % for my $inner_row (@{ $row->{teochew} }) {
           % unless (\$inner_row == \$row->{teochew}->[0]) {
               <tr>
           % }
-          <td><%= $inner_row->{pronunciations}[0]{pengim} %></td>
+          <td class="pengim">
+            <%= $inner_row->{pronunciations}[0]{pengim} %>
+          </td>
           <td><%= $inner_row->{chinese} %></td>
           <td>
             % if ($inner_row->{pronunciations}[0]{audio}) {

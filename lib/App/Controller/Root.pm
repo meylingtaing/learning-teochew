@@ -75,9 +75,8 @@ sub translate {
 
 =head2 search
 
-This is what happens when you click on English with the little magnifying
-glass. The list of English words will be searched using the input that was
-entered.
+This is what happens when you click on Search. The list of words will be
+searched against the English words, Teochew pengim, and Chinese characters.
 
 =cut
 
@@ -90,28 +89,10 @@ sub search {
         return;
     }
 
-    my @results = Teochew::search_english_words($search);
-
-    $c->stash(results => \@results);
+    $c->stash(results => Teochew::search($search));
     $c->stash(search  => $search);
     $c->render(template => 'search');
 };
-
-=head2 search_pengim
-
-This is what happens when you click on Peng'im with the little magnifying
-glass.
-
-=cut
-
-sub search_pengim {
-    my $c = shift;
-    my $search = trim $c->param('search');
-
-    $c->stash(results => Teochew::search_pengim($search));
-    $c->stash(search  => $search);
-    $c->render(template => 'search_pengim');
-}
 
 =head2 category
 

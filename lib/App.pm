@@ -19,7 +19,6 @@ sub startup {
         subcategory => '');
 
     $r->get('/translate')->to('root#translate');
-    $r->get('/search_pengim')->to('root#search_pengim');
     $r->get('/search')->to('root#search');
     $r->get('/english/:english')->to('root#english');
     $r->get('/chinese/:character')->to('root#chinese');
