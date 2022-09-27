@@ -1,9 +1,4 @@
 % layout 'wrapper-left';
-<style>
-.notes {
-    font-size: 1.2em;
-}
-</style>
 
 % if ($chinese and scalar @$chinese) {
   <div class="text-sm-left text-center">
