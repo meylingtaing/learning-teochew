@@ -21,7 +21,7 @@ die "Must include English and synonym!\n" unless $english and $synonym;
 my ($word, $notes) = split_out_parens($english);
 
 # Make sure the english word exists already -- I know I'm ignoring the notes,
-# but with the way my app words, the english page just lumps all the English
+# but with the way my app works, the english page just lumps all the English
 # words with the same base word together
 my ($row) = Teochew::get_english_from_database(word => $word);
 

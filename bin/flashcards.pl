@@ -12,7 +12,7 @@ use Data::Dumper;
 
 use lib 'lib';
 
-use Input;
+use Input qw(input_via_editor);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
@@ -190,7 +190,7 @@ elsif ($command eq 'insert_extra') {
     # Check if we already have notes
     my $existing = get_info($english_id);
 
-    my $info = Input::via_editor($existing);
+    my $info = input_via_editor($existing);
 
     say "Inserting these notes for $english:\n$info";
     if (confirm()) {

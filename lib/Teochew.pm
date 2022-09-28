@@ -906,6 +906,7 @@ sub replace_variables_all {
 
 =head1 DATABASE/FILESYSTEM FUNCTIONS
 
+# XXX Move lookup functions to translate
 =head2 _lookup
 
 Returns the first translation found for the english word given.
@@ -969,29 +970,23 @@ sub _lookup_all {
     return @rows;
 }
 
-=head2 extra_information
+=head2 extra_information_by_id
 
-Gets extra information about an english word if it exists
+Gets extra information about an english word if it exists. You must pass in the
+English.id
 
 =cut
 
-sub extra_information {
-    my $english = shift;
-    my ($word, $notes) = split_out_parens($english);
+sub extra_information_by_id {
+    my $english_id = shift;
 
     my $sql = qq{
         select Extra.info from English
         join Extra on English.id = Extra.english_id
-        where word = ?
+        where English.id = ?
     };
 
-    my @binds = ($word);
-    if ($notes) {
-        $sql .= " and notes = ?";
-        push @binds, $notes;
-    }
-
-    my @rows = $dbh->selectall_array($sql, {}, @binds);
+    my @rows = $dbh->selectall_array($sql, {}, $english_id);
     return undef unless scalar @rows;
     return $rows[0]->[0];
 }

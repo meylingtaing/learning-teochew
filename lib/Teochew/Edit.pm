@@ -144,6 +144,7 @@ sub insert_category {
 
 sub insert_chinese {
     my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
 
     my @columns = qw(simplified pengim);
     my @binds = ($params{simplified}, $params{pengim});
@@ -164,6 +165,40 @@ sub insert_chinese {
     my $sql = "insert into Chinese ($col_str) values ($bind_str)";
     my $sth = $self->dbh->prepare($sql);
     $sth->execute(@binds);
+}
+
+=head2 insert_extra
+
+    $teochew->insert_extra(
+        english_id => '',
+        info       => '',
+    );
+
+This will replace whatever extra information is already stored for this
+English word.
+
+=cut
+
+sub insert_extra {
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    my $dbh = $self->dbh;
+    my $sth;
+
+    if (defined Teochew::extra_information_by_id($params{english_id})) {
+        $sth = $dbh->prepare(
+            "update Extra set info = ? where english_id = ?"
+        );
+    }
+    else {
+        $sth = $dbh->prepare(
+            "insert into Extra (info, english_id) values (?,?)"
+        );
+    }
+    $sth->bind_param(1, $params{info});
+    $sth->bind_param(2, $params{english_id});
+    $sth->execute;
 }
 
 =head2 insert_phrase

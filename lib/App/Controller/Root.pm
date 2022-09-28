@@ -140,6 +140,7 @@ C<english> must be stashed
 sub english {
     my $c = shift;
     my $english = trim $c->stash('english');
+    my $extra_notes = '';
 
     # All of the verbs in the database are stored like "to eat", but we should
     # allow someone to see the translation without typing the "to" part of it
@@ -190,6 +191,10 @@ sub english {
                 flashcard_set => $english_row->{flashcard_set_name},
             };
 
+            # Add any extra notes
+            $extra_notes .=
+                Teochew::extra_information_by_id($english_row->{id}) // '';
+
             # Get the translation
             my $translation_rows = Teochew::translate(
                 $english_row,
@@ -211,9 +216,7 @@ sub english {
         $c->stash(english  => $english_display);
         $c->stash(synonyms => [Teochew::get_synonyms($_)]);
 
-        $c->stash(extra_info => markdown(
-            Teochew::extra_information($english) // ''
-        ));
+        $c->stash(extra_info => markdown($extra_notes));
 
         $c->stash(words_containing =>
             Teochew::find_words_using_character(\@chinese, exclude_itself => 1)
