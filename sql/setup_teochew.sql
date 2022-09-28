@@ -529,6 +529,8 @@ INSERT INTO English VALUES(488,13,'to think',0,'',NULL,NULL);
 INSERT INTO English VALUES(489,10,'rice',0,'uncooked',NULL,NULL);
 INSERT INTO English VALUES(490,10,'rice vermicelli',0,'',NULL,NULL);
 INSERT INTO English VALUES(491,13,'to walk',0,'',NULL,NULL);
+INSERT INTO English VALUES(492,32,'not',0,'',NULL,NULL);
+INSERT INTO English VALUES(493,32,'to be in the process of',0,NULL,NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1086,6 +1088,8 @@ INSERT INTO Teochew VALUES(562,488,'sion6','想',0,0,0);
 INSERT INTO Teochew VALUES(563,489,'bhi2','米',0,0,0);
 INSERT INTO Teochew VALUES(564,490,'bhi26 hung2','米粉',0,0,0);
 INSERT INTO Teochew VALUES(565,491,'gian5','行',0,0,0);
+INSERT INTO Teochew VALUES(566,492,'bhoi6','袂',0,0,1);
+INSERT INTO Teochew VALUES(567,493,'do6','在',0,0,1);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1561,6 +1565,7 @@ INSERT INTO Chinese VALUES(474,'艰','艱',NULL,'gang1');
 INSERT INTO Chinese VALUES(475,'想',NULL,NULL,'sion6');
 INSERT INTO Chinese VALUES(476,'米',NULL,NULL,'bhi2');
 INSERT INTO Chinese VALUES(477,'行',NULL,NULL,'gian5');
+INSERT INTO Chinese VALUES(478,'袂',NULL,NULL,'bhoi6');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1647,7 +1652,7 @@ INSERT INTO Phrases VALUES(10,'I to_be_at house-lai6','I am at home',0);
 INSERT INTO Phrases VALUES(11,'$smallnumber day front','$smallnumber days ago',1);
 INSERT INTO Phrases VALUES(12,'$smallnumber day back','in $smallnumber days',1);
 INSERT INTO Phrases VALUES(13,'this| how_many dollar','How much does this cost?',0);
-INSERT INTO Phrases VALUES(14,'I to_go store','I''m going to the store',0);
+INSERT INTO Phrases VALUES(14,'I to_go store','I went to the store',0);
 INSERT INTO Phrases VALUES(15,'I to_go to_buy vegetables','I''m going to buy vegetables',0);
 INSERT INTO Phrases VALUES(16,'I $personadjective','I''m $personadjective',0);
 INSERT INTO Phrases VALUES(17,'I to_want to_eat $drink','I want to drink $drink',0);
@@ -1659,7 +1664,7 @@ INSERT INTO Phrases VALUES(22,'you when to_come','When are you coming?',0);
 INSERT INTO Phrases VALUES(23,'you to_have free_time no_(don''t_have)','Do you have time?',0);
 INSERT INTO Phrases VALUES(24,'I busy','I''m busy',0);
 INSERT INTO Phrases VALUES(25,'I 30 age','I''m thirty years old',0);
-INSERT INTO Phrases VALUES(26,'I to_wash bowl','I am washing dishes',0);
+INSERT INTO Phrases VALUES(26,'I to_wash bowl','I washed dishes',0);
 INSERT INTO Phrases VALUES(27,'I must to_brush_teeth','I have to brush my teeth',0);
 INSERT INTO Phrases VALUES(28,'you to_eat rice done| no_(not_yet)','Have you eaten rice yet?',0);
 INSERT INTO Phrases VALUES(29,'I done no_(not_yet) to_eat','I did not finish eating yet',0);
@@ -1699,6 +1704,7 @@ INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល
 INSERT INTO Extra VALUES(13,281,replace('Alternatively, you may see 底珍 or 底滇 used.\n','\n',char(10)));
 INSERT INTO Extra VALUES(14,284,replace('Alternatively, you may see this as 怎呢.\n\nMy recorded pronunciation is a little overly formal; people normally pronounce the first syllable much more quickly.\n','\n',char(10)));
 INSERT INTO Extra VALUES(15,180,replace('Alternatively, you might see 树泥.\n','\n',char(10)));
+INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
