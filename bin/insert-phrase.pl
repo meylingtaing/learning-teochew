@@ -30,5 +30,5 @@ say "Inserting phrase \"$sentence\" with translation \"" .
 
 if (confirm()) {
     Teochew::Edit->insert_phrase(sentence => $sentence, words => $words);
+    say colored("Inserted sentence '$sentence'", "green");
 }
-say colored("Inserted sentence '$sentence'", "green");
