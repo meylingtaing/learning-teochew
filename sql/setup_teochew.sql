@@ -78,7 +78,7 @@ INSERT INTO English VALUES(30,3,'gray',0,NULL,NULL,2);
 INSERT INTO English VALUES(31,3,'pink',0,NULL,NULL,2);
 INSERT INTO English VALUES(32,4,'I',0,NULL,1,1);
 INSERT INTO English VALUES(33,4,'you',0,NULL,NULL,1);
-INSERT INTO English VALUES(34,4,'he, she, it',0,NULL,NULL,1);
+INSERT INTO English VALUES(34,4,'she',0,NULL,NULL,1);
 INSERT INTO English VALUES(35,4,'we',0,'including person spoken to',NULL,1);
 INSERT INTO English VALUES(36,4,'they',0,NULL,NULL,1);
 INSERT INTO English VALUES(37,4,'people',0,NULL,NULL,2);
@@ -531,6 +531,12 @@ INSERT INTO English VALUES(490,10,'rice vermicelli',0,'',NULL,NULL);
 INSERT INTO English VALUES(491,13,'to walk',0,'',NULL,NULL);
 INSERT INTO English VALUES(492,32,'not',0,'',NULL,NULL);
 INSERT INTO English VALUES(493,32,'to be in the process of',0,NULL,NULL,NULL);
+INSERT INTO English VALUES(494,32,'already',0,'',NULL,NULL);
+INSERT INTO English VALUES(495,28,'cabbage',0,'',NULL,NULL);
+INSERT INTO English VALUES(496,4,'he',0,'',NULL,NULL);
+INSERT INTO English VALUES(497,4,'it',0,'',NULL,NULL);
+INSERT INTO English VALUES(498,10,'to boil',0,'',NULL,NULL);
+INSERT INTO English VALUES(499,10,'to cook rice',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1090,6 +1096,12 @@ INSERT INTO Teochew VALUES(564,490,'bhi26 hung2','米粉',0,0,0);
 INSERT INTO Teochew VALUES(565,491,'gian5','行',0,0,0);
 INSERT INTO Teochew VALUES(566,492,'bhoi6','袂',0,0,1);
 INSERT INTO Teochew VALUES(567,493,'do6','在',0,0,1);
+INSERT INTO Teochew VALUES(568,494,'ou3','了',0,0,1);
+INSERT INTO Teochew VALUES(569,495,'go1 le6','高丽',0,0,0);
+INSERT INTO Teochew VALUES(570,496,'i1','伊',0,0,0);
+INSERT INTO Teochew VALUES(571,497,'i1','伊',0,0,0);
+INSERT INTO Teochew VALUES(572,498,'bu5','煲',0,0,0);
+INSERT INTO Teochew VALUES(573,499,'bu57 beung7','煲饭',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1566,6 +1578,10 @@ INSERT INTO Chinese VALUES(475,'想',NULL,NULL,'sion6');
 INSERT INTO Chinese VALUES(476,'米',NULL,NULL,'bhi2');
 INSERT INTO Chinese VALUES(477,'行',NULL,NULL,'gian5');
 INSERT INTO Chinese VALUES(478,'袂',NULL,NULL,'bhoi6');
+INSERT INTO Chinese VALUES(479,'了',NULL,NULL,'ou3');
+INSERT INTO Chinese VALUES(480,'高',NULL,NULL,'go1');
+INSERT INTO Chinese VALUES(481,'丽','麗',NULL,'le6');
+INSERT INTO Chinese VALUES(482,'煲',NULL,NULL,'bu5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1668,6 +1684,9 @@ INSERT INTO Phrases VALUES(26,'I to_wash bowl','I washed dishes',0);
 INSERT INTO Phrases VALUES(27,'I must to_brush_teeth','I have to brush my teeth',0);
 INSERT INTO Phrases VALUES(28,'you to_eat rice done| no_(not_yet)','Have you eaten rice yet?',0);
 INSERT INTO Phrases VALUES(29,'I done no_(not_yet) to_eat','I did not finish eating yet',0);
+INSERT INTO Phrases VALUES(30,'she to_be_in_the_process_of to_look television','She is watching tv',0);
+INSERT INTO Phrases VALUES(31,'he to_sleep| already','He is already asleep',0);
+INSERT INTO Phrases VALUES(32,'I to_eat done| already','I have already eaten',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1705,6 +1724,9 @@ INSERT INTO Extra VALUES(13,281,replace('Alternatively, you may see 底珍 or �
 INSERT INTO Extra VALUES(14,284,replace('Alternatively, you may see this as 怎呢.\n\nMy recorded pronunciation is a little overly formal; people normally pronounce the first syllable much more quickly.\n','\n',char(10)));
 INSERT INTO Extra VALUES(15,180,replace('Alternatively, you might see 树泥.\n','\n',char(10)));
 INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
+INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
