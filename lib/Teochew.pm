@@ -682,6 +682,42 @@ sub get_tags {
     return map { $_->{name} } @rows;
 }
 
+=head2 check_alternate_chinese
+
+Given a chinese string, this will query the database and see if it either has
+alternate forms, or if it is an alternate of another entry. Returns a hashref.
+
+If it has alternates, the hashref will be of this form:
+
+    { has_alts => ['炰', '烳'] }
+
+If it is an alternate of another main entry, the hashref will be of this form:
+
+    { alt_of => '煲' }
+
+=cut
+
+sub check_alternate_chinese {
+    my ($chinese) = @_;
+    my $sql = qq{
+        select
+            Teochew.chinese main, TeochewAltChinese.chinese alt
+        from Teochew
+        join TeochewAltChinese on Teochew.id = TeochewAltChinese.teochew_id
+        where Teochew.chinese = ? or TeochewAltChinese.chinese = ?
+    };
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $chinese, $chinese);
+    return {} unless @rows;
+
+    if ($rows[0]{alt} eq $chinese) {
+        return { alt_of => $rows[0]{main} };
+    }
+    else {
+        return { has_alts => [ map { $_->{alt} } @rows ] };
+    }
+}
+
 =head1 INTERNALS
 
 These functions are not typically meant to be called outside of this file, but

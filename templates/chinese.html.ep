@@ -24,10 +24,22 @@
   </h2>
   </div>
 
-%= include 'elements/play_teochew'
+  % if (my $main_chinese = $alternates->{alt_of}) {
+    <p class="text-muted">
+      Alternate form of
+      <a href="/chinese/<%= $main_chinese %>"><%= $main_chinese %></a>
+    </p>
+  % } elsif (my $alts = $alternates->{has_alts}) {
+    <p class="text-muted">
+      Alternates:
+      <%= join ", ", @$alts %>
+    </p>
+  % }
 
 <hr>
 % }
+
+%= include 'elements/play_teochew'
 
 <h5>Words containing <%= $character %>:</h5>
 %= include 'elements/all-translations-table', translations => $words

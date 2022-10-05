@@ -33,6 +33,11 @@
         <li class="list-group-item">
           %= include 'elements/translation', row => $row
           <span class="notes"><%= $row->{notes} %></span>
+          % if ($row->{alt_chinese}) {
+              <span class="text-muted">
+              Alternates: <%= join ", ", @{ $row->{alt_chinese} } %>
+              </span>
+          % }
         </li>
       % }
     % }

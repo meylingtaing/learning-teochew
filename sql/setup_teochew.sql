@@ -1582,6 +1582,8 @@ INSERT INTO Chinese VALUES(479,'了',NULL,NULL,'ou3');
 INSERT INTO Chinese VALUES(480,'高',NULL,NULL,'go1');
 INSERT INTO Chinese VALUES(481,'丽','麗',NULL,'le6');
 INSERT INTO Chinese VALUES(482,'煲',NULL,NULL,'bu5');
+INSERT INTO Chinese VALUES(483,'炰',NULL,NULL,'bu5');
+INSERT INTO Chinese VALUES(484,'烳',NULL,NULL,'bu5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2069,4 +2071,11 @@ INSERT INTO FlashcardSet VALUES(11,'Time','Clock Time',1,10);
 INSERT INTO FlashcardSet VALUES(12,'Basics','Basics',0,1);
 INSERT INTO FlashcardSet VALUES(13,'Number','Numbers',1,NULL);
 INSERT INTO FlashcardSet VALUES(14,'Nature','Nature',0,10);
+CREATE TABLE TeochewAltChinese (
+    id integer primary key,
+    teochew_id integer references Teochew(id),
+    chinese text
+);
+INSERT INTO TeochewAltChinese VALUES(1,572,'炰');
+INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
 COMMIT;
