@@ -32,7 +32,11 @@ $content = input_via_editor($content);
 # Save it to the database
 my $sth;
 if ($id) {
-    $sth = $dbh->prepare("update Updates set content = ? where id = ?");
+    $sth = $dbh->prepare(qq{
+        update Updates
+        set content = ?, time_stamp = datetime('now', 'localtime')
+        where id = ?
+    });
     $sth->bind_param(1, $content);
     $sth->bind_param(2, $id);
 }
