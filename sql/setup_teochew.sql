@@ -537,6 +537,16 @@ INSERT INTO English VALUES(496,4,'he',0,'',NULL,NULL);
 INSERT INTO English VALUES(497,4,'it',0,'',NULL,NULL);
 INSERT INTO English VALUES(498,10,'to boil',0,'',NULL,NULL);
 INSERT INTO English VALUES(499,10,'to cook rice',0,'',NULL,NULL);
+INSERT INTO English VALUES(500,10,'to pan fry',0,'',NULL,NULL);
+INSERT INTO English VALUES(501,10,'to stir fry',0,'',NULL,NULL);
+INSERT INTO English VALUES(502,10,'fried rice',0,'',NULL,NULL);
+INSERT INTO English VALUES(503,10,'sweet',0,'',NULL,NULL);
+INSERT INTO English VALUES(504,10,'salty',0,'',NULL,NULL);
+INSERT INTO English VALUES(505,28,'jujube',0,'',NULL,NULL);
+INSERT INTO English VALUES(506,10,'to brew',0,'with hot water',NULL,NULL);
+INSERT INTO English VALUES(507,30,'to make tea',0,'',NULL,NULL);
+INSERT INTO English VALUES(508,30,'to make coffee',0,NULL,NULL,NULL);
+INSERT INTO English VALUES(509,10,'leftover',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1102,6 +1112,16 @@ INSERT INTO Teochew VALUES(570,496,'i1','伊',0,0,0);
 INSERT INTO Teochew VALUES(571,497,'i1','伊',0,0,0);
 INSERT INTO Teochew VALUES(572,498,'bu5','煲',0,0,0);
 INSERT INTO Teochew VALUES(573,499,'bu57 beung7','煲饭',0,0,0);
+INSERT INTO Teochew VALUES(574,500,'luah4','烙',0,0,0);
+INSERT INTO Teochew VALUES(575,501,'cha2','炒',0,0,0);
+INSERT INTO Teochew VALUES(576,502,'cha26 beung7','炒饭',0,0,0);
+INSERT INTO Teochew VALUES(577,503,'diam5','甜',0,0,0);
+INSERT INTO Teochew VALUES(578,504,'giam5','咸',0,0,0);
+INSERT INTO Teochew VALUES(579,505,'ang57 jo2','红枣',0,0,0);
+INSERT INTO Teochew VALUES(580,506,'chong1','冲',0,0,0);
+INSERT INTO Teochew VALUES(581,507,'chong1 de5','冲茶',0,0,0);
+INSERT INTO Teochew VALUES(582,508,'chong1 gu1 bi5','冲咖啡',0,0,0);
+INSERT INTO Teochew VALUES(583,509,'chung5','存',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1585,6 +1605,15 @@ INSERT INTO Chinese VALUES(482,'煲',NULL,NULL,'bu5');
 INSERT INTO Chinese VALUES(483,'炰',NULL,NULL,'bu5');
 INSERT INTO Chinese VALUES(484,'烳',NULL,NULL,'bu5');
 INSERT INTO Chinese VALUES(485,'酷',NULL,NULL,'hoh4');
+INSERT INTO Chinese VALUES(486,'烙',NULL,NULL,'luah4');
+INSERT INTO Chinese VALUES(487,'炒',NULL,NULL,'cha2');
+INSERT INTO Chinese VALUES(488,'甜',NULL,NULL,'diam5');
+INSERT INTO Chinese VALUES(489,'咸','鹹',NULL,'giam5');
+INSERT INTO Chinese VALUES(490,'枣','棗',NULL,'jo2');
+INSERT INTO Chinese VALUES(491,'冲','沖',NULL,'chong1');
+INSERT INTO Chinese VALUES(492,'咖',NULL,NULL,'gu1');
+INSERT INTO Chinese VALUES(493,'啡',NULL,NULL,'bi5');
+INSERT INTO Chinese VALUES(494,'存',NULL,NULL,'chung5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1644,6 +1673,7 @@ INSERT INTO Synonyms VALUES(51,483,'so');
 INSERT INTO Synonyms VALUES(52,486,'to find');
 INSERT INTO Synonyms VALUES(53,486,'to search');
 INSERT INTO Synonyms VALUES(54,487,'hard');
+INSERT INTO Synonyms VALUES(55,501,'to saute');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
