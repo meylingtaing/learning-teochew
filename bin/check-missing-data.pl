@@ -72,7 +72,7 @@ if (grep /^audio$/, @commands_to_run) {
 }
 
 if (grep /^phrase$/, @commands_to_run) {
-    @rows = Teochew::generate_full_translations(
+    @rows = Teochew::generate_translation_word_list(
         category => 'phrase', subcategory => 'all'
     );
 
@@ -107,10 +107,11 @@ if (grep /^character_details$/, @commands_to_run) {
 }
 
 if (grep /^hidden$/, @commands_to_run) {
-    @rows = $dbh->selectall_array(
-        "select word from English " .
-        "where hidden = 1 and hidden_from_flashcards = 1",
-    );
+    @rows = $dbh->selectall_array(qq{
+        select word from English
+        join Teochew on Teochew.english_id = English.id
+        where hidden = 1 and hidden_from_flashcards = 1
+    });
 
     say "Hidden words:";
     say $_->[0] for @rows;
