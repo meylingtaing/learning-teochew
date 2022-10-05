@@ -285,6 +285,7 @@ sub translate {
         $pronunciation = [$pronunciation->[0]] unless $show_all_accents;
 
         push @ret, {
+            teochew_id     => $_->{teochew_id},
             chinese        => $_->{chinese} =~ s/\?/[?]/gr,
             pronunciations => $pronunciation,
         }
@@ -704,16 +705,32 @@ If it is an alternate of another main entry, the hashref will be of this form:
 =cut
 
 sub check_alternate_chinese {
-    my ($chinese) = @_;
+    my (%params) = @_;
+
+    my $chinese    = $params{chinese} || '';
+    my $teochew_id = $params{teochew_id};
+
+    my $where = '';
+    my @binds;
+
+    if ($teochew_id) {
+        $where = 'Teochew.id = ?';
+        @binds = ($teochew_id);
+    }
+    else {
+        $where = 'Teochew.chinese = ? or TeochewAltChinese.chinese = ?';
+        @binds = ($chinese, $chinese);
+    }
+
     my $sql = qq{
         select
             Teochew.chinese main, TeochewAltChinese.chinese alt
         from Teochew
         join TeochewAltChinese on Teochew.id = TeochewAltChinese.teochew_id
-        where Teochew.chinese = ? or TeochewAltChinese.chinese = ?
+        where $where
     };
 
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $chinese, $chinese);
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
     return {} unless @rows;
 
     if ($rows[0]{alt} eq $chinese) {

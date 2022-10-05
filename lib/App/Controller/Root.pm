@@ -204,10 +204,8 @@ sub english {
             );
 
             for my $translation_row (@$translation_rows) {
-                # XXX could probably use the teochew ID instead? maybe I'll
-                # loop back to this implementation later
                 my $alternates = Teochew::check_alternate_chinese(
-                    $translation_row->{chinese});
+                    teochew_id => $translation_row->{teochew_id});
                 if (my $alts = $alternates->{has_alts}) {
                     $translation_row->{alt_chinese} = $alts;
                 }
@@ -244,7 +242,7 @@ sub chinese {
     my $character  = $c->stash('character');
     my $details    = Teochew::chinese_character_details($character);
     my $words      = Teochew::find_words_using_character($character);
-    my $alternates = Teochew::check_alternate_chinese($character);
+    my $alternates = Teochew::check_alternate_chinese(chinese => $character);
 
     $c->stash(chinese => $details);
     $c->stash(words => $words);
