@@ -167,6 +167,27 @@ sub insert_chinese {
     $sth->execute(@binds);
 }
 
+=head2 insert_alt_chinese
+
+    $teochew->insert_alt_chinese(
+        teochew_id => '',
+        chinese    => '',
+    );
+
+=cut
+
+sub insert_alt_chinese {
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    my $sql = qq{
+        insert into TeochewAltChinese (teochew_id, chinese)
+        values (?, ?)
+    };
+
+    $self->dbh->do($sql, undef, $params{teochew_id}, $params{chinese});
+}
+
 =head2 insert_extra
 
     $teochew->insert_extra(

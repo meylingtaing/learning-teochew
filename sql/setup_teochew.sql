@@ -1584,6 +1584,7 @@ INSERT INTO Chinese VALUES(481,'丽','麗',NULL,'le6');
 INSERT INTO Chinese VALUES(482,'煲',NULL,NULL,'bu5');
 INSERT INTO Chinese VALUES(483,'炰',NULL,NULL,'bu5');
 INSERT INTO Chinese VALUES(484,'烳',NULL,NULL,'bu5');
+INSERT INTO Chinese VALUES(485,'酷',NULL,NULL,'hoh4');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2078,4 +2079,5 @@ CREATE TABLE TeochewAltChinese (
 );
 INSERT INTO TeochewAltChinese VALUES(1,572,'炰');
 INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
+INSERT INTO TeochewAltChinese VALUES(3,557,'酷');
 COMMIT;

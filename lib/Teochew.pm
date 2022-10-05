@@ -587,6 +587,7 @@ Params:
     category
     for_flashcards
     word
+    notes
     include_category_in_output
 
 =cut
@@ -597,6 +598,7 @@ sub get_english_from_database {
     my $flashcard_set  = $params{flashcard_set};
     my $category       = $params{category};
     my $word           = $params{word};
+    my $notes          = $params{notes};
     my $for_flashcards = $params{for_flashcards};
 
     my @binds;
@@ -614,6 +616,10 @@ sub get_english_from_database {
     if ($word) {
         $extra_where .= "and word = ? ";
         push @binds, $word;
+    }
+    if ($notes) {
+        $extra_where .= "and notes = ? ";
+        push @binds, $notes;
     }
 
     $extra_where .= "and hidden_from_flashcards = 0 " if $for_flashcards;
