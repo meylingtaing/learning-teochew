@@ -42,6 +42,7 @@ sub input_via_editor {
         SUFFIX => '.txt',
     );
 
+    binmode($fh, ":utf8");
     print $fh $content;
     close $fh;
 

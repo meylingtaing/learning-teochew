@@ -207,6 +207,12 @@ sub insert_extra {
     my $dbh = $self->dbh;
     my $sth;
 
+    if (!defined $params{info}) {
+        $dbh->do("delete from Extra where english_id = ?", undef,
+            $params{english_id});
+        return;
+    }
+
     if (defined Teochew::extra_information_by_id($params{english_id})) {
         $sth = $dbh->prepare(
             "update Extra set info = ? where english_id = ?"

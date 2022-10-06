@@ -6,6 +6,10 @@ use warnings;
 use feature qw(say);
 use lib 'lib';
 
+binmode STDOUT, ':encoding(UTF-8)';
+
+use Term::ANSIColor qw(colored);
+
 use Input qw(confirm input_via_editor);
 use Teochew;
 use Teochew::Edit;
@@ -22,10 +26,18 @@ die "$english does not exist!\n" unless $row;
 my $existing = Teochew::extra_information_by_id($row->{id});
 my $info = input_via_editor($existing);
 
-say "Inserting these notes for $english:\n$info";
+if ($info eq '') {
+    say "Deleting extra notes for $english\n";
+    $info = undef;
+}
+else {
+    say "Inserting these notes for $english:\n$info";
+}
+
 if (confirm()) {
     Teochew::Edit->insert_extra(
         english_id => $row->{id},
         info       => $info,
     );
+    say colored("Successfully updated the extra info for $english", 'green');
 }
