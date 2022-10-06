@@ -614,7 +614,7 @@ sub get_english_from_database {
         $extra_where .= "and Categories.name = ? ";
         push @binds, ucfirst $category;
     }
-    if ($word) {
+    if (defined $word) {
         $extra_where .= "and word = ? ";
         push @binds, $word;
     }
