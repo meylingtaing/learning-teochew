@@ -17,13 +17,13 @@
 % if (scalar keys %$teochew_by_category == 0) {
     Sorry! I don't know how to translate "<%= $english %>".
 % } else {
-    <h1><%= $english %></h1>
-    <p class="text-muted"><%= join(', ', @$synonyms) %></p>
+    <h1 id="english-word"><%= $english %></h1>
+    <p id="synonyms" class="text-muted"><%= join(', ', @$synonyms) %></p>
     <ul id="translate-table" class="list-group">
 
     % for my $key (keys %$teochew_by_category) {
       % if ($teochew_by_category->{$key}{flashcard_set}) {
-      <li class="list-group-item list-group-item-primary">
+      <li class="list-group-item list-group-item-primary category-header">
         <a href="/category/<%= $teochew_by_category->{$key}{flashcard_set} %>#<%= $key %>">
           <%= $teochew_by_category->{$key}{display} %>
         </a>
