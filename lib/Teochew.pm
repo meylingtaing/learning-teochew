@@ -1187,9 +1187,9 @@ sub chinese_character_details {
 
     my $sql = qq{
         select id chinese_id, simplified, traditional, pengim, meaning
-        from Chinese where simplified = ?
+        from Chinese where (simplified = ? or traditional = ?)
     };
-    my @binds = ($character);
+    my @binds = ($character, $character);
 
     if ($pengim) {
         $sql .= " and pengim = ?";

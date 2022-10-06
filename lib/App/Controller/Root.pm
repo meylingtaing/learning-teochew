@@ -241,6 +241,11 @@ sub chinese {
 
     my $character  = $c->stash('character');
     my $details    = Teochew::chinese_character_details($character);
+
+    # It's possible that the traditional character was searched. Use the
+    # simplified character for finding other words using this character
+    $character = $details->[0]{simplified};
+
     my $words      = Teochew::find_words_using_character($character);
     my $alternates = Teochew::check_alternate_chinese(chinese => $character);
 
