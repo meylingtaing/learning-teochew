@@ -571,7 +571,7 @@ INSERT INTO Teochew VALUES(13,13,'boih4','八',0,0,0);
 INSERT INTO Teochew VALUES(14,14,'gao2','九',0,0,0);
 INSERT INTO Teochew VALUES(15,15,'jap8','十',0,0,0);
 INSERT INTO Teochew VALUES(16,16,'kang3','空',0,0,1);
-INSERT INTO Teochew VALUES(17,17,'yi6','二',0,0,0);
+INSERT INTO Teochew VALUES(17,17,'yi6','二',0,0,1);
 INSERT INTO Teochew VALUES(19,19,'sek4','色',0,0,0);
 INSERT INTO Teochew VALUES(20,20,'ou1','乌',0,0,1);
 INSERT INTO Teochew VALUES(21,21,'beh8','白',0,0,1);
@@ -1039,7 +1039,7 @@ INSERT INTO Teochew VALUES(496,12,'chik4','七',0,0,0);
 INSERT INTO Teochew VALUES(497,438,'chim1 ang57 sek4','深红色',0,0,0);
 INSERT INTO Teochew VALUES(498,439,'chiang2','浅',0,0,0);
 INSERT INTO Teochew VALUES(499,440,'chiang26 nam57 sek4','浅蓝色',0,0,0);
-INSERT INTO Teochew VALUES(500,18,'ik4','一',0,0,0);
+INSERT INTO Teochew VALUES(500,18,'ik4','一',0,0,1);
 INSERT INTO Teochew VALUES(502,91,'jian1 ghueh84','正月',0,0,0);
 INSERT INTO Teochew VALUES(503,80,'yik8','日',0,0,0);
 INSERT INTO Teochew VALUES(504,80,'jek84 yik8','一日',0,0,0);
@@ -1743,8 +1743,8 @@ CREATE TABLE Extra (
     info text,
     foreign key(english_id) references English(id)
 );
-INSERT INTO Extra VALUES(1,6,'The original character for 1, pronounced as jēk, is actually 蜀, however you typically see the character 一 instead.');
-INSERT INTO Extra VALUES(2,7,'The number 2 by itself is pronounced "no6", but many other words that include a 2 in it will use "yi6(7)". You may also see the character 两 for 2. 两 is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6"');
+INSERT INTO Extra VALUES(1,6,replace('The original character for 1, pronounced as **jek8**, is actually 蜀, however you typically see the character 一 instead.\n','\n',char(10)));
+INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 for 2. 两 is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
 INSERT INTO Extra VALUES(3,111,'chŭ 厝 refers to a house as a building, whereas lái 内 is more like a home. I have heard both used interchangeably though.');
 INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as "kì 起" means to go up and "jà 早" means early.\n','\n',char(10)));
 INSERT INTO Extra VALUES(5,30,'My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that ''pin7 hung1 sek4'' was like the smoke that comes out of the nose.');
@@ -2110,4 +2110,6 @@ CREATE TABLE TeochewAltChinese (
 INSERT INTO TeochewAltChinese VALUES(1,572,'炰');
 INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
 INSERT INTO TeochewAltChinese VALUES(3,557,'酷');
+INSERT INTO TeochewAltChinese VALUES(4,6,'蜀');
+INSERT INTO TeochewAltChinese VALUES(5,7,'两');
 COMMIT;
