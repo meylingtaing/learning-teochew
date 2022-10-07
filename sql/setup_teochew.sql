@@ -548,6 +548,10 @@ INSERT INTO English VALUES(506,10,'to brew',0,'with hot water',NULL,NULL);
 INSERT INTO English VALUES(507,30,'to make tea',0,'',NULL,NULL);
 INSERT INTO English VALUES(508,30,'to make coffee',0,NULL,NULL,NULL);
 INSERT INTO English VALUES(509,10,'leftover',0,'',NULL,NULL);
+INSERT INTO English VALUES(510,32,'completed',0,'',NULL,NULL);
+INSERT INTO English VALUES(511,9,'bag',0,'',NULL,NULL);
+INSERT INTO English VALUES(512,9,'box',0,'',NULL,NULL);
+INSERT INTO English VALUES(513,33,'to take',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1123,6 +1127,10 @@ INSERT INTO Teochew VALUES(580,506,'chong1','冲',0,0,0);
 INSERT INTO Teochew VALUES(581,507,'chong1 de5','冲茶',0,0,0);
 INSERT INTO Teochew VALUES(582,508,'chong1 gu1 bi5','冲咖啡',0,0,0);
 INSERT INTO Teochew VALUES(583,509,'chung5','存',0,0,0);
+INSERT INTO Teochew VALUES(584,510,'liao2','了',0,0,1);
+INSERT INTO Teochew VALUES(585,511,'do7','袋',0,0,0);
+INSERT INTO Teochew VALUES(586,512,'ap8','盒',0,0,0);
+INSERT INTO Teochew VALUES(587,513,'kioh8','挈',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1615,6 +1623,10 @@ INSERT INTO Chinese VALUES(491,'冲','沖',NULL,'chong1');
 INSERT INTO Chinese VALUES(492,'咖',NULL,NULL,'gu1');
 INSERT INTO Chinese VALUES(493,'啡',NULL,NULL,'bi5');
 INSERT INTO Chinese VALUES(494,'存',NULL,NULL,'chung5');
+INSERT INTO Chinese VALUES(495,'了',NULL,NULL,'liao2');
+INSERT INTO Chinese VALUES(496,'袋',NULL,NULL,'do7');
+INSERT INTO Chinese VALUES(497,'盒',NULL,NULL,'ap8');
+INSERT INTO Chinese VALUES(498,'挈',NULL,NULL,'kioh8');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1675,6 +1687,8 @@ INSERT INTO Synonyms VALUES(52,486,'to find');
 INSERT INTO Synonyms VALUES(53,486,'to search');
 INSERT INTO Synonyms VALUES(54,487,'hard');
 INSERT INTO Synonyms VALUES(55,501,'to saute');
+INSERT INTO Synonyms VALUES(56,513,'to bring');
+INSERT INTO Synonyms VALUES(57,513,'to get');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1721,6 +1735,7 @@ INSERT INTO Phrases VALUES(29,'I done no_(not_yet) to_eat','I did not finish eat
 INSERT INTO Phrases VALUES(30,'she to_be_in_the_process_of to_look television','She is watching tv',0);
 INSERT INTO Phrases VALUES(31,'he to_sleep| already','He is already asleep',0);
 INSERT INTO Phrases VALUES(32,'I to_eat done| already','I have already eaten',0);
+INSERT INTO Phrases VALUES(33,'to_eat completed','Eat all of it',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
