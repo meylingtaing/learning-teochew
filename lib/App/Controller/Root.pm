@@ -149,7 +149,9 @@ sub english {
         # First, look for english words in the database that match. There might
         # be multiple
         my @english_rows = Teochew::get_english_from_database(
-            word => $_, include_category_in_output => 1
+            word                       => $_,
+            include_category_in_output => 1,
+            check_synonyms             => 1,
         );
 
         # This also could be a number or a clock time, and we don't have
@@ -172,6 +174,10 @@ sub english {
         }
 
         next unless scalar @english_rows;
+
+        # It's possible a synonym was used to get to this page, so explicitly
+        # set the English word to the non-synonym
+        $_ = $english_rows[0]{word};
 
         my $english_display = $_;
 

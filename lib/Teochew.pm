@@ -590,6 +590,7 @@ Params:
     word
     notes
     include_category_in_output
+    check_synonyms
 
 =cut
 
@@ -601,6 +602,7 @@ sub get_english_from_database {
     my $word           = $params{word};
     my $notes          = $params{notes};
     my $for_flashcards = $params{for_flashcards};
+    my $check_synonyms = $params{check_synonyms};
 
     my @binds;
 
@@ -615,8 +617,15 @@ sub get_english_from_database {
         push @binds, ucfirst $category;
     }
     if (defined $word) {
-        $extra_where .= "and word = ? ";
+        my $word_where = "English.word = ?";
         push @binds, $word;
+
+        if ($check_synonyms) {
+            $word_where .= " or Synonyms.word = ?";
+            push @binds, $word;
+        }
+
+        $extra_where .= "and ($word_where) ";
     }
     if ($notes) {
         $extra_where .= "and notes = ? ";
@@ -635,11 +644,12 @@ sub get_english_from_database {
 
     my $sql = qq{
         select
-            English.id, word, notes$category_columns
+            English.id, English.word, notes$category_columns
         from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
-        join Teochew on English.id = english_id
+        join Teochew on English.id = Teochew.english_id
+        left join Synonyms on English.id = Synonyms.english_id
         where
             English.hidden = 0
             $extra_where
