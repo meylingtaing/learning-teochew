@@ -295,7 +295,7 @@ INSERT INTO English VALUES(252,28,'bitter melon',0,NULL,NULL,10);
 INSERT INTO English VALUES(253,28,'tomato',0,NULL,NULL,10);
 INSERT INTO English VALUES(254,10,'pumpkin',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(255,28,'taro',0,NULL,NULL,10);
-INSERT INTO English VALUES(256,10,'fruit',1,NULL,NULL,NULL);
+INSERT INTO English VALUES(256,28,'fruit',0,NULL,NULL,NULL);
 INSERT INTO English VALUES(257,10,'pear',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(258,10,'clementine',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(259,10,'cantaloupe',1,NULL,NULL,NULL);
@@ -552,6 +552,12 @@ INSERT INTO English VALUES(510,32,'completed',0,'',NULL,NULL);
 INSERT INTO English VALUES(511,9,'bag',0,'',NULL,NULL);
 INSERT INTO English VALUES(512,9,'box',0,'',NULL,NULL);
 INSERT INTO English VALUES(513,33,'to take',0,'',NULL,NULL);
+INSERT INTO English VALUES(514,8,'straight',0,'',NULL,NULL);
+INSERT INTO English VALUES(515,32,'don''t need to',0,'',NULL,NULL);
+INSERT INTO English VALUES(516,13,'to open',0,'',NULL,NULL);
+INSERT INTO English VALUES(517,13,'to turn on',0,'',NULL,NULL);
+INSERT INTO English VALUES(518,13,'to bite',0,'',NULL,NULL);
+INSERT INTO English VALUES(519,13,'to rise',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -842,7 +848,7 @@ INSERT INTO Teochew VALUES(290,252,'kou26 gue1','苦瓜',0,0,0);
 INSERT INTO Teochew VALUES(291,253,'ang57 mo57 gio5','红毛茄',0,0,0);
 INSERT INTO Teochew VALUES(292,254,'huang1 gue1','番瓜',0,0,1);
 INSERT INTO Teochew VALUES(293,255,'ou7','芋',0,0,0);
-INSERT INTO Teochew VALUES(294,256,'chen1 gue2','青果',0,0,1);
+INSERT INTO Teochew VALUES(294,256,'chen1 gue2','青果',0,0,0);
 INSERT INTO Teochew VALUES(295,257,'lai5','梨',0,0,1);
 INSERT INTO Teochew VALUES(296,258,'gek4','橘',0,0,1);
 INSERT INTO Teochew VALUES(297,259,'pang1 gue1','芳瓜',0,0,1);
@@ -1131,6 +1137,13 @@ INSERT INTO Teochew VALUES(584,510,'liao2','了',0,0,1);
 INSERT INTO Teochew VALUES(585,511,'do7','袋',0,0,0);
 INSERT INTO Teochew VALUES(586,512,'ap8','盒',0,0,0);
 INSERT INTO Teochew VALUES(587,513,'kioh8','挈',0,0,0);
+INSERT INTO Teochew VALUES(588,514,'dik8','直',0,0,0);
+INSERT INTO Teochew VALUES(589,515,'miang2','免',0,0,0);
+INSERT INTO Teochew VALUES(590,516,'kui1','开',0,0,0);
+INSERT INTO Teochew VALUES(591,517,'kui1','开',0,0,0);
+INSERT INTO Teochew VALUES(592,514,'dik84 dik8','直直',0,0,1);
+INSERT INTO Teochew VALUES(593,518,'ga6','咬',0,0,0);
+INSERT INTO Teochew VALUES(594,519,'ki2','起',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1627,6 +1640,10 @@ INSERT INTO Chinese VALUES(495,'了',NULL,NULL,'liao2');
 INSERT INTO Chinese VALUES(496,'袋',NULL,NULL,'do7');
 INSERT INTO Chinese VALUES(497,'盒',NULL,NULL,'ap8');
 INSERT INTO Chinese VALUES(498,'挈',NULL,NULL,'kioh8');
+INSERT INTO Chinese VALUES(499,'直',NULL,NULL,'dik8');
+INSERT INTO Chinese VALUES(500,'免',NULL,NULL,'miang2');
+INSERT INTO Chinese VALUES(501,'开','開',NULL,'kui1');
+INSERT INTO Chinese VALUES(502,'咬',NULL,NULL,'ga6');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1689,6 +1706,9 @@ INSERT INTO Synonyms VALUES(54,487,'hard');
 INSERT INTO Synonyms VALUES(55,501,'to saute');
 INSERT INTO Synonyms VALUES(56,513,'to bring');
 INSERT INTO Synonyms VALUES(57,513,'to get');
+INSERT INTO Synonyms VALUES(58,515,'shouldn''t');
+INSERT INTO Synonyms VALUES(59,155,'AC');
+INSERT INTO Synonyms VALUES(60,310,'porridge');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1794,6 +1814,7 @@ INSERT INTO PengimAlt VALUES(8,207,'p','peng');
 INSERT INTO PengimAlt VALUES(9,186,'m','meng');
 INSERT INTO PengimAlt VALUES(10,23,'bh','bhek');
 INSERT INTO PengimAlt VALUES(11,223,'s','seng');
+INSERT INTO PengimAlt VALUES(12,300,'d','dek');
 CREATE TABLE Pengim (
     id          integer primary key,
     beginning   text,
@@ -2098,6 +2119,7 @@ INSERT INTO Pengim VALUES(296,'t','tian');
 INSERT INTO Pengim VALUES(297,'t','toin');
 INSERT INTO Pengim VALUES(298,'t','tui');
 INSERT INTO Pengim VALUES(299,'y','yuah');
+INSERT INTO Pengim VALUES(300,'d','dik');
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
