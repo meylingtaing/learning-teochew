@@ -2,7 +2,6 @@
 .nav-link { color: #0056b3; }
 .navbar-toggler { font-size: 1.5em }
 </style>
-<div class="container-fluid">
 
   <div class="row mx-sm-1 my-2">
     <div class="col">
@@ -114,4 +113,3 @@
       <hr>
     </div>
   </div>
-</div>

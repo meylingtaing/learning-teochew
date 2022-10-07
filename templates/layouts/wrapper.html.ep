@@ -18,6 +18,8 @@
   <script src="/js/popper.min.js"></script>
   <script src="/js/bootstrap1.min.js"></script>
 
+  <div class="container-md">
+
   %= include 'flashcard_selection'
 
   %= content html => begin
@@ -25,5 +27,6 @@
   % end
 
   %= include 'footer'
+  </div>
 </body>
 </html>
