@@ -40,7 +40,7 @@ INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',0,12);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
-    word text,
+    word text collate nocase,
     hidden boolean default 0,
     notes text collate nocase,
     part_of_speech_id integer references PartOfSpeech(id),
@@ -1647,7 +1647,7 @@ INSERT INTO Chinese VALUES(502,'咬',NULL,NULL,'ga6');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
-    word        text,
+    word        text collate nocase,
     foreign key(english_id) references English(id)
 );
 INSERT INTO Synonyms VALUES(1,258,'tangerine');

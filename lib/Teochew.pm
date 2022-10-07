@@ -645,8 +645,8 @@ sub get_english_from_database {
             $extra_where
         group by English.id
         order by
-            english.sort,
-            word collate nocase,
+            English.sort,
+            English.word,
             case when notes is null or notes = '' then 1 else 2 end
     };
 
@@ -1001,7 +1001,7 @@ sub _lookup_all {
     my ($word, $notes) = split_out_parens($english);
     my @binds = ($word);
 
-    my $cond = "English.word = ? collate nocase";
+    my $cond = "English.word = ?";
 
     if ($notes) {
         $cond .= " and notes = ?";
