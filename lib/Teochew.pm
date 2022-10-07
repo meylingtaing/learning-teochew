@@ -1091,6 +1091,7 @@ sub search {
     my @pengim = map { "%$_%" } split /\s+/, $input;
     my $pengim_where = join ' and ', ("pengim like ?") x scalar @pengim;
 
+    # group concat synonyms?
     my $sql = qq{
         select
             English.word as english,
@@ -1104,13 +1105,13 @@ sub search {
             Synonyms.word like ? or
             ($pengim_where)
         )
+        group by Teochew.id
         order by
             case when English.word = ? or Synonyms.word = ? then 1 else 2 end,
             pengim
     };
     my @rows = $dbh->selectall_array($sql, { Slice => {} },
         ("%$input%") x 3, @pengim, ($input) x 2);
-
     return _format_for_translations_table(@rows);
 }
 
