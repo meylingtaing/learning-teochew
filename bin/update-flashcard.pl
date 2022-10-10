@@ -25,7 +25,10 @@ die colored("Must provide an English word!", "red") . "\n"
     unless defined $english;
 
 my ($word, $notes) = split_out_parens($english);
-my ($row) = Teochew::get_english_from_database(word => $word, notes => $notes);
+my ($row) = Teochew::get_english_from_database(
+                word => $word,
+                notes => $notes,
+                include_category_in_output => 1);
 
 die colored("$english does not exist!", "red") . "\n" unless $row;
 
@@ -54,6 +57,21 @@ GetOptions(
 );
 
 my $db = Teochew::Edit->new;
+
+if ($category) {
+    # First check if category exists already (you can only add new categories
+    # manually, using sql, for now)
+    my %categories = map { $_->{name} => $_->{id} } Teochew::categories;
+
+    my $new_category_id = $categories{$category};
+    die "Category '$category' doesn't exist!" unless $new_category_id;
+
+    say "Changing category from $row->{category_name} to $category";
+    if (confirm()) {
+        $db->update_english($row->{id}, category_id => $new_category_id);
+        say colored("Updated category to $category!", "green");
+    }
+}
 
 if ($alt_chinese) {
     # First check and see if these Chinese characters exist in the database

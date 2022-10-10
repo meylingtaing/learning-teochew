@@ -62,6 +62,29 @@ sub insert_translation {
     $sth->execute;
 }
 
+=head2 update_english
+
+    $teochew->update_english(
+        $english_id,
+        category_id => '',
+    );
+
+I will support more types of updates in the future
+
+=cut
+
+sub update_english {
+    my ($self, $english_id, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    die "No english_id given!" unless $english_id;
+
+    if ($params{category_id}) {
+        $self->dbh->do('update english set category_id = ? where id = ?',
+            undef, $params{category_id}, $english_id);
+    }
+}
+
 =head2 insert_english
 
     $teochew->insert_english(
