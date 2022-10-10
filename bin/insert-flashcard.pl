@@ -52,6 +52,9 @@ unless ($category_id) {
     if (confirm()) {
         $db->insert_category($category);
     }
+    else {
+        exit;
+    }
 }
 
 # Split up Chinese characters with simpl. and trad. We might need to add them
