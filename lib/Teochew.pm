@@ -444,13 +444,6 @@ sub translate_phrase {
     # to make sure all the words go through tone change
     my $incomplete = $english->{sentence} =~ /\.\.\.$/;
 
-    # No tone change for words that come before tag questions
-    if ($english->{sentence} =~ /\?$/ and
-        $components[-1]->{tag_question})
-    {
-        $components[-2]->{no_tone_change} = 1;
-    }
-
     return link_teochew_words(
         \@components, { tone_change_last_word => $incomplete }
     );
@@ -1001,7 +994,6 @@ arrayref contains a hashref with these fields:
     pengim
     chinese
     no_tone_change
-    tag_question
 
 =cut
 
@@ -1029,7 +1021,7 @@ sub _lookup_all {
     my $sql = qq{
         select
             pengim, chinese,
-            no_tone_change, tag_question
+            no_tone_change
         from Teochew join English on English.id = Teochew.english_id
         where $cond
     };
