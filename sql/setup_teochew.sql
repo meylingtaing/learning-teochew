@@ -558,6 +558,7 @@ INSERT INTO English VALUES(516,13,'to open',0,'',NULL,NULL);
 INSERT INTO English VALUES(517,13,'to turn on',0,'',NULL,NULL);
 INSERT INTO English VALUES(518,13,'to bite',0,'',NULL,NULL);
 INSERT INTO English VALUES(519,13,'to rise',0,'',NULL,NULL);
+INSERT INTO English VALUES(520,10,'raw',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -848,7 +849,7 @@ INSERT INTO Teochew VALUES(290,252,'kou26 gue1','苦瓜',0,0,0);
 INSERT INTO Teochew VALUES(291,253,'ang57 mo57 gio5','红毛茄',0,0,0);
 INSERT INTO Teochew VALUES(292,254,'huang1 gue1','番瓜',0,0,1);
 INSERT INTO Teochew VALUES(293,255,'ou7','芋',0,0,0);
-INSERT INTO Teochew VALUES(294,256,'chen1 gue2','青果',0,0,0);
+INSERT INTO Teochew VALUES(294,256,'chen1 gue2','生果',0,0,0);
 INSERT INTO Teochew VALUES(295,257,'lai5','梨',0,0,1);
 INSERT INTO Teochew VALUES(296,258,'gek4','橘',0,0,1);
 INSERT INTO Teochew VALUES(297,259,'pang1 gue1','芳瓜',0,0,1);
@@ -1144,6 +1145,7 @@ INSERT INTO Teochew VALUES(591,517,'kui1','开',0,0,0);
 INSERT INTO Teochew VALUES(592,514,'dik84 dik8','直直',0,0,1);
 INSERT INTO Teochew VALUES(593,518,'ga6','咬',0,0,0);
 INSERT INTO Teochew VALUES(594,519,'ki2','起',0,0,0);
+INSERT INTO Teochew VALUES(595,520,'chen1','生',0,0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1644,6 +1646,7 @@ INSERT INTO Chinese VALUES(499,'直',NULL,NULL,'dik8');
 INSERT INTO Chinese VALUES(500,'免',NULL,NULL,'miang2');
 INSERT INTO Chinese VALUES(501,'开','開',NULL,'kui1');
 INSERT INTO Chinese VALUES(502,'咬',NULL,NULL,'ga6');
+INSERT INTO Chinese VALUES(503,'生',NULL,NULL,'chen1');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1756,6 +1759,7 @@ INSERT INTO Phrases VALUES(30,'she to_be_in_the_process_of to_look television','
 INSERT INTO Phrases VALUES(31,'he to_sleep| already','He is already asleep',0);
 INSERT INTO Phrases VALUES(32,'I to_eat done| already','I have already eaten',0);
 INSERT INTO Phrases VALUES(33,'to_eat completed','Eat all of it',0);
+INSERT INTO Phrases VALUES(34,'don''t_need_to to_turn_on air_conditioner','You don''t have to turn on the AC',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
