@@ -139,17 +139,17 @@ C<english> must be stashed
 
 sub english {
     my $c = shift;
-    my $english = trim $c->stash('english');
+    my $input = trim $c->stash('english');
     my $extra_notes = '';
 
     # All of the verbs in the database are stored like "to eat", but we should
     # allow someone to see the translation without typing the "to" part of it
-    for ($english, "to $english") {
+    for my $english ("$input", "to $input") {
 
         # First, look for english words in the database that match. There might
         # be multiple
         my @english_rows = Teochew::get_english_from_database(
-            word                       => $_,
+            word                       => $english,
             include_category_in_output => 1,
             check_synonyms             => 1,
         );
@@ -157,16 +157,16 @@ sub english {
         # This also could be a number or a clock time, and we don't have
         # entries for those, but we have special translate functions for them
         unless (@english_rows) {
-            if ($_ =~ /^\d+$/) {
+            if ($english =~ /^\d+$/) {
                 push @english_rows, {
-                    word => $_,
+                    word => $english,
                     category_display   => 'Numbers',
                     flashcard_set_name => 'number',
                 };
             }
-            elsif ($_ =~ /^\d+:\d+$/) {
+            elsif ($english =~ /^\d+:\d+$/) {
                 push @english_rows, {
-                    word => $_,
+                    word => $english,
                     category_display   => 'Clock Time',
                     flashcard_set_name => 'time',
                 };
@@ -175,11 +175,15 @@ sub english {
 
         next unless scalar @english_rows;
 
-        # It's possible a synonym was used to get to this page, so explicitly
-        # set the English word to the non-synonym
-        $_ = $english_rows[0]{word};
+        my $english_display = $english;
+        my $is_synonym = 0;
 
-        my $english_display = $_;
+        # It's possible a synonym was used to get to this page, so explicitly
+        # set the English word to the non-synonym for synonym lookups later
+        if ($english ne $english_rows[0]{word}) {
+            $english = $english_rows[0]{word};
+            $is_synonym = 1;
+        }
 
         # Organize this by category. Also keep track of chinese characters.
         my %categories;
@@ -226,7 +230,13 @@ sub english {
 
         $c->stash(teochew_by_category => \%categories);
         $c->stash(english  => $english_display);
-        $c->stash(synonyms => [Teochew::get_synonyms($_)]);
+
+        my @synonyms = Teochew::get_synonyms($english);
+        if ($is_synonym) {
+            @synonyms = grep { $_ ne $input && $_ ne "to $input" } @synonyms;
+            unshift @synonyms, $english;
+        }
+        $c->stash(synonyms => \@synonyms);
 
         $c->stash(extra_info => markdown($extra_notes));
 
@@ -239,8 +249,8 @@ sub english {
     }
 
     # Redirect to the search page if we have no translations available
-    $c->redirect_to("/search?search=$english");
-};
+    $c->redirect_to("/search?search=$input");
+}
 
 sub chinese {
     my $c = shift;
