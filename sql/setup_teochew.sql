@@ -2154,4 +2154,12 @@ INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
 INSERT INTO TeochewAltChinese VALUES(3,557,'酷');
 INSERT INTO TeochewAltChinese VALUES(4,6,'蜀');
 INSERT INTO TeochewAltChinese VALUES(5,7,'两');
+CREATE TABLE Compound (
+    id integer primary key,
+    parent_teochew_id integer references Teochew(id),
+    sort integer,
+    child_teochew_id integer references Teochew(id)
+);
+INSERT INTO Compound VALUES(1,1,1,33);
+INSERT INTO Compound VALUES(2,1,2,356);
 COMMIT;
