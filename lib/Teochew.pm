@@ -657,6 +657,27 @@ sub get_english_from_database {
     return @rows;
 }
 
+=head2 category_words_by_sort_order
+
+Given a category id, this will return a hashref of words by sort order
+
+=cut
+
+sub category_words_by_sort_order {
+    my ($category_id) = @_;
+
+    die "Must pass in a category id to category_words_by_sort_order!\n"
+        unless $category_id;
+
+    my $sql = qq{
+        select sort, group_concat(distinct word) words from English
+        where category_id = ?
+        group by sort order by sort
+    };
+
+    return $dbh->selectall_array($sql, { Slice => {} }, $category_id);
+}
+
 =head2 get_synonyms
 
 Given an English word, returns the synonyms for that word

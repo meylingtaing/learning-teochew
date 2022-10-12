@@ -24,12 +24,13 @@ sub new { shift->create_db_object('Teochew.sqlite') }
 =head2 insert_translation
 
     my $success = $teochew->insert_word(
-        category_id => $category_id,
-        english     => $english_main,
-        notes       => $notes,
-        pengim      => $pengim,
-        chinese     => $simplified,
-        hidden      => $hidden,
+        category_id  => $category_id,
+        english      => $english_main,
+        notes        => $notes,
+        english_sort => $sort,
+        pengim       => $pengim,
+        chinese      => $simplified,
+        hidden       => $hidden,
         hidden_from_flashcards => 1,
     );
 
@@ -42,7 +43,7 @@ sub insert_translation {
     # Insert into the English table. It's possible this is a dupe, so check for
     # that first
     my %english_params =
-        map { $_ => $params{$_} } qw(english notes category_id hidden);
+        map { $_ => $params{$_} } qw(english notes category_id hidden english_sort);
 
     my $english_id = $self->_get_english_id(%english_params) ||
                      $self->insert_english(%english_params);
@@ -88,10 +89,11 @@ sub update_english {
 =head2 insert_english
 
     $teochew->insert_english(
-        category_id => $category_id,
-        english     => $english_main,
-        notes       => $notes,
-        hidden      => $hidden,
+        category_id  => $category_id,
+        english      => $english_main,
+        notes        => $notes,
+        hidden       => $hidden,
+        english_sort => $sort,
     );
 
 =cut
@@ -101,13 +103,14 @@ sub insert_english {
 
     my $dbh = $self->dbh;
     my $sth = $dbh->prepare(
-        "insert into English (category_id, word, notes, hidden) " .
-        "values (?,?,?,?)"
+        "insert into English (category_id, word, notes, hidden, sort) " .
+        "values (?,?,?,?, ?)"
     );
     $sth->bind_param(1, $params{category_id}, SQL_INTEGER);
     $sth->bind_param(2, $params{english});
     $sth->bind_param(3, $params{notes});
     $sth->bind_param(4, $params{hidden} ? 1 : 0, SQL_INTEGER);
+    $sth->bind_param(5, $params{english_sort}, SQL_INTEGER);
     $sth->execute;
 
     return $dbh->sqlite_last_insert_rowid;

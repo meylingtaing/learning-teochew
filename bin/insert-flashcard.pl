@@ -50,11 +50,23 @@ my $category_id = $categories{$category};
 unless ($category_id) {
     say "Creating new category: $category";
     if (confirm()) {
-        $db->insert_category($category);
+        $category_id = $db->insert_category($category);
     }
     else {
         exit;
     }
+}
+
+# So, sometimes I insert words and then they need to be sorted. Check the
+# sorts in the category and see if this makes sense to have a sort value
+my $sort = undef;
+my @words_by_sort = Teochew::category_words_by_sort_order($category_id);
+if (scalar @words_by_sort > 1) {
+    for (@words_by_sort) {
+        $_->{sort} //= '';
+        say "$_->{sort}: " . substr($_->{words}, 0, 50);
+    }
+    $sort = input_from_prompt("Sort order:");
 }
 
 # Split up Chinese characters with simpl. and trad. We might need to add them
@@ -119,6 +131,8 @@ say "\tEnglish: $english";
 say "\tPeng'im: $pengim";
 say "\tSimplified Chinese: $simplified";
 
+say "\tSort: $sort" if defined $sort;
+
 say "\thidden: 1" if $hidden;
 say "\thidden_from_flashcards: 1" if $hidden_from_flashcards;
 
@@ -126,12 +140,13 @@ if (confirm()) {
 
     # Add the translation!!
     my $success = $db->insert_translation(
-        category_id => $category_id,
-        english     => $english_main,
-        notes       => $notes,
-        pengim      => $pengim,
-        chinese     => $simplified,
-        hidden      => $hidden,
+        category_id  => $category_id,
+        english      => $english_main,
+        notes        => $notes,
+        english_sort => $sort,
+        pengim       => $pengim,
+        chinese      => $simplified,
+        hidden       => $hidden,
         hidden_from_flashcards => $hidden_from_flashcards,
     );
     if ($success) {
