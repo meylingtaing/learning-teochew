@@ -122,9 +122,9 @@ INSERT INTO English VALUES(73,7,'time',1,'hour',NULL,10);
 INSERT INTO English VALUES(74,7,'time',1,'30 min',NULL,10);
 INSERT INTO English VALUES(75,7,'time',1,'5 min',NULL,10);
 INSERT INTO English VALUES(76,7,'afternoon',0,NULL,NULL,4);
-INSERT INTO English VALUES(77,7,'noon',1,NULL,NULL,10);
+INSERT INTO English VALUES(77,7,'noon',0,NULL,NULL,10);
 INSERT INTO English VALUES(78,7,'midnight',1,NULL,NULL,10);
-INSERT INTO English VALUES(79,7,'evening',1,NULL,NULL,10);
+INSERT INTO English VALUES(79,7,'evening',0,NULL,NULL,10);
 INSERT INTO English VALUES(80,7,'day',0,NULL,NULL,1);
 INSERT INTO English VALUES(81,7,'week',0,NULL,NULL,10);
 INSERT INTO English VALUES(82,7,'month',0,NULL,NULL,10);
@@ -249,7 +249,7 @@ INSERT INTO English VALUES(201,30,'soda',0,NULL,NULL,NULL);
 INSERT INTO English VALUES(203,30,'milk tea',0,NULL,NULL,NULL);
 INSERT INTO English VALUES(204,10,'coconut',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(205,10,'coconut juice',1,NULL,NULL,NULL);
-INSERT INTO English VALUES(206,10,'breakfast',1,NULL,NULL,NULL);
+INSERT INTO English VALUES(206,10,'breakfast',0,NULL,NULL,NULL);
 INSERT INTO English VALUES(207,10,'lunch',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(208,10,'dinner',1,NULL,NULL,NULL);
 INSERT INTO English VALUES(209,29,'duck',0,'meat',NULL,10);
@@ -505,7 +505,7 @@ INSERT INTO English VALUES(463,18,'wristwatch',0,'',NULL,NULL);
 INSERT INTO English VALUES(464,18,'bracelet',0,'',NULL,NULL);
 INSERT INTO English VALUES(465,18,'ring',0,'',NULL,NULL);
 INSERT INTO English VALUES(466,18,'dress',0,'',NULL,NULL);
-INSERT INTO English VALUES(467,7,'day before yesterday',0,'',NULL,NULL);
+INSERT INTO English VALUES(467,7,'day before yesterday',0,'',NULL,3);
 INSERT INTO English VALUES(468,5,'cousin',0,'',NULL,NULL);
 INSERT INTO English VALUES(469,15,'squirrel',0,'',NULL,NULL);
 INSERT INTO English VALUES(470,31,'to brush teeth',0,'',NULL,NULL);
@@ -560,6 +560,8 @@ INSERT INTO English VALUES(518,13,'to bite',0,'',NULL,NULL);
 INSERT INTO English VALUES(519,13,'to rise',0,'',NULL,NULL);
 INSERT INTO English VALUES(520,10,'raw',0,'',NULL,NULL);
 INSERT INTO English VALUES(521,13,'to thank',0,'',NULL,NULL);
+INSERT INTO English VALUES(522,10,'meal',0,'',NULL,NULL);
+INSERT INTO English VALUES(523,7,'early',0,'',NULL,4);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -641,9 +643,9 @@ INSERT INTO Teochew VALUES(72,73,'diam2','点',0,0);
 INSERT INTO Teochew VALUES(73,74,'buan3','半',0,0);
 INSERT INTO Teochew VALUES(74,75,'dah4','搭',0,0);
 INSERT INTO Teochew VALUES(75,76,'e7 gua3','下旰',0,0);
-INSERT INTO Teochew VALUES(76,77,'yik84 dao3','日昼',0,1);
+INSERT INTO Teochew VALUES(76,77,'yik84 dao3','日昼',0,0);
 INSERT INTO Teochew VALUES(77,78,'buan32 me5','半暝',0,1);
-INSERT INTO Teochew VALUES(78,79,'me57 heung1 gian2','暝昏囝',0,1);
+INSERT INTO Teochew VALUES(78,79,'me57 heung1 gian2','暝昏囝',0,0);
 INSERT INTO Teochew VALUES(80,81,'loi26 bai3','礼拜',0,0);
 INSERT INTO Teochew VALUES(81,82,'ghueh8','月',0,0);
 INSERT INTO Teochew VALUES(82,83,'ni5','年',0,0);
@@ -788,7 +790,7 @@ INSERT INTO Teochew VALUES(226,201,'ki32 jui2','汽水',0,0);
 INSERT INTO Teochew VALUES(227,203,'ni67 de5','奶茶',0,0);
 INSERT INTO Teochew VALUES(228,204,'ia57 ji2','椰子',0,1);
 INSERT INTO Teochew VALUES(229,205,'ia57 ji26 jui2','椰子水',0,1);
-INSERT INTO Teochew VALUES(230,206,'ja26 chang1','早餐',0,1);
+INSERT INTO Teochew VALUES(230,206,'ja26 chang1','早餐',0,0);
 INSERT INTO Teochew VALUES(231,207,'dong1 ngou26 chang1','中午餐',0,1);
 INSERT INTO Teochew VALUES(232,208,'men57 chang1','夜餐',0,1);
 INSERT INTO Teochew VALUES(233,209,'ah48 bhah4','鸭肉',0,0);
@@ -1149,6 +1151,8 @@ INSERT INTO Teochew VALUES(594,519,'ki2','起',0,0);
 INSERT INTO Teochew VALUES(595,520,'chen1','生',0,0);
 INSERT INTO Teochew VALUES(596,521,'sia7','谢',0,0);
 INSERT INTO Teochew VALUES(597,492,'m6','唔',0,1);
+INSERT INTO Teochew VALUES(598,522,'chang1','餐',0,1);
+INSERT INTO Teochew VALUES(599,523,'ja2','早',0,0);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
