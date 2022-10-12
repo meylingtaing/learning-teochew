@@ -68,6 +68,7 @@ sub insert_translation {
     $teochew->update_english(
         $english_id,
         category_id => '',
+        sort        => '',
     );
 
 I will support more types of updates in the future
@@ -80,10 +81,25 @@ sub update_english {
 
     die "No english_id given!" unless $english_id;
 
+    my $sql = 'update english set ';
+    my @binds;
+    my @sets;
+
     if ($params{category_id}) {
-        $self->dbh->do('update english set category_id = ? where id = ?',
-            undef, $params{category_id}, $english_id);
+        push @sets, "category_id = ?";
+        push @binds, $params{category_id};
     }
+
+    if ($params{sort}) {
+        push @sets, "sort = ?";
+        push @binds, $params{sort};
+    }
+
+    $self->dbh->do(
+        'update english set ' . join(', ', @sets) .
+        ' where id = ?',
+        undef, @binds, $english_id
+    );
 }
 
 =head2 insert_english

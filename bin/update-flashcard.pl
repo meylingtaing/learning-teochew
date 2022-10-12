@@ -16,7 +16,7 @@ use Term::ANSIColor qw(colored);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
-use Input qw(confirm);
+use Input qw(confirm input_from_prompt);
 
 # First argument should be the English word
 my $english = shift @ARGV;
@@ -50,13 +50,15 @@ elsif (scalar @rows > 1) {
 }
 
 # Let's see what the user wants to update
-my ($category, $alt_chinese);
+my ($category, $alt_chinese, $category_sort);
 GetOptions(
     "category=s"    => \$category,
     "alt-chinese=s" => \$alt_chinese,
+    "category-sort" => \$category_sort,
 );
 
 my $db = Teochew::Edit->new;
+my %update_english_params;
 
 if ($category) {
     # First check if category exists already (you can only add new categories
@@ -68,9 +70,31 @@ if ($category) {
 
     say "Changing category from $row->{category_name} to $category";
     if (confirm()) {
-        $db->update_english($row->{id}, category_id => $new_category_id);
-        say colored("Updated category to $category!", "green");
+        $update_english_params{category_id} = $new_category_id;
+        $row->{category_id} = $new_category_id;
     }
+
+    $category_sort = 1;
+}
+
+# Sorta copy pasted from the insert-flashcards script
+if ($category_sort) {
+    my @words_by_sort =
+        Teochew::category_words_by_sort_order($row->{category_id});
+    for (@words_by_sort) {
+        $_->{sort} //= '';
+        say "$_->{sort}: " . substr($_->{words}, 0, 50);
+    }
+    my $sort = input_from_prompt("Sort order:");
+    say "Changing sort order of english word to $sort";
+    if (confirm()) {
+        $update_english_params{sort} = $sort;
+    }
+}
+
+if (%update_english_params) {
+    $db->update_english($row->{id}, %update_english_params);
+    say colored("Updated english word!", "green");
 }
 
 if ($alt_chinese) {

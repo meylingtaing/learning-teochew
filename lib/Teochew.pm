@@ -570,6 +570,7 @@ Returns a list of english words as a hashref like so:
     # These are included if you provide 'include_category_in_output'
     category_name      => 'basics',
     category_display   => 'Basics',
+    category_id        => 1,
     flashcard_set_name => 'Basics',
 
 You can optionally provide a category to limit the types of words that can be
@@ -632,6 +633,7 @@ sub get_english_from_database {
         lower(Categories.name) as category_name,
         coalesce(Categories.display_name, Categories.name)
             as category_display,
+        Categories.id as category_id,
         lower(FlashcardSet.name) as flashcard_set_name
     } : '';
 
@@ -671,7 +673,7 @@ sub category_words_by_sort_order {
 
     my $sql = qq{
         select sort, group_concat(distinct word) words from English
-        where category_id = ?
+        where category_id = ? and hidden = 0
         group by sort order by sort
     };
 
