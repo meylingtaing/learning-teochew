@@ -214,11 +214,16 @@ sub english {
             );
 
             for my $translation_row (@$translation_rows) {
+                my $teochew_id = $translation_row->{teochew_id};
+
                 my $alternates = Teochew::check_alternate_chinese(
-                    teochew_id => $translation_row->{teochew_id});
+                    teochew_id => $teochew_id);
                 if (my $alts = $alternates->{has_alts}) {
                     $translation_row->{alt_chinese} = $alts;
                 }
+
+                my @components = Teochew::compound_word_components($teochew_id);
+                $translation_row->{compound} = \@components if @components;
 
                 push @chinese, $translation_row->{chinese};
                 push @{ $categories{$category}{teochew} }, {

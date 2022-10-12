@@ -559,6 +559,7 @@ INSERT INTO English VALUES(517,13,'to turn on',0,'',NULL,NULL);
 INSERT INTO English VALUES(518,13,'to bite',0,'',NULL,NULL);
 INSERT INTO English VALUES(519,13,'to rise',0,'',NULL,NULL);
 INSERT INTO English VALUES(520,10,'raw',0,'',NULL,NULL);
+INSERT INTO English VALUES(521,13,'to thank',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1146,6 +1147,8 @@ INSERT INTO Teochew VALUES(592,514,'dik84 dik8','直直',0,1);
 INSERT INTO Teochew VALUES(593,518,'ga6','咬',0,0);
 INSERT INTO Teochew VALUES(594,519,'ki2','起',0,0);
 INSERT INTO Teochew VALUES(595,520,'chen1','生',0,0);
+INSERT INTO Teochew VALUES(596,521,'sia7','谢',0,0);
+INSERT INTO Teochew VALUES(597,492,'m6','唔',0,1);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2154,4 +2157,19 @@ INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
 INSERT INTO TeochewAltChinese VALUES(3,557,'酷');
 INSERT INTO TeochewAltChinese VALUES(4,6,'蜀');
 INSERT INTO TeochewAltChinese VALUES(5,7,'两');
+CREATE TABLE Compound (
+    id integer primary key,
+    parent_teochew_id integer references Teochew(id),
+    sort integer,
+    child_teochew_id integer references Teochew(id)
+);
+INSERT INTO Compound VALUES(1,1,1,33);
+INSERT INTO Compound VALUES(2,1,2,356);
+INSERT INTO Compound VALUES(3,2,1,454);
+INSERT INTO Compound VALUES(4,2,2,596);
+INSERT INTO Compound VALUES(5,31,1,489);
+INSERT INTO Compound VALUES(6,31,2,22);
+INSERT INTO Compound VALUES(7,259,1,489);
+INSERT INTO Compound VALUES(8,259,2,22);
+INSERT INTO Compound VALUES(9,259,3,19);
 COMMIT;

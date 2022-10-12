@@ -744,6 +744,36 @@ sub check_alternate_chinese {
     }
 }
 
+=head2 compound_word_components
+
+Given a teochew id, this will return the compound word breakdown (if
+applicable), in the form of an array of hashrefs, each containing
+
+    chinese
+    pengim
+    word
+
+=cut
+
+sub compound_word_components {
+    my ($teochew_id) = @_;
+
+    my $sql = qq{
+        select
+            Teochew.chinese,
+            Teochew.pengim,
+            English.word
+        from Compound
+        join Teochew on Teochew.id = Compound.child_teochew_id
+        join English on English.id = Teochew.english_id
+        where parent_teochew_id = ?
+        order by Compound.sort
+    };
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $teochew_id);
+    return @rows;
+}
+
 =head1 INTERNALS
 
 These functions are not typically meant to be called outside of this file, but
