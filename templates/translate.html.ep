@@ -29,18 +29,21 @@
         </a>
       </li>
       % }
+      % my $row_id = 0;
       % for my $row (@{ $teochew_by_category->{$key}{teochew} }) {
+        % ++$row_id;
         <li class="list-group-item">
           %= include 'elements/translation', row => $row
           <span class="notes"><%= $row->{notes} %></span>
 
           % if ($row->{compound}) {
-            <a data-toggle="collapse" href="#word-breakdown">
+            <a data-toggle="collapse" href="#word-breakdown-<%= $row_id %>">
               <small>
                 Compound word breakdown <i class="ion-arrow-down-b"></i>
               </small>
             </a>
-            <div class="row no-gutters collapse" id="word-breakdown">
+            <div class="row no-gutters collapse"
+                 id="word-breakdown-<%= $row_id %>">
             % for my $component (@{ $row->{compound} }) {
               <div class="col-auto"><div class="card text-center">
                 <h4 class="card-header"><%= $component->{word} %></h4>
