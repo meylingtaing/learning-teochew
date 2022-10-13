@@ -18,36 +18,18 @@ use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
 use Input qw(confirm input_from_prompt);
 
+my $db = Teochew::Edit->new;
+
 # First argument should be the English word
-my $english = shift @ARGV;
+my $input = shift @ARGV;
 
 die colored("Must provide an English word!", "red") . "\n"
-    unless defined $english;
+    unless defined $input;
 
-my ($word, $notes) = split_out_parens($english);
-my ($row) = Teochew::get_english_from_database(
-                word => $word,
-                notes => $notes,
-                include_category_in_output => 1);
-
-die colored("$english does not exist!", "red") . "\n" unless $row;
-
-# Get existing translations -- there might be more than one. If so, have the
-# user select the one they want to modify
-my @rows = Teochew::get_all_translations_by_id($row->{id});
-my $row_id = 0;
-if (scalar @rows == 0) {
-    die "No translations found for $english!\n";
-}
-elsif (scalar @rows > 1) {
-    # Need the user to select which translation they want to modify
-    for (my $i = 0; $i < scalar @rows; $i++) {
-        my $row = $rows[$i];
-        say "$i: $row->{chinese} $row->{pengim}";
-    }
-    $row_id = get_input_from_prompt(
-        "Which translation would you like to modify?");
-}
+# Gather up the relevant information from the database for this translation
+my %translation = $db->choose_translation_from_english($input);
+my $english     = $translation{english};
+my $teochew     = $translation{teochew};
 
 # Let's see what the user wants to update
 my ($category, $alt_chinese, $category_sort);
@@ -57,7 +39,6 @@ GetOptions(
     "category-sort" => \$category_sort,
 );
 
-my $db = Teochew::Edit->new;
 my %update_english_params;
 
 if ($category) {
@@ -68,10 +49,10 @@ if ($category) {
     my $new_category_id = $categories{$category};
     die "Category '$category' doesn't exist!" unless $new_category_id;
 
-    say "Changing category from $row->{category_name} to $category";
+    say "Changing category from $english->{category_name} to $category";
     if (confirm()) {
         $update_english_params{category_id} = $new_category_id;
-        $row->{category_id} = $new_category_id;
+        $english->{category_id} = $new_category_id;
     }
 
     $category_sort = 1;
@@ -80,7 +61,7 @@ if ($category) {
 # Sorta copy pasted from the insert-flashcards script
 if ($category_sort) {
     my @words_by_sort =
-        Teochew::category_words_by_sort_order($row->{category_id});
+        Teochew::category_words_by_sort_order($english->{category_id});
     for (@words_by_sort) {
         $_->{sort} //= '';
         say "$_->{sort}: " . substr($_->{words}, 0, 50);
@@ -93,7 +74,7 @@ if ($category_sort) {
 }
 
 if (%update_english_params) {
-    $db->update_english($row->{id}, %update_english_params);
+    $db->update_english($english->{id}, %update_english_params);
     say colored("Updated english word!", "green");
 }
 
@@ -101,10 +82,10 @@ if ($alt_chinese) {
     # First check and see if these Chinese characters exist in the database
     # XXX Will need to support simplified and traditional at some point
     my @simplified_chars  = split //, $alt_chinese;
-    my @pengim_syllables  = split / /, $rows[$row_id]{pengim};
+    my @pengim_syllables  = split / /, $teochew->{pengim};
 
     die colored(
-        "The number of characters doesn't match $rows[$row_id]{pengim}!", "red"
+        "The number of characters doesn't match $teochew->{pengim}!", "red"
     ) . "\n" if scalar @simplified_chars != scalar @pengim_syllables;
 
     for (my $i = 0; $i < scalar @simplified_chars; $i++) {
@@ -129,10 +110,10 @@ if ($alt_chinese) {
         }
     }
 
-    say "Adding $alt_chinese as an alternate for $rows[$row_id]{chinese}";
+    say "Adding $alt_chinese as an alternate for $teochew->{chinese}";
     if (confirm()) {
         $db->insert_alt_chinese(
-            teochew_id => $rows[$row_id]{teochew_id},
+            teochew_id => $teochew->{teochew_id},
             chinese    => $alt_chinese
         );
         say colored("Added $alt_chinese as an alternate!", "green");

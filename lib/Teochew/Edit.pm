@@ -16,10 +16,20 @@ Class for modifying the Teochew database
 use strict;
 use warnings;
 
+# Needed for reading/modifying the DB
 use parent 'SqliteDB';
 use DBI qw(:sql_types);
 
+use Teochew::Utils qw(split_out_parens);
+
+# Needed for interacting with the user
+use feature qw(say);
+use Term::ANSIColor qw(colored);
+use Input qw(input_from_prompt);
+
 sub new { shift->create_db_object('Teochew.sqlite') }
+
+=head1 METHODS THAT UPDATE THE DB DIRECTLY
 
 =head2 insert_translation
 
@@ -308,6 +318,78 @@ sub make_fully_hidden {
     $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
     return $sth->execute;
 }
+
+=head1 HELPERS FOR PROMPTING THE USER
+
+=head2 choose_translation_from_english
+
+    $teochew->choose_translation_from_english('hello');
+
+Given an english word, this returns a hash with relevant translation
+information. If there are multiple translations found, this will prompt the
+user to choose one
+
+The return hash will consist of two keys: C<english> and C<teochew>. Here is
+an example of one:
+
+  'english' => {
+                 'id' => 1
+                 'word' => 'hello',
+                 'notes' => undef,
+                 'category_name' => 'common',
+                 'flashcard_set_name' => 'basics',
+                 'category_display' => 'Common Phrases',
+                 'category_id' => 1,
+               },
+  'teochew' => {
+                 'teochew_id' => 1,
+                 'chinese' => "\x{6c5d}\x{597d}",
+                 'pengim' => 'leu2 ho2'
+               },
+=cut
+
+sub choose_translation_from_english {
+    my ($self, $english) = @_;
+
+    return undef unless defined $english;
+
+    my %ret;
+
+    my ($word, $notes) = split_out_parens($english);
+    my ($english_row) = Teochew::get_english_from_database(
+                    word => $word,
+                    notes => $notes,
+                    include_category_in_output => 1);
+
+    die colored("$english does not exist!", "red") . "\n" unless $english_row;
+
+    $ret{english} = $english_row;
+
+    # Get existing translations -- there might be more than one. If so, have
+    # the user select the one they want to modify
+    my @rows = Teochew::get_all_translations_by_id($english_row->{id});
+    my $row_id = 0;
+    if (scalar @rows == 0) {
+        die "No translations found for $english!\n";
+    }
+    elsif (scalar @rows > 1) {
+        # Need the user to select which translation they want to modify
+        for (my $i = 0; $i < scalar @rows; $i++) {
+            my $row = $rows[$i];
+            say "$i: $row->{chinese} $row->{pengim}";
+        }
+        $row_id = input_from_prompt(
+            "Which translation would you like to modify?");
+    }
+
+    $ret{teochew} = $rows[$row_id];
+
+    return %ret;
+}
+
+=head1 INTERNALS
+
+=cut
 
 sub _get_english_id {
     my ($self, %params) = @_;
