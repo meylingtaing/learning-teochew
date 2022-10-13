@@ -1,9 +1,9 @@
+test: setup-db
+	carton exec -- prove -lr t
+
 clean-teochew-db:
 	sqlite3 Teochew.sqlite.tmp < sql/setup_teochew.sql
 	mv Teochew.sqlite.tmp Teochew.sqlite
-
-test: setup-db
-	carton exec -- prove -lr t
 
 sandbox: setup-db
 	carton exec -- morbo bin/webapp.pl
