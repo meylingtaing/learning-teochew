@@ -562,6 +562,7 @@ INSERT INTO English VALUES(520,10,'raw',0,'',NULL,NULL);
 INSERT INTO English VALUES(521,13,'to thank',0,'',NULL,NULL);
 INSERT INTO English VALUES(522,10,'meal',0,'',NULL,NULL);
 INSERT INTO English VALUES(523,7,'early',0,'',NULL,4);
+INSERT INTO English VALUES(524,16,'inside',0,'',NULL,NULL);
 CREATE TABLE Teochew (
     id         integer primary key,
     english_id integer,
@@ -1153,6 +1154,7 @@ INSERT INTO Teochew VALUES(596,521,'sia7','谢',0,0);
 INSERT INTO Teochew VALUES(597,492,'m6','唔',0,1);
 INSERT INTO Teochew VALUES(598,522,'chang1','餐',0,1);
 INSERT INTO Teochew VALUES(599,523,'ja2','早',0,0);
+INSERT INTO Teochew VALUES(600,524,'lai6','内',0,1);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1166,7 +1168,7 @@ INSERT INTO Chinese VALUES(5,'谢','謝','thanks','sia7');
 INSERT INTO Chinese VALUES(6,'对','對',NULL,'dui3');
 INSERT INTO Chinese VALUES(7,'唔',NULL,NULL,'im6');
 INSERT INTO Chinese VALUES(8,'住',NULL,NULL,'ju6');
-INSERT INTO Chinese VALUES(9,'内',NULL,NULL,'lai6');
+INSERT INTO Chinese VALUES(9,'内','內',NULL,'lai6');
 INSERT INTO Chinese VALUES(10,'孬',NULL,'bad','mo2');
 INSERT INTO Chinese VALUES(11,'意',NULL,NULL,'i3');
 INSERT INTO Chinese VALUES(12,'思',NULL,NULL,'seu1');
@@ -1654,6 +1656,8 @@ INSERT INTO Chinese VALUES(500,'免',NULL,NULL,'miang2');
 INSERT INTO Chinese VALUES(501,'开','開',NULL,'kui1');
 INSERT INTO Chinese VALUES(502,'咬',NULL,NULL,'ga6');
 INSERT INTO Chinese VALUES(503,'生',NULL,NULL,'chen1');
+INSERT INTO Chinese VALUES(504,'里','裡',NULL,'lai6');
+INSERT INTO Chinese VALUES(505,'裏',NULL,NULL,'lai6');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1792,7 +1796,7 @@ CREATE TABLE Extra (
 );
 INSERT INTO Extra VALUES(1,6,replace('The original character for 1, pronounced as **jek8**, is actually 蜀, however you typically see the character 一 instead.\n','\n',char(10)));
 INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 for 2. 两 is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
-INSERT INTO Extra VALUES(3,111,'chŭ 厝 refers to a house as a building, whereas lái 内 is more like a home. I have heard both used interchangeably though.');
+INSERT INTO Extra VALUES(3,111,replace('**chu3** 厝 refers to a house as a building, whereas **lai6** 内 is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
 INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as "kì 起" means to go up and "jà 早" means early.\n','\n',char(10)));
 INSERT INTO Extra VALUES(5,30,'My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that ''pin7 hung1 sek4'' was like the smoke that comes out of the nose.');
 INSERT INTO Extra VALUES(7,47,'Note that you should always just use "ma2" when addressing your grandmother. "lai7 ma2" and "ghua7 ma2" can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.');
@@ -2161,6 +2165,8 @@ INSERT INTO TeochewAltChinese VALUES(2,572,'烳');
 INSERT INTO TeochewAltChinese VALUES(3,557,'酷');
 INSERT INTO TeochewAltChinese VALUES(4,6,'蜀');
 INSERT INTO TeochewAltChinese VALUES(5,7,'两');
+INSERT INTO TeochewAltChinese VALUES(6,120,'里 (裡)');
+INSERT INTO TeochewAltChinese VALUES(7,120,'裏');
 CREATE TABLE Compound (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
