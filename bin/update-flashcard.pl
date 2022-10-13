@@ -26,11 +26,6 @@ my $input = shift @ARGV;
 die colored("Must provide an English word!", "red") . "\n"
     unless defined $input;
 
-# Gather up the relevant information from the database for this translation
-my %translation = $db->choose_translation_from_english($input);
-my $english     = $translation{english};
-my $teochew     = $translation{teochew};
-
 # Let's see what the user wants to update
 my ($category, $alt_chinese, $category_sort);
 GetOptions(
@@ -38,6 +33,20 @@ GetOptions(
     "alt-chinese=s" => \$alt_chinese,
     "category-sort" => \$category_sort,
 );
+
+# XXX There's probably an easier way of handling this
+unless ($category || $alt_chinese || $category_sort) {
+    say "Must provide one of these options:";
+    say "\t--category";
+    say "\t--alt-chinese";
+    say "\t--category-sort";
+    exit;
+}
+
+# Gather up the relevant information from the database for this translation
+my %translation = $db->choose_translation_from_english($input);
+my $english     = $translation{english};
+my $teochew     = $translation{teochew};
 
 my %update_english_params;
 
