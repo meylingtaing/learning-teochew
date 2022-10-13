@@ -25,7 +25,7 @@ use Teochew::Utils qw(split_out_parens);
 # Needed for interacting with the user
 use feature qw(say);
 use Term::ANSIColor qw(colored);
-use Input qw(input_from_prompt);
+use Input qw(confirm input_from_prompt);
 
 sub new { shift->create_db_object('Teochew.sqlite') }
 
@@ -350,6 +350,7 @@ an example of one:
 
 sub choose_translation_from_english {
     my ($self, $english) = @_;
+    $self = $self->new unless ref $self;
 
     return undef unless defined $english;
 
@@ -385,6 +386,87 @@ sub choose_translation_from_english {
     $ret{teochew} = $rows[$row_id];
 
     return %ret;
+}
+
+=head2 ensure_chinese_is_in_database
+
+    $teochew->ensure_chinese_is_in_database(
+        chinese => "simp (trad)",
+        pengim  => "syl1 syl2",
+    );
+
+Given a "simp (trad)" Chinese string and its corresponding pengim, this will
+check each character, and make sure it exists in the database.
+
+Returns the simplified Chinese string on success, and undef on error
+
+=cut
+
+sub ensure_chinese_is_in_database {
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    my $chinese = $params{chinese};
+    my $pengim  = $params{pengim};
+
+    # Split up Chinese characters with simpl. and trad. We might need to add
+    # them to the Chinese table in the database.
+    my ($simplified, $traditional) = split_out_parens($chinese);
+    my @simplified_chars  = split //, $simplified;
+    my @traditional_chars = split //, $traditional;
+    my @pengim_syllables  = split / /, $pengim;
+
+    if (scalar @simplified_chars != scalar @pengim_syllables) {
+        say colored(
+            "The number of characters doesn't match $pengim!", "red"
+        );
+        return undef;
+    }
+
+    # Look at the Chinese character by character
+    for (my $i = 0; $i < scalar @simplified_chars; $i++) {
+        next if $simplified_chars[$i] eq '?';
+
+        # XXX: Maybe update Pengim table too...but honestly it's not that
+        # important
+
+        # The pengim might have had tone change -- if so, it would be inputted
+        # like "ma3(2)", with the base tone listed first, and the changed tone
+        # in parens. We need to associate the Chinese character with the base
+        # tone
+        my $pengim_orig = $pengim_syllables[$i] =~ tr/()//dr;
+        $pengim_orig =~ s/(\d)(\d)/$1/;
+
+        die "Poorly formatted pengim! [$pengim_orig]\n"
+            unless $pengim_orig =~ /(1|2|3|4|5|6|7|8)$/;
+
+        unless (scalar Teochew::chinese_character_details(
+                            $simplified_chars[$i], $pengim_orig))
+        {
+            my $insert_traditional =
+                scalar @traditional_chars == 0                  ? '' :
+                $simplified_chars[$i] eq $traditional_chars[$i] ? '' :
+                $traditional_chars[$i];
+
+            say sprintf "Inserting Chinese [%s (%s), %s]",
+                $simplified_chars[$i],
+                $insert_traditional,
+                $pengim_orig;
+
+            if (confirm()) {
+                $self->insert_chinese(
+                    simplified  => $simplified_chars[$i],
+                    traditional => $insert_traditional,
+                    pengim      => $pengim_orig,
+                );
+            }
+            else {
+                return undef;
+            }
+        }
+    }
+
+    return $simplified;
 }
 
 =head1 INTERNALS

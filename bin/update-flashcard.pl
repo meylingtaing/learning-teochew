@@ -88,36 +88,12 @@ if (%update_english_params) {
 }
 
 if ($alt_chinese) {
+
     # First check and see if these Chinese characters exist in the database
-    # XXX Will need to support simplified and traditional at some point
-    my @simplified_chars  = split //, $alt_chinese;
-    my @pengim_syllables  = split / /, $teochew->{pengim};
-
-    die colored(
-        "The number of characters doesn't match $teochew->{pengim}!", "red"
-    ) . "\n" if scalar @simplified_chars != scalar @pengim_syllables;
-
-    for (my $i = 0; $i < scalar @simplified_chars; $i++) {
-        unless (scalar Teochew::chinese_character_details(
-                        $simplified_chars[$i], $pengim_syllables[$i]))
-        {
-            # Copy pasted from insert-flashcard.pl
-            say sprintf "Inserting Chinese [%s %s]",
-                $simplified_chars[$i],
-                $pengim_syllables[$i];
-
-            if (confirm()) {
-                $db->insert_chinese(
-                    simplified  => $simplified_chars[$i],
-                    pengim      => $pengim_syllables[$i],
-                );
-                say colored("Added $alt_chinese to Chinese table", "green");
-            }
-            else {
-                exit;
-            }
-        }
-    }
+    $db->ensure_chinese_is_in_database(
+        chinese => $alt_chinese,
+        pengim  => $teochew->{pengim},
+    );
 
     say "Adding $alt_chinese as an alternate for $teochew->{chinese}";
     if (confirm()) {

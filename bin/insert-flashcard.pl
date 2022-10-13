@@ -69,55 +69,12 @@ if (scalar @words_by_sort > 1) {
     $sort = input_from_prompt("Sort order:");
 }
 
-# Split up Chinese characters with simpl. and trad. We might need to add them
-# to the Chinese table in the database.
-my ($simplified, $traditional) = split_out_parens($chinese);
-my @simplified_chars  = split //, $simplified;
-my @traditional_chars = split //, $traditional;
-my @pengim_syllables  = split / /, $pengim;
-
-# Look at the Chinese character by character
-for (my $i = 0; $i < scalar @simplified_chars; $i++) {
-    next if $simplified_chars[$i] eq '?';
-
-    # XXX: Check if pengim exists in the Pengim table in the database, just
-    # for completeness sake? We're not actually doing anything with it unless
-    # there's an alternate pronunciation though
-
-    # The pengim might have had tone change -- if so, it would be inputted like
-    # "ma3(2)", with the base tone listed first, and the changed tone in parens
-    #
-    # We need to associate the Chinese character with the base tone
-    my ($pengim_orig, $changed_tone) = split_out_parens($pengim_syllables[$i]);
-
-    die "Poorly formatted pengim! [$pengim_orig]\n"
-        unless $pengim_orig =~ /(1|2|3|4|5|6|7|8)$/;
-
-    unless (scalar Teochew::chinese_character_details(
-                        $simplified_chars[$i], $pengim_orig))
-    {
-        my $insert_traditional =
-            scalar @traditional_chars == 0                  ? '' :
-            $simplified_chars[$i] eq $traditional_chars[$i] ? '' :
-            $traditional_chars[$i];
-
-        say sprintf "Inserting Chinese [%s (%s), %s]",
-            $simplified_chars[$i],
-            $insert_traditional,
-            $pengim_orig;
-
-        if (confirm()) {
-            $db->insert_chinese(
-                simplified  => $simplified_chars[$i],
-                traditional => $insert_traditional,
-                pengim      => $pengim_orig,
-            );
-        }
-        else {
-            exit;
-        }
-    }
-}
+# Make sure the Chinese characters are in the database
+my $simplified = $db->ensure_chinese_is_in_database(
+    chinese => $chinese,
+    pengim  => $pengim,
+);
+exit unless $simplified;
 
 # Split notes out of english if applicable
 my ($english_main, $notes) = split_out_parens($english);
