@@ -785,11 +785,17 @@ sub compound_word_components {
         select
             Teochew.chinese,
             Teochew.pengim,
-            group_concat(English.word, ", ") word
+            group_concat(EnglishTemp.word, ", ") word
         from Compound
         join Teochew on Teochew.id = Compound.child_teochew_id
         join Translation on Translation.teochew_id = Teochew.id
-        join English on English.id = Translation.english_id
+        join (
+            select id, case
+                when notes is not null then word || ' (' || notes || ')'
+                else word end as word
+            from English
+        ) EnglishTemp
+        on EnglishTemp.id = Translation.english_id
         where parent_teochew_id = ?
         group by Teochew.id
         order by Compound.sort
