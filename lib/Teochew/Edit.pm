@@ -69,14 +69,11 @@ sub insert_translation {
     }
     else {
         my $sth = $self->dbh->prepare(qq{
-            insert into Teochew
-            (english_id, pengim, chinese)
-            values (?, ?, ?)
+            insert into Teochew (pengim, chinese) values (?, ?)
         });
 
-        $sth->bind_param(1, $english_id);
-        $sth->bind_param(2, $params{pengim});
-        $sth->bind_param(3, $params{chinese});
+        $sth->bind_param(1, $params{pengim});
+        $sth->bind_param(2, $params{chinese});
 
         $sth->execute;
 
