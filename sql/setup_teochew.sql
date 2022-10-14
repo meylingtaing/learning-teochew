@@ -570,6 +570,7 @@ INSERT INTO English VALUES(529,16,'ash',0,NULL,NULL);
 INSERT INTO English VALUES(530,16,'smoke',1,NULL,NULL);
 INSERT INTO English VALUES(531,3,'brown',0,'',2);
 INSERT INTO English VALUES(532,10,'crispy',0,'',NULL);
+INSERT INTO English VALUES(533,16,'question',0,'',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1081,6 +1082,7 @@ INSERT INTO Chinese VALUES(510,'嫲',NULL,NULL,'ma2');
 INSERT INTO Chinese VALUES(511,'嬤',NULL,NULL,'ma2');
 INSERT INTO Chinese VALUES(512,'赤',NULL,NULL,'chiah4');
 INSERT INTO Chinese VALUES(513,'酥',NULL,NULL,'sou1');
+INSERT INTO Chinese VALUES(514,'题','題',NULL,'doi5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2258,6 +2260,7 @@ INSERT INTO Translation VALUES(591,530,608,1);
 INSERT INTO Translation VALUES(592,531,609,1);
 INSERT INTO Translation VALUES(593,531,610,0);
 INSERT INTO Translation VALUES(594,532,611,0);
+INSERT INTO Translation VALUES(595,533,612,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2844,4 +2847,5 @@ INSERT INTO Teochew VALUES(608,'hung1','薰',0);
 INSERT INTO Teochew VALUES(609,'chiah4','赤',0);
 INSERT INTO Teochew VALUES(610,'chiah48 sek4','赤色',0);
 INSERT INTO Teochew VALUES(611,'sou1','酥',0);
+INSERT INTO Teochew VALUES(612,'meung7 doi5','问题',0);
 COMMIT;
