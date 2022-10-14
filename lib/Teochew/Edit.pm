@@ -334,6 +334,31 @@ sub make_fully_hidden {
     return $sth->execute;
 }
 
+=head2 insert_compound_breakdown
+
+    $teochew->insert_compound_breakdown(
+        parent_teochew_id => 1,
+        child_teochew_ids => [2, 3, 4],
+    );
+
+=cut
+
+sub insert_compound_breakdown {
+    my ($self, %params) = @_;
+
+    my $i = 0;
+    my @binds;
+    for my $child_id (@{ $params{child_teochew_ids} }) {
+        push @binds, $params{parent_teochew_id}, ++$i, $child_id;
+    }
+
+    $self->dbh->do(qq{
+        insert into Compound
+        (parent_teochew_id, sort, child_teochew_id)
+        values
+    } . join(", ", ("(?,?,?)") x $i), undef, @binds);
+}
+
 =head1 HELPERS FOR PROMPTING THE USER
 
 =head2 choose_translation_from_english

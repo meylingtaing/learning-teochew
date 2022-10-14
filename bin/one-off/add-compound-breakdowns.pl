@@ -55,10 +55,12 @@ for (my $i = 0; $i < scalar @chars; $i++) {
     my @rows = $db->dbh->selectall_array(qq{
         select
             Teochew.id teochew_id,
-            English.word english,
-            English.notes
-        from Teochew join English on Teochew.english_id = English.id
+            group_concat(English.word, ", ") english
+        from Teochew
+        join Translation on Translation.teochew_id = Teochew.id
+        join English on Translation.english_id = English.id
         where chinese = ? and pengim = ?
+        group by Teochew.id
         order by Teochew.id
     }, { Slice => {} }, $chars[$i], $syllables[$i]);
 
@@ -73,9 +75,7 @@ for (my $i = 0; $i < scalar @chars; $i++) {
     my $row_id = 0;
     if (scalar @rows > 1) {
         for (my $j = 0; $j < scalar @rows; $j++) {
-            my $msg = "$j: $rows[$j]{english}";
-            $msg .= " ($rows[$j]{notes})" if $rows[$j]{notes};
-            say $msg;
+            say "$j: $rows[$j]{english}";
         }
         $row_id = input_from_prompt(
             "Which translation to use for $chars[$i] $syllables[$i]?");
@@ -87,3 +87,10 @@ for (my $i = 0; $i < scalar @chars; $i++) {
 }
 
 say $confirm_str;
+if (confirm()) {
+    $db->insert_compound_breakdown(
+        parent_teochew_id => $teochew->{teochew_id},
+        child_teochew_ids => \@child_teochew_ids,
+    );
+    say colored("Added compound breakdown!", "green");
+}
