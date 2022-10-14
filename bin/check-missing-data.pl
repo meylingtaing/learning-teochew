@@ -109,7 +109,8 @@ if (grep /^character_details$/, @commands_to_run) {
 if (grep /^hidden$/, @commands_to_run) {
     @rows = $dbh->selectall_array(qq{
         select word from English
-        join Teochew on Teochew.english_id = English.id
+        join Translation on English.id = Translation.english_id
+        join Teochew on Translation.english_id = English.id
         where hidden = 1 and hidden_from_flashcards = 1
     });
 
