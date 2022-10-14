@@ -34,7 +34,7 @@
         % ++$row_id;
         <li class="list-group-item">
           %= include 'elements/translation', row => $row
-          <span class="notes"><%= $row->{notes} %></span>
+          <div class="notes"><%= $row->{notes} %></div>
 
           % if ($row->{compound}) {
             <a data-toggle="collapse" href="#word-breakdown-<%= $row_id %>">
