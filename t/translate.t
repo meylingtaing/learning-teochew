@@ -39,7 +39,12 @@ check_translation('10:05', "jap(4) diam(6) dah(8) ek4");
 check_translation('10:10', "jap(4) diam(6) dah(8) yi6");
 check_translation('10:15', "jap(4) diam(6) dah(8) san1");
 
-check_translation('Red', "ang5");
+# Check translation for a word that has multiple translations
+my $translations = Teochew::translate('Red');
+is scalar @$translations, 2, "Found two translations for 'Red'";
+is_deeply [ map { $_->{pronunciations}[0]{pengim} } @$translations ],
+    [ 'ang(7) sek4', 'ang5' ],
+    'Translations are correct and non-hidden one is shown first';
 
 check_translation(
     { sentence => 'What are you doing?', words => 'you to_do what' },

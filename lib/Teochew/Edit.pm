@@ -48,29 +48,47 @@ sub new { shift->create_db_object('Teochew.sqlite') }
 
 sub insert_translation {
     my ($self, %params) = @_;
-    my $sth;
 
     # Insert into the English table. It's possible this is a dupe, so check for
     # that first
     my %english_params =
-        map { $_ => $params{$_} } qw(english notes category_id hidden english_sort);
+        map { $_ => $params{$_} }
+        qw(english notes category_id hidden english_sort);
 
     my $english_id = $self->_get_english_id(%english_params) ||
                      $self->insert_english(%english_params);
 
-    # Now insert the translation
-    $sth = $self->dbh->prepare(qq{
-        insert into Teochew
-        (english_id, pengim, chinese, hidden_from_flashcards)
-        values (?, ?, ?, ?)
-    });
+    # Insert into the Teochew table
+    my $teochew_id = $self->_get_teochew_id(
+        pengim  => $params{pengim},
+        chinese => $params{chinese},
+    );
 
-    $sth->bind_param(1, $english_id);
-    $sth->bind_param(2, $params{pengim});
-    $sth->bind_param(3, $params{chinese});
-    $sth->bind_param(4, $params{hidden_from_flashcards} ? 1 : 0);
+    if ($teochew_id) {
+        say colored("Teochew entry already exists", "yellow");
+    }
+    else {
+        my $sth = $self->dbh->prepare(qq{
+            insert into Teochew
+            (english_id, pengim, chinese)
+            values (?, ?, ?)
+        });
 
-    $sth->execute;
+        $sth->bind_param(1, $english_id);
+        $sth->bind_param(2, $params{pengim});
+        $sth->bind_param(3, $params{chinese});
+
+        $sth->execute;
+
+        $teochew_id = $self->dbh->sqlite_last_insert_rowid;
+    }
+
+    # Now insert the Translation
+    $self->dbh->do(qq{
+        insert into Translation
+        (english_id, teochew_id, hidden_from_flashcards)
+        values (?, ?, ?)
+    }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
 }
 
 =head2 update_english
@@ -130,7 +148,7 @@ sub insert_english {
     my $dbh = $self->dbh;
     my $sth = $dbh->prepare(
         "insert into English (category_id, word, notes, hidden, sort) " .
-        "values (?,?,?,?, ?)"
+        "values (?,?,?,?,?)"
     );
     $sth->bind_param(1, $params{category_id}, SQL_INTEGER);
     $sth->bind_param(2, $params{english});
@@ -492,6 +510,20 @@ sub _get_english_id {
         push @binds, $note;
     }
     my @rows = $self->dbh->selectall_array($sql, {}, @binds);
+
+    return unless scalar @rows;
+    return $rows[0]->[0];
+}
+
+sub _get_teochew_id {
+    my ($self, %params) = @_;
+
+    my $pengim  = $params{pengim};
+    my $chinese = $params{chinese};
+
+    my @rows = $self->dbh->selectall_array(qq{
+        select id from Teochew where pengim = ? and chinese = ?
+    }, undef, $pengim, $chinese);
 
     return unless scalar @rows;
     return $rows[0]->[0];

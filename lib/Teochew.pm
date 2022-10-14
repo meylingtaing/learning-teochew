@@ -643,7 +643,7 @@ sub get_english_from_database {
         from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
-        join Teochew on English.id = Teochew.english_id
+        join Translation on English.id = Translation.english_id
         left join Synonyms on English.id = Synonyms.english_id
         where
             English.hidden = 0
@@ -785,11 +785,13 @@ sub compound_word_components {
         select
             Teochew.chinese,
             Teochew.pengim,
-            English.word
+            group_concat(English.word, ", ") word
         from Compound
         join Teochew on Teochew.id = Compound.child_teochew_id
-        join English on English.id = Teochew.english_id
+        join Translation on Translation.teochew_id = Teochew.id
+        join English on English.id = Translation.english_id
         where parent_teochew_id = ?
+        group by Teochew.id
         order by Compound.sort
     };
 
@@ -1075,7 +1077,9 @@ sub _lookup_all {
         select
             pengim, chinese,
             no_tone_change
-        from Teochew join English on English.id = Teochew.english_id
+        from Teochew
+        join Translation on Teochew.id = Translation.teochew_id
+        join English on English.id = Translation.english_id
         where $cond
     };
 
@@ -1153,14 +1157,16 @@ sub search {
             English.notes,
             Teochew.pengim,
             Teochew.chinese
-        from Teochew join English on Teochew.english_id = English.id
+        from Teochew
+        join Translation on Teochew.id = Translation.teochew_id
+        join English on Translation.english_id = English.id
         left join Synonyms on English.id = Synonyms.english_id
         where hidden = 0 and (
             English.word like ? or notes like ? or
             Synonyms.word like ? or
             ($pengim_where)
         )
-        group by Teochew.id
+        group by Translation.id
         order by case
             when English.word = ? or Synonyms.word = ? then 1
             when Teochew.pengim = ? then 2
@@ -1172,6 +1178,8 @@ sub search {
 }
 
 =head2 get_all_translations_by_id
+
+# XXX Move this up to the translate functions
 
 Similar to L</get_all_translations>, but you pass in an id instead
 
@@ -1190,10 +1198,14 @@ sub get_all_translations_by_id {
     my $hidden_from_flashcards = $params{for_flashcards} ?
         "and hidden_from_flashcards = 0" : "";
 
+    # XXX Should this be getting a translation id instead?
     my $sql = qq{
-        select id teochew_id, pengim, chinese
-        from Teochew where english_id = ?
+        select Teochew.id teochew_id, pengim, chinese
+        from Teochew
+        join Translation on Teochew.id = Translation.teochew_id
+        where Translation.english_id = ?
         $hidden_from_flashcards
+        order by hidden_from_flashcards
     };
     return $dbh->selectall_array($sql, { Slice => {} }, $english_id);
 }
@@ -1316,10 +1328,13 @@ sub find_words_using_character {
 
     $characters = [$characters] unless ref $characters eq 'ARRAY';
 
-    my $sql =
-        "select English.word as english, notes, chinese, pengim from Teochew " .
-        "join English on English.id = english_id " .
-        "where hidden = 0";
+    my $sql = qq{
+        select English.word as english, notes, chinese, pengim
+        from Teochew
+        join Translation on Teochew.id = Translation.teochew_id
+        join English on English.id = Translation.english_id
+        where hidden = 0
+    };
 
     my @binds = map { "%$_%" } @$characters;
     my $chinese_like_sql = join " or ", ("chinese like ?") x scalar @$characters;
