@@ -1205,6 +1205,7 @@ sub get_all_translations_by_id {
         join Translation on Teochew.id = Translation.teochew_id
         where Translation.english_id = ?
         $hidden_from_flashcards
+        order by hidden_from_flashcards
     };
     return $dbh->selectall_array($sql, { Slice => {} }, $english_id);
 }
