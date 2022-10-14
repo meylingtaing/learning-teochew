@@ -1073,6 +1073,8 @@ INSERT INTO Chinese VALUES(506,'底',NULL,NULL,'doi2');
 INSERT INTO Chinese VALUES(507,'钟','鐘',NULL,'jeng1');
 INSERT INTO Chinese VALUES(508,'分',NULL,NULL,'hung1');
 INSERT INTO Chinese VALUES(509,'葛',NULL,NULL,'guah4');
+INSERT INTO Chinese VALUES(510,'嫲',NULL,NULL,'ma2');
+INSERT INTO Chinese VALUES(511,'嬤',NULL,NULL,'ma2');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1214,8 +1216,8 @@ INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6
 INSERT INTO Extra VALUES(3,111,replace('**chu3** 厝 refers to a house as a building, whereas **lai6** 内 is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
 INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as "kì 起" means to go up and "jà 早" means early.\n','\n',char(10)));
 INSERT INTO Extra VALUES(5,30,'My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that ''pin7 hung1 sek4'' was like the smoke that comes out of the nose.');
-INSERT INTO Extra VALUES(7,47,'Note that you should always just use "ma2" when addressing your grandmother. "lai7 ma2" and "ghua7 ma2" can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.');
-INSERT INTO Extra VALUES(8,48,'Note that you should always just use "gong1" when addressing your grandfather. "lai7 gong1" and "ghua7 gong1" can be used when referring to your grandfather, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandfather.');
+INSERT INTO Extra VALUES(7,47,replace('Note that you should always just use **ma2** when addressing your grandmother. **lai7 ma2** and **ghua7 ma2** can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.\n','\n',char(10)));
+INSERT INTO Extra VALUES(8,48,replace('Note that you should always just use **gong1** when addressing your grandfather. **lai7 gong1** and **ghua7 gong1** can be used when referring to your grandfather, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandfather.\n','\n',char(10)));
 INSERT INTO Extra VALUES(10,344,replace('**ga lem** originates from the French word crème. We just throw a teochew accent on it (:\n','\n',char(10)));
 INSERT INTO Extra VALUES(11,110,replace('囝 is not the "official" character used for "gian" in **gian yik**, but I''m using it because it has the same sound and I''m not sure what a more appropriate character would be.\n','\n',char(10)));
 INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
@@ -1226,7 +1228,8 @@ INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. Y
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(20,524,replace('I don''t typically use **lai6** on its own for "inside". The more common usage of that word is to mean a home.\n','\n',char(10)));
+INSERT INTO Extra VALUES(20,524,replace('**doi(6) bain5** should be used when saying that something is inside of something else, or to mean indoors.\n\n**lai6** should not be used on its own to mean "inside". It''s really just used as an adjective to describe other words, like in **内妈 lai(7) ma2**. The more common usage of **lai6** is to mean a home.\n','\n',char(10)));
+INSERT INTO Extra VALUES(21,359,replace('**kao(6) bain5** or **kao2** should be used when referring to the outdoors. **ghua7** is really just used as an adjective that goes along with other words, like in **外妈 ghua7 ma2**.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -1586,6 +1589,8 @@ INSERT INTO TeochewAltChinese VALUES(7,120,'裏');
 INSERT INTO TeochewAltChinese VALUES(8,602,'畔');
 INSERT INTO TeochewAltChinese VALUES(9,403,'口畔');
 INSERT INTO TeochewAltChinese VALUES(10,601,'底畔');
+INSERT INTO TeochewAltChinese VALUES(11,47,'嫲');
+INSERT INTO TeochewAltChinese VALUES(12,47,'嬤');
 CREATE TABLE Compound (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -1601,6 +1606,14 @@ INSERT INTO Compound VALUES(6,31,2,22);
 INSERT INTO Compound VALUES(7,259,1,489);
 INSERT INTO Compound VALUES(8,259,2,22);
 INSERT INTO Compound VALUES(9,259,3,19);
+INSERT INTO Compound VALUES(10,49,1,120);
+INSERT INTO Compound VALUES(11,49,2,47);
+INSERT INTO Compound VALUES(12,50,1,607);
+INSERT INTO Compound VALUES(13,50,2,47);
+INSERT INTO Compound VALUES(14,52,1,607);
+INSERT INTO Compound VALUES(15,52,2,48);
+INSERT INTO Compound VALUES(16,51,1,120);
+INSERT INTO Compound VALUES(17,51,2,48);
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2195,6 +2208,7 @@ INSERT INTO Translation VALUES(586,359,603,0);
 INSERT INTO Translation VALUES(587,526,604,0);
 INSERT INTO Translation VALUES(588,527,605,0);
 INSERT INTO Translation VALUES(589,528,606,0);
+INSERT INTO Translation VALUES(590,359,607,1);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2776,4 +2790,5 @@ INSERT INTO Teochew VALUES(603,'kao2','口',0);
 INSERT INTO Teochew VALUES(604,'diam26 jeng1','点钟',0);
 INSERT INTO Teochew VALUES(605,'hung1 jeng1','分钟',0);
 INSERT INTO Teochew VALUES(606,'beh84 guah4','白葛',0);
+INSERT INTO Teochew VALUES(607,'ghua7','外',0);
 COMMIT;
