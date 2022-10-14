@@ -566,6 +566,8 @@ INSERT INTO English VALUES(525,16,'side',0,'',NULL);
 INSERT INTO English VALUES(526,7,'hour',0,'',10);
 INSERT INTO English VALUES(527,7,'minute',0,'',10);
 INSERT INTO English VALUES(528,28,'jicama',0,'',10);
+INSERT INTO English VALUES(529,16,'ash',0,NULL,NULL);
+INSERT INTO English VALUES(530,16,'smoke',1,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1230,6 +1232,7 @@ INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "sh
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(20,524,replace('**doi(6) bain5** should be used when saying that something is inside of something else, or to mean indoors.\n\n**lai6** should not be used on its own to mean "inside". It''s really just used as an adjective to describe other words, like in **内妈 lai(7) ma2**. The more common usage of **lai6** is to mean a home.\n','\n',char(10)));
 INSERT INTO Extra VALUES(21,359,replace('**kao(6) bain5** or **kao2** should be used when referring to the outdoors. **ghua7** is really just used as an adjective that goes along with other words, like in **外妈 ghua7 ma2**.\n','\n',char(10)));
+INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -1614,6 +1617,43 @@ INSERT INTO Compound VALUES(14,52,1,607);
 INSERT INTO Compound VALUES(15,52,2,48);
 INSERT INTO Compound VALUES(16,51,1,120);
 INSERT INTO Compound VALUES(17,51,2,48);
+INSERT INTO Compound VALUES(18,36,1,34);
+INSERT INTO Compound VALUES(19,36,2,37);
+INSERT INTO Compound VALUES(20,247,1,20);
+INSERT INTO Compound VALUES(21,247,2,19);
+INSERT INTO Compound VALUES(22,248,1,21);
+INSERT INTO Compound VALUES(23,248,2,19);
+INSERT INTO Compound VALUES(24,249,1,22);
+INSERT INTO Compound VALUES(25,249,2,19);
+INSERT INTO Compound VALUES(26,251,1,24);
+INSERT INTO Compound VALUES(27,251,2,19);
+INSERT INTO Compound VALUES(28,252,1,25);
+INSERT INTO Compound VALUES(29,252,2,19);
+INSERT INTO Compound VALUES(30,253,1,138);
+INSERT INTO Compound VALUES(31,253,2,19);
+INSERT INTO Compound VALUES(32,254,1,26);
+INSERT INTO Compound VALUES(33,254,2,19);
+INSERT INTO Compound VALUES(34,255,1,27);
+INSERT INTO Compound VALUES(35,255,2,19);
+INSERT INTO Compound VALUES(36,487,1,246);
+INSERT INTO Compound VALUES(37,487,2,19);
+INSERT INTO Compound VALUES(38,485,1,491);
+INSERT INTO Compound VALUES(39,485,2,19);
+INSERT INTO Compound VALUES(40,257,1,29);
+INSERT INTO Compound VALUES(41,257,2,19);
+INSERT INTO Compound VALUES(42,258,1,30);
+INSERT INTO Compound VALUES(43,258,2,19);
+INSERT INTO Compound VALUES(44,486,1,331);
+INSERT INTO Compound VALUES(45,486,2,608);
+INSERT INTO Compound VALUES(46,486,3,19);
+INSERT INTO Compound VALUES(47,250,1,23);
+INSERT INTO Compound VALUES(48,250,2,19);
+INSERT INTO Compound VALUES(49,497,1,488);
+INSERT INTO Compound VALUES(50,497,2,22);
+INSERT INTO Compound VALUES(51,497,3,19);
+INSERT INTO Compound VALUES(52,499,1,498);
+INSERT INTO Compound VALUES(53,499,2,26);
+INSERT INTO Compound VALUES(54,499,3,19);
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -1645,7 +1685,7 @@ INSERT INTO Translation VALUES(23,25,25,1);
 INSERT INTO Translation VALUES(24,26,26,1);
 INSERT INTO Translation VALUES(25,27,27,1);
 INSERT INTO Translation VALUES(26,29,29,1);
-INSERT INTO Translation VALUES(27,30,30,1);
+INSERT INTO Translation VALUES(27,529,30,1);
 INSERT INTO Translation VALUES(28,31,31,1);
 INSERT INTO Translation VALUES(29,32,32,0);
 INSERT INTO Translation VALUES(30,33,33,0);
@@ -2209,6 +2249,7 @@ INSERT INTO Translation VALUES(587,526,604,0);
 INSERT INTO Translation VALUES(588,527,605,0);
 INSERT INTO Translation VALUES(589,528,606,0);
 INSERT INTO Translation VALUES(590,359,607,1);
+INSERT INTO Translation VALUES(591,530,608,1);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2791,4 +2832,5 @@ INSERT INTO Teochew VALUES(604,'diam26 jeng1','点钟',0);
 INSERT INTO Teochew VALUES(605,'hung1 jeng1','分钟',0);
 INSERT INTO Teochew VALUES(606,'beh84 guah4','白葛',0);
 INSERT INTO Teochew VALUES(607,'ghua7','外',0);
+INSERT INTO Teochew VALUES(608,'hung1','薰',0);
 COMMIT;
