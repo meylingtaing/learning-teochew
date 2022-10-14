@@ -413,7 +413,7 @@ INSERT INTO English VALUES(371,10,'black pepper',0,'',NULL,NULL);
 INSERT INTO English VALUES(372,10,'sugar',0,'',NULL,NULL);
 INSERT INTO English VALUES(373,10,'msg',0,'',NULL,NULL);
 INSERT INTO English VALUES(374,13,'to love',0,'',NULL,NULL);
-INSERT INTO English VALUES(375,10,'to cook',1,'',NULL,NULL);
+INSERT INTO English VALUES(375,10,'to cook',0,'',NULL,NULL);
 INSERT INTO English VALUES(376,8,'long',0,'',NULL,NULL);
 INSERT INTO English VALUES(377,8,'slow',0,'',NULL,NULL);
 INSERT INTO English VALUES(378,8,'fragrant',0,'',NULL,NULL);
@@ -564,6 +564,9 @@ INSERT INTO English VALUES(522,10,'meal',0,'',NULL,NULL);
 INSERT INTO English VALUES(523,7,'early',0,'',NULL,4);
 INSERT INTO English VALUES(524,16,'inside',0,'',NULL,NULL);
 INSERT INTO English VALUES(525,16,'side',0,'',NULL,NULL);
+INSERT INTO English VALUES(526,7,'hour',0,'',NULL,10);
+INSERT INTO English VALUES(527,7,'minute',0,'',NULL,10);
+INSERT INTO English VALUES(528,28,'jicama',0,'',NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1068,6 +1071,9 @@ INSERT INTO Chinese VALUES(503,'生',NULL,NULL,'chen1');
 INSERT INTO Chinese VALUES(504,'里','裡',NULL,'lai6');
 INSERT INTO Chinese VALUES(505,'裏',NULL,NULL,'lai6');
 INSERT INTO Chinese VALUES(506,'底',NULL,NULL,'doi2');
+INSERT INTO Chinese VALUES(507,'钟','鐘',NULL,'jeng1');
+INSERT INTO Chinese VALUES(508,'分',NULL,NULL,'hung1');
+INSERT INTO Chinese VALUES(509,'葛',NULL,NULL,'guah4');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1221,6 +1227,7 @@ INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. Y
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO Extra VALUES(20,524,replace('I don''t typically use **lai6** on its own for "inside". The more common usage of that word is to mean a home.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -2009,7 +2016,7 @@ INSERT INTO Translation VALUES(405,371,418,0);
 INSERT INTO Translation VALUES(406,372,419,0);
 INSERT INTO Translation VALUES(407,373,420,0);
 INSERT INTO Translation VALUES(408,374,421,0);
-INSERT INTO Translation VALUES(409,375,422,1);
+INSERT INTO Translation VALUES(409,375,422,0);
 INSERT INTO Translation VALUES(410,376,423,0);
 INSERT INTO Translation VALUES(411,377,424,0);
 INSERT INTO Translation VALUES(412,378,425,0);
@@ -2187,6 +2194,9 @@ INSERT INTO Translation VALUES(583,524,120,1);
 INSERT INTO Translation VALUES(584,524,601,0);
 INSERT INTO Translation VALUES(585,525,602,1);
 INSERT INTO Translation VALUES(586,359,603,0);
+INSERT INTO Translation VALUES(587,526,604,0);
+INSERT INTO Translation VALUES(588,527,605,0);
+INSERT INTO Translation VALUES(589,528,606,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2779,4 +2789,7 @@ INSERT INTO Teochew VALUES(600,'lai6','内',0);
 INSERT INTO Teochew VALUES(601,'doi26 bain5','底爿',0);
 INSERT INTO Teochew VALUES(602,'bain5','爿',0);
 INSERT INTO Teochew VALUES(603,'kao2','口',0);
+INSERT INTO Teochew VALUES(604,'diam26 jeng1','点钟',0);
+INSERT INTO Teochew VALUES(605,'hung1 jeng1','分钟',0);
+INSERT INTO Teochew VALUES(606,'beh84 guah4','白葛',0);
 COMMIT;
