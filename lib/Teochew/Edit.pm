@@ -338,7 +338,7 @@ sub make_fully_hidden {
 
     $teochew->insert_compound_breakdown(
         parent_teochew_id => 1,
-        child_teochew_ids => [2, 3, 4],
+        translation_ids   => [2, 3, 4],
     );
 
 =cut
@@ -348,13 +348,13 @@ sub insert_compound_breakdown {
 
     my $i = 0;
     my @binds;
-    for my $child_id (@{ $params{child_teochew_ids} }) {
+    for my $child_id (@{ $params{translation_ids} }) {
         push @binds, $params{parent_teochew_id}, ++$i, $child_id;
     }
 
     $self->dbh->do(qq{
         insert into Compound
-        (parent_teochew_id, sort, child_teochew_id)
+        (parent_teochew_id, sort, translation_id)
         values
     } . join(", ", ("(?,?,?)") x $i), undef, @binds);
 }

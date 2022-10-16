@@ -785,23 +785,28 @@ sub compound_word_components {
         select
             Teochew.chinese,
             Teochew.pengim,
-            group_concat(EnglishTemp.word, ", ") word
+            English.word,
+            English.notes,
+            group_concat(Synonyms.word, ", ") synonyms
         from Compound
-        join Teochew on Teochew.id = Compound.child_teochew_id
-        join Translation on Translation.teochew_id = Teochew.id
-        join (
-            select id, case
-                when notes is not null then word || ' (' || notes || ')'
-                else word end as word
-            from English
-        ) EnglishTemp
-        on EnglishTemp.id = Translation.english_id
+        join Translation on Compound.translation_id = Translation.id
+        join Teochew on Translation.teochew_id = Teochew.id
+        join English on English.id = Translation.english_id
+        left join Synonyms on English.id = Synonyms.english_id
         where parent_teochew_id = ?
-        group by Teochew.id
+        group by English.id
         order by Compound.sort
     };
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, $teochew_id);
+
+    for (@rows) {
+        # Uhh, this is awkward
+        $_->{word} .= ", $_->{synonyms}"
+            if $_->{synonyms} &&
+               length($_->{word}) + length($_->{synonyms}) < 15;
+    }
+
     return @rows;
 }
 

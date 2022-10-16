@@ -44,7 +44,7 @@ if (length($teochew->{chinese}) == 1) {
 my @chars     = split //,  $teochew->{chinese};
 my @syllables = split / /, $teochew->{pengim};
 
-my @child_teochew_ids;
+my @child_ids;
 my $confirm_str = "Compound breakdown:";
 for (my $i = 0; $i < scalar @chars; $i++) {
 
@@ -54,13 +54,13 @@ for (my $i = 0; $i < scalar @chars; $i++) {
 
     my @rows = $db->dbh->selectall_array(qq{
         select
-            Teochew.id teochew_id,
-            group_concat(English.word, ", ") english
+            Translation.id translation_id,
+            English.word english,
+            English.notes notes
         from Teochew
         join Translation on Translation.teochew_id = Teochew.id
         join English on Translation.english_id = English.id
         where chinese = ? and pengim = ?
-        group by Teochew.id
         order by Teochew.id
     }, { Slice => {} }, $chars[$i], $syllables[$i]);
 
@@ -75,22 +75,25 @@ for (my $i = 0; $i < scalar @chars; $i++) {
     my $row_id = 0;
     if (scalar @rows > 1) {
         for (my $j = 0; $j < scalar @rows; $j++) {
-            say "$j: $rows[$j]{english}";
+            my $msg = "$j: $rows[$j]{english}";
+            $msg .= " ($rows[$j]{notes})" if $rows[$j]{notes};
+            say $msg;
         }
         $row_id = input_from_prompt(
             "Which translation to use for $chars[$i] $syllables[$i]?");
     }
 
     # XXX: I did not error check
-    push @child_teochew_ids, $rows[$row_id]{teochew_id};
+    push @child_ids, $rows[$row_id]{translation_id};
     $confirm_str .= "\n\t$rows[$row_id]{english}";
+    $confirm_str .= " ($rows[$row_id]{notes})" if $rows[$row_id]{notes};
 }
 
 say $confirm_str;
 if (confirm()) {
     $db->insert_compound_breakdown(
         parent_teochew_id => $teochew->{teochew_id},
-        child_teochew_ids => \@child_teochew_ids,
+        translation_ids   => \@child_ids,
     );
     say colored("Added compound breakdown!", "green");
 }
