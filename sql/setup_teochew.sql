@@ -571,6 +571,8 @@ INSERT INTO English VALUES(530,16,'smoke',1,NULL,NULL);
 INSERT INTO English VALUES(531,3,'brown',0,'',2);
 INSERT INTO English VALUES(532,10,'crispy',0,'',NULL);
 INSERT INTO English VALUES(533,16,'question',0,'',NULL);
+INSERT INTO English VALUES(534,16,'inside',1,NULL,NULL);
+INSERT INTO English VALUES(535,23,'outside',1,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1236,8 +1238,6 @@ INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. Y
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(20,524,replace('**doi(6) bain5** should be used when saying that something is inside of something else, or to mean indoors.\n\n**lai6** should not be used on its own to mean "inside". It''s really just used as an adjective to describe other words, like in **内妈 lai(7) ma2**. The more common usage of **lai6** is to mean a home.\n','\n',char(10)));
-INSERT INTO Extra VALUES(21,359,replace('**kao(6) bain5** or **kao2** should be used when referring to the outdoors. **ghua7** is really just used as an adjective that goes along with other words, like in **外妈 ghua7 ma2**.\n','\n',char(10)));
 INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
 INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
@@ -2248,14 +2248,14 @@ INSERT INTO Translation VALUES(579,521,596,0);
 INSERT INTO Translation VALUES(580,492,361,1);
 INSERT INTO Translation VALUES(581,522,598,1);
 INSERT INTO Translation VALUES(582,523,599,0);
-INSERT INTO Translation VALUES(583,524,120,1);
+INSERT INTO Translation VALUES(583,534,120,0);
 INSERT INTO Translation VALUES(584,524,601,0);
 INSERT INTO Translation VALUES(585,525,602,1);
 INSERT INTO Translation VALUES(586,359,603,0);
 INSERT INTO Translation VALUES(587,526,604,0);
 INSERT INTO Translation VALUES(588,527,605,0);
 INSERT INTO Translation VALUES(589,528,606,0);
-INSERT INTO Translation VALUES(590,359,607,1);
+INSERT INTO Translation VALUES(590,535,607,0);
 INSERT INTO Translation VALUES(591,530,608,1);
 INSERT INTO Translation VALUES(592,531,609,1);
 INSERT INTO Translation VALUES(593,531,610,0);
