@@ -598,6 +598,17 @@ sub get_english_from_database {
     my $for_flashcards = $params{for_flashcards};
     my $check_synonyms = $params{check_synonyms};
 
+    # First check and see if this is a synonym. If it is, we'll have to adjust
+    # our search to use the base English word instead
+    if ($check_synonyms) {
+        my @rows = $dbh->selectall_array(qq{
+            select English.word from English
+            join Synonyms on English.id = Synonyms.english_id
+            where Synonyms.word = ?
+        }, { Slice => {} }, $word);
+        $word = $rows[0]->{word} if @rows;
+    }
+
     my @binds;
 
     my $extra_where = '';
@@ -613,12 +624,6 @@ sub get_english_from_database {
     if (defined $word) {
         my $word_where = "English.word = ?";
         push @binds, $word;
-
-        if ($check_synonyms) {
-            $word_where .= " or Synonyms.word = ?";
-            push @binds, $word;
-        }
-
         $extra_where .= "and ($word_where) ";
     }
     if ($notes) {
