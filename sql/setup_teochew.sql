@@ -110,7 +110,7 @@ INSERT INTO English VALUES(62,5,'aunt',0,'mom''s sister',NULL);
 INSERT INTO English VALUES(63,5,'uncle',0,'mom''s sister''s husband',NULL);
 INSERT INTO English VALUES(64,5,'uncle',0,'mom''s brother',NULL);
 INSERT INTO English VALUES(65,5,'aunt',0,'mom''s brother''s wife',NULL);
-INSERT INTO English VALUES(66,5,'relative',1,NULL,NULL);
+INSERT INTO English VALUES(66,5,'relative',0,NULL,NULL);
 INSERT INTO English VALUES(67,2,'100',0,NULL,NULL);
 INSERT INTO English VALUES(68,6,'television',0,NULL,NULL);
 INSERT INTO English VALUES(69,6,'computer',0,NULL,NULL);
@@ -571,6 +571,14 @@ INSERT INTO English VALUES(532,10,'crispy',0,NULL,NULL);
 INSERT INTO English VALUES(533,16,'question',0,NULL,NULL);
 INSERT INTO English VALUES(534,16,'inside',1,NULL,NULL);
 INSERT INTO English VALUES(535,23,'outside',1,NULL,NULL);
+INSERT INTO English VALUES(536,5,'offspring',1,NULL,NULL);
+INSERT INTO English VALUES(537,6,'electricity',0,NULL,NULL);
+INSERT INTO English VALUES(538,13,'to look',1,NULL,NULL);
+INSERT INTO English VALUES(539,11,'brain',1,NULL,NULL);
+INSERT INTO English VALUES(540,16,'language',0,NULL,NULL);
+INSERT INTO English VALUES(541,16,'spoken word',1,NULL,NULL);
+INSERT INTO English VALUES(542,7,'part of day',1,NULL,4);
+INSERT INTO English VALUES(543,16,'low',1,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1259,6 +1267,7 @@ INSERT INTO PengimAlt VALUES(9,186,'m','meng');
 INSERT INTO PengimAlt VALUES(10,23,'bh','bhek');
 INSERT INTO PengimAlt VALUES(11,223,'s','seng');
 INSERT INTO PengimAlt VALUES(12,300,'d','dek');
+INSERT INTO PengimAlt VALUES(13,301,'ch','cheng');
 CREATE TABLE Pengim (
     id          integer primary key,
     beginning   text,
@@ -1564,6 +1573,7 @@ INSERT INTO Pengim VALUES(297,'t','toin');
 INSERT INTO Pengim VALUES(298,'t','tui');
 INSERT INTO Pengim VALUES(299,'y','yuah');
 INSERT INTO Pengim VALUES(300,'d','dik');
+INSERT INTO Pengim VALUES(301,'ch','ching');
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1668,7 +1678,7 @@ INSERT INTO Translation VALUES(59,62,62,0);
 INSERT INTO Translation VALUES(60,63,61,0);
 INSERT INTO Translation VALUES(61,64,64,0);
 INSERT INTO Translation VALUES(62,65,65,0);
-INSERT INTO Translation VALUES(63,66,66,1);
+INSERT INTO Translation VALUES(63,66,66,0);
 INSERT INTO Translation VALUES(64,68,67,0);
 INSERT INTO Translation VALUES(65,69,68,0);
 INSERT INTO Translation VALUES(66,70,69,0);
@@ -2199,6 +2209,14 @@ INSERT INTO Translation VALUES(592,531,609,1);
 INSERT INTO Translation VALUES(593,531,610,0);
 INSERT INTO Translation VALUES(594,532,611,0);
 INSERT INTO Translation VALUES(595,533,612,0);
+INSERT INTO Translation VALUES(596,536,613,0);
+INSERT INTO Translation VALUES(597,537,614,0);
+INSERT INTO Translation VALUES(598,538,615,0);
+INSERT INTO Translation VALUES(599,539,616,0);
+INSERT INTO Translation VALUES(600,540,617,0);
+INSERT INTO Translation VALUES(601,541,617,0);
+INSERT INTO Translation VALUES(602,542,618,0);
+INSERT INTO Translation VALUES(603,543,619,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2265,7 +2283,7 @@ INSERT INTO Teochew VALUES(61,'dion6','丈',0);
 INSERT INTO Teochew VALUES(62,'i5','姨',0);
 INSERT INTO Teochew VALUES(64,'gu6','舅',0);
 INSERT INTO Teochew VALUES(65,'gim6','妗',0);
-INSERT INTO Teochew VALUES(66,'cheng1 chek4','亲戚',0);
+INSERT INTO Teochew VALUES(66,'ching1 chek4','亲戚',0);
 INSERT INTO Teochew VALUES(67,'diang67 si6','电视',0);
 INSERT INTO Teochew VALUES(68,'diang67 nao2','电脑',0);
 INSERT INTO Teochew VALUES(69,'diang67 ue7','电话',0);
@@ -2274,7 +2292,7 @@ INSERT INTO Teochew VALUES(71,'jap84 yi6','十二',0);
 INSERT INTO Teochew VALUES(72,'diam2','点',0);
 INSERT INTO Teochew VALUES(73,'buan3','半',0);
 INSERT INTO Teochew VALUES(74,'dah4','搭',0);
-INSERT INTO Teochew VALUES(75,'e7 gua3','下旰',0);
+INSERT INTO Teochew VALUES(75,'e67 gua3','下旰',0);
 INSERT INTO Teochew VALUES(76,'yik84 dao3','日昼',0);
 INSERT INTO Teochew VALUES(77,'buan32 me5','半暝',0);
 INSERT INTO Teochew VALUES(78,'me57 heung1 gian2','暝昏囝',0);
@@ -2786,6 +2804,13 @@ INSERT INTO Teochew VALUES(609,'chiah4','赤',0);
 INSERT INTO Teochew VALUES(610,'chiah48 sek4','赤色',0);
 INSERT INTO Teochew VALUES(611,'sou1','酥',0);
 INSERT INTO Teochew VALUES(612,'meung7 doi5','问题',0);
+INSERT INTO Teochew VALUES(613,'nou1','孥',0);
+INSERT INTO Teochew VALUES(614,'diang6','电',0);
+INSERT INTO Teochew VALUES(615,'si6','视',0);
+INSERT INTO Teochew VALUES(616,'nao2','脑',0);
+INSERT INTO Teochew VALUES(617,'ue7','话',0);
+INSERT INTO Teochew VALUES(618,'gua3','旰',0);
+INSERT INTO Teochew VALUES(619,'e6','下',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2846,4 +2871,20 @@ INSERT INTO Compound VALUES(51,497,3,17);
 INSERT INTO Compound VALUES(52,499,1,482);
 INSERT INTO Compound VALUES(53,499,2,24);
 INSERT INTO Compound VALUES(54,499,3,17);
+INSERT INTO Compound VALUES(55,473,1,596);
+INSERT INTO Compound VALUES(56,473,2,37);
+INSERT INTO Compound VALUES(57,67,1,597);
+INSERT INTO Compound VALUES(58,67,2,598);
+INSERT INTO Compound VALUES(59,68,1,597);
+INSERT INTO Compound VALUES(60,68,2,599);
+INSERT INTO Compound VALUES(61,69,1,597);
+INSERT INTO Compound VALUES(62,69,2,601);
+INSERT INTO Compound VALUES(63,408,1,120);
+INSERT INTO Compound VALUES(64,408,2,66);
+INSERT INTO Compound VALUES(65,75,1,603);
+INSERT INTO Compound VALUES(66,75,2,602);
+INSERT INTO Compound VALUES(67,519,1,486);
+INSERT INTO Compound VALUES(68,519,2,602);
+INSERT INTO Compound VALUES(69,518,1,400);
+INSERT INTO Compound VALUES(70,518,2,602);
 COMMIT;
