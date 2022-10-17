@@ -142,6 +142,9 @@ sub update_english {
 sub insert_english {
     my ($self, %params) = @_;
 
+    # We want to insert NULL, not empty string if there are no notes
+    $params{notes} = undef if $params{notes} eq '';
+
     my $dbh = $self->dbh;
     my $sth = $dbh->prepare(
         "insert into English (category_id, word, notes, hidden, sort) " .
