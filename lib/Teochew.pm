@@ -386,7 +386,7 @@ sub translate_time {
     }
 
     if ($minute eq '30') {
-        push @components, _lookup('time (30 min)');
+        push @components, _lookup('half');
     }
     elsif ($minute % 5 == 0) {
         my $minute_hand = $minute / 5;
