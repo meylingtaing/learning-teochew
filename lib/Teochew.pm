@@ -790,13 +790,13 @@ sub compound_word_components {
         select
             Teochew.chinese,
             Teochew.pengim,
-            English.word,
+            coalesce(English.word, '') word,
             English.notes,
             group_concat(Synonyms.word, ", ") synonyms
         from Compound
         join Translation on Compound.translation_id = Translation.id
         join Teochew on Translation.teochew_id = Teochew.id
-        join English on English.id = Translation.english_id
+        left join English on English.id = Translation.english_id
         left join Synonyms on English.id = Synonyms.english_id
         where parent_teochew_id = ?
         group by English.id

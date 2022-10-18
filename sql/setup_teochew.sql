@@ -2217,6 +2217,7 @@ INSERT INTO Translation VALUES(600,540,617,0);
 INSERT INTO Translation VALUES(601,541,617,0);
 INSERT INTO Translation VALUES(602,542,618,0);
 INSERT INTO Translation VALUES(603,543,619,0);
+INSERT INTO Translation VALUES(604,NULL,620,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2811,6 +2812,7 @@ INSERT INTO Teochew VALUES(616,'nao2','脑',0);
 INSERT INTO Teochew VALUES(617,'ue7','话',0);
 INSERT INTO Teochew VALUES(618,'gua3','旰',0);
 INSERT INTO Teochew VALUES(619,'e6','下',0);
+INSERT INTO Teochew VALUES(620,'dao3','昼',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2887,4 +2889,6 @@ INSERT INTO Compound VALUES(67,519,1,486);
 INSERT INTO Compound VALUES(68,519,2,602);
 INSERT INTO Compound VALUES(69,518,1,400);
 INSERT INTO Compound VALUES(70,518,2,602);
+INSERT INTO Compound VALUES(71,76,1,486);
+INSERT INTO Compound VALUES(72,76,2,604);
 COMMIT;
