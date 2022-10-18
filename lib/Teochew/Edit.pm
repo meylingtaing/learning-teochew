@@ -160,6 +160,25 @@ sub insert_english {
     return $dbh->sqlite_last_insert_rowid;
 }
 
+=head2 update_teochew
+
+    $teochew->update_teochew(
+        $teochew_id,
+        pengim  => '',
+        chinese => '',
+    );
+
+=cut
+
+sub update_teochew {
+    my ($self, $teochew_id, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    $self->dbh->do(qq{
+        update Teochew set pengim = ? where Teochew.id = ?
+    }, undef, $params{pengim}, $teochew_id);
+}
+
 =head2 insert_synonym
 
     $teochew->insert_synonym(

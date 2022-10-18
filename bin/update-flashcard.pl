@@ -27,15 +27,16 @@ die colored("Must provide an English word!", "red") . "\n"
     unless defined $input;
 
 # Let's see what the user wants to update
-my ($category, $alt_chinese, $category_sort);
+my ($category, $alt_chinese, $category_sort, $pengim);
 GetOptions(
     "category=s"    => \$category,
     "alt-chinese=s" => \$alt_chinese,
     "category-sort" => \$category_sort,
+    "pengim=s"      => \$pengim,
 );
 
 # XXX There's probably an easier way of handling this
-unless ($category || $alt_chinese || $category_sort) {
+unless ($category || $alt_chinese || $category_sort || $pengim) {
     say "Must provide one of these options:";
     say "\t--category";
     say "\t--alt-chinese";
@@ -102,5 +103,18 @@ if ($alt_chinese) {
             chinese    => $alt_chinese
         );
         say colored("Added $alt_chinese as an alternate!", "green");
+    }
+}
+
+if ($pengim) {
+    # TODO: Be able to smartly modify the related Chinese entry. Maybe.
+
+    say "Modifying $english->{word} translation to $pengim";
+    if (confirm()) {
+        $db->update_teochew(
+            $teochew->{teochew_id},
+            pengim => $pengim,
+        );
+        say colored("Updated $english->{word} pengim to $pengim!", "green");
     }
 }
