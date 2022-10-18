@@ -41,26 +41,27 @@
                 More details <i class="ion-arrow-down-b"></i>
               </small>
             </a>
-            <div class="row no-gutters collapse word-breakdown mt-2"
-                 id="word-breakdown-<%= $row_id %>">
-            % for my $component (@{ $row->{compound} }) {
-              <div class="col-auto"><div class="card text-center">
-                <div class="card-header py-1">
-                  <%= $component->{word} %>
-                  %# Hmmm....maybe come back to this later
-                  %#<br>
-                  %# if ($component->{notes}) {
-                  %#    (<%= $component->{notes} %>)
-                  %# } else {
-                  %#    <br>
-                  %# }
-                </div>
-                <div class="card-body py-1">
-                  <h1 class="card-title"><%= $component->{chinese} %></h1>
-                  <h5 class="card-subtitle"><%= $component->{pengim} %></h5>
-                </div>
-              </div></div>
-            % }
+            <div id="word-breakdown-<%= $row_id %>" class="collapse mt-2">
+            <table class="table table-bordered w-auto">
+              <thead class="thead-light"><tr>
+              % for my $component (@{ $row->{compound} }) {
+                  <th class="py-1 text-center">
+                    <%= $component->{word} %>
+                    % if ($component->{notes}) {
+                        <br>(<%= $component->{notes} %>)
+                    % }
+                  </th>
+              % }
+              </tr></thead>
+              <tr>
+              % for my $component (@{ $row->{compound} }) {
+                  <td class="py-2 text-center">
+                    <h1 class="mb-0"><%= $component->{chinese} %></h1>
+                    <span><%= $component->{pengim} %></span>
+                  </td>
+              % }
+              </tr>
+            </table>
             </div>
           % }
 
