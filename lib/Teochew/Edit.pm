@@ -33,7 +33,7 @@ sub new { shift->create_db_object('Teochew.sqlite') }
 
 =head2 insert_translation
 
-    my $success = $teochew->insert_word(
+    my $success = $teochew->insert_translation(
         category_id  => $category_id,
         english      => $english_main,
         notes        => $notes,
@@ -49,14 +49,17 @@ sub new { shift->create_db_object('Teochew.sqlite') }
 sub insert_translation {
     my ($self, %params) = @_;
 
-    # Insert into the English table. It's possible this is a dupe, so check for
-    # that first
-    my %english_params =
-        map { $_ => $params{$_} }
-        qw(english notes category_id hidden english_sort);
+    my $english_id = undef;
+    if (defined $params{english}) {
+        # Insert into the English table. It's possible this is a dupe, so check
+        # for that first
+        my %english_params =
+            map { $_ => $params{$_} }
+            qw(english notes category_id hidden english_sort);
 
-    my $english_id = $self->_get_english_id(%english_params) ||
-                     $self->insert_english(%english_params);
+        my $english_id = $self->_get_english_id(%english_params) ||
+                         $self->insert_english(%english_params);
+    }
 
     # Insert into the Teochew table
     my $teochew_id = $self->_get_teochew_id(
@@ -86,6 +89,8 @@ sub insert_translation {
         (english_id, teochew_id, hidden_from_flashcards)
         values (?, ?, ?)
     }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
+
+    return $self->dbh->sqlite_last_insert_rowid;
 }
 
 =head2 update_english

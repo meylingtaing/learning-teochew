@@ -11,7 +11,7 @@ use lib 'lib';
 use Teochew;
 use Teochew::Edit;
 
-use Teochew::Utils qw(); 
+use Teochew::Utils qw();
 use Input qw(confirm input_from_prompt);
 
 use Data::Dumper;
@@ -35,9 +35,6 @@ if (length($teochew->{chinese}) == 1) {
     say "Only one Chinese character: $teochew->{chinese}!";
     exit;
 }
-
-# XXX Remove this
-#warn Dumper(\%translation);
 
 # Break down the word character by character and see if there are other Teochew
 # entries that match
@@ -65,9 +62,22 @@ for (my $i = 0; $i < scalar @chars; $i++) {
     }, { Slice => {} }, $chars[$i], $syllables[$i]);
 
     if (scalar @rows == 0) {
-        say colored("No translations found for $chars[$i] $syllables[$i]!",
-                    "red");
-        exit;
+        say colored(
+            "Need to create empty translation for $chars[$i] $syllables[$i]!",
+            "yellow"
+        );
+        if (confirm()) {
+            # XXX fill this in...
+            my $translation_id = $db->insert_translation(
+                chinese => $chars[$i],
+                pengim  => $syllables[$i],
+            );
+            $rows[0] = {
+                translation_id => $translation_id,
+                english        => undef,
+                notes          => undef,
+            };
+        }
     }
 
     # If there's a single match, then use that. If there are multiple matches,
@@ -82,6 +92,8 @@ for (my $i = 0; $i < scalar @chars; $i++) {
         $row_id = input_from_prompt(
             "Which translation to use for $chars[$i] $syllables[$i]?");
     }
+
+    $rows[$row_id]{english} //= '--';
 
     # XXX: I did not error check
     push @child_ids, $rows[$row_id]{translation_id};
