@@ -62,7 +62,7 @@ sub insert_translation {
             map { $_ => $params{$_} }
             qw(english notes category_id hidden english_sort);
 
-        my $english_id = $self->_get_english_id(%english_params) ||
+        $english_id = $self->_get_english_id(%english_params) ||
                          $self->insert_english(%english_params);
     }
 

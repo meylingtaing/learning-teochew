@@ -37,6 +37,7 @@ INSERT INTO Categories VALUES(30,'Drink',NULL,0,5);
 INSERT INTO Categories VALUES(31,'Bathroom',NULL,0,4);
 INSERT INTO Categories VALUES(32,'Basics','Basic Words',0,12);
 INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',0,12);
+INSERT INTO Categories VALUES(34,'Hidden',NULL,0,NULL);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -580,6 +581,7 @@ INSERT INTO English VALUES(541,16,'spoken word',1,NULL,NULL);
 INSERT INTO English VALUES(542,7,'part of day',1,NULL,4);
 INSERT INTO English VALUES(543,16,'low',1,NULL,NULL);
 INSERT INTO English VALUES(544,16,'first',1,NULL,NULL);
+INSERT INTO English VALUES(545,34,'stay',1,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2222,6 +2224,7 @@ INSERT INTO Translation VALUES(604,NULL,620,0);
 INSERT INTO Translation VALUES(605,NULL,621,0);
 INSERT INTO Translation VALUES(606,NULL,622,0);
 INSERT INTO Translation VALUES(607,544,623,0);
+INSERT INTO Translation VALUES(608,545,624,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2820,6 +2823,7 @@ INSERT INTO Teochew VALUES(620,'dao3','昼',0);
 INSERT INTO Teochew VALUES(621,'heung1','昏',0);
 INSERT INTO Teochew VALUES(622,'loi2','礼',0);
 INSERT INTO Teochew VALUES(623,'jian1','正',0);
+INSERT INTO Teochew VALUES(624,'dao1','逗',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
