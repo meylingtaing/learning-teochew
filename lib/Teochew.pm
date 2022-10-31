@@ -1201,6 +1201,7 @@ Similar to L</get_all_translations>, but you pass in an id instead
 
 Returns rows with
 
+    translation_id
     teochew_id
     pengim
     chinese
@@ -1214,9 +1215,9 @@ sub get_all_translations_by_id {
     my $hidden_from_flashcards = $params{for_flashcards} ?
         "and hidden_from_flashcards = 0" : "";
 
-    # XXX Should this be getting a translation id instead?
     my $sql = qq{
-        select Teochew.id teochew_id, pengim, chinese
+        select Teochew.id teochew_id, pengim, chinese,
+            Translation.id translation_id
         from Teochew
         join Translation on Teochew.id = Translation.teochew_id
         where Translation.english_id = ?

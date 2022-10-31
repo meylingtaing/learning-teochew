@@ -27,25 +27,34 @@ die colored("Must provide an English word!", "red") . "\n"
     unless defined $input;
 
 # Let's see what the user wants to update
-my ($category, $alt_chinese, $category_sort, $pengim);
+my ($category, $alt_chinese, $category_sort, $pengim, $hidden_from_flashcards);
 GetOptions(
     "category=s"    => \$category,
     "alt-chinese=s" => \$alt_chinese,
     "category-sort" => \$category_sort,
     "pengim=s"      => \$pengim,
+
+    "hidden-from-flashcards=i" => \$hidden_from_flashcards,
 );
 
 # XXX There's probably an easier way of handling this
-unless ($category || $alt_chinese || $category_sort || $pengim) {
+unless ($category ||
+        $alt_chinese ||
+        $category_sort ||
+        $pengim ||
+        defined $hidden_from_flashcards)
+{
     say "Must provide one of these options:";
     say "\t--category";
     say "\t--alt-chinese";
     say "\t--category-sort";
+    say "\t--hidden-from-flashcards";
     exit;
 }
 
 # Gather up the relevant information from the database for this translation
 my %translation = $db->choose_translation_from_english($input);
+
 my $english     = $translation{english};
 my $teochew     = $translation{teochew};
 
@@ -117,4 +126,19 @@ if ($pengim) {
         );
         say colored("Updated $english->{word} pengim to $pengim!", "green");
     }
+}
+
+if (defined $hidden_from_flashcards) {
+    my $msg = "Modifying $english->{word} translation to be";
+    my $hidden_shown = $hidden_from_flashcards ? "hidden from flashcards" :
+                                                 "shown in flashcards";
+
+    say "$msg $hidden_shown";
+    if (confirm()) {
+        $db->update_translation(
+            $teochew->{translation_id},
+            hidden_from_flashcards => $hidden_from_flashcards
+        );
+    }
+    say colored("Updated $english->{word} to be $hidden_shown", "green");
 }

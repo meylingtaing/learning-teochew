@@ -366,6 +366,25 @@ sub make_fully_hidden {
     return $sth->execute;
 }
 
+=head2 update_translation
+
+    $teochew->update_translation(
+        $translation_id,
+        hidden_from_flashcards => 1,
+    );
+
+=cut
+
+sub update_translation {
+    my ($self, $translation_id, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    $self->dbh->do(qq{
+        update Translation set hidden_from_flashcards = ?
+        where id = ?
+    }, undef, $params{hidden_from_flashcards}, $translation_id);
+}
+
 =head2 insert_compound_breakdown
 
     $teochew->insert_compound_breakdown(
@@ -401,8 +420,8 @@ Given an english word, this returns a hash with relevant translation
 information. If there are multiple translations found, this will prompt the
 user to choose one
 
-The return hash will consist of two keys: C<english> and C<teochew>. Here is
-an example of one:
+The return hash will consist of three keys: C<english>, C<teochew>, and
+C<translation>. Here is an example of one:
 
   'english' => {
                  'id' => 1
@@ -416,7 +435,8 @@ an example of one:
   'teochew' => {
                  'teochew_id' => 1,
                  'chinese' => "\x{6c5d}\x{597d}",
-                 'pengim' => 'leu2 ho2'
+                 'pengim' => 'leu2 ho2',
+                 'translation_id' => 1
                },
 =cut
 
