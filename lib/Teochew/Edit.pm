@@ -16,6 +16,9 @@ Class for modifying the Teochew database
 use strict;
 use warnings;
 
+binmode STDOUT, ':encoding(UTF-8)';
+binmode STDERR, ':encoding(UTF-8)';
+
 # Needed for reading/modifying the DB
 use parent 'SqliteDB';
 use DBI qw(:sql_types);
@@ -26,6 +29,8 @@ use Teochew::Utils qw(split_out_parens);
 use feature qw(say);
 use Term::ANSIColor qw(colored);
 use Input qw(confirm input_from_prompt);
+
+use Data::Dumper;
 
 sub new { shift->create_db_object('Teochew.sqlite') }
 
@@ -416,7 +421,7 @@ an example of one:
 =cut
 
 sub choose_translation_from_english {
-    my ($self, $english) = @_;
+    my ($self, $english, $chinese) = @_;
     $self = $self->new unless ref $self;
 
     return undef unless defined $english;
@@ -436,9 +441,14 @@ sub choose_translation_from_english {
     # Get existing translations -- there might be more than one. If so, have
     # the user select the one they want to modify
     my @rows = Teochew::get_all_translations_by_id($english_row->{id});
+
+    if ($chinese) {
+        @rows = grep { $_->{chinese} eq $chinese } @rows;
+    }
+
     my $row_id = 0;
     if (scalar @rows == 0) {
-        die "No translations found for $english!\n";
+        die "No matching translations found for $english!\n";
     }
     elsif (scalar @rows > 1) {
         # Need the user to select which translation they want to modify
