@@ -189,15 +189,21 @@ Given any english word, returns the translations. Here is the output for the
 example given, using C<show_all_accents>:
 
     [{
+        teochew_id => 1,
+        translation_id => 1,
         chinese => '银',
         pronunciations => [
             { pengim => 'ngeng5', audio => 'ngeng5.mp3' },
             { pengim => 'nging5', audio => 'nging5.mp3' },
         ],
     }, {
+        teochew_id => 1,
+        translation_id => 1,
         chinese => '钱',
         pronunciations => [{ pengim => 'jin5', audio => 'jin5.mp3' }],
     }, {
+        teochew_id => 1,
+        translation_id => 1,
         chinese => '镭',
         pronunciations => [{ pengim => 'lui1', audio => 'lui1.mp3' }],
     }]
@@ -285,6 +291,7 @@ sub translate {
         $pronunciation = [$pronunciation->[0]] unless $show_all_accents;
 
         push @ret, {
+            translation_id => $_->{translation_id},
             teochew_id     => $_->{teochew_id},
             chinese        => $_->{chinese} =~ s/\?/[?]/gr,
             pronunciations => $pronunciation,
@@ -1121,6 +1128,28 @@ sub extra_information_by_id {
     };
 
     my @rows = $dbh->selectall_array($sql, {}, $english_id);
+    return undef unless scalar @rows;
+    return $rows[0]->[0];
+}
+
+=head2 extra_translation_information_by_id
+
+Gets extra information about a translation if it exists. You must pass in the
+Translation.id
+
+=cut
+
+sub extra_translation_information_by_id {
+    my $translation_id = shift;
+
+    my $sql = qq{
+        select TranslationExtra.info from Translation
+        join TranslationExtra
+            on Translation.id = TranslationExtra.translation_id
+        where Translation.id = ?
+    };
+
+    my @rows = $dbh->selectall_array($sql, {}, $translation_id);
     return undef unless scalar @rows;
     return $rows[0]->[0];
 }

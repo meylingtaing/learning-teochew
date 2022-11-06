@@ -225,6 +225,13 @@ sub english {
                 my @components = Teochew::compound_word_components($teochew_id);
                 $translation_row->{compound} = \@components if @components;
 
+                my $extra_translation_notes =
+                    Teochew::extra_translation_information_by_id(
+                        $translation_row->{translation_id}
+                    );
+                $translation_row->{extra_notes} =
+                    markdown($extra_translation_notes // '');
+
                 push @chinese, $translation_row->{chinese};
                 push @{ $categories{$category}{teochew} }, {
                     %$translation_row,

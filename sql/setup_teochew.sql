@@ -2959,4 +2959,13 @@ INSERT INTO Compound VALUES(126,101,1,68);
 INSERT INTO Compound VALUES(127,101,2,77);
 INSERT INTO Compound VALUES(128,104,1,452);
 INSERT INTO Compound VALUES(129,104,2,37);
+INSERT INTO Compound VALUES(130,105,1,608);
+INSERT INTO Compound VALUES(131,105,2,37);
+CREATE TABLE TranslationExtra (
+    id integer primary key,
+    translation_id integer,
+    info text,
+    foreign key(translation_id) references Translation(id)
+);
+INSERT INTO TranslationExtra VALUES(1,98,'This is sort of like a contraction of **da bou**. Traditionally, the son is thought of as the child who _stays_ with the family, as opposed to the daughter, who gets married into a different family.');
 COMMIT;

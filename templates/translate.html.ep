@@ -62,6 +62,7 @@
               % }
               </tr>
             </table>
+            %== $row->{extra_notes}
             </div>
           % }
 
