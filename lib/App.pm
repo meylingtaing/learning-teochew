@@ -8,6 +8,21 @@ sub startup {
     # "Rendering template" ones
     $app->log->level('debug');
 
+    $app->hook(before_dispatch => sub {
+        my ($c) = @_;
+
+        # Copy pasted from Mojolicious.pm -- I wanted this log message, but
+        # it's set at the 'trace' level, and I'm hiding those by default since
+        # I don't want to see all the "Rendering template..." messages
+        $app->log->debug(sub {
+            my $req    = $c->req;
+            my $method = $req->method;
+            my $path   = $req->url->path->to_abs_string;
+            $c->helpers->timing->begin('mojo.timer');
+            return qq{$method "$path"};
+        });
+    });
+
     my $r = $app->routes;
 
     # Flashcards
