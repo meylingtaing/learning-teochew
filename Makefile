@@ -28,3 +28,4 @@ Updates.sqlite:
 
 db-dump:
 	sqlite3 Teochew.sqlite .dump > sql/setup_teochew.sql
+	sqlite3 Updates.sqlite .dump > sql/setup_updates.sql
