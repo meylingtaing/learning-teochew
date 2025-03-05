@@ -39,6 +39,10 @@ check_translation('10:05', "jap(4) diam(6) dah(8) ek4");
 check_translation('10:10', "jap(4) diam(6) dah(8) yi6");
 check_translation('10:15', "jap(4) diam(6) dah(8) san1");
 
+# Some English words have multiple translations, and we add extra notes to
+# differentiate. Make sure our translate method can handle this
+check_translation("aunt (dad's oldest sister)", "dua7 gou1");
+
 # Check translation for a word that has multiple translations
 my $translations = Teochew::translate('Red');
 is scalar @$translations, 2, "Found two translations for 'Red'";
