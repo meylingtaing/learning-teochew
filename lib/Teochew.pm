@@ -247,7 +247,15 @@ sub translate {
             }
             else {
                 $word = lc $word;
-                ($english) = get_english_from_database(word => $word);
+
+                # If there's stuff in parens, split that out and pass it along
+                # as "notes"
+                my ($main_word, $notes) = split_out_parens($word);
+
+                ($english) = get_english_from_database(
+                    word => $main_word, notes => $notes
+                );
+
                 return translate($english) if $english;
             }
         }
