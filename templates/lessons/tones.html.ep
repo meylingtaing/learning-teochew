@@ -57,7 +57,7 @@ each syllable, indicating which tone it is.
     <tr>
       <td>8</td>
       <td>High Short</td>
-      %= include 'elements/translation-row', word => 'white'
+      %= include 'elements/translation-row', word => 'white', pengim => 'beh8'
     </tr>
   </tbody>
 </table>
@@ -115,5 +115,5 @@ demonstrate how their tones change.
 
 <p>In the translations on this site, if a word has undergone tone change, the
 spoken tone will be displayed in parentheses. If a word originally has tone 3 and undergoes tone change, I will always display tone 2 for it, but my audio clips will vary between actually saying it with tone 2 or tone 5. I'm not consistent 😅
-</p> 
+</p>
 %= include 'elements/play_teochew'

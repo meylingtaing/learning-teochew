@@ -1,4 +1,18 @@
-% my $translation = Teochew::translate($word)->[0];
+%# This is used on the lessons pages to display a row in a table of
+%# translations.
+%#
+%# Requires "word" to be stashed, and optionally "pengim" if a word has
+%# multiple translations and you want to make sure the desired one is shown
+
+% my $translations = Teochew::translate($word);
+% my $translation;
+% if (my $pengim = stash('pengim')) {
+%     ($translation) = grep { $_->{pronunciations}[0]{pengim} eq $pengim }
+%                      @$translations;
+% }
+% else {
+%     $translation = $translations->[0];
+% }
 <td><%= $word %></td>
 <td><%= $translation->{pronunciations}[0]{pengim} %></td>
 <td><%= $translation->{chinese} %></td>
