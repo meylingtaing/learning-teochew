@@ -583,6 +583,7 @@ INSERT INTO English VALUES(543,16,'low',1,NULL,NULL);
 INSERT INTO English VALUES(544,16,'first',1,NULL,NULL);
 INSERT INTO English VALUES(545,34,'stay',1,NULL,NULL);
 INSERT INTO English VALUES(546,18,'to wear',0,NULL,NULL);
+INSERT INTO English VALUES(547,5,'aunt',0,'dad''s youngest sister',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2229,6 +2230,7 @@ INSERT INTO Translation VALUES(606,NULL,622,0);
 INSERT INTO Translation VALUES(607,544,623,0);
 INSERT INTO Translation VALUES(608,545,624,0);
 INSERT INTO Translation VALUES(609,546,625,0);
+INSERT INTO Translation VALUES(610,547,626,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2317,16 +2319,16 @@ INSERT INTO Teochew VALUES(85,'loi26 bai32 san1','礼拜三',0);
 INSERT INTO Teochew VALUES(86,'loi26 bai32 si3','礼拜四',0);
 INSERT INTO Teochew VALUES(87,'loi26 bai32 ngou6','礼拜五',0);
 INSERT INTO Teochew VALUES(88,'loi26 bai32 lak8','礼拜六',0);
-INSERT INTO Teochew VALUES(91,'yi67 ghueh84','二月',0);
+INSERT INTO Teochew VALUES(91,'yi6 ghueh84','二月',0);
 INSERT INTO Teochew VALUES(92,'san1 ghueh84','三月',0);
-INSERT INTO Teochew VALUES(93,'si32 ghueh84','四月',0);
-INSERT INTO Teochew VALUES(94,'ngou67 ghueh84','五月',0);
-INSERT INTO Teochew VALUES(95,'lak84 ghueh84','六月',0);
-INSERT INTO Teochew VALUES(96,'chik48 ghueh84','七月',0);
-INSERT INTO Teochew VALUES(97,'boih48 ghueh84','八月',0);
-INSERT INTO Teochew VALUES(98,'gao26 ghueh84','九月',0);
-INSERT INTO Teochew VALUES(99,'jap84 ghueh84','十月',0);
-INSERT INTO Teochew VALUES(101,'jap84 yi67 ghueh84','十二月',0);
+INSERT INTO Teochew VALUES(93,'si3 ghueh84','四月',0);
+INSERT INTO Teochew VALUES(94,'ngou6 ghueh84','五月',0);
+INSERT INTO Teochew VALUES(95,'lak8 ghueh84','六月',0);
+INSERT INTO Teochew VALUES(96,'chek4 ghueh84','七月',0);
+INSERT INTO Teochew VALUES(97,'boih4 ghueh84','八月',0);
+INSERT INTO Teochew VALUES(98,'gao2 ghueh84','九月',0);
+INSERT INTO Teochew VALUES(99,'jap8 ghueh84','十月',0);
+INSERT INTO Teochew VALUES(101,'jap84 yi6 ghueh84','十二月',0);
 INSERT INTO Teochew VALUES(102,'soi3','细',0);
 INSERT INTO Teochew VALUES(103,'dua7','大',0);
 INSERT INTO Teochew VALUES(104,'da1 bou1 gian2','丈夫囝',0);
@@ -2718,8 +2720,8 @@ INSERT INTO Teochew VALUES(500,'ik4','一',0);
 INSERT INTO Teochew VALUES(502,'jian1 ghueh84','正月',0);
 INSERT INTO Teochew VALUES(503,'yik8','日',0);
 INSERT INTO Teochew VALUES(504,'jek84 yik8','一日',0);
-INSERT INTO Teochew VALUES(505,'ik48 ghueh84','一月',0);
-INSERT INTO Teochew VALUES(506,'jap84 ik48 ghueh84','十一月',0);
+INSERT INTO Teochew VALUES(505,'ek4 ghueh84','一月',0);
+INSERT INTO Teochew VALUES(506,'jap84 ek4 ghueh84','十一月',0);
 INSERT INTO Teochew VALUES(507,'loi26 bai32 yik8','礼拜日',0);
 INSERT INTO Teochew VALUES(508,'ging1 yik8','今日',0);
 INSERT INTO Teochew VALUES(509,'ao6 yik84','后日',0);
@@ -2829,6 +2831,7 @@ INSERT INTO Teochew VALUES(622,'loi2','礼',0);
 INSERT INTO Teochew VALUES(623,'jian1','正',0);
 INSERT INTO Teochew VALUES(624,'dao1','逗',0);
 INSERT INTO Teochew VALUES(625,'cheng7','穿',0);
+INSERT INTO Teochew VALUES(626,'soi32 gou1','细姑',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2966,6 +2969,10 @@ INSERT INTO Compound VALUES(128,104,1,452);
 INSERT INTO Compound VALUES(129,104,2,37);
 INSERT INTO Compound VALUES(130,105,1,608);
 INSERT INTO Compound VALUES(131,105,2,37);
+INSERT INTO Compound VALUES(132,626,1,95);
+INSERT INTO Compound VALUES(133,626,2,57);
+INSERT INTO Compound VALUES(134,399,1,96);
+INSERT INTO Compound VALUES(135,399,2,57);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
