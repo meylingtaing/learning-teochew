@@ -2,8 +2,13 @@
 <table class="table table-sm">
   <tbody>
   % for my $word (@$words) {
+    % my $pengim;
+    % if (ref($word) eq 'HASH') {
+    %   $pengim = $word->{pengim};
+    %   $word   = $word->{word};
+    % }
     <tr>
-    %= include 'elements/translation-row', word => $word;
+    %= include 'elements/translation-row', word => $word, pengim => $pengim;
     </tr>
   % }
   </tbody>
