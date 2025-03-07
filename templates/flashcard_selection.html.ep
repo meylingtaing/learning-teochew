@@ -81,6 +81,9 @@
                 <a class="dropdown-item" href="/lesson/tones">
                   Tones
                 </a>
+                <a class="dropdown-item" href="/lesson/months">
+                  Months
+                </a>
               </div>
             </li>
           </ul>

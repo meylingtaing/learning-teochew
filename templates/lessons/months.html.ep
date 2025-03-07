@@ -1,0 +1,60 @@
+% layout 'wrapper-left';
+<style>
+.hover-details:hover { color: #007bff; cursor: default; }
+.table .play-teochew { font-size: 1.5em }
+.large-translation { margin-bottom: 2rem; }
+</style>
+
+<h1>Months</h1>
+
+<p>
+After learning about tones and about numbers, we can talk about months! The
+word for month is <b>ghueh8 月</b>
+<%= include 'elements/play-teochew', audio => 'gh/ghueh8.mp3' %>, and to say
+"one month" or "a month", you'd say <b>jek(4) ghueh8 一月</b>
+<%= include 'elements/play-teochew', audio => 'j/jek4ghueh8.mp3' %>.
+</p>
+
+<p>
+The words for each month of the year are formed by combining a number and the
+word month. However, the months do not follow the usual tone change rules, and
+I've found that my own family isn't even consistent on what the correct tones
+are here, but here's what seems to be the general consensus: When saying each
+month in isolation,
+</p>
+
+<ul>
+<li>you would <i>not</i> apply tone change to the number,</li>
+<li>and you <i>do</i> apply it to the word month</li>
+</ul>
+
+<p>Here's the translation for <b>January</b>:</p>
+
+<h2 class="text-center large-translation">
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title="一 one">ek4</span>
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title="月 month">ghueh(4)</span>
+    %= include 'elements/play-teochew', audio => 'e/ek4ghueh4.mp3'
+</h2>
+
+<p>The rest of the months follow the same pattern of number + month:</p>
+<%= include 'elements/translation-table',
+        words => [
+            { word => "January", pengim => 'ek4 ghueh(4)' },
+            "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ] %>
+
+But, there's actually more nuance to this tone rule. When I asked my mom
+whether the number part should have tone change, she said, "Sometimes it does,
+and sometimes it doesn't!" I've heard that other people will sandhi the number
+if there's <i>more</i> to the month phrase that we're saying.
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+%= include 'elements/play_teochew'
