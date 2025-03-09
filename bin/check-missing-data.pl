@@ -42,7 +42,7 @@ if (grep /^chinese$/, @commands_to_run) {
         "from Teochew " .
         "join English on English.id = english_id " .
         "where hidden = 0 and chinese is null", { Slice => {} }
-    ); 
+    );
 
     say "Missing Chinese character:";
     say $_->{english} . " " . $_->{teochew} for @rows;
@@ -110,7 +110,7 @@ if (grep /^hidden$/, @commands_to_run) {
     @rows = $dbh->selectall_array(qq{
         select word from English
         join Translation on English.id = Translation.english_id
-        join Teochew on Translation.english_id = English.id
+        join Teochew on Translation.teochew_id = Teochew.id
         where hidden = 1 and hidden_from_flashcards = 1
     });
 
