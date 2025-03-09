@@ -584,6 +584,10 @@ INSERT INTO English VALUES(544,16,'first',1,NULL,NULL);
 INSERT INTO English VALUES(545,34,'stay',1,NULL,NULL);
 INSERT INTO English VALUES(546,18,'to wear',0,NULL,NULL);
 INSERT INTO English VALUES(547,5,'aunt',0,'dad''s youngest sister',NULL);
+INSERT INTO English VALUES(548,18,'to wear shoes',0,NULL,NULL);
+INSERT INTO English VALUES(549,10,'to knead',0,NULL,NULL);
+INSERT INTO English VALUES(550,18,'to wash clothes',0,NULL,NULL);
+INSERT INTO English VALUES(551,10,'to wash dishes',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1097,6 +1101,7 @@ INSERT INTO Chinese VALUES(512,'赤',NULL,NULL,'chiah4');
 INSERT INTO Chinese VALUES(513,'酥',NULL,NULL,'sou1');
 INSERT INTO Chinese VALUES(514,'题','題',NULL,'doi5');
 INSERT INTO Chinese VALUES(515,'穿',NULL,NULL,'cheng7');
+INSERT INTO Chinese VALUES(516,'挦','撏',NULL,'chip8');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1255,6 +1260,7 @@ INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "sh
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
 INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
+INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip** the filling, so this is not limited to just dough.\n\nI''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -2231,6 +2237,10 @@ INSERT INTO Translation VALUES(607,544,623,0);
 INSERT INTO Translation VALUES(608,545,624,0);
 INSERT INTO Translation VALUES(609,546,625,0);
 INSERT INTO Translation VALUES(610,547,626,0);
+INSERT INTO Translation VALUES(611,548,627,0);
+INSERT INTO Translation VALUES(612,549,628,0);
+INSERT INTO Translation VALUES(613,550,629,0);
+INSERT INTO Translation VALUES(614,551,630,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2832,6 +2842,10 @@ INSERT INTO Teochew VALUES(623,'jian1','正',0);
 INSERT INTO Teochew VALUES(624,'dao1','逗',0);
 INSERT INTO Teochew VALUES(625,'cheng7','穿',0);
 INSERT INTO Teochew VALUES(626,'soi32 gou1','细姑',0);
+INSERT INTO Teochew VALUES(627,'cheng7 oi5','穿鞋',0);
+INSERT INTO Teochew VALUES(628,'chip8','挦',0);
+INSERT INTO Teochew VALUES(629,'soi26 san1 kou3','洗衫裤',0);
+INSERT INTO Teochew VALUES(630,'soi26 uan2','洗碗',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
