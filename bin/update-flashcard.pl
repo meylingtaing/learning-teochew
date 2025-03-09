@@ -27,11 +27,16 @@ die colored("Must provide an English word!", "red") . "\n"
     unless defined $input;
 
 # Let's see what the user wants to update
-my ($category, $alt_chinese, $category_sort, $pengim, $hidden_from_flashcards);
+my (
+    $category, $category_sort,
+    $chinese, $alt_chinese,
+    $pengim,
+    $hidden_from_flashcards);
 GetOptions(
     "category=s"    => \$category,
-    "alt-chinese=s" => \$alt_chinese,
     "category-sort" => \$category_sort,
+    "chinese=s"     => \$chinese,
+    "alt-chinese=s" => \$alt_chinese,
     "pengim=s"      => \$pengim,
 
     "hidden-from-flashcards=i" => \$hidden_from_flashcards,
@@ -39,15 +44,17 @@ GetOptions(
 
 # XXX There's probably an easier way of handling this
 unless ($category ||
-        $alt_chinese ||
         $category_sort ||
+        $alt_chinese ||
         $pengim ||
+        $chinese ||
         defined $hidden_from_flashcards)
 {
     say "Must provide one of these options:";
     say "\t--category";
-    say "\t--alt-chinese";
     say "\t--category-sort";
+    say "\t--chinese";
+    say "\t--alt-chinese";
     say "\t--hidden-from-flashcards";
     exit;
 }
@@ -115,9 +122,30 @@ if ($alt_chinese) {
     }
 }
 
-if ($pengim) {
-    # TODO: Be able to smartly modify the related Chinese entry. Maybe.
+if ($chinese) {
+    # First make sure these Chinese characters exist in the database
+    $db->ensure_chinese_is_in_database(
+        chinese => $chinese,
+        pengim  => $teochew->{pengim},
+    );
 
+    # Maybe this one doesn't have any Chinese yet?
+    my $teochew_id = $db->_get_teochew_id(
+        pengim  => $teochew->{pengim},
+        chinese => '?',
+    );
+
+    # TODO: Be able to smartly modify the related Chinese entry. Maybe.
+    die "I haven't supported replacing the Chinese character yet\n"
+        unless $teochew_id;
+
+    say "Adding $chinese as the Chinese for $english->{word}";
+    if (confirm()) {
+        $db->update_teochew($teochew_id, chinese => $chinese);
+    }
+}
+
+if ($pengim) {
     say "Modifying $english->{word} translation to $pengim";
     if (confirm()) {
         $db->update_teochew(

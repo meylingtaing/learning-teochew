@@ -184,9 +184,20 @@ sub update_teochew {
     my ($self, $teochew_id, %params) = @_;
     $self = $self->new unless ref $self;
 
-    $self->dbh->do(qq{
-        update Teochew set pengim = ? where Teochew.id = ?
-    }, undef, $params{pengim}, $teochew_id);
+    if (my $pengim = $params{pengim}) {
+        $self->dbh->do(qq{
+            update Teochew set pengim = ? where Teochew.id = ?
+        }, undef, $pengim, $teochew_id);
+    }
+
+    if (my $chinese = $params{chinese}) {
+        # If we're getting both simplified and traditional, just insert the
+        # simplified
+        my ($simplified, $traditional) = split_out_parens($chinese);
+        $self->dbh->do(qq{
+            update Teochew set chinese = ? where Teochew.id = ?
+        }, undef, $simplified, $teochew_id);
+    }
 }
 
 =head2 insert_synonym
