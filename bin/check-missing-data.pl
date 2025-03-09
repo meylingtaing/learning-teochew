@@ -31,6 +31,7 @@ my @commands_to_run = $command ?
         'audio',
         'character_details',
         'phrase',
+        'compound_breakdown',
         'hidden',
     );
 
@@ -115,6 +116,24 @@ if (grep /^hidden$/, @commands_to_run) {
     });
 
     say "Hidden words:";
+    say $_->[0] for @rows;
+    print "\n";
+}
+
+if (grep /^compound_breakdown/, @commands_to_run) {
+
+    # Find all the english words that translate to multisyllable teochew
+    # (if there's a space, then there are multiple syllables) that don't have
+    # any corresponding "compound" entries
+    @rows = $dbh->selectall_array(qq{
+        select word from English
+        join Translation on English.id = Translation.english_id
+        join Teochew on Translation.teochew_id = Teochew.id
+        left join Compound on Compound.parent_teochew_id = Teochew.id
+        where pengim like '% %' and Compound.id is null
+    });
+
+    say "Missing compound breakdowns";
     say $_->[0] for @rows;
     print "\n";
 }
