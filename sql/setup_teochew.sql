@@ -588,6 +588,10 @@ INSERT INTO English VALUES(548,18,'to wear shoes',0,NULL,NULL);
 INSERT INTO English VALUES(549,10,'to knead',0,NULL,NULL);
 INSERT INTO English VALUES(550,18,'to wash clothes',0,NULL,NULL);
 INSERT INTO English VALUES(551,10,'to wash dishes',0,NULL,NULL);
+INSERT INTO English VALUES(552,32,'with',0,NULL,NULL);
+INSERT INTO English VALUES(553,14,'to add',0,NULL,NULL);
+INSERT INTO English VALUES(554,8,'scared',0,NULL,NULL);
+INSERT INTO English VALUES(555,6,'car',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1102,6 +1106,10 @@ INSERT INTO Chinese VALUES(513,'酥',NULL,NULL,'sou1');
 INSERT INTO Chinese VALUES(514,'题','題',NULL,'doi5');
 INSERT INTO Chinese VALUES(515,'穿',NULL,NULL,'cheng7');
 INSERT INTO Chinese VALUES(516,'挦','撏',NULL,'chip8');
+INSERT INTO Chinese VALUES(517,'合',NULL,NULL,'gah8');
+INSERT INTO Chinese VALUES(518,'加',NULL,NULL,'gia1');
+INSERT INTO Chinese VALUES(519,'惊','驚',NULL,'gian1');
+INSERT INTO Chinese VALUES(520,'车','車',NULL,'chia1');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1170,6 +1178,8 @@ INSERT INTO Synonyms VALUES(60,310,'porridge');
 INSERT INTO Synonyms VALUES(61,34,'he');
 INSERT INTO Synonyms VALUES(62,34,'it');
 INSERT INTO Synonyms VALUES(63,426,'coat');
+INSERT INTO Synonyms VALUES(64,552,'and');
+INSERT INTO Synonyms VALUES(65,554,'scary');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2244,6 +2254,11 @@ INSERT INTO Translation VALUES(613,550,629,0);
 INSERT INTO Translation VALUES(614,551,630,0);
 INSERT INTO Translation VALUES(615,155,631,1);
 INSERT INTO Translation VALUES(616,155,632,1);
+INSERT INTO Translation VALUES(617,552,633,0);
+INSERT INTO Translation VALUES(618,553,634,0);
+INSERT INTO Translation VALUES(619,554,635,0);
+INSERT INTO Translation VALUES(620,555,636,0);
+INSERT INTO Translation VALUES(621,555,637,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2851,6 +2866,11 @@ INSERT INTO Teochew VALUES(629,'soi26 san1 kou3','洗衫裤',0);
 INSERT INTO Teochew VALUES(630,'soi26 uan2','洗碗',0);
 INSERT INTO Teochew VALUES(631,'liang57 ki3','凉气',0);
 INSERT INTO Teochew VALUES(632,'liang57 ki32 gi1','凉气机',0);
+INSERT INTO Teochew VALUES(633,'gah8','合',0);
+INSERT INTO Teochew VALUES(634,'gia1','加',0);
+INSERT INTO Teochew VALUES(635,'gian1','惊',0);
+INSERT INTO Teochew VALUES(636,'chia1','车',0);
+INSERT INTO Teochew VALUES(637,'diang67 chia1','电车',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
