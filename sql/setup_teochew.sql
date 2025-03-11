@@ -1261,6 +1261,7 @@ INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "s
 INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
 INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
 INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip** the filling, so this is not limited to just dough.\n\nI''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
+INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -1794,7 +1795,7 @@ INSERT INTO Translation VALUES(162,153,172,1);
 INSERT INTO Translation VALUES(163,154,173,1);
 INSERT INTO Translation VALUES(164,155,174,0);
 INSERT INTO Translation VALUES(165,155,175,0);
-INSERT INTO Translation VALUES(166,155,176,0);
+INSERT INTO Translation VALUES(166,155,176,1);
 INSERT INTO Translation VALUES(167,156,177,1);
 INSERT INTO Translation VALUES(168,157,178,0);
 INSERT INTO Translation VALUES(169,158,179,1);
@@ -2241,6 +2242,8 @@ INSERT INTO Translation VALUES(611,548,627,0);
 INSERT INTO Translation VALUES(612,549,628,0);
 INSERT INTO Translation VALUES(613,550,629,0);
 INSERT INTO Translation VALUES(614,551,630,0);
+INSERT INTO Translation VALUES(615,155,631,1);
+INSERT INTO Translation VALUES(616,155,632,1);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2846,6 +2849,8 @@ INSERT INTO Teochew VALUES(627,'cheng7 oi5','穿鞋',0);
 INSERT INTO Teochew VALUES(628,'chip8','挦',0);
 INSERT INTO Teochew VALUES(629,'soi26 san1 kou3','洗衫裤',0);
 INSERT INTO Teochew VALUES(630,'soi26 uan2','洗碗',0);
+INSERT INTO Teochew VALUES(631,'liang57 ki3','凉气',0);
+INSERT INTO Teochew VALUES(632,'liang57 ki32 gi1','凉气机',0);
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
