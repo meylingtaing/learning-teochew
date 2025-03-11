@@ -41,10 +41,12 @@ sub input_via_editor {
         DIR    => $folder,
         SUFFIX => '.txt',
     );
-
     binmode($fh, ":utf8");
-    print $fh $content;
-    close $fh;
+
+    if ($content) {
+        print $fh $content;
+        close $fh;
+    }
 
     # Open up vim on that file
     system('vim', $filename);
