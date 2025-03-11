@@ -264,6 +264,12 @@ sub english {
     $c->redirect_to("/search?search=$input");
 }
 
+=head2 chinese
+
+The page for seeing details for a Chinese character
+
+=cut
+
 sub chinese {
     my $c = shift;
 
@@ -272,7 +278,8 @@ sub chinese {
 
     # It's possible that the traditional character was searched. Use the
     # simplified character for finding other words using this character
-    $character = $details->[0]{simplified};
+    my $simplified = $details->[0]{simplified};
+    $character = $simplified if $simplified;
 
     my $words      = Teochew::find_words_using_character($character);
     my $alternates = Teochew::check_alternate_chinese(chinese => $character);
