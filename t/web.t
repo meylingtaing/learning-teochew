@@ -8,6 +8,9 @@ use URI::Escape;
 use lib 'lib';
 my $t = Test::Mojo->new('App');
 
+# Hide the extra debug messages because they're kind of noisy
+$t->app->log->level('info');
+
 # Index page hits /flashcards
 $t->get_ok('/')->status_is(302)->header_is(location => '/flashcards');
 

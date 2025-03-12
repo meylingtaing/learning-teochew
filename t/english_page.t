@@ -3,6 +3,9 @@ use Test::More;
 
 my $t = Test::Mojo->new('App');
 
+# Hide the extra debug messages because they're kind of noisy
+$t->app->log->level('info');
+
 # Each of these tests checks:
 #   * status 200
 #   * main word that is displayed
