@@ -592,6 +592,13 @@ INSERT INTO English VALUES(552,32,'with',0,NULL,NULL);
 INSERT INTO English VALUES(553,14,'to add',0,NULL,NULL);
 INSERT INTO English VALUES(554,8,'scared',0,NULL,NULL);
 INSERT INTO English VALUES(555,6,'car',0,NULL,NULL);
+INSERT INTO English VALUES(556,13,'to drive',0,NULL,NULL);
+INSERT INTO English VALUES(557,6,'to drive a car',0,NULL,NULL);
+INSERT INTO English VALUES(558,23,'weather',0,NULL,NULL);
+INSERT INTO English VALUES(559,32,'too',0,NULL,NULL);
+INSERT INTO English VALUES(560,8,'too hot',0,NULL,NULL);
+INSERT INTO English VALUES(561,8,'quite hot',0,NULL,NULL);
+INSERT INTO English VALUES(562,23,'good weather',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1110,6 +1117,9 @@ INSERT INTO Chinese VALUES(517,'合',NULL,NULL,'gah8');
 INSERT INTO Chinese VALUES(518,'加',NULL,NULL,'gia1');
 INSERT INTO Chinese VALUES(519,'惊','驚',NULL,'gian1');
 INSERT INTO Chinese VALUES(520,'车','車',NULL,'chia1');
+INSERT INTO Chinese VALUES(521,'驶','駛',NULL,'sai2');
+INSERT INTO Chinese VALUES(522,'佮',NULL,NULL,'kah4');
+INSERT INTO Chinese VALUES(523,'恰',NULL,NULL,'kah4');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1272,6 +1282,7 @@ INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blu
 INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
 INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip** the filling, so this is not limited to just dough.\n\nI''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
+INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too much"\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -1635,6 +1646,7 @@ INSERT INTO TeochewAltChinese VALUES(9,403,'口畔');
 INSERT INTO TeochewAltChinese VALUES(10,601,'底畔');
 INSERT INTO TeochewAltChinese VALUES(11,47,'嫲');
 INSERT INTO TeochewAltChinese VALUES(12,47,'嬤');
+INSERT INTO TeochewAltChinese VALUES(13,641,'恰');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2259,6 +2271,13 @@ INSERT INTO Translation VALUES(618,553,634,0);
 INSERT INTO Translation VALUES(619,554,635,0);
 INSERT INTO Translation VALUES(620,555,636,0);
 INSERT INTO Translation VALUES(621,555,637,0);
+INSERT INTO Translation VALUES(622,556,638,1);
+INSERT INTO Translation VALUES(623,557,639,0);
+INSERT INTO Translation VALUES(624,558,640,0);
+INSERT INTO Translation VALUES(625,559,641,1);
+INSERT INTO Translation VALUES(626,560,642,0);
+INSERT INTO Translation VALUES(627,561,643,0);
+INSERT INTO Translation VALUES(628,562,644,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2869,6 +2888,13 @@ INSERT INTO Teochew VALUES(634,'gia1','加');
 INSERT INTO Teochew VALUES(635,'gian1','惊');
 INSERT INTO Teochew VALUES(636,'chia1','车');
 INSERT INTO Teochew VALUES(637,'diang67 chia1','电车');
+INSERT INTO Teochew VALUES(638,'sai2','驶');
+INSERT INTO Teochew VALUES(639,'sai26 chia1','驶车');
+INSERT INTO Teochew VALUES(640,'tin1 si5','天时');
+INSERT INTO Teochew VALUES(641,'kah4','佮');
+INSERT INTO Teochew VALUES(642,'kah48 yuah8','佮热');
+INSERT INTO Teochew VALUES(643,'hoh48 yuah8','好热');
+INSERT INTO Teochew VALUES(644,'tin1 si57 ho2','天时好');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
