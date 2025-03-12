@@ -421,7 +421,13 @@ sub translate_time {
 
 Translates a phrase. Expects a hashref in the form of
 
-    { sentence => 'I'm going to the store', words => 'I to_go store' }
+    { sentence => 'I'm going to the store', words => 'I| to_go store' }
+
+In C<words>, a C<|> character after a word indicates that it should not
+undergo tone change (sandhi). It is assumed that all other words (except the
+last one in a sentence) will have tone change
+
+This also will never apply sandhi the words 'I' or 'you'
 
 =cut
 
@@ -450,8 +456,14 @@ sub translate_phrase {
         else {
             $translation = _lookup($word, $pengim);
         }
-        $translation->{no_tone_change} ||= $no_tone_change;
+
         $translation->{pengim} =~ s/\d(\d)/($1)/;
+
+        # As far as I know, 'I' and 'you' never undergo tone change, so I'm
+        # just hardcoding that rule here
+        $translation->{no_tone_change} =
+            ($word eq 'I' || $word eq 'you') ? 1 : $no_tone_change;
+
         push @components, $translation;
     }
 
@@ -1079,7 +1091,6 @@ arrayref contains a hashref with these fields:
 
     pengim
     chinese
-    no_tone_change
 
 =cut
 
@@ -1105,9 +1116,7 @@ sub _lookup_all {
     }
 
     my $sql = qq{
-        select
-            pengim, chinese,
-            no_tone_change
+        select pengim, chinese
         from Teochew
         join Translation on Teochew.id = Translation.teochew_id
         join English on English.id = Translation.english_id
