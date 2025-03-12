@@ -68,14 +68,16 @@
 
   </div>
 
-  <div class="row mx-sm-1 my-1">
-    <div class="col">
-      <a href="/english/<%= $flashcard->{english} %>" target="_blank"
-         id="english-page-link">
-        View translation page for <b><%= $flashcard->{english} %></b>
-      </a>
+  % if (($type // '') ne 'phrase') {
+    <div class="row mx-sm-1 my-1">
+      <div class="col">
+        <a href="/english/<%= $flashcard->{english} %>" target="_blank"
+           id="english-page-link">
+          View translation page for <b><%= $flashcard->{english} %></b>
+        </a>
+      </div>
     </div>
-  </div>
+  % }
 
   % if ($type) {
     <div class="row mx-sm-1 my-1">
