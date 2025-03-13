@@ -1190,6 +1190,7 @@ INSERT INTO Synonyms VALUES(62,34,'it');
 INSERT INTO Synonyms VALUES(63,426,'coat');
 INSERT INTO Synonyms VALUES(64,552,'and');
 INSERT INTO Synonyms VALUES(65,554,'scary');
+INSERT INTO Synonyms VALUES(66,220,'cool');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1283,6 +1284,7 @@ INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. Wh
 INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip** the filling, so this is not limited to just dough.\n\nI''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
 INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too much"\n','\n',char(10)));
+INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
