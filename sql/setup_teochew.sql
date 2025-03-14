@@ -247,8 +247,8 @@ INSERT INTO English VALUES(199,29,'pork',0,NULL,10);
 INSERT INTO English VALUES(200,9,'dryer',1,NULL,NULL);
 INSERT INTO English VALUES(201,30,'soda',0,NULL,NULL);
 INSERT INTO English VALUES(203,30,'milk tea',0,NULL,NULL);
-INSERT INTO English VALUES(204,10,'coconut',1,NULL,NULL);
-INSERT INTO English VALUES(205,10,'coconut juice',1,NULL,NULL);
+INSERT INTO English VALUES(204,10,'coconut',0,NULL,NULL);
+INSERT INTO English VALUES(205,10,'coconut juice',0,NULL,NULL);
 INSERT INTO English VALUES(206,10,'breakfast',0,NULL,NULL);
 INSERT INTO English VALUES(207,10,'lunch',1,NULL,NULL);
 INSERT INTO English VALUES(208,10,'dinner',1,NULL,NULL);
@@ -599,6 +599,11 @@ INSERT INTO English VALUES(559,32,'too',0,NULL,NULL);
 INSERT INTO English VALUES(560,8,'too hot',0,NULL,NULL);
 INSERT INTO English VALUES(561,8,'quite hot',0,NULL,NULL);
 INSERT INTO English VALUES(562,23,'good weather',0,NULL,NULL);
+INSERT INTO English VALUES(563,8,'new',0,NULL,NULL);
+INSERT INTO English VALUES(564,13,'to fold',0,NULL,NULL);
+INSERT INTO English VALUES(565,14,'work',0,NULL,NULL);
+INSERT INTO English VALUES(566,14,'a new job',0,NULL,NULL);
+INSERT INTO English VALUES(567,18,'to fold clothes',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1120,6 +1125,8 @@ INSERT INTO Chinese VALUES(520,'车','車',NULL,'chia1');
 INSERT INTO Chinese VALUES(521,'驶','駛',NULL,'sai2');
 INSERT INTO Chinese VALUES(522,'佮',NULL,NULL,'kah4');
 INSERT INTO Chinese VALUES(523,'恰',NULL,NULL,'kah4');
+INSERT INTO Chinese VALUES(524,'新',NULL,NULL,'seng1');
+INSERT INTO Chinese VALUES(525,'折',NULL,NULL,'jih4');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1191,6 +1198,7 @@ INSERT INTO Synonyms VALUES(63,426,'coat');
 INSERT INTO Synonyms VALUES(64,552,'and');
 INSERT INTO Synonyms VALUES(65,554,'scary');
 INSERT INTO Synonyms VALUES(66,220,'cool');
+INSERT INTO Synonyms VALUES(67,565,'job');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1285,6 +1293,8 @@ INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were maki
 INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
 INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too much"\n','\n',char(10)));
 INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
+INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
+INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
 CREATE TABLE PengimAlt (
     id          integer primary key,
     pengim_id   integer,
@@ -2280,6 +2290,14 @@ INSERT INTO Translation VALUES(625,559,641,1);
 INSERT INTO Translation VALUES(626,560,642,0);
 INSERT INTO Translation VALUES(627,561,643,0);
 INSERT INTO Translation VALUES(628,562,644,0);
+INSERT INTO Translation VALUES(629,375,645,0);
+INSERT INTO Translation VALUES(630,563,646,0);
+INSERT INTO Translation VALUES(631,564,647,0);
+INSERT INTO Translation VALUES(632,564,648,0);
+INSERT INTO Translation VALUES(633,565,649,0);
+INSERT INTO Translation VALUES(634,566,650,0);
+INSERT INTO Translation VALUES(635,567,651,0);
+INSERT INTO Translation VALUES(636,567,652,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2897,6 +2915,14 @@ INSERT INTO Teochew VALUES(641,'kah4','佮');
 INSERT INTO Teochew VALUES(642,'kah48 yuah8','佮热');
 INSERT INTO Teochew VALUES(643,'hoh48 yuah8','好热');
 INSERT INTO Teochew VALUES(644,'tin1 si57 ho2','天时好');
+INSERT INTO Teochew VALUES(645,'jeu26 jiah8','煮食');
+INSERT INTO Teochew VALUES(646,'seng1','新');
+INSERT INTO Teochew VALUES(647,'yih8','?');
+INSERT INTO Teochew VALUES(648,'jih4','折');
+INSERT INTO Teochew VALUES(649,'kang1 kue3','工课');
+INSERT INTO Teochew VALUES(650,'seng1 kang1 kue3','新工课');
+INSERT INTO Teochew VALUES(651,'yih84 san1 kou3','?衫裤');
+INSERT INTO Teochew VALUES(652,'jih48 san1 kou3','折衫裤');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3056,6 +3082,12 @@ INSERT INTO Compound VALUES(150,233,1,423);
 INSERT INTO Compound VALUES(151,233,2,384);
 INSERT INTO Compound VALUES(152,397,1,114);
 INSERT INTO Compound VALUES(153,397,2,44);
+INSERT INTO Compound VALUES(154,645,1,409);
+INSERT INTO Compound VALUES(155,645,2,207);
+INSERT INTO Compound VALUES(156,652,1,632);
+INSERT INTO Compound VALUES(157,652,2,365);
+INSERT INTO Compound VALUES(158,650,1,630);
+INSERT INTO Compound VALUES(159,650,2,633);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
