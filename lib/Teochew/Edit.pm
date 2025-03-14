@@ -577,6 +577,79 @@ sub ensure_chinese_is_in_database {
     return $simplified;
 }
 
+=head2 potential_compound_breakdown
+
+Checks to see if there's a way we can automatically add a compound breakdown,
+and if so, it returns that breakdown in a hash in this form:
+
+    chinese => ['煮', '食'],
+    pengim  => ['jeu2', 'jiah8'],
+    english => ['to cook', 'to eat'],
+    notes   => ['', ''],
+    child_translation_ids => [1, 2],
+
+Otherwise, this returns undef
+
+TODO: There is some duplicated code between this and the add-compound-breakdown
+script, find a way to consolidate it
+
+=cut
+
+sub potential_compound_breakdown {
+    my ($self, %params) = @_;
+
+    my $chinese = $params{chinese};
+    my $pengim  = $params{pengim};
+
+    my @chars     = split //,  $chinese;
+    my @syllables = split / /, $pengim;
+
+    my %breakdown = (chinese => \@chars);
+
+    # Iterate through each syllable/character set
+    for (my $i = 0; $i < scalar @chars; $i++) {
+
+        # Determine the corresponding pengim for this set of characters
+        my @pengim_parts;
+        for (1..length($chars[$i])) {
+            my $syllable = shift @syllables;
+            push @pengim_parts, $syllable;
+        }
+        my $pengim_str = join ' ', @pengim_parts;
+
+        push @{ $breakdown{pengim} }, $pengim_str;
+
+        # Seach for a translation for this set of pengim and chinese. Note that
+        # the pengim might have a tone change, but we only want the base tone
+        # for searching
+        $pengim_str =~ s/(\d)(\d)$/$1/;
+
+        my @rows = $self->dbh->selectall_array(qq{
+            select
+                Translation.id translation_id,
+                English.word english,
+                English.notes notes
+            from Teochew
+            join Translation on Translation.teochew_id = Teochew.id
+            left join English on Translation.english_id = English.id
+            where chinese = ? and pengim = ?
+            order by Teochew.id
+        }, { Slice => {} }, $chars[$i], $pengim_str);
+
+        # TODO: handle multiple rows?
+        # For now, just return early if we can't find the right translation
+        if (scalar @rows != 1) {
+            return;
+        }
+
+        push @{ $breakdown{english} }, ($rows[0]{english} // '--');
+        push @{ $breakdown{notes} }, ($rows[0]{notes} // '');
+        push @{ $breakdown{child_translation_ids} }, $rows[0]{translation_id};
+    }
+
+    return %breakdown;
+}
+
 =head1 INTERNALS
 
 =cut

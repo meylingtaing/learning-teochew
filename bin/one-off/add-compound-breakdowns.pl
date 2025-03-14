@@ -19,6 +19,9 @@ use Input qw(confirm input_from_prompt);
 use Data::Dumper;
 use Term::ANSIColor qw(colored);
 
+# TODO: There is some duplicated code between this and the
+# potential_compound_breakdown method, find a way to consolidate it
+
 my $db = Teochew::Edit->new;
 
 # Usage: add-compound-breakdowns.pl "hello"

@@ -112,3 +112,41 @@ if (confirm()) {
         say colored($success_message, "green");
     }
 }
+
+my $syllables = length $simplified;
+exit unless $syllables > 1;
+
+# Check and see if we can automatically add a compound breakdown
+my %potential_breakdown = $db->potential_compound_breakdown(
+    chinese => $simplified,
+    pengim  => $pengim,
+);
+
+if (%potential_breakdown) {
+    say "\nAdding a compound breakdown...\n";
+
+    my %translation = $db->choose_translation_from_english($english, $simplified);
+    my $teochew = $translation{teochew};
+    die "Can't find the teochew entry for this!" unless $teochew;
+
+    my $confirm_str = "Compound breakdown:";
+
+    for (my $i = 0; $i < $syllables; $i++) {
+        say "Character: $potential_breakdown{chinese}[$i]";
+        say "Pengim syllable: $potential_breakdown{pengim}[$i]\n";
+
+        $confirm_str .= "\n\t$potential_breakdown{english}[$i]";
+        $confirm_str .= " ($potential_breakdown{notes}[$i])"
+            if $potential_breakdown{notes}[$i];
+    }
+
+    say $confirm_str;
+
+    if (confirm()) {
+        $db->insert_compound_breakdown(
+            parent_teochew_id => $teochew->{teochew_id},
+            translation_ids   => $potential_breakdown{child_translation_ids},
+        );
+        say colored("Added compound breakdown!", "green");
+    }
+}
