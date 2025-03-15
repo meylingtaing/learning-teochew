@@ -112,7 +112,7 @@ INSERT INTO English VALUES(63,5,'uncle',0,'mom''s sister''s husband',NULL);
 INSERT INTO English VALUES(64,5,'uncle',0,'mom''s brother',NULL);
 INSERT INTO English VALUES(65,5,'aunt',0,'mom''s brother''s wife',NULL);
 INSERT INTO English VALUES(66,5,'relative',0,NULL,NULL);
-INSERT INTO English VALUES(67,2,'100',0,NULL,NULL);
+INSERT INTO English VALUES(67,2,'100',1,NULL,NULL);
 INSERT INTO English VALUES(68,6,'television',0,NULL,NULL);
 INSERT INTO English VALUES(69,6,'computer',0,NULL,NULL);
 INSERT INTO English VALUES(70,6,'phone',0,NULL,NULL);
