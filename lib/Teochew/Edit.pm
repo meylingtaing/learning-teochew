@@ -74,6 +74,7 @@ sub insert_translation {
 
     if ($teochew_id) {
         say colored("Teochew entry already exists", "yellow");
+        return;
     }
     else {
         my $sth = $self->dbh->prepare(qq{
