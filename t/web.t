@@ -32,6 +32,7 @@ $t->get_ok('/flashcards/fake')
 # Check that category pages load
 $get->('/category/colors');
 $get->('/category/numbers/100');
+$get->('/category/phrase');
 
 # Check that you can translate
 # XXX: Should probably make sure something actually shows up on the page...
