@@ -108,7 +108,7 @@ if (confirm()) {
     );
     if ($success) {
         my $success_message = "Successfully added $english_main";
-        $success_message .= "($notes)" if $notes;
+        $success_message .= " ($notes)" if $notes;
         say colored($success_message, "green");
     }
 }
