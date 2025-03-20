@@ -47,7 +47,7 @@ my %alt_pengim = map { $_->[0] => $_->[1] } @{
 };
 
 # XXX Make this configurable eventually
-my $preferred_accent = 'alt';
+my $preferred_accent = 'gekion';
 
 =head1 DATA
 
@@ -270,29 +270,28 @@ sub translate {
 
     my @ret;
     for (@translations) {
+        my $alt = _standard_pronunciation(
+            chinese => $_->{chinese},
+            pengim  => $_->{pengim}
+        );
+
         $_->{pengim} =~ s/\d(\d)/($1)/g;
+        $alt =~ s/\d(\d)/($1)/g if $alt;
+
         my $pronunciation = [{
             pengim => $_->{pengim}, audio => find_audio($_->{pengim})
         }];
 
         # It's possible that I recorded multiple versions of this word, with
         # different accents. If I have multiple accents recorded, include them
-        my $alt = _alternate_pronunciation($_->{pengim});
         if ($alt) {
             my $audio = find_audio($alt);
-
-            # Whooooo this is hacky -- if I only have audio for one of the
-            # accents, show that one, BUUUT if this is a number/clock time,
-            # then always use the alternate pronunciation, for consistency's
-            # sake
-            if ($audio || $translate_number) {
-                my $new_pronunciation = { pengim => $alt, audio => $audio };
-                if ($preferred_accent eq 'alt') {
-                    unshift @$pronunciation, $new_pronunciation;
-                }
-                else {
-                    push @$pronunciation, $new_pronunciation;
-                }
+            my $new_pronunciation = { pengim => $alt, audio => $audio };
+            if ($preferred_accent eq 'gekion') {
+                push @$pronunciation, $new_pronunciation;
+            }
+            else {
+                unshift @$pronunciation, $new_pronunciation;
             }
         }
 
@@ -1497,13 +1496,9 @@ sub _format_for_translations_table {
         my $pengim = $_->{pengim};
         $pengim =~ s/\d(\d)/($1)/g;
         my $audio;
-        if ($preferred_accent eq 'alt') {
-            my $alt = _alternate_pronunciation($pengim);
-            if ($alt) {
-                $audio  = find_audio($alt);
-                $pengim = $alt if $audio;
-            }
-        }
+
+        # TODO: Be able to display the non-gekion pronunciation here
+
         $audio ||= find_audio($pengim);
 
         push @ret, {
