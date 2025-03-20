@@ -923,6 +923,61 @@ sub _generate_english_times {
     return @times;
 }
 
+=head2 _standard_pronunciation
+
+This takes two params in a hash, C<chinese> and C<pengim>, and checks to see if
+the Gekion pronunciation differs from the Teochew proper pronunciation. If it
+does, this returns the pengim for the Teochew accent. If not, this returns
+undef.
+
+=cut
+
+sub _standard_pronunciation {
+    my (%params) = @_;
+
+    my $chinese = $params{chinese};
+    my $pengim  = $params{pengim};
+
+    my $has_alt = 0;
+
+    # Break apart the pengim string into each syllable
+    my @words = split /\s+/, $pengim;
+    my @characters = split //, $chinese;
+    my @new_words;
+
+    for (my $i = 0; $i <= $#words; $i++) {
+
+        my $orig_pengim = $words[$i];
+
+        # Check if there's a tone change -- we just want the base tone for
+        # looking it up
+        my $changed_tone = $words[$i] =~ /\d\d/;
+        $words[$i] =~ s/(\d)\d/$1/g;
+
+        my $alt = $dbh->selectrow_array(qq{
+            select standard_pengim
+            from Chinese
+            where simplified = ? and pengim = ?
+        }, { Slice => {} }, $characters[$i], $words[$i]);
+
+        if ($alt) {
+            $has_alt = 1;
+            if ($changed_tone) {
+                $alt = change_tone($alt);
+            }
+            push @new_words, $alt;
+        }
+        else {
+            push @new_words, $orig_pengim;
+        }
+    }
+
+    return undef unless $has_alt;
+
+    my $standard_pengim = join ' ', @new_words;
+    return $standard_pengim;
+}
+
 # XXX Change this to not use cross product...just have one alternate, it's
 # a lot easier that way
 sub _alternate_pronunciation {
