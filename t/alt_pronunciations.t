@@ -9,14 +9,16 @@ use Data::Dumper;
 
 require_ok 'Teochew';
 
-# These are nonsense words/phrases that I'm just using to test
-is Teochew::_alternate_pronunciation('nging5'), 'ngeng5',
-    'nging5 has ngeng1 alternate';
+is Teochew::_standard_pronunciation(chinese => '银', pengim => 'ngeng5'), 'nging5',
+    'ngeng5 has nging5 standard pronunciation';
 
-is Teochew::_alternate_pronunciation('ma1 nging5 yik8'),
-    'ma1 ngeng5 yek8', 'ma1 nging5 yik8 has alternate ma1 ngeng5 yek8';
+is Teochew::_standard_pronunciation(
+    chinese => '礼拜日',
+    pengim => 'loi26 bai32 yek8'
+), 'loi26 bai32 yik8',
+    'loi26 bai32 yek8 has standard pronunciation loi26 bai32 yik8';
 
-is Teochew::_alternate_pronunciation('ma1'), undef,
-    'ma1 has no alternate';
+is Teochew::_standard_pronunciation(chinese => '妈', pengim => 'ma1'), undef,
+    'ma1 is same for both gekion and standard teochew';
 
 done_testing;
