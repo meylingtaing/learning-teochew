@@ -2815,7 +2815,7 @@ INSERT INTO Teochew VALUES(503,'yek8','日');
 INSERT INTO Teochew VALUES(504,'jek84 yek8','一日');
 INSERT INTO Teochew VALUES(505,'ek4 ghueh84','一月');
 INSERT INTO Teochew VALUES(506,'jap84 ek4 ghueh84','十一月');
-INSERT INTO Teochew VALUES(507,'loi26 bai32 yik8','礼拜日');
+INSERT INTO Teochew VALUES(507,'loi26 bai32 yek8','礼拜日');
 INSERT INTO Teochew VALUES(508,'geng1 yek8','今日');
 INSERT INTO Teochew VALUES(509,'ao6 yek84','后日');
 INSERT INTO Teochew VALUES(510,'gao1 miang5','高棉');
@@ -3127,6 +3127,10 @@ INSERT INTO Compound VALUES(158,650,1,630);
 INSERT INTO Compound VALUES(159,650,2,633);
 INSERT INTO Compound VALUES(160,659,1,642);
 INSERT INTO Compound VALUES(161,659,2,402);
+INSERT INTO Compound VALUES(162,643,1,540);
+INSERT INTO Compound VALUES(163,643,2,307);
+INSERT INTO Compound VALUES(164,644,1,624);
+INSERT INTO Compound VALUES(165,644,2,344);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
