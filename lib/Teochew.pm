@@ -35,17 +35,6 @@ Class for accessing the Teochew database
 my $dbh = DBI->connect("DBI:SQLite:dbname=Teochew.sqlite");
 $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
 
-# Get a cache of the alternates pronunciations because it's small and we don't
-# want to keep hitting the database over and over
-my %alt_pengim = map { $_->[0] => $_->[1] } @{
-    $dbh->selectall_arrayref(qq{
-        select
-            Pengim.full pengim,
-            PengimAlt.full alt
-        from Pengim join PengimAlt on Pengim.id = pengim_id
-    })
-};
-
 # XXX Make this configurable eventually
 my $preferred_accent = 'gekion';
 
@@ -975,63 +964,6 @@ sub _standard_pronunciation {
 
     my $standard_pengim = join ' ', @new_words;
     return $standard_pengim;
-}
-
-# XXX Change this to not use cross product...just have one alternate, it's
-# a lot easier that way
-sub _alternate_pronunciation {
-    my ($pengim) = @_;
-    my $has_alt = 0;
-
-    # Break apart the string into multiple words, and then keep a list of the
-    # tone numbers--they aren't relevant for this, but we need to tack them
-    # back on at the end
-    my @words = split /\s+/, $pengim;
-    my @tones;
-
-    my %variations;
-
-    my @new_words;
-
-    for (my $i = 0; $i <= $#words; $i++) {
-        $words[$i] =~ /([a-z]+)(\(?\d\)?)/;
-        my $base_word = $words[$i] = $1;
-        push @tones, $2;
-        my $tone = $2;
-        if (my $alt = $alt_pengim{$base_word}) {
-            #$variations{$i} = [$base_word, $alt];
-            push @new_words, $alt . $tone;
-            $has_alt = 1;
-        }
-        else {
-            push @new_words, $base_word . $tone;
-        }
-    }
-
-    return undef unless $has_alt;
-    return join ' ', @new_words;
-
-    ## If there's only one word with alternates, we need this fake key in
-    ## order for CrossProduct to work
-    #my $combinations = Set::CrossProduct->new({
-    #    fake_key => ['1'],
-    #    %variations
-    #});
-
-    ## Form the list of strings
-    #my @ret;
-    #while (my $combo = $combinations->get) {
-    #    my @alt_words;
-    #    for (my $i = 0; $i <= $#words; $i++) {
-    #        my $new_word = $combo->{$i} // $words[$i];
-    #        push @alt_words, $new_word . $tones[$i];
-    #    }
-    #    my $alt_pronunciation = join(' ', @alt_words);
-    #    next if $alt_pronunciation eq $pengim;
-    #    push @ret, $alt_pronunciation;
-    #}
-
-    #return @ret;
 }
 
 =head1 MISCELLANEOUS FUNCTIONS

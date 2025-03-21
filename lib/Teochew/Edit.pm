@@ -530,9 +530,6 @@ sub ensure_chinese_is_in_database {
     for (my $i = 0; $i < scalar @simplified_chars; $i++) {
         next if $simplified_chars[$i] eq '?';
 
-        # XXX: Maybe update Pengim table too...but honestly it's not that
-        # important
-
         # The pengim might have had tone change -- if so, it would be inputted
         # like "ma3(2)", with the base tone listed first, and the changed tone
         # in parens. We need to associate the Chinese character with the base
