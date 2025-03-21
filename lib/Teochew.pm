@@ -1366,13 +1366,31 @@ sub find_audio {
 
 =head2 chinese_character_details
 
+Given a chinese character and optionally some pengim, this will return an
+arrayref of details about this character, with each element being a hash of
+this form:
+
+    {
+        simplified      => '汝'
+        traditional     => undef,
+        pengim          => 'leu2'
+        audio           => 'l/leu2.mp3',
+    }
+
+Most Chinese characters only have one entry, but it is possible for there to be
+multiple for one character, with different pengim associated with it. If you
+supply pengim to this method, it will only look for that specific character
+with that specific pengim
+
+Returns undef if it can't find a matching entry in the database
+
 =cut
 
 sub chinese_character_details {
     my ($character, $pengim) = @_;
 
     my $sql = qq{
-        select id chinese_id, simplified, traditional, pengim, meaning
+        select simplified, traditional, pengim, standard_pengim
         from Chinese where (simplified = ? or traditional = ?)
     };
     my @binds = ($character, $character);
@@ -1386,18 +1404,19 @@ sub chinese_character_details {
 
     return unless scalar @rows;
 
-    my $chinese = $rows[0];
+    my @return;
 
     for my $chinese (@rows) {
-        $chinese->{audio}  = find_audio($chinese->{pengim});
-        $chinese->{pengim} = add_tone_marks($chinese->{pengim});
+        push @return, {
+            simplified  => $chinese->{simplified},
+            traditional => $chinese->{traditional},
+            pengim      => add_tone_marks($chinese->{pengim}),
+            audio       => find_audio($chinese->{pengim}),
+        };
 
-        # XXX: As of now, there will only be one alt per each standard pengim,
-        # though that might change in the future
-        my $alt = _alternate_pronunciation($chinese->{pengim});
-        if ($alt) {
+        if (my $alt = $chinese->{standard_pengim}) {
             my $audio = find_audio($alt);
-            push @rows, {
+            push @return, {
                 simplified  => $chinese->{simplified},
                 traditional => $chinese->{traditional},
                 pengim      => add_tone_marks($alt),
@@ -1406,10 +1425,9 @@ sub chinese_character_details {
         }
     }
 
-    # hacky
-    @rows = reverse @rows if $preferred_accent eq 'alt';
+    @return = reverse @return if $preferred_accent ne 'gekion';
 
-    return \@rows;
+    return \@return;
 }
 
 =head2 find_words_using_character
