@@ -1295,9 +1295,9 @@ sub search {
 
 =head2 get_all_translations_by_id
 
-# XXX Move this up to the translate functions
-
-Similar to L</get_all_translations>, but you pass in an id instead
+Takes an english_id, and optionally a hash of params. In the params, you can
+set C<for_flashcards> which will filter out translations that are
+"hidden from flashcards"
 
 Returns rows with
 
