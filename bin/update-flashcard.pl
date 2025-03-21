@@ -146,7 +146,8 @@ if ($chinese) {
 }
 
 if ($pengim) {
-    say "Modifying $english->{word} translation to $pengim";
+    say "Modifying $english->{word} translation from " .
+        "'$teochew->{pengim}' to '$pengim'";
     if (confirm()) {
         $db->update_teochew(
             $teochew->{teochew_id},
