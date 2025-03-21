@@ -248,7 +248,6 @@ sub insert_category {
         pengim      => '',
         simplified  => '',
         traditional => '',
-        meaning     => '',
     );
 
 =cut
@@ -263,11 +262,6 @@ sub insert_chinese {
     if ($params{traditional}) {
         push @columns, 'traditional';
         push @binds, $params{traditional};
-    }
-
-    if ($params{meaning}) {
-        push @columns, 'meaning';
-        push @binds, $params{meaning};
     }
 
     my $col_str  = join ', ', @columns;
