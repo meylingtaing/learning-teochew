@@ -208,9 +208,7 @@ sub english {
             # Get the translation
             my $translation_rows = Teochew::translate(
                 $english_row,
-                # XXX: I might try this again later, but I find that showing
-                # multiple accents makes the page look cluttered
-                #show_all_accents => 1
+                show_all_accents => 1
             );
 
             for my $translation_row (@$translation_rows) {
@@ -229,8 +227,8 @@ sub english {
                     Teochew::extra_translation_information_by_id(
                         $translation_row->{translation_id}
                     );
-                $translation_row->{extra_notes} =
-                    markdown($extra_translation_notes // '');
+                $translation_row->{extra_notes} = $extra_translation_notes ?
+                    markdown($extra_translation_notes) : undef;
 
                 push @chinese, $translation_row->{chinese};
                 push @{ $categories{$category}{teochew} }, {

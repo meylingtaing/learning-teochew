@@ -11,6 +11,9 @@
     padding-top: .4em;
     padding-bottom: .4em;
 }
+.word-breakdown > :not(:last-child) {
+    margin-bottom: .5rem;
+}
 </style>
 
 % if (scalar keys %$teochew_by_category == 0) {
@@ -35,13 +38,34 @@
           %= include 'elements/translation', row => $row
           <div class="notes"><%= $row->{notes} %></div>
 
-          % if ($row->{compound}) {
+
+          % if ($row->{compound} || $row->{extra_notes} || $row->{pronunciations}[1] || $row->{alt_chinese}) {
             <a data-toggle="collapse" href="#word-breakdown-<%= $row_id %>">
               <small>
                 More details <i class="ion-arrow-down-b"></i>
               </small>
             </a>
-            <div id="word-breakdown-<%= $row_id %>" class="collapse mt-2">
+
+            %# XXX: I should rename this class since it contains more than just
+            %# the compound word breakdowns now
+            <div id="word-breakdown-<%= $row_id %>"
+                 class="word-breakdown collapse my-2">
+
+            %# If there is a standard "Teochew proper" pronunciation that is
+            %# different than the Gekion one that I use by default, display
+            %# that here
+            % if (my $standard_pronunciation = $row->{pronunciations}[1]) {
+              <div class="teochew-proper-pronunciation">
+              潮州音: <%= $standard_pronunciation->{pengim} %>
+              % if ($standard_pronunciation->{audio}) {
+                <%= include 'elements/play-teochew',
+                      audio => $standard_pronunciation->{audio} %>
+              % }
+              </div>
+            % }
+
+            %# Compound breakdown
+            % if ($row->{compound}) {
             <table class="table table-bordered w-auto">
               <thead class="thead-light"><tr>
               % for my $component (@{ $row->{compound} }) {
@@ -62,15 +86,24 @@
               % }
               </tr>
             </table>
+            % }
+
+            % if ($row->{alt_chinese}) {
+              <div class="text-muted">
+              Alternates: <%= join ", ", @{ $row->{alt_chinese} } %>
+              </div>
+            % }
+
+            %# Extra notes for this particular translation
+            % if ($row->{extra_notes}) {
+            <div class="extra-notes">
             %== $row->{extra_notes}
             </div>
+            % }
+
+            </div> <!-- word-breakdown -->
           % }
 
-          % if ($row->{alt_chinese}) {
-              <span class="text-muted">
-              Alternates: <%= join ", ", @{ $row->{alt_chinese} } %>
-              </span>
-          % }
         </li>
       % }
     % }
