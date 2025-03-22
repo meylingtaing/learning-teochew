@@ -245,9 +245,10 @@ sub insert_category {
 =head2 insert_chinese
 
     $teochew->insert_chinese(
-        pengim      => '',
-        simplified  => '',
-        traditional => '',
+        pengim          => 'chek8',
+        standard_pengim => 'chik8', # optional
+        simplified      => '',
+        traditional     => '',
     );
 
 =cut
@@ -262,6 +263,11 @@ sub insert_chinese {
     if ($params{traditional}) {
         push @columns, 'traditional';
         push @binds, $params{traditional};
+    }
+
+    if ($params{standard_pengim}) {
+        push @columns, 'standard_pengim';
+        push @binds, $params{standard_pengim};
     }
 
     my $col_str  = join ', ', @columns;
