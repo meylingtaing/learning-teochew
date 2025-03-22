@@ -614,6 +614,8 @@ INSERT INTO English VALUES(575,33,'to remember',0,NULL,NULL);
 INSERT INTO English VALUES(576,33,'to forget',0,NULL,NULL);
 INSERT INTO English VALUES(577,9,'to wake up',0,NULL,NULL);
 INSERT INTO English VALUES(578,32,'how much',0,NULL,NULL);
+INSERT INTO English VALUES(579,6,'broken',0,NULL,NULL);
+INSERT INTO English VALUES(580,32,'one''s self',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1148,6 +1150,11 @@ INSERT INTO Chinese VALUES(534,'得',NULL,'dek4',NULL);
 INSERT INTO Chinese VALUES(535,'毋',NULL,'m6',NULL);
 INSERT INTO Chinese VALUES(536,'醒',NULL,'chen2',NULL);
 INSERT INTO Chinese VALUES(537,'若',NULL,'yioh8',NULL);
+INSERT INTO Chinese VALUES(538,'失',NULL,'sek4','sik4');
+INSERT INTO Chinese VALUES(539,'掉',NULL,'diao7',NULL);
+INSERT INTO Chinese VALUES(540,'家',NULL,'ga1',NULL);
+INSERT INTO Chinese VALUES(541,'自',NULL,'di7',NULL);
+INSERT INTO Chinese VALUES(542,'己',NULL,'gi7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1318,6 +1325,7 @@ INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too
 INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
 INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
 INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
+INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the 揭阳 Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1359,6 +1367,7 @@ INSERT INTO TeochewAltChinese VALUES(13,641,'恰');
 INSERT INTO TeochewAltChinese VALUES(14,655,'打');
 INSERT INTO TeochewAltChinese VALUES(15,361,'毋');
 INSERT INTO TeochewAltChinese VALUES(16,662,'早起');
+INSERT INTO TeochewAltChinese VALUES(17,666,'家己');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2009,6 +2018,9 @@ INSERT INTO Translation VALUES(645,576,661,0);
 INSERT INTO Translation VALUES(646,577,662,0);
 INSERT INTO Translation VALUES(647,577,663,0);
 INSERT INTO Translation VALUES(648,578,664,0);
+INSERT INTO Translation VALUES(649,579,665,0);
+INSERT INTO Translation VALUES(650,580,666,0);
+INSERT INTO Translation VALUES(651,580,667,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2646,6 +2658,9 @@ INSERT INTO Teochew VALUES(661,'m67 ek48 dek4','唔忆得');
 INSERT INTO Teochew VALUES(662,'jao26 ki2','走起');
 INSERT INTO Teochew VALUES(663,'jao26 chen2','走醒');
 INSERT INTO Teochew VALUES(664,'yioh84 joi7','若㩼');
+INSERT INTO Teochew VALUES(665,'sek48 diao7','失掉');
+INSERT INTO Teochew VALUES(666,'ga1 di7','家自');
+INSERT INTO Teochew VALUES(667,'ga1 gi7','家己');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
