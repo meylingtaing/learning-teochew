@@ -141,25 +141,7 @@ elsif ($command eq 'insert_phrase') {
     die "This is not supported anymore. Use insert-phrase.pl instead\n";
 }
 elsif ($command eq 'insert_chinese') {
-    my ($chinese, $pengim, $meaning) = @ARGV;
-
-    # Require both Chinese and pengim
-    die "Must include chinese and pengim!" unless $chinese and $pengim;
-
-    # See if we have both simplified AND traditional given
-    my ($simplified, $traditional) = split_out_parens($chinese);
-    $meaning ||= '';
-
-    # Tell the user what we're doing before proceeding
-    say "Inserting Chinese [$simplified ($traditional), $pengim, $meaning]";
-    if (confirm()) {
-        insert_chinese(
-            simplified  => $simplified,
-            traditional => $traditional,
-            pengim      => $pengim,
-            meaning     => $meaning,
-        );
-    }
+    die "This is not supported anymore. Use insert-chinese.pl instead\n";
 }
 elsif ($command eq 'insert_synonym') {
     die "This is not supported anymore. Use insert-synonym.pl instead\n";
@@ -179,27 +161,8 @@ elsif ($command eq 'hide') {
     }
 }
 elsif ($command eq 'insert_extra') {
-    my ($english) = @ARGV;
-
-    die "Must include English!\n" unless $english;
-
-    # Make sure the english word exists already
-    my $english_id = get_english_id(english => $english, no_insert => 1);
-    die "$english does not exist!\n" unless $english_id;
-
-    # Check if we already have notes
-    my $existing = get_info($english_id);
-
-    my $info = input_via_editor($existing);
-
-    say "Inserting these notes for $english:\n$info";
-    if (confirm()) {
-        insert_extra(
-            english_id => $english_id,
-            info       => $info,
-            replacing  => $existing ? 1 : 0
-        );
-    }
+    die "This is not supported anymore. Use insert-extra-notes.pl instead\n"
+        unless $english;
 }
 else {
     die "Need an insert command!\n";
