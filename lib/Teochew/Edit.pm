@@ -546,33 +546,62 @@ sub ensure_chinese_is_in_database {
         die "Poorly formatted pengim! [$pengim_orig]\n"
             unless $pengim_orig =~ /(1|2|3|4|5|6|7|8)$/;
 
-        unless (scalar Teochew::chinese_character_details(
-                            $simplified_chars[$i], $pengim_orig))
-        {
-            my $insert_traditional =
-                scalar @traditional_chars == 0                  ? '' :
-                $simplified_chars[$i] eq $traditional_chars[$i] ? '' :
-                $traditional_chars[$i];
-
-            say sprintf "Inserting Chinese [%s (%s), %s]",
-                $simplified_chars[$i],
-                $insert_traditional,
-                $pengim_orig;
-
-            if (confirm()) {
-                $self->insert_chinese(
-                    simplified  => $simplified_chars[$i],
-                    traditional => $insert_traditional,
-                    pengim      => $pengim_orig,
-                );
-            }
-            else {
-                return undef;
-            }
-        }
+        # Insert Chinese if it doesn't exist
+        my $inserted = $self->confirm_and_insert_chinese(
+            simplified  => $simplified_chars[$i],
+            traditional => ($traditional_chars[$i] // ''),
+            pengim      => $pengim_orig,
+        );
+        return undef unless $inserted;
     }
 
     return $simplified;
+}
+
+=head2 confirm_and_insert_chinese
+
+Takes the same parameters as L</insert_chinese>. This will check and make sure
+the chinese character doesn't already exist in the database, and if it doesn't,
+it will prompt the user for confirmation to add it, and then add it.
+
+=cut
+
+sub confirm_and_insert_chinese {
+    my ($self, %params) = @_;
+
+    my $simplified      = $params{simplified};
+    my $traditional     = $params{traditional};
+    my $pengim          = $params{pengim};
+    my $standard_pengim = $params{standard_pengim};
+
+    unless (scalar Teochew::chinese_character_details($simplified, $pengim))
+    {
+        # Only insert the traditional character if it's different than
+        # the simplified one
+        my $insert_traditional =
+            !$traditional               ? '' :
+            $simplified eq $traditional ? '' : $traditional;
+
+        my $prompt = sprintf "Inserting Chinese [%s (%s), %s]",
+            $simplified,
+            $insert_traditional,
+            $pengim;
+
+        $prompt .= ", standard pengim '$standard_pengim'" if $standard_pengim;
+
+        say $prompt;
+        if (confirm()) {
+            $self->insert_chinese(
+                simplified      => $simplified,
+                traditional     => $insert_traditional,
+                pengim          => $pengim,
+                standard_pengim => $standard_pengim,
+            );
+        }
+        else {
+            return undef;
+        }
+    }
 }
 
 =head2 potential_compound_breakdown
