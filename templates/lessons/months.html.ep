@@ -46,10 +46,22 @@ month in isolation,
             "July", "August", "September", "October", "November", "December"
         ] %>
 
+<p>
 But, there's actually more nuance to this tone rule. When I asked my mom
 whether the number part should have tone change, she said, "Sometimes it does,
 and sometimes it doesn't!" I've heard that other people will sandhi the number
 if there's <i>more</i> to the month phrase that we're saying.
+</p>
+
+<h1>Dates</h1>
+
+<p>
+When you're referring to a specific day in a month, you would say the number
+followed by <b>ho7 号</b>. For example, the 18th would be
+<b>号jap(4) boih(8) ho7 十八号</b>.
+</p>
+
+To say the full date, you would say the month, then the day.
 
 <script>
 $(function () {
