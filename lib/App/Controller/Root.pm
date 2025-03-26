@@ -272,17 +272,21 @@ sub chinese {
     my $c = shift;
 
     my $character  = $c->stash('character');
-    my $details    = Teochew::chinese_character_details($character);
+    my $chinese    = Teochew::chinese_character_details($character);
 
-    # It's possible that the traditional character was searched. Use the
-    # simplified character for finding other words using this character
-    my $simplified = $details->[0]{simplified};
-    $character = $simplified if $simplified;
+    # Look up extra details about this character if it exists in our database
+    my ($words, $alternates);
+    if ($chinese) {
 
-    my $words      = Teochew::find_words_using_character($character);
-    my $alternates = Teochew::check_alternate_chinese(chinese => $character);
+        # It's possible that the traditional character was searched. Use the
+        # simplified character for finding other words using this character
+        my $simplified = $chinese->[0]{simplified};
 
-    $c->stash(chinese => $details);
+        $words      = Teochew::find_words_using_character($character);
+        $alternates = Teochew::check_alternate_chinese(chinese => $character);
+    }
+
+    $c->stash(chinese => $chinese);
     $c->stash(words => $words);
     $c->stash(alternates => $alternates);
     $c->render(template => 'chinese');
