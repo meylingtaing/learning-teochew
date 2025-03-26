@@ -2,14 +2,14 @@
 
 % if ($chinese and scalar @$chinese) {
   <div class="text-sm-left text-center">
-  <h1>
+  <h1 id="main-chinese-character">
     <%= $chinese->[0]->{simplified} %>
     % if ($chinese->[0]->{traditional}) {
         (<%= $chinese->[0]->{traditional} %>)
     % }
   </h1>
 
-  <h2>
+  <h2 id="main-pengim-with-audio">
   % for my $row (@$chinese) {
       <%= $row->{pengim} %>
       % if ($row->{audio}) {
@@ -42,4 +42,5 @@
 %= include 'elements/play_teochew'
 
 <h5>Words containing <%= $character %>:</h5>
-%= include 'elements/all-translations-table', translations => $words
+<%= include 'elements/all-translations-table',
+    translations => $words, table_id => 'words-containing-chinese-character' %>

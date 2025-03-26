@@ -1,6 +1,10 @@
 %# Requires 'translations' to be stashed
 <div class="table-responsive">
-<table class="table table-bordered all-translations-table">
+<table class="table table-bordered all-translations-table"
+% if (my $table_id = stash('table_id')) {
+    id="<%= $table_id %>"
+% }
+>
   <thead>
     <tr>
       <th>English</th>
