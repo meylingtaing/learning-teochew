@@ -9,9 +9,9 @@
 
 <p>
 After learning about tones and about numbers, we can talk about months! The
-word for month is <b>ghueh8 月</b>
+word for month is <b>ghueh8&nbsp;月</b>
 <%= include 'elements/play-teochew', audio => 'gh/ghueh8.mp3' %>, and to say
-"one month" or "a month", you'd say <b>jek(4) ghueh8 一月</b>
+"one month" or "a month", you'd say <b>jek(4)&nbsp;ghueh8&nbsp;一月</b>
 <%= include 'elements/play-teochew', audio => 'j/jek4ghueh8.mp3' %>.
 </p>
 
@@ -46,10 +46,49 @@ month in isolation,
             "July", "August", "September", "October", "November", "December"
         ] %>
 
+<div class="alert alert-secondary">
+<p>
 But, there's actually more nuance to this tone rule. When I asked my mom
 whether the number part should have tone change, she said, "Sometimes it does,
 and sometimes it doesn't!" I've heard that other people will sandhi the number
 if there's <i>more</i> to the month phrase that we're saying.
+</p>
+
+<p>
+I have also heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
+</p>
+</div>
+
+<h1>Dates</h1>
+
+<p>
+When you're referring to a specific day in a month, you would say the number
+followed by <b>ho7&nbsp;号</b>
+<%= include 'elements/play-teochew', audio => 'h/ho7.mp3' %>.
+For example, <b>the&nbsp;18th</b> would be
+</p>
+
+<h2 class="text-center large-translation">
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title=" 十八 18">jap(4) boih(8)</span>
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title="号 number">ho7</span>
+    %= include 'elements/play-teochew', audio => 'j/jap4boih8ho7.mp3'
+</h2>
+
+<p>
+To say the full date, you would say the month, then the day. Here's the translation for <b>January&nbsp;18th</b>:
+</p>
+
+<h2 class="text-center large-translation">
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title="一月 January">ek4 ghueh(4)</span>
+    <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
+          title=" 十八号 18th">jap(4) boih(8) ho7</span>
+    %= include 'elements/play-teochew', audio => 'e/ek4ghueh4jap4boih8ho7.mp3'
+</h2>
+
+%# TODO: Add a table with examples, just like on the Numbers page
 
 <script>
 $(function () {
