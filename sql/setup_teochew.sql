@@ -621,6 +621,12 @@ INSERT INTO English VALUES(582,31,'to comb hair',0,NULL,NULL);
 INSERT INTO English VALUES(583,10,'tastes good',0,NULL,NULL);
 INSERT INTO English VALUES(584,14,'word',0,'written',NULL);
 INSERT INTO English VALUES(585,10,'full',0,'from eating',NULL);
+INSERT INTO English VALUES(586,16,'number',0,NULL,NULL);
+INSERT INTO English VALUES(587,10,'sour',0,NULL,NULL);
+INSERT INTO English VALUES(588,23,'rock',0,NULL,NULL);
+INSERT INTO English VALUES(589,23,'mountain',0,NULL,NULL);
+INSERT INTO English VALUES(590,23,'to climb',0,NULL,NULL);
+INSERT INTO English VALUES(591,23,'to go hiking',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1162,6 +1168,10 @@ INSERT INTO Chinese VALUES(541,'自',NULL,'di7',NULL);
 INSERT INTO Chinese VALUES(542,'己',NULL,'gi7',NULL);
 INSERT INTO Chinese VALUES(543,'梳',NULL,'siu1',NULL);
 INSERT INTO Chinese VALUES(544,'饱','飽','ba2',NULL);
+INSERT INTO Chinese VALUES(545,'号','號','ho7',NULL);
+INSERT INTO Chinese VALUES(546,'石',NULL,'jioh8',NULL);
+INSERT INTO Chinese VALUES(547,'山',NULL,'suan1',NULL);
+INSERT INTO Chinese VALUES(548,'爬',NULL,'beh4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1242,6 +1252,10 @@ INSERT INTO Synonyms VALUES(72,583,'tasty');
 INSERT INTO Synonyms VALUES(73,540,'language');
 INSERT INTO Synonyms VALUES(74,540,'speech');
 INSERT INTO Synonyms VALUES(75,540,'text');
+INSERT INTO Synonyms VALUES(76,264,'lemon');
+INSERT INTO Synonyms VALUES(77,588,'stone');
+INSERT INTO Synonyms VALUES(78,589,'hill');
+INSERT INTO Synonyms VALUES(79,591,'to hike');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1341,6 +1355,8 @@ INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to m
 INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
 INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the 揭阳 Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
 INSERT INTO Extra VALUES(31,1,replace('This is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
+INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
+INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2041,6 +2057,12 @@ INSERT INTO Translation VALUES(653,582,669,0);
 INSERT INTO Translation VALUES(654,583,670,0);
 INSERT INTO Translation VALUES(655,584,671,0);
 INSERT INTO Translation VALUES(656,585,672,0);
+INSERT INTO Translation VALUES(657,586,673,1);
+INSERT INTO Translation VALUES(658,587,674,0);
+INSERT INTO Translation VALUES(659,588,675,0);
+INSERT INTO Translation VALUES(660,589,676,0);
+INSERT INTO Translation VALUES(661,590,677,0);
+INSERT INTO Translation VALUES(662,591,678,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2686,6 +2708,12 @@ INSERT INTO Teochew VALUES(669,'siu1 mo5','梳毛');
 INSERT INTO Teochew VALUES(670,'ho26 jiah8','好食');
 INSERT INTO Teochew VALUES(671,'yi7','字');
 INSERT INTO Teochew VALUES(672,'ba2','饱');
+INSERT INTO Teochew VALUES(673,'ho7','号');
+INSERT INTO Teochew VALUES(674,'seung1','酸');
+INSERT INTO Teochew VALUES(675,'jioh8','石');
+INSERT INTO Teochew VALUES(676,'suan1','山');
+INSERT INTO Teochew VALUES(677,'beh4','爬');
+INSERT INTO Teochew VALUES(678,'beh48 suan1','爬山');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2859,6 +2887,8 @@ INSERT INTO Compound VALUES(164,644,1,624);
 INSERT INTO Compound VALUES(165,644,2,344);
 INSERT INTO Compound VALUES(166,662,1,456);
 INSERT INTO Compound VALUES(167,662,2,577);
+INSERT INTO Compound VALUES(168,678,1,661);
+INSERT INTO Compound VALUES(169,678,2,660);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
