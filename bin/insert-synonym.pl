@@ -33,5 +33,5 @@ if (confirm()) {
         english_id => $row->{id},
         synonym    => $synonym
     );
+    say colored("Inserted $synonym as a synonym for $row->{word}", "green");
 }
-say colored("Inserted $synonym as a synonym for $row->{word}", "green");
