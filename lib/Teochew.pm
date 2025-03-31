@@ -545,7 +545,7 @@ sub generate_translation_word_list {
 }
 
 
-=head2 generate_flashcard
+=head2 generate_flashcards
 
 Returns a random english word and teochew translation in a hashref. You can
 optionally provide a category name to limit the bank of words chosen to a
