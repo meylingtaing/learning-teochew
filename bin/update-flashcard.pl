@@ -55,6 +55,7 @@ unless ($category ||
     say "\t--category-sort";
     say "\t--chinese";
     say "\t--alt-chinese";
+    say "\t--pengim";
     say "\t--hidden-from-flashcards";
     exit;
 }
