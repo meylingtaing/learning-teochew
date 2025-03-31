@@ -180,7 +180,7 @@ sub english {
 
         # It's possible a synonym was used to get to this page, so explicitly
         # set the English word to the non-synonym for synonym lookups later
-        if ($english ne $english_rows[0]{word}) {
+        if (lc($english) ne lc($english_rows[0]{word})) {
             $english = $english_rows[0]{word};
             $is_synonym = 1;
         }
