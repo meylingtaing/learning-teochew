@@ -1303,6 +1303,7 @@ arrayref of details about this character, with each element being a hash of
 this form:
 
     {
+        chinese_id      => 1,
         simplified      => '汝'
         traditional     => undef,
         pengim          => 'leu2'
@@ -1322,7 +1323,7 @@ sub chinese_character_details {
     my ($character, $pengim) = @_;
 
     my $sql = qq{
-        select simplified, traditional, pengim, standard_pengim
+        select id, simplified, traditional, pengim, standard_pengim
         from Chinese where (simplified = ? or traditional = ?)
     };
     my @binds = ($character, $character);
@@ -1340,6 +1341,7 @@ sub chinese_character_details {
 
     for my $chinese (@rows) {
         push @return, {
+            chinese_id  => $chinese->{id},
             simplified  => $chinese->{simplified},
             traditional => $chinese->{traditional},
             pengim      => add_tone_marks($chinese->{pengim}),
@@ -1349,6 +1351,7 @@ sub chinese_character_details {
         if (my $alt = $chinese->{standard_pengim}) {
             my $audio = find_audio($alt);
             push @return, {
+                chinese_id  => $chinese->{id},
                 simplified  => $chinese->{simplified},
                 traditional => $chinese->{traditional},
                 pengim      => add_tone_marks($alt),
