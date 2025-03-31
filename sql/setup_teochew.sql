@@ -627,6 +627,11 @@ INSERT INTO English VALUES(588,23,'rock',0,NULL,NULL);
 INSERT INTO English VALUES(589,23,'mountain',0,NULL,NULL);
 INSERT INTO English VALUES(590,23,'to climb',0,NULL,NULL);
 INSERT INTO English VALUES(591,23,'to go hiking',0,NULL,NULL);
+INSERT INTO English VALUES(592,23,'degrees',0,'temperature',NULL);
+INSERT INTO English VALUES(593,10,'restaurant',0,NULL,NULL);
+INSERT INTO English VALUES(594,11,'pain',0,NULL,NULL);
+INSERT INTO English VALUES(595,11,'stomach ache',0,NULL,NULL);
+INSERT INTO English VALUES(596,28,'Chinese broccoli',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1172,6 +1177,15 @@ INSERT INTO Chinese VALUES(545,'号','號','ho7',NULL);
 INSERT INTO Chinese VALUES(546,'石',NULL,'jioh8',NULL);
 INSERT INTO Chinese VALUES(547,'山',NULL,'suan1',NULL);
 INSERT INTO Chinese VALUES(548,'爬',NULL,'beh4',NULL);
+INSERT INTO Chinese VALUES(549,'度',NULL,'dou7',NULL);
+INSERT INTO Chinese VALUES(550,'店',NULL,'diam3',NULL);
+INSERT INTO Chinese VALUES(551,'铺','鋪','pou3',NULL);
+INSERT INTO Chinese VALUES(552,'壏',NULL,'na7',NULL);
+INSERT INTO Chinese VALUES(553,'逽',NULL,'na7',NULL);
+INSERT INTO Chinese VALUES(554,'痛',NULL,'tian3',NULL);
+INSERT INTO Chinese VALUES(555,'疼',NULL,'tian3',NULL);
+INSERT INTO Chinese VALUES(556,'芥',NULL,'kah4',NULL);
+INSERT INTO Chinese VALUES(557,'蓝','藍','na5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1256,6 +1270,12 @@ INSERT INTO Synonyms VALUES(76,264,'lemon');
 INSERT INTO Synonyms VALUES(77,588,'stone');
 INSERT INTO Synonyms VALUES(78,589,'hill');
 INSERT INTO Synonyms VALUES(79,591,'to hike');
+INSERT INTO Synonyms VALUES(80,322,'at');
+INSERT INTO Synonyms VALUES(81,322,'in');
+INSERT INTO Synonyms VALUES(82,594,'ache');
+INSERT INTO Synonyms VALUES(83,217,'garlic chive');
+INSERT INTO Synonyms VALUES(84,596,'gai lan');
+INSERT INTO Synonyms VALUES(85,596,'Chinese kale');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1399,6 +1419,10 @@ INSERT INTO TeochewAltChinese VALUES(14,655,'打');
 INSERT INTO TeochewAltChinese VALUES(15,361,'毋');
 INSERT INTO TeochewAltChinese VALUES(16,662,'早起');
 INSERT INTO TeochewAltChinese VALUES(17,666,'家己');
+INSERT INTO TeochewAltChinese VALUES(18,680,'店舖');
+INSERT INTO TeochewAltChinese VALUES(19,681,'逽');
+INSERT INTO TeochewAltChinese VALUES(20,681,'那');
+INSERT INTO TeochewAltChinese VALUES(21,682,'疼');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2063,6 +2087,12 @@ INSERT INTO Translation VALUES(659,588,675,0);
 INSERT INTO Translation VALUES(660,589,676,0);
 INSERT INTO Translation VALUES(661,590,677,0);
 INSERT INTO Translation VALUES(662,591,678,0);
+INSERT INTO Translation VALUES(663,592,679,0);
+INSERT INTO Translation VALUES(664,593,680,0);
+INSERT INTO Translation VALUES(665,322,681,1);
+INSERT INTO Translation VALUES(666,594,682,0);
+INSERT INTO Translation VALUES(667,595,683,0);
+INSERT INTO Translation VALUES(668,596,684,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2714,6 +2744,12 @@ INSERT INTO Teochew VALUES(675,'jioh8','石');
 INSERT INTO Teochew VALUES(676,'suan1','山');
 INSERT INTO Teochew VALUES(677,'beh4','爬');
 INSERT INTO Teochew VALUES(678,'beh48 suan1','爬山');
+INSERT INTO Teochew VALUES(679,'dou7','度');
+INSERT INTO Teochew VALUES(680,'diam32 pou3','店铺');
+INSERT INTO Teochew VALUES(681,'na7','壏');
+INSERT INTO Teochew VALUES(682,'tian3','痛');
+INSERT INTO Teochew VALUES(683,'dou2 tian3','肚痛');
+INSERT INTO Teochew VALUES(684,'kah48 na5','芥蓝');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2889,6 +2925,10 @@ INSERT INTO Compound VALUES(166,662,1,456);
 INSERT INTO Compound VALUES(167,662,2,577);
 INSERT INTO Compound VALUES(168,678,1,661);
 INSERT INTO Compound VALUES(169,678,2,660);
+INSERT INTO Compound VALUES(170,360,1,469);
+INSERT INTO Compound VALUES(171,360,2,415);
+INSERT INTO Compound VALUES(172,683,1,393);
+INSERT INTO Compound VALUES(173,683,2,666);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -2898,4 +2938,5 @@ CREATE TABLE TranslationExtra (
 INSERT INTO TranslationExtra VALUES(1,98,'This is sort of like a contraction of **da bou**. Traditionally, the son is thought of as the child who _stays_ with the family, as opposed to the daughter, who gets married into a different family.');
 INSERT INTO TranslationExtra VALUES(2,6,'The original character for this is actually 蜀, however you typically see the character 一 instead');
 INSERT INTO TranslationExtra VALUES(3,401,'囝 is not the "official" character used for **gian**, but I''m using it because it has the same sound and I''m not sure what a more appropriate character would be');
+INSERT INTO TranslationExtra VALUES(4,665,'I took the character from [the wiktionary](https://en.wiktionary.org/wiki/%E5%A3%8F). Apparently it''s the traditional version, but my computer can''t render the simplified one so I''m only displaying traditional here');
 COMMIT;
