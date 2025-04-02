@@ -632,6 +632,8 @@ INSERT INTO English VALUES(593,10,'restaurant',0,NULL,NULL);
 INSERT INTO English VALUES(594,11,'pain',0,NULL,NULL);
 INSERT INTO English VALUES(595,11,'stomach ache',0,NULL,NULL);
 INSERT INTO English VALUES(596,28,'Chinese broccoli',0,NULL,10);
+INSERT INTO English VALUES(597,28,'cauliflower',0,NULL,10);
+INSERT INTO English VALUES(598,28,'broccoli',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1325,6 +1327,7 @@ INSERT INTO Phrases VALUES(32,'I to_eat done| already','I have already eaten',0)
 INSERT INTO Phrases VALUES(33,'to_eat completed','Eat all of it',0);
 INSERT INTO Phrases VALUES(34,'don''t_need_to to_turn_on air_conditioner','You don''t have to turn on the AC',0);
 INSERT INTO Phrases VALUES(35,'I to_know_(how_to_do_something) to_do','I know how to do it',0);
+INSERT INTO Phrases VALUES(36,'you to_come house-lai6| no_(not_yet)','Did you come home yet?',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1377,6 +1380,8 @@ INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the 揭阳 Gekion pronun
 INSERT INTO Extra VALUES(31,1,replace('This is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
 INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
 INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
+INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/english/broccoli) are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
+INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflower) and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2093,6 +2098,12 @@ INSERT INTO Translation VALUES(665,322,681,1);
 INSERT INTO Translation VALUES(666,594,682,0);
 INSERT INTO Translation VALUES(667,595,683,0);
 INSERT INTO Translation VALUES(668,596,684,0);
+INSERT INTO Translation VALUES(669,597,685,1);
+INSERT INTO Translation VALUES(670,597,686,0);
+INSERT INTO Translation VALUES(671,597,687,1);
+INSERT INTO Translation VALUES(672,597,688,0);
+INSERT INTO Translation VALUES(673,598,689,0);
+INSERT INTO Translation VALUES(674,598,690,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2750,6 +2761,12 @@ INSERT INTO Teochew VALUES(681,'na7','壏');
 INSERT INTO Teochew VALUES(682,'tian3','痛');
 INSERT INTO Teochew VALUES(683,'dou2 tian3','肚痛');
 INSERT INTO Teochew VALUES(684,'kah48 na5','芥蓝');
+INSERT INTO Teochew VALUES(685,'kah48 na57 hue1','芥蓝花');
+INSERT INTO Teochew VALUES(686,'beh84 kah48 na57 hue1','白芥蓝花');
+INSERT INTO Teochew VALUES(687,'chai32 hue1','菜花');
+INSERT INTO Teochew VALUES(688,'beh84 chai32 hue1','白菜花');
+INSERT INTO Teochew VALUES(689,'chen1 chai32 hue1','青菜花');
+INSERT INTO Teochew VALUES(690,'chen1 kah48 na57 hue1','青芥蓝花');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -2929,6 +2946,20 @@ INSERT INTO Compound VALUES(170,360,1,469);
 INSERT INTO Compound VALUES(171,360,2,415);
 INSERT INTO Compound VALUES(172,683,1,393);
 INSERT INTO Compound VALUES(173,683,2,666);
+INSERT INTO Compound VALUES(174,687,1,230);
+INSERT INTO Compound VALUES(175,687,2,425);
+INSERT INTO Compound VALUES(176,688,1,19);
+INSERT INTO Compound VALUES(177,688,2,230);
+INSERT INTO Compound VALUES(178,688,3,425);
+INSERT INTO Compound VALUES(179,686,1,19);
+INSERT INTO Compound VALUES(180,686,2,668);
+INSERT INTO Compound VALUES(181,686,3,425);
+INSERT INTO Compound VALUES(182,685,1,668);
+INSERT INTO Compound VALUES(183,685,2,425);
+INSERT INTO Compound VALUES(184,689,1,23);
+INSERT INTO Compound VALUES(185,689,2,671);
+INSERT INTO Compound VALUES(186,690,1,23);
+INSERT INTO Compound VALUES(187,690,2,669);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
