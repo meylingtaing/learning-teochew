@@ -922,7 +922,7 @@ sub _generate_english_phrases {
         }
     }
 
-    return map +{ sentence => $_, words => $phrases{$_} }, keys %phrases;
+    return map +{ sentence => $_, words => $phrases{$_} }, sort keys %phrases;
 }
 
 =head2 _generate_english_times
