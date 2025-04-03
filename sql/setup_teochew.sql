@@ -2990,6 +2990,8 @@ INSERT INTO Compound VALUES(188,693,1,676);
 INSERT INTO Compound VALUES(189,693,2,585);
 INSERT INTO Compound VALUES(190,694,1,660);
 INSERT INTO Compound VALUES(191,694,2,676);
+INSERT INTO Compound VALUES(192,315,1,304);
+INSERT INTO Compound VALUES(193,315,2,202);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -3000,4 +3002,49 @@ INSERT INTO TranslationExtra VALUES(1,98,'This is sort of like a contraction of 
 INSERT INTO TranslationExtra VALUES(2,6,'The original character for this is actually 蜀, however you typically see the character 一 instead');
 INSERT INTO TranslationExtra VALUES(3,401,'囝 is not the "official" character used for **gian**, but I''m using it because it has the same sound and I''m not sure what a more appropriate character would be');
 INSERT INTO TranslationExtra VALUES(4,665,'I took the character from [the wiktionary](https://en.wiktionary.org/wiki/%E5%A3%8F). Apparently it''s the traditional version, but my computer can''t render the simplified one so I''m only displaying traditional here');
+CREATE TABLE PhraseTranslations (
+    id integer primary key,
+    phrase_id integer,
+    words text,
+    foreign key(phrase_id) references Phrases(id)
+);
+INSERT INTO PhraseTranslations VALUES(1,1,'I to_know_(information)');
+INSERT INTO PhraseTranslations VALUES(2,2,'I name');
+INSERT INTO PhraseTranslations VALUES(3,3,'you name what');
+INSERT INTO PhraseTranslations VALUES(4,4,'you to_do what');
+INSERT INTO PhraseTranslations VALUES(5,5,'you good| bad');
+INSERT INTO PhraseTranslations VALUES(6,6,'I not-m6 to_know_(information)');
+INSERT INTO PhraseTranslations VALUES(7,7,'how_many time_(hour)');
+INSERT INTO PhraseTranslations VALUES(8,8,'you to_be_at where');
+INSERT INTO PhraseTranslations VALUES(9,9,'you to_go where');
+INSERT INTO PhraseTranslations VALUES(10,10,'I to_be_at house-lai6');
+INSERT INTO PhraseTranslations VALUES(11,11,'$smallnumber day front');
+INSERT INTO PhraseTranslations VALUES(12,12,'$smallnumber day back');
+INSERT INTO PhraseTranslations VALUES(13,13,'this| how_many dollar');
+INSERT INTO PhraseTranslations VALUES(14,14,'I to_go store');
+INSERT INTO PhraseTranslations VALUES(15,15,'I to_go to_buy vegetables');
+INSERT INTO PhraseTranslations VALUES(16,16,'I $personadjective');
+INSERT INTO PhraseTranslations VALUES(17,17,'I to_want to_eat $drink');
+INSERT INTO PhraseTranslations VALUES(18,18,'you to_like what color');
+INSERT INTO PhraseTranslations VALUES(19,19,'you how_many age');
+INSERT INTO PhraseTranslations VALUES(20,20,'today-ging1yik8| you to_have time no_(don''t_have)');
+INSERT INTO PhraseTranslations VALUES(21,21,'I to_learn to_say Teochew_language');
+INSERT INTO PhraseTranslations VALUES(22,22,'you when to_come');
+INSERT INTO PhraseTranslations VALUES(23,23,'you to_have free_time| no_(don''t_have)');
+INSERT INTO PhraseTranslations VALUES(24,24,'I busy');
+INSERT INTO PhraseTranslations VALUES(25,25,'I 30 age');
+INSERT INTO PhraseTranslations VALUES(26,26,'I to_wash bowl');
+INSERT INTO PhraseTranslations VALUES(27,27,'I must to_brush_teeth');
+INSERT INTO PhraseTranslations VALUES(28,28,'you to_eat rice done| no_(not_yet)');
+INSERT INTO PhraseTranslations VALUES(29,29,'I done no_(not_yet) to_eat');
+INSERT INTO PhraseTranslations VALUES(30,30,'she to_be_in_the_process_of to_look television');
+INSERT INTO PhraseTranslations VALUES(31,31,'she to_sleep| already');
+INSERT INTO PhraseTranslations VALUES(32,32,'I to_eat done| already');
+INSERT INTO PhraseTranslations VALUES(33,33,'to_eat completed');
+INSERT INTO PhraseTranslations VALUES(34,34,'don''t_need_to to_turn_on air_conditioner');
+INSERT INTO PhraseTranslations VALUES(35,35,'I to_know_(how_to_do_something) to_do');
+INSERT INTO PhraseTranslations VALUES(36,36,'you to_come house-lai6| no_(not_yet)');
+INSERT INTO PhraseTranslations VALUES(37,37,'I to_want to_say word_(spoken) with-gah4 you');
+INSERT INTO PhraseTranslations VALUES(38,38,'tonight| I to_go restaurant| to_eat');
+INSERT INTO PhraseTranslations VALUES(39,38,'tonight| I to_go to_eat to_be_at-na7 restaurant');
 COMMIT;
