@@ -516,6 +516,8 @@ sub generate_translation_word_list {
 
     my $for_flashcards = $params{for_flashcards};
 
+    my $all_phrases = $for_flashcards ? '' : 'all';
+
     my @english_list;
 
     ## 1. Get a list of english words to use in the flashcards
@@ -525,7 +527,7 @@ sub generate_translation_word_list {
     push @english_list,
         $type eq 'number' ? (0..($subtype||20)) :
         $type eq 'time'   ? _generate_english_times() :
-        $type eq 'phrase' ? _generate_english_phrases($subtype) :
+        $type eq 'phrase' ? _generate_english_phrases($all_phrases) :
                             get_english_from_database(
                                 flashcard_set  => $type,
                                 category       => $category,
