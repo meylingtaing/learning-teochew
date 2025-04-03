@@ -218,7 +218,7 @@ sub translate {
     # be stored
     if (ref $english eq 'HASH') {
         if ($english->{sentence}) {
-            @translations = (translate_phrase($english));
+            @translations = translate_phrase($english);
         }
         elsif ($english->{id}) {
             @translations = get_all_translations_by_id(
@@ -409,59 +409,75 @@ sub translate_time {
 
 Translates a phrase. Expects a hashref in the form of
 
-    { sentence => 'I'm going to the store', words => 'I| to_go store' }
+    {
+        sentence => 'I'm going to the store',
+        words    => ['I| to_go store']
+    }
 
-In C<words>, a C<|> character after a word indicates that it should not
-undergo tone change (sandhi). It is assumed that all other words (except the
-last one in a sentence) will have tone change
+C<words> is an arrayref because we can have multiple translations per sentence
+
+In each of the C<words>, a C<|> character after a word indicates that it should
+not undergo tone change (sandhi). It is assumed that all other words (except
+the last one in a sentence) will have tone change
 
 This also will never apply sandhi the words 'I' or 'you'
+
+Returns a list of translations, each in the form of
+
+    { pengim => 'ua2 keu32 chi6', chinese => '我去市' }
 
 =cut
 
 sub translate_phrase {
     my ($english) = @_;
-    # Split up each word into components
-    my @words = split / /, $english->{words};
-    my @components;
+    my @return;
 
-    for my $word (@words) {
+    for my $translation_words (@{ $english->{words} }) {
 
-        my $no_tone_change = $word =~ s/\|$//g ? 1 : 0;
+        # Split up each word into components
+        my @words = split / /, $translation_words;
+        my @components;
 
-        my $pengim = undef;
-        if ($word =~ /\-(.*)$/) {
-            $pengim = $1;
-            $word =~ s/\-(.*)$//;
+        for my $word (@words) {
+
+            my $no_tone_change = $word =~ s/\|$//g ? 1 : 0;
+
+            my $pengim = undef;
+            if ($word =~ /\-(.*)$/) {
+                $pengim = $1;
+                $word =~ s/\-(.*)$//;
+            }
+
+            $word =~ s/_/ /g;
+
+            my $translation;
+            if ($word =~ /\d+/) {
+                ($translation) = translate_number($word);
+            }
+            else {
+                $translation = _lookup($word, $pengim);
+            }
+
+            $translation->{pengim} =~ s/\d(\d)/($1)/;
+
+            # As far as I know, 'I' and 'you' never undergo tone change, so I'm
+            # just hardcoding that rule here
+            $translation->{no_tone_change} =
+                ($word eq 'I' || $word eq 'you') ? 1 : $no_tone_change;
+
+            push @components, $translation;
         }
 
-        $word =~ s/_/ /g;
+        # "..." indicates that it's an incomplete sentence so we need
+        # to make sure all the words go through tone change
+        my $incomplete = $english->{sentence} =~ /\.\.\.$/;
 
-        my $translation;
-        if ($word =~ /\d+/) {
-            ($translation) = translate_number($word);
-        }
-        else {
-            $translation = _lookup($word, $pengim);
-        }
-
-        $translation->{pengim} =~ s/\d(\d)/($1)/;
-
-        # As far as I know, 'I' and 'you' never undergo tone change, so I'm
-        # just hardcoding that rule here
-        $translation->{no_tone_change} =
-            ($word eq 'I' || $word eq 'you') ? 1 : $no_tone_change;
-
-        push @components, $translation;
+        push @return, link_teochew_words(
+            \@components, { tone_change_last_word => $incomplete }
+        );
     }
 
-    # "..." indicates that it's an incomplete sentence so we need
-    # to make sure all the words go through tone change
-    my $incomplete = $english->{sentence} =~ /\.\.\.$/;
-
-    return link_teochew_words(
-        \@components, { tone_change_last_word => $incomplete }
-    );
+    return @return;
 }
 
 =head2 generate_translation_word_list
@@ -865,29 +881,48 @@ sub _generate_english_in_subcategory {
 
 Returns a list of random english sentences in the form of
 
-    { sentence => 'I know', words => 'I to_know' }
+    { sentence => 'I know', words => ['I to_know'] }
 
 =cut
 
 sub _generate_english_phrases {
     my $setting = shift;
 
-    my $sql  = "select sentence, words from Phrases where hidden = 0";
+    my $sql = qq{
+        select sentence, PhraseTranslations.words from Phrases
+        join PhraseTranslations on Phrases.id = PhraseTranslations.phrase_id
+        where hidden = 0
+    };
     my @rows = $dbh->selectall_array($sql, { Slice => {} });
 
+    # Hmm, probably want the 'all' setting for the full translation list page
     if (($setting || '') eq 'all') {
-        my @ret;
+        my @replaced_all_variables;
         for (@rows) {
-            push @ret, replace_variables_all($_);
+            push @replaced_all_variables, replace_variables_all($_);
         }
-        return @ret;
+        @rows = @replaced_all_variables;
     }
     else {
         # Replace variables
         replace_variables($_) for @rows;
-        return @rows;
     }
 
+    # There might be multiple translations for a single word. Rather than that
+    # showing up as two separate rows in the return value, let's consolidate
+    # those
+    my %phrases;
+    for my $row (@rows) {
+        my $sentence = $row->{sentence};
+        if (exists $phrases{$sentence}) {
+            push @{ $phrases{$sentence} }, $row->{words};
+        }
+        else {
+            $phrases{$sentence} = [$row->{words}];
+        }
+    }
+
+    return map +{ sentence => $_, words => $phrases{$_} }, keys %phrases;
 }
 
 =head2 _generate_english_times

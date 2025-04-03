@@ -51,19 +51,19 @@ is_deeply [ map { $_->{pronunciations}[0]{pengim} } @$translations ],
     'Translations are correct and non-hidden one is shown first';
 
 check_translation(
-    { sentence => 'What are you doing?', words => 'you to_do what' },
+    { sentence => 'What are you doing?', words => ['you to_do what'] },
     "leu2 mueh(4) mih(8) gai5"
 );
 
 # Make sure we don't tone change when we have the '|'
 check_translation({
     sentence => 'Did you eat yet?',
-    words    => 'you to_eat done| no_(not_yet)'
+    words    => ['you to_eat done| no_(not_yet)']
 }, "leu2 jiah(4) ho2 bhue7");
 
 check_translation({
     sentence => '1, 2, 3',
-    words    => '1| 2| 3'
+    words    => ['1| 2| 3']
 }, 'jek8 no6 san1');
 
 done_testing;
