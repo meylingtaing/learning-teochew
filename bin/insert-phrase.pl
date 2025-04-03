@@ -23,10 +23,13 @@ my $phrase = Teochew::replace_variables({
     sentence => $sentence, words => $words
 });
 
-my $translation = Teochew::translate_phrase($phrase);
+my @translations = Teochew::translate_phrase({
+    sentence => $sentence,
+    words    => [$words],
+});
 
 say "Inserting phrase \"$sentence\" with translation \"" .
-    $translation->{pengim} . "\"";
+    $translations[0]{pengim} . "\"";
 
 if (confirm()) {
     Teochew::Edit->insert_phrase(sentence => $sentence, words => $words);

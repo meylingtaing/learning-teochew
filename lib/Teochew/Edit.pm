@@ -352,12 +352,27 @@ sub insert_phrase {
     my ($self, %params) = @_;
     $self = $self->new unless ref $self;
 
-    my $sth = $self->dbh->prepare(
-        "insert into Phrases (sentence, words) values (?,?)"
+    # First insert into the Phrases table if necessary
+    my $phrase_id = $self->dbh->selectrow_array(
+        "select id from Phrases where sentence = ?",
+        undef, $params{sentence}
     );
-    $sth->bind_param(1, $params{sentence});
-    $sth->bind_param(2, $params{words});
-    $sth->execute;
+
+    unless ($phrase_id) {
+        my $sth = $self->dbh->prepare(
+            "insert into Phrases (sentence) values (?)"
+        );
+        $sth->bind_param(1, $params{sentence});
+        $sth->execute;
+
+        $phrase_id = $self->dbh->sqlite_last_insert_rowid;
+    }
+
+    # And then insert into PhraseTranslations
+    $self->dbh->do(qq{
+        insert into PhraseTranslations (phrase_id, words)
+        values (?, ?)
+    }, undef, $phrase_id, $params{words});
 }
 
 =head2 make_fully_hidden
