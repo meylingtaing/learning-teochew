@@ -1188,6 +1188,7 @@ INSERT INTO Chinese VALUES(554,'痛',NULL,'tian3',NULL);
 INSERT INTO Chinese VALUES(555,'疼',NULL,'tian3',NULL);
 INSERT INTO Chinese VALUES(556,'芥',NULL,'kah4',NULL);
 INSERT INTO Chinese VALUES(557,'蓝','藍','na5',NULL);
+INSERT INTO Chinese VALUES(558,'合',NULL,'gah4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1328,6 +1329,8 @@ INSERT INTO Phrases VALUES(33,'to_eat completed','Eat all of it',0);
 INSERT INTO Phrases VALUES(34,'don''t_need_to to_turn_on air_conditioner','You don''t have to turn on the AC',0);
 INSERT INTO Phrases VALUES(35,'I to_know_(how_to_do_something) to_do','I know how to do it',0);
 INSERT INTO Phrases VALUES(36,'you to_come house-lai6| no_(not_yet)','Did you come home yet?',0);
+INSERT INTO Phrases VALUES(37,'I to_want to_say word_(spoken) with-gah4 you','I want to talk to you',0);
+INSERT INTO Phrases VALUES(38,'tonight| I to_go restaurant| to_eat','Tonight I am going to eat at a restaurant',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1382,6 +1385,7 @@ INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "numb
 INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
 INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/english/broccoli) are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
 INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflower) and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
+INSERT INTO Extra VALUES(36,552,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2104,6 +2108,7 @@ INSERT INTO Translation VALUES(671,597,687,1);
 INSERT INTO Translation VALUES(672,597,688,0);
 INSERT INTO Translation VALUES(673,598,689,0);
 INSERT INTO Translation VALUES(674,598,690,0);
+INSERT INTO Translation VALUES(675,552,691,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2709,7 +2714,7 @@ INSERT INTO Teochew VALUES(629,'soi26 san1 kou3','洗衫裤');
 INSERT INTO Teochew VALUES(630,'soi26 uan2','洗碗');
 INSERT INTO Teochew VALUES(631,'liang57 ki3','凉气');
 INSERT INTO Teochew VALUES(632,'liang57 ki32 gi1','凉气机');
-INSERT INTO Teochew VALUES(633,'gah8','合');
+INSERT INTO Teochew VALUES(633,'gah4','合');
 INSERT INTO Teochew VALUES(634,'gia1','加');
 INSERT INTO Teochew VALUES(635,'gian1','惊');
 INSERT INTO Teochew VALUES(636,'chia1','车');
@@ -2767,6 +2772,7 @@ INSERT INTO Teochew VALUES(687,'chai32 hue1','菜花');
 INSERT INTO Teochew VALUES(688,'beh84 chai32 hue1','白菜花');
 INSERT INTO Teochew VALUES(689,'chen1 chai32 hue1','青菜花');
 INSERT INTO Teochew VALUES(690,'chen1 kah48 na57 hue1','青芥蓝花');
+INSERT INTO Teochew VALUES(691,'gah8','合');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
