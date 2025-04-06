@@ -38,26 +38,13 @@ month in isolation,
     %= include 'elements/play-teochew', audio => 'e/ek4ghueh4.mp3'
 </h2>
 
-<p>The rest of the months follow the same pattern of number + month:</p>
+<p>The rest of the months follow the same pattern of number + month (and remember that you should use <b>ek4(8)</b> for 1 and <b>yi6(7)</b> for 2):</p>
 <%= include 'elements/translation-table',
         words => [
             { word => "January", pengim => 'ek4 ghueh(4)' },
             "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ] %>
-
-<div class="alert alert-secondary">
-<p>
-But, there's actually more nuance to this tone rule. When I asked my mom
-whether the number part should have tone change, she said, "Sometimes it does,
-and sometimes it doesn't!" I've heard that other people will sandhi the number
-if there's <i>more</i> to the month phrase that we're saying.
-</p>
-
-<p>
-I have also heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
-</p>
-</div>
 
 <h1>Dates</h1>
 
@@ -77,18 +64,23 @@ For example, <b>the&nbsp;18th</b> would be
 </h2>
 
 <p>
-To say the full date, you would say the month, then the day. Here's the translation for <b>January&nbsp;18th</b>:
+To say the full date, you would say the month, then the day. And this time you <i>do</i> sandhi the number part of the month. Here's the translation for <b>January&nbsp;18th</b>:
 </p>
 
 <h2 class="text-center large-translation">
     <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
-          title="一月 January">ek4 ghueh(4)</span>
+          title="一月 January">ek(8) ghueh(4)</span>
     <span class="hover-details" data-toggle="tooltip" data-placement="bottom"
           title=" 十八号 18th">jap(4) boih(8) ho7</span>
-    %= include 'elements/play-teochew', audio => 'e/ek4ghueh4jap4boih8ho7.mp3'
+    %= include 'elements/play-teochew', audio => 'e/ek8ghueh4jap4boih8ho7.mp3'
 </h2>
 
 %# TODO: Add a table with examples, just like on the Numbers page
+%# But I think I need to add a translate_date function
+
+<div class="alert alert-secondary">
+Generally, when there's more at the end of the "month phrase", you do apply tone change to the number portion of the month. But remember, not everyone follows these tone change rules exactly as I've stated them. I have heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
+</div>
 
 <script>
 $(function () {
