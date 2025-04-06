@@ -20,14 +20,22 @@ And here are the numbers 11-19:
 
 <p>
 You should notice a pattern here. For the most part, the numbers 11-19 can be
-formed by combining <b>jāp 十</b> and the ones digit. However, the "1" in 11
+formed by combining <b>jap8(4) 十</b> and the ones digit. However, the "1" in 11
 and the "2" in 12 use a different translation than what's in the first table.
-Except for the actual numbers 1 and 2,
-<ul>
-  <li>A "1" in the ones digit should be pronounced <b>ik</b></li>
-  <li>A "2" in the ones digit should be pronounced <b>yí</b></li>
-</ul>
+The numbers 1 and 2 are special and each have two different ways of saying them.
 </p>
+
+<ul>
+  <li>
+    When you are referring to one of something, you use <b>jek8</b>,
+    otherwise you use <b>ek4</b>
+  </li>
+  <li>
+    When you are referring to two of something, you use <b>no6</b>, otherwise
+    you use <b>yi6</b>
+  </li>
+</ul>
+
 <p>
 Note that if a number has multiple syllables, every syllable except the last
 undergoes <a href="/lesson/tones">tone change</a>.
@@ -41,13 +49,13 @@ We'll continue with the multiples of ten up to 100:
 
 <p>
 This also follows a very simple formula. You just place the number in the tens
-digit before <b>jāp 十</b>. A "2" in the tens digit is always pronounced
-<b>yí</b>.
+digit before <b>jap8(4) 十</b>. A "2" in the tens digit is always pronounced
+<b>yi6(7)</b>.
 </p>
 
 <p>
 For all the other numbers below 100, you can use this formula:
-<b>(tens digit) jap (ones digit)</b>. Here are some examples:
+tens digit + <b>jap(4)</b> + ones digit. Here are some examples:
 </p>
 <%= include 'elements/translation-table',
         words => [25,42,68,71,99] %>
