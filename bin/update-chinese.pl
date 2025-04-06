@@ -28,16 +28,18 @@ my $simplified = shift @ARGV;
 
 # Let's see what the user wants to update
 # TODO: Add more options
-my ($pengim);
+my ($pengim, $standard_pengim);
 GetOptions(
-    "pengim=s" => \$pengim,
+    "pengim=s"          => \$pengim,
+    "standard-pengim=s" => \$standard_pengim,
 );
 
-die colored ("Must provide pengim!", "red") . "\n"
-    unless $pengim;
+die colored ("Must provide pengim or standard-pengim!", "red") . "\n"
+    unless $pengim || $standard_pengim;
 
 # Find the Chinese character in the database
-my $rows = Teochew::chinese_character_details($simplified);
+my $rows = Teochew::chinese_character_details(
+    $simplified, undef, no_alt_pengim => 1);
 
 die colored("Could not find entry in the database for $simplified!", "red") . "\n"
     unless $rows;
@@ -54,14 +56,22 @@ if (scalar @$rows > 1) {
     $row = $rows->[$row_id];
 }
 
-$db->dbh->do("update Chinese set pengim = ? where id = ?",
-    undef, $pengim, $row->{chinese_id});
+if ($pengim) {
+    $db->dbh->do("update Chinese set pengim = ? where id = ?",
+        undef, $pengim, $row->{chinese_id});
 
-# Check and see if there are any teochew entries to update
-my @teochew_rows = $db->dbh->selectall_array(qq{
-    select * from Teochew where Chinese like ? and pengim like ?
-}, { Slice => {} }, "%$simplified%", "%$row->{pengim}%");
+    # Check and see if there are any teochew entries to update
+    my @teochew_rows = $db->dbh->selectall_array(qq{
+        select * from Teochew where Chinese like ? and pengim like ?
+    }, { Slice => {} }, "%$simplified%", "%$row->{pengim}%");
 
-# Next, I need to double check that the pengim actually does match for the
-# particular syllable. And then I need to prompt the user to see if they want
-# to fix it
+    # Next, I need to double check that the pengim actually does match for the
+    # particular syllable. And then I need to prompt the user to see if they want
+    # to fix it
+}
+
+if ($standard_pengim) {
+    $db->dbh->do("update Chinese set standard_pengim = ? where id = ?",
+        undef, $standard_pengim, $row->{chinese_id});
+    say colored("Added standard pengim!", "green");
+}

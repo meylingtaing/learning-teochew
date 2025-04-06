@@ -1352,12 +1352,16 @@ multiple for one character, with different pengim associated with it. If you
 supply pengim to this method, it will only look for that specific character
 with that specific pengim
 
+XXX: Add more explanation on the "standard pengim" stuff
+
 Returns undef if it can't find a matching entry in the database
 
 =cut
 
 sub chinese_character_details {
-    my ($character, $pengim) = @_;
+    my ($character, $pengim, %params) = @_;
+
+    my $no_alt_pengim = $params{no_alt_pengim};
 
     my $sql = qq{
         select id, simplified, traditional, pengim, standard_pengim
@@ -1385,6 +1389,7 @@ sub chinese_character_details {
             audio       => find_audio($chinese->{pengim}),
         };
 
+        next if $no_alt_pengim;
         if (my $alt = $chinese->{standard_pengim}) {
             my $audio = find_audio($alt);
             push @return, {
