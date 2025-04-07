@@ -38,6 +38,21 @@ $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
 # XXX Make this configurable eventually
 my $preferred_accent = 'gekion';
 
+my %month_numbers = (
+    January   => 1,
+    February  => 2,
+    March     => 3,
+    April     => 4,
+    May       => 5,
+    June      => 6,
+    July      => 7,
+    August    => 8,
+    September => 9,
+    October   => 10,
+    November  => 11,
+    December  => 12,
+);
+
 =head1 DATA
 
 =head2 English Words
@@ -362,6 +377,50 @@ sub translate_number {
     # Ones Digit
     $ones_digit .= " (alt)" if $ones_digit == 1 || $ones_digit == 2;
     push @components, _lookup($ones_digit);
+
+    return link_teochew_words(\@components);
+}
+
+=head2 translate_date
+
+Given a date in the form of "May 23", returns the translation
+
+=cut
+
+sub translate_date {
+    my $date = shift;
+
+    my ($month, $day) = split / /, $date;
+    my @components;
+
+    # I need to actually split up the month into number + 'month' rather than
+    # calling _lookup on the month name directly because months in isolation
+    # don't have the number portion sandhi'ed but month in a date does
+
+    my $month_number = $month_numbers{$month};
+    die "Invalid month in translate_date!" unless $month_number;
+
+    ## 1. Translate the month portion
+    # I also need to make sure we're using the alternate pronunciations of
+    # 1 and 2, both in the month and the day portion
+    if ($month_number eq '1' || $month_number eq '2') {
+        push @components, _lookup("$month_number (alt)");
+    }
+    else {
+        push @components, translate_number($month_number);
+    }
+
+    push @components, _lookup('month');
+
+    ## 2. Translate the day portion
+    if ($day eq '1' || $day eq '2') {
+        push @components, _lookup("$day (alt)");
+    }
+    else {
+        push @components, translate_number($day);
+    }
+
+    push @components, _lookup('number');
 
     return link_teochew_words(\@components);
 }
