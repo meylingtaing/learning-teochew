@@ -75,8 +75,14 @@ To say the full date, you would say the month, then the day. And this time you <
     %= include 'elements/play-teochew', audio => 'e/ek8ghueh4jap4boih8ho7.mp3'
 </h2>
 
-%# TODO: Add a table with examples, just like on the Numbers page
-%# But I think I need to add a translate_date function
+<p>Here are some more examples:</p>
+
+<%= include 'elements/translation-table', words => [
+    'January 18',
+    'March 25',
+    'April 1',
+    'November 12',
+] %>
 
 <div class="alert alert-secondary">
 Generally, when there's more at the end of the "month phrase", you do apply tone change to the number portion of the month. But remember, not everyone follows these tone change rules exactly as I've stated them. I have heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
