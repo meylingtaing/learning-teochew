@@ -246,6 +246,9 @@ sub translate {
             elsif ($word =~ /^\d+:\d+$/) {
                 @translations = ( translate_time($word) );
             }
+            elsif (_is_date($word)) {
+                @translations = ( translate_date($word) );
+            }
             else {
                 $word = lc $word;
 
@@ -1566,6 +1569,22 @@ sub _format_for_translations_table {
     }
 
     return \@ret;
+}
+
+=head2 _is_date
+
+Returns true if the given input looks like a date, which means it has a month
+and a number.
+
+=cut
+
+sub _is_date {
+    my $input = shift;
+    my ($month, $day) = split / /, $input;
+    return 0 unless $month && $day;
+    return 0 unless $month_numbers{$month};
+    return 0 unless $day =~ /\d\d?/;
+    return 1;
 }
 
 # TODO
