@@ -39,6 +39,11 @@ check_translation('10:05', "jap(4) diam(6) dah(8) ek4");
 check_translation('10:10', "jap(4) diam(6) dah(8) yi6");
 check_translation('10:15', "jap(4) diam(6) dah(8) san1");
 
+check_translation('January 18', "ek(8) ghueh(4) jap(4) boih(8) ho7");
+check_translation('April 1', "si(2) ghueh(4) ek(8) ho7");
+check_translation('November 12', "jap(4) ek(8) ghueh(4) jap(4) yi(7) ho7");
+check_translation('March 25', "san1 ghueh(4) yi(7) jap(4) ngou(7) ho7");
+
 # Some English words have multiple translations, and we add extra notes to
 # differentiate. Make sure our translate method can handle this
 check_translation("aunt (dad's oldest sister)", "dua7 gou1");
