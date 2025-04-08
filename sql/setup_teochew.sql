@@ -640,6 +640,9 @@ INSERT INTO English VALUES(601,16,'to go out and have fun',0,NULL,NULL);
 INSERT INTO English VALUES(602,13,'to go on a walk',0,NULL,NULL);
 INSERT INTO English VALUES(603,16,'birthday',0,NULL,NULL);
 INSERT INTO English VALUES(604,1,'happy birthday',0,NULL,NULL);
+INSERT INTO English VALUES(605,32,'classifier',0,'generic',NULL);
+INSERT INTO English VALUES(606,13,'to leave',0,NULL,NULL);
+INSERT INTO English VALUES(607,13,'to be born',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1200,6 +1203,8 @@ INSERT INTO Chinese VALUES(560,'𨑨',NULL,'tek4','tik4');
 INSERT INTO Chinese VALUES(561,'迌',NULL,'to5',NULL);
 INSERT INTO Chinese VALUES(562,'快',NULL,'kuai3',NULL);
 INSERT INTO Chinese VALUES(563,'乐','樂','lak8',NULL);
+INSERT INTO Chinese VALUES(564,'出',NULL,'chuk4',NULL);
+INSERT INTO Chinese VALUES(565,'世',NULL,'si3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1296,6 +1301,8 @@ INSERT INTO Synonyms VALUES(88,601,'for leisure');
 INSERT INTO Synonyms VALUES(89,601,'to vacation');
 INSERT INTO Synonyms VALUES(90,601,'for fun');
 INSERT INTO Synonyms VALUES(91,601,'to hang out');
+INSERT INTO Synonyms VALUES(92,606,'to exit');
+INSERT INTO Synonyms VALUES(93,606,'to go out');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1348,6 +1355,7 @@ INSERT INTO Phrases VALUES(36,'Did you come home yet?',0);
 INSERT INTO Phrases VALUES(37,'I want to talk to you',0);
 INSERT INTO Phrases VALUES(38,'Tonight I am going to eat at a restaurant',0);
 INSERT INTO Phrases VALUES(39,'Don''t go to sleep too late',0);
+INSERT INTO Phrases VALUES(40,'My friend and I went out for a walk',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -2133,6 +2141,9 @@ INSERT INTO Translation VALUES(679,601,695,0);
 INSERT INTO Translation VALUES(680,602,696,0);
 INSERT INTO Translation VALUES(681,603,697,0);
 INSERT INTO Translation VALUES(682,604,698,0);
+INSERT INTO Translation VALUES(683,605,699,1);
+INSERT INTO Translation VALUES(684,606,700,0);
+INSERT INTO Translation VALUES(685,607,701,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2804,6 +2815,9 @@ INSERT INTO Teochew VALUES(695,'tek48 to5','𨑨迌');
 INSERT INTO Teochew VALUES(696,'gian57 tek48 to5','行𨑨迌');
 INSERT INTO Teochew VALUES(697,'sen1 yek8','生日');
 INSERT INTO Teochew VALUES(698,'sen1 yek84 kuai32 lak8','生日快乐');
+INSERT INTO Teochew VALUES(699,'gai5','个');
+INSERT INTO Teochew VALUES(700,'chuk4','出');
+INSERT INTO Teochew VALUES(701,'chuk48 si3','出世');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3005,6 +3019,8 @@ INSERT INTO Compound VALUES(192,315,1,304);
 INSERT INTO Compound VALUES(193,315,2,202);
 INSERT INTO Compound VALUES(194,696,1,548);
 INSERT INTO Compound VALUES(195,696,2,679);
+INSERT INTO Compound VALUES(196,282,1,412);
+INSERT INTO Compound VALUES(197,282,2,230);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -3062,4 +3078,5 @@ INSERT INTO PhraseTranslations VALUES(38,38,'tonight| I to_go restaurant| to_eat
 INSERT INTO PhraseTranslations VALUES(39,38,'tonight| I to_go to_eat to_be_at-na7 restaurant');
 INSERT INTO PhraseTranslations VALUES(40,22,'you to_come when');
 INSERT INTO PhraseTranslations VALUES(41,39,'don''t too late_(at_night)| to_go to_sleep');
+INSERT INTO PhraseTranslations VALUES(42,40,'I with I classifier_(generic) friend| to_go to_go_on_a_walk');
 COMMIT;
