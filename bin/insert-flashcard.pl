@@ -36,10 +36,12 @@ $chinese  //= input_from_prompt("Chinese characters:");
 
 # Also check and see if the user wanted to hide these words
 my ($hidden, $hidden_from_flashcards);
-GetOptionsFromArray(\@other_args,
+my $getopt_success = GetOptionsFromArray(\@other_args,
     hidden => \$hidden,
     hidden_from_flashcards => \$hidden_from_flashcards
 );
+
+exit unless $getopt_success;
 
 my $db = Teochew::Edit->new;
 
