@@ -38,6 +38,7 @@ INSERT INTO Categories VALUES(31,'Bathroom',NULL,0,4);
 INSERT INTO Categories VALUES(32,'Basics','Basic Words',0,12);
 INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',0,12);
 INSERT INTO Categories VALUES(34,'Hidden',NULL,0,NULL);
+INSERT INTO Categories VALUES(35,'World','Around the World',0,8);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -439,7 +440,7 @@ INSERT INTO English VALUES(398,8,'sleepy',0,NULL,NULL);
 INSERT INTO English VALUES(399,11,'booger',0,NULL,NULL);
 INSERT INTO English VALUES(400,33,'to come',0,NULL,NULL);
 INSERT INTO English VALUES(401,13,'to help',0,NULL,NULL);
-INSERT INTO English VALUES(402,16,'Chinese people',0,NULL,NULL);
+INSERT INTO English VALUES(402,35,'Chinese people',0,NULL,NULL);
 INSERT INTO English VALUES(403,32,'no',0,'don''t want',NULL);
 INSERT INTO English VALUES(404,8,'dirty',0,NULL,NULL);
 INSERT INTO English VALUES(405,4,'that',0,NULL,4);
@@ -479,7 +480,7 @@ INSERT INTO English VALUES(438,3,'dark red',0,NULL,3);
 INSERT INTO English VALUES(439,3,'light',0,'shade of color',3);
 INSERT INTO English VALUES(440,3,'light blue',0,NULL,3);
 INSERT INTO English VALUES(441,7,'day after tomorrow',0,NULL,3);
-INSERT INTO English VALUES(442,16,'Cambodia',0,NULL,NULL);
+INSERT INTO English VALUES(442,35,'Cambodia',0,NULL,NULL);
 INSERT INTO English VALUES(443,23,'dark',0,'to describe weather',NULL);
 INSERT INTO English VALUES(444,7,'late',0,'at night',4);
 INSERT INTO English VALUES(445,7,'tonight',0,NULL,4);
@@ -643,6 +644,9 @@ INSERT INTO English VALUES(604,1,'happy birthday',0,NULL,NULL);
 INSERT INTO English VALUES(605,32,'classifier',0,'generic',NULL);
 INSERT INTO English VALUES(606,13,'to leave',0,NULL,NULL);
 INSERT INTO English VALUES(607,13,'to be born',0,NULL,NULL);
+INSERT INTO English VALUES(608,9,'to live in',0,NULL,NULL);
+INSERT INTO English VALUES(609,35,'California',0,NULL,NULL);
+INSERT INTO English VALUES(610,35,'Southeast Asia',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1205,6 +1209,8 @@ INSERT INTO Chinese VALUES(562,'快',NULL,'kuai3',NULL);
 INSERT INTO Chinese VALUES(563,'乐','樂','lak8',NULL);
 INSERT INTO Chinese VALUES(564,'出',NULL,'chuk4',NULL);
 INSERT INTO Chinese VALUES(565,'世',NULL,'si3',NULL);
+INSERT INTO Chinese VALUES(566,'徛',NULL,'kia6',NULL);
+INSERT INTO Chinese VALUES(567,'企',NULL,'kia6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1303,6 +1309,8 @@ INSERT INTO Synonyms VALUES(90,601,'for fun');
 INSERT INTO Synonyms VALUES(91,601,'to hang out');
 INSERT INTO Synonyms VALUES(92,606,'to exit');
 INSERT INTO Synonyms VALUES(93,606,'to go out');
+INSERT INTO Synonyms VALUES(94,608,'to reside at');
+INSERT INTO Synonyms VALUES(95,610,'Cambodia');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1356,6 +1364,7 @@ INSERT INTO Phrases VALUES(37,'I want to talk to you',0);
 INSERT INTO Phrases VALUES(38,'Tonight I am going to eat at a restaurant',0);
 INSERT INTO Phrases VALUES(39,'Don''t go to sleep too late',0);
 INSERT INTO Phrases VALUES(40,'My friend and I went out for a walk',0);
+INSERT INTO Phrases VALUES(41,'He lives in California',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1411,6 +1420,7 @@ INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between le
 INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/english/broccoli) are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
 INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflower) and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
 INSERT INTO Extra VALUES(36,552,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
+INSERT INTO Extra VALUES(37,610,replace('**huang1 bain5** is used to generally mean Southeast Asia, but my family sometimes uses it to mean Cambodia, because that''s where they''re from\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1457,6 +1467,7 @@ INSERT INTO TeochewAltChinese VALUES(18,680,'店舖');
 INSERT INTO TeochewAltChinese VALUES(19,681,'逽');
 INSERT INTO TeochewAltChinese VALUES(20,681,'那');
 INSERT INTO TeochewAltChinese VALUES(21,682,'疼');
+INSERT INTO TeochewAltChinese VALUES(22,702,'企');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2144,6 +2155,9 @@ INSERT INTO Translation VALUES(682,604,698,0);
 INSERT INTO Translation VALUES(683,605,699,1);
 INSERT INTO Translation VALUES(684,606,700,0);
 INSERT INTO Translation VALUES(685,607,701,0);
+INSERT INTO Translation VALUES(686,608,702,0);
+INSERT INTO Translation VALUES(687,609,703,0);
+INSERT INTO Translation VALUES(688,610,704,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2818,6 +2832,9 @@ INSERT INTO Teochew VALUES(698,'sen1 yek84 kuai32 lak8','生日快乐');
 INSERT INTO Teochew VALUES(699,'gai5','个');
 INSERT INTO Teochew VALUES(700,'chuk4','出');
 INSERT INTO Teochew VALUES(701,'chuk48 si3','出世');
+INSERT INTO Teochew VALUES(702,'kia6','徛');
+INSERT INTO Teochew VALUES(703,'gia1 jiu1','加州');
+INSERT INTO Teochew VALUES(704,'huang1 bain5','番爿');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3079,4 +3096,6 @@ INSERT INTO PhraseTranslations VALUES(39,38,'tonight| I to_go to_eat to_be_at-na
 INSERT INTO PhraseTranslations VALUES(40,22,'you to_come when');
 INSERT INTO PhraseTranslations VALUES(41,39,'don''t too late_(at_night)| to_go to_sleep');
 INSERT INTO PhraseTranslations VALUES(42,40,'I with I classifier_(generic) friend| to_go to_go_on_a_walk');
+INSERT INTO PhraseTranslations VALUES(43,41,'she to_live_in to_be_at California');
+INSERT INTO PhraseTranslations VALUES(44,41,'she to_live_in to_be_at-na7 California');
 COMMIT;
