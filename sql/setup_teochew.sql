@@ -4,41 +4,40 @@ CREATE TABLE Categories (
     id integer primary key,
     name text,
     display_name text,
-    standalone boolean default 0,
     flashcardset_id integer references FlashcardSet(id));
-INSERT INTO Categories VALUES(0,'Non-Flashcards',NULL,0,NULL);
-INSERT INTO Categories VALUES(1,'Common','Common Phrases',0,12);
-INSERT INTO Categories VALUES(2,'Number','Numbers',0,13);
-INSERT INTO Categories VALUES(3,'Colors','Colors',1,1);
-INSERT INTO Categories VALUES(4,'Pronouns',NULL,0,12);
-INSERT INTO Categories VALUES(5,'Family','Family',1,2);
-INSERT INTO Categories VALUES(6,'Electronics',NULL,0,4);
-INSERT INTO Categories VALUES(7,'Datetime','Date/Time',1,3);
-INSERT INTO Categories VALUES(8,'Adjectives',NULL,0,8);
-INSERT INTO Categories VALUES(9,'House','Around the House',1,4);
-INSERT INTO Categories VALUES(10,'Food','Food/Drink',1,5);
-INSERT INTO Categories VALUES(11,'Body','Body Parts',1,6);
-INSERT INTO Categories VALUES(13,'Actions',NULL,0,8);
-INSERT INTO Categories VALUES(14,'School','School/Work',1,7);
-INSERT INTO Categories VALUES(15,'Animals',NULL,0,14);
-INSERT INTO Categories VALUES(16,'Misc','Miscellaneous',0,8);
-INSERT INTO Categories VALUES(17,'Shopping',NULL,0,8);
-INSERT INTO Categories VALUES(18,'Clothing',NULL,0,8);
-INSERT INTO Categories VALUES(19,'','All',0,NULL);
-INSERT INTO Categories VALUES(20,'Time','Clock Time',0,11);
-INSERT INTO Categories VALUES(21,'Phrase','Sentences',0,10);
-INSERT INTO Categories VALUES(22,'Weather',NULL,0,NULL);
-INSERT INTO Categories VALUES(23,'Outside',NULL,0,14);
-INSERT INTO Categories VALUES(26,'Months',NULL,0,3);
-INSERT INTO Categories VALUES(27,'Weekdays','Days of the Week',0,3);
-INSERT INTO Categories VALUES(28,'Produce','Fruits/Vegetables',0,5);
-INSERT INTO Categories VALUES(29,'Meat',NULL,0,5);
-INSERT INTO Categories VALUES(30,'Drink',NULL,0,5);
-INSERT INTO Categories VALUES(31,'Bathroom',NULL,0,4);
-INSERT INTO Categories VALUES(32,'Basics','Basic Words',0,12);
-INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',0,12);
-INSERT INTO Categories VALUES(34,'Hidden',NULL,0,NULL);
-INSERT INTO Categories VALUES(35,'World','Around the World',0,8);
+INSERT INTO Categories VALUES(0,'Non-Flashcards',NULL,NULL);
+INSERT INTO Categories VALUES(1,'Common','Common Phrases',12);
+INSERT INTO Categories VALUES(2,'Number','Numbers',13);
+INSERT INTO Categories VALUES(3,'Colors','Colors',1);
+INSERT INTO Categories VALUES(4,'Pronouns',NULL,12);
+INSERT INTO Categories VALUES(5,'Family','Family',2);
+INSERT INTO Categories VALUES(6,'Electronics',NULL,4);
+INSERT INTO Categories VALUES(7,'Datetime','Date/Time',3);
+INSERT INTO Categories VALUES(8,'Adjectives',NULL,8);
+INSERT INTO Categories VALUES(9,'House','Around the House',4);
+INSERT INTO Categories VALUES(10,'Food','Food/Drink',5);
+INSERT INTO Categories VALUES(11,'Body','Body Parts',6);
+INSERT INTO Categories VALUES(13,'Actions',NULL,8);
+INSERT INTO Categories VALUES(14,'School','School/Work',7);
+INSERT INTO Categories VALUES(15,'Animals',NULL,14);
+INSERT INTO Categories VALUES(16,'Misc','Miscellaneous',8);
+INSERT INTO Categories VALUES(17,'Shopping',NULL,8);
+INSERT INTO Categories VALUES(18,'Clothing',NULL,8);
+INSERT INTO Categories VALUES(19,'','All',NULL);
+INSERT INTO Categories VALUES(20,'Time','Clock Time',11);
+INSERT INTO Categories VALUES(21,'Phrase','Sentences',10);
+INSERT INTO Categories VALUES(22,'Weather',NULL,NULL);
+INSERT INTO Categories VALUES(23,'Outside',NULL,14);
+INSERT INTO Categories VALUES(26,'Months',NULL,3);
+INSERT INTO Categories VALUES(27,'Weekdays','Days of the Week',3);
+INSERT INTO Categories VALUES(28,'Produce','Fruits/Vegetables',5);
+INSERT INTO Categories VALUES(29,'Meat',NULL,5);
+INSERT INTO Categories VALUES(30,'Drink',NULL,5);
+INSERT INTO Categories VALUES(31,'Bathroom',NULL,4);
+INSERT INTO Categories VALUES(32,'Basics','Basic Words',12);
+INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',12);
+INSERT INTO Categories VALUES(34,'Hidden',NULL,NULL);
+INSERT INTO Categories VALUES(35,'World','Around the World',8);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
