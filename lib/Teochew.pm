@@ -8,6 +8,7 @@ use DBI qw(:sql_types);
 use DBD::SQLite::Constants qw(:dbd_sqlite_string_mode);
 use POSIX;
 use List::Util qw(shuffle);
+use List::MoreUtils qw(uniq);
 use Set::CrossProduct;
 
 use Carp;
@@ -690,6 +691,8 @@ sub get_english_from_database {
     my $for_flashcards = $params{for_flashcards};
     my $check_synonyms = $params{check_synonyms};
 
+    my @synonym_words;
+
     # First check and see if this is a synonym. If it is, we'll have to adjust
     # our search to use the base English word instead
     if ($check_synonyms) {
@@ -698,7 +701,7 @@ sub get_english_from_database {
             join Synonyms on English.id = Synonyms.english_id
             where Synonyms.word = ?
         }, { Slice => {} }, $word);
-        $word = $rows[0]->{word} if @rows;
+        @synonym_words = uniq(map { $_->{word} } @rows);
     }
 
     my @binds;
@@ -713,10 +716,18 @@ sub get_english_from_database {
         $extra_where .= "and Categories.name = ? ";
         push @binds, ucfirst $category;
     }
-    if (defined $word) {
-        my $word_where = "English.word = ?";
-        push @binds, $word;
-        $extra_where .= "and ($word_where) ";
+    if (defined $word || @synonym_words) {
+        my @placeholders;
+        if ($word) {
+            push @placeholders, '?';
+            push @binds, $word;
+        }
+        for my $synonym_word (@synonym_words) {
+            push @placeholders, '?';
+            push @binds, $synonym_word;
+        }
+        my $placeholder_string = join ',', @placeholders;
+        $extra_where .= "and English.word in ($placeholder_string) ";
     }
     if ($notes) {
         $extra_where .= "and notes = ? ";

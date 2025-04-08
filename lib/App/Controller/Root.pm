@@ -8,6 +8,7 @@ use JSON;
 use String::Util qw(trim);
 use Text::MultiMarkdown qw(markdown);
 use Lingua::EN::FindNumber qw(numify);
+use List::MoreUtils qw(all);
 
 use Data::Dumper;
 
@@ -180,7 +181,7 @@ sub english {
 
         # It's possible a synonym was used to get to this page, so explicitly
         # set the English word to the non-synonym for synonym lookups later
-        if (lc($english) ne lc($english_rows[0]{word})) {
+        if (all { lc($_->{word}) ne lc($english) } @english_rows) {
             $english = $english_rows[0]{word};
             $is_synonym = 1;
         }
