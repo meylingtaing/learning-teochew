@@ -196,7 +196,7 @@ INSERT INTO English VALUES(148,9,'umbrella',0,NULL,NULL);
 INSERT INTO English VALUES(149,9,'body pillow',0,NULL,NULL);
 INSERT INTO English VALUES(150,9,'chair',0,NULL,NULL);
 INSERT INTO English VALUES(151,9,'bed',0,NULL,NULL);
-INSERT INTO English VALUES(152,9,'wall',1,NULL,NULL);
+INSERT INTO English VALUES(152,9,'wall',0,NULL,NULL);
 INSERT INTO English VALUES(153,9,'drawers',1,NULL,NULL);
 INSERT INTO English VALUES(154,9,'closet',1,NULL,NULL);
 INSERT INTO English VALUES(155,9,'air conditioner',0,NULL,NULL);
@@ -646,6 +646,14 @@ INSERT INTO English VALUES(607,13,'to be born',0,NULL,NULL);
 INSERT INTO English VALUES(608,9,'to live in',0,NULL,NULL);
 INSERT INTO English VALUES(609,35,'California',0,NULL,NULL);
 INSERT INTO English VALUES(610,35,'Southeast Asia',0,NULL,NULL);
+INSERT INTO English VALUES(611,16,'near',0,NULL,NULL);
+INSERT INTO English VALUES(612,13,'to enter',0,NULL,NULL);
+INSERT INTO English VALUES(613,8,'fake',0,NULL,NULL);
+INSERT INTO English VALUES(614,13,'to call out for someone',0,NULL,NULL);
+INSERT INTO English VALUES(615,6,'to call',0,'on the phone',NULL);
+INSERT INTO English VALUES(616,28,'sweet potato',0,NULL,10);
+INSERT INTO English VALUES(617,35,'America',0,NULL,NULL);
+INSERT INTO English VALUES(618,28,'potato',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1210,6 +1218,15 @@ INSERT INTO Chinese VALUES(564,'出',NULL,'chuk4',NULL);
 INSERT INTO Chinese VALUES(565,'世',NULL,'si3',NULL);
 INSERT INTO Chinese VALUES(566,'徛',NULL,'kia6',NULL);
 INSERT INTO Chinese VALUES(567,'企',NULL,'kia6',NULL);
+INSERT INTO Chinese VALUES(568,'近',NULL,'geng6',NULL);
+INSERT INTO Chinese VALUES(569,'入',NULL,'yip8',NULL);
+INSERT INTO Chinese VALUES(570,'假',NULL,'ge2',NULL);
+INSERT INTO Chinese VALUES(571,'喊',NULL,'ham3',NULL);
+INSERT INTO Chinese VALUES(572,'敲',NULL,'ka3',NULL);
+INSERT INTO Chinese VALUES(573,'薯','藷','jeu5',NULL);
+INSERT INTO Chinese VALUES(574,'美',NULL,'mui2',NULL);
+INSERT INTO Chinese VALUES(575,'国','國','gok4',NULL);
+INSERT INTO Chinese VALUES(576,'同',NULL,'dang5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1310,6 +1327,11 @@ INSERT INTO Synonyms VALUES(92,606,'to exit');
 INSERT INTO Synonyms VALUES(93,606,'to go out');
 INSERT INTO Synonyms VALUES(94,608,'to reside at');
 INSERT INTO Synonyms VALUES(95,610,'Cambodia');
+INSERT INTO Synonyms VALUES(96,612,'to go in');
+INSERT INTO Synonyms VALUES(97,614,'to beckon');
+INSERT INTO Synonyms VALUES(98,617,'United States');
+INSERT INTO Synonyms VALUES(99,617,'USA');
+INSERT INTO Synonyms VALUES(100,616,'potato');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1420,6 +1442,7 @@ INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/eng
 INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflower) and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
 INSERT INTO Extra VALUES(36,552,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
 INSERT INTO Extra VALUES(37,610,replace('**huang1 bain5** is used to generally mean Southeast Asia, but my family sometimes uses it to mean Cambodia, because that''s where they''re from\n','\n',char(10)));
+INSERT INTO Extra VALUES(38,618,replace('**gang1 dang5** is apparently derived from the Malay word for potato, _kentang_. Other Teochew people might pronounce this slightly differently and with different tones, but this is what is closest to how my aunt pronounces it.\n\n**[huang1 jeu5](/english/sweet%20potato)** is technically the term for _sweet potato_, but my mom says she uses it for all kinds of potatoes, even non-sweet ones, so I''ve included it here. It seems like most people use huang1 jeu5 only for sweet potatoes.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1467,6 +1490,7 @@ INSERT INTO TeochewAltChinese VALUES(19,681,'逽');
 INSERT INTO TeochewAltChinese VALUES(20,681,'那');
 INSERT INTO TeochewAltChinese VALUES(21,682,'疼');
 INSERT INTO TeochewAltChinese VALUES(22,702,'企');
+INSERT INTO TeochewAltChinese VALUES(23,712,'蕳砃');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -1631,8 +1655,8 @@ INSERT INTO Translation VALUES(156,149,166,0);
 INSERT INTO Translation VALUES(157,150,167,0);
 INSERT INTO Translation VALUES(158,151,168,0);
 INSERT INTO Translation VALUES(159,150,169,0);
-INSERT INTO Translation VALUES(160,152,170,1);
-INSERT INTO Translation VALUES(161,152,171,1);
+INSERT INTO Translation VALUES(160,152,170,0);
+INSERT INTO Translation VALUES(161,152,171,0);
 INSERT INTO Translation VALUES(162,153,172,1);
 INSERT INTO Translation VALUES(163,154,173,1);
 INSERT INTO Translation VALUES(164,155,174,0);
@@ -2157,6 +2181,14 @@ INSERT INTO Translation VALUES(685,607,701,0);
 INSERT INTO Translation VALUES(686,608,702,0);
 INSERT INTO Translation VALUES(687,609,703,0);
 INSERT INTO Translation VALUES(688,610,704,0);
+INSERT INTO Translation VALUES(689,611,705,0);
+INSERT INTO Translation VALUES(690,612,706,0);
+INSERT INTO Translation VALUES(691,613,707,0);
+INSERT INTO Translation VALUES(692,614,708,0);
+INSERT INTO Translation VALUES(693,615,709,0);
+INSERT INTO Translation VALUES(694,616,710,0);
+INSERT INTO Translation VALUES(695,617,711,0);
+INSERT INTO Translation VALUES(696,618,712,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2834,6 +2866,14 @@ INSERT INTO Teochew VALUES(701,'chuk48 si3','出世');
 INSERT INTO Teochew VALUES(702,'kia6','徛');
 INSERT INTO Teochew VALUES(703,'gia1 jiu1','加州');
 INSERT INTO Teochew VALUES(704,'huang1 bain5','番爿');
+INSERT INTO Teochew VALUES(705,'geng6','近');
+INSERT INTO Teochew VALUES(706,'yip8','入');
+INSERT INTO Teochew VALUES(707,'ge2','假');
+INSERT INTO Teochew VALUES(708,'ham3','喊');
+INSERT INTO Teochew VALUES(709,'ka3','敲');
+INSERT INTO Teochew VALUES(710,'huang1 jeu5','番薯');
+INSERT INTO Teochew VALUES(711,'mui26 gok4','美国');
+INSERT INTO Teochew VALUES(712,'gang1 dang5','工同');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
