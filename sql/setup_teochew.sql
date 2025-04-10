@@ -3098,6 +3098,8 @@ INSERT INTO TranslationExtra VALUES(1,98,'This is sort of like a contraction of 
 INSERT INTO TranslationExtra VALUES(2,6,'The original character for this is actually 蜀, however you typically see the character 一 instead');
 INSERT INTO TranslationExtra VALUES(3,401,'囝 is not the "official" character used for **gian**, but I''m using it because it has the same sound and I''m not sure what a more appropriate character would be');
 INSERT INTO TranslationExtra VALUES(4,665,'I took the character from [the wiktionary](https://en.wiktionary.org/wiki/%E5%A3%8F). Apparently it''s the traditional version, but my computer can''t render the simplified one so I''m only displaying traditional here');
+INSERT INTO TranslationExtra VALUES(5,696,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(6,34,replace('侬 is the original character for this word, though 人 seems to be the more common and widely understood character\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
