@@ -74,7 +74,6 @@ sub insert_translation {
 
     if ($teochew_id) {
         say colored("Teochew entry already exists", "yellow");
-        return;
     }
     else {
         my $sth = $self->dbh->prepare(qq{
@@ -89,7 +88,8 @@ sub insert_translation {
         $teochew_id = $self->dbh->sqlite_last_insert_rowid;
     }
 
-    # Now insert the Translation
+    # Now insert the Translation. If this is a dupe, this will fail since
+    # there is a unique constraint on each english/teochew translation pair
     $self->dbh->do(qq{
         insert into Translation
         (english_id, teochew_id, hidden_from_flashcards)

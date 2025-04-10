@@ -3137,4 +3137,5 @@ INSERT INTO PhraseTranslations VALUES(41,39,'don''t too late_(at_night)| to_go t
 INSERT INTO PhraseTranslations VALUES(42,40,'I with I classifier_(generic) friend| to_go to_go_on_a_walk');
 INSERT INTO PhraseTranslations VALUES(43,41,'she to_live_in to_be_at California');
 INSERT INTO PhraseTranslations VALUES(44,41,'she to_live_in to_be_at-na7 California');
+CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 COMMIT;
