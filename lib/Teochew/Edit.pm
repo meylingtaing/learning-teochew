@@ -447,8 +447,8 @@ Given an english word, this returns a hash with relevant translation
 information. If there are multiple translations found, this will prompt the
 user to choose one
 
-The return hash will consist of three keys: C<english>, C<teochew>, and
-C<translation>. Here is an example of one:
+The return hash will consist of three keys: C<english> and C<teochew>. Here is
+an example of one:
 
   'english' => {
                  'id' => 1
