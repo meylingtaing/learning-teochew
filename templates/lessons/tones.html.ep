@@ -36,7 +36,7 @@ each syllable, indicating which tone it is.
     </tr>
     <tr>
       <td>4</td>
-      <td>Middle Short</td>
+      <td>Middle Short (Checked)</td>
       %= include 'elements/translation-row', word => 'meat'
     </tr>
     <tr>
@@ -56,12 +56,22 @@ each syllable, indicating which tone it is.
     </tr>
     <tr>
       <td>8</td>
-      <td>High Short</td>
+      <td>High Short (Checked)</td>
       %= include 'elements/translation-row', word => 'white', pengim => 'beh8'
     </tr>
   </tbody>
 </table>
 </div></div>
+
+<p>I like to categorize the tones into these subsets:</p>
+
+<ul>
+
+<li><b>Tones 1, 5, and 7</b> have a steady pitch. Note that these are relative&#8212;the exact pitches will vary from person to person.</li>
+<li><b>Tones 2 and 6</b> change in pitch while you say them.</li>
+<li><b>Tones 4 and 8</b> are checked tones that always have an ending sound with h, k, or p.</li>
+<li><b>Tone 3</b> subtly falls and rises, but it honestly sounds indistinguishable from tone 7 to me. (They have different tone change rules though!) Different people will stress how much rising/falling to use here.
+</ul>
 
 <p>
 Many words undergo tone change when placed in front of another word. This is
@@ -114,6 +124,6 @@ in front of another word to demonstrate how their tones change.
 </div></div>
 
 <p>In the translations on this site, if a word has undergone tone change, the
-spoken tone will be displayed in parentheses. If a word originally has tone 3 and undergoes tone change, I will always display tone 2 for it, but my audio clips will vary between actually saying it with tone 2 or tone 5. I'm not consistent 😅
+spoken tone will be displayed in parentheses. If a word originally has tone 3 and undergoes tone change, I will always display tone 2 for it, but my audio clips will vary between actually saying it with tone 2 or tone 5. I'm not consistent, and it's mainly because it takes more effort to say something with tone 2 in the middle of a phrase 😅
 </p>
 %= include 'elements/play_teochew'
