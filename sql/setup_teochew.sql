@@ -656,6 +656,10 @@ INSERT INTO English VALUES(617,35,'America',0,NULL,NULL);
 INSERT INTO English VALUES(618,28,'potato',0,NULL,10);
 INSERT INTO English VALUES(619,4,'other people',0,NULL,2);
 INSERT INTO English VALUES(620,33,'to make',0,NULL,NULL);
+INSERT INTO English VALUES(621,33,'to meet',0,NULL,NULL);
+INSERT INTO English VALUES(622,33,'to meet',0,'each other',NULL);
+INSERT INTO English VALUES(623,13,'to stop',0,NULL,NULL);
+INSERT INTO English VALUES(624,13,'to arrive',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1231,6 +1235,9 @@ INSERT INTO Chinese VALUES(575,'国','國','gok4',NULL);
 INSERT INTO Chinese VALUES(576,'同',NULL,'dang5',NULL);
 INSERT INTO Chinese VALUES(577,'侬','儂','nang5',NULL);
 INSERT INTO Chinese VALUES(578,'侬','儂','nang7',NULL);
+INSERT INTO Chinese VALUES(579,'遇',NULL,'ngo6',NULL);
+INSERT INTO Chinese VALUES(580,'歇',NULL,'hiah4',NULL);
+INSERT INTO Chinese VALUES(581,'到',NULL,'gao3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2198,6 +2205,10 @@ INSERT INTO Translation VALUES(697,619,713,1);
 INSERT INTO Translation VALUES(698,313,714,0);
 INSERT INTO Translation VALUES(699,620,714,0);
 INSERT INTO Translation VALUES(700,620,354,0);
+INSERT INTO Translation VALUES(701,621,715,0);
+INSERT INTO Translation VALUES(702,622,716,0);
+INSERT INTO Translation VALUES(703,623,717,0);
+INSERT INTO Translation VALUES(704,624,718,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2885,6 +2896,10 @@ INSERT INTO Teochew VALUES(711,'mui26 gok4','美国');
 INSERT INTO Teochew VALUES(712,'gang1 dang5','工同');
 INSERT INTO Teochew VALUES(713,'nang7','人');
 INSERT INTO Teochew VALUES(714,'jo3','做');
+INSERT INTO Teochew VALUES(715,'ngo6','遇');
+INSERT INTO Teochew VALUES(716,'sio1 ngo6','相遇');
+INSERT INTO Teochew VALUES(717,'hiah4','歇');
+INSERT INTO Teochew VALUES(718,'gao3','到');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
