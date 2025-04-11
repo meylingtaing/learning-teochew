@@ -1,0 +1,103 @@
+% layout 'wrapper-left';
+<style>
+.hover-details:hover { color: #007bff; cursor: default; }
+.table .play-teochew { font-size: 1.5em }
+.large-translation { margin-bottom: 2rem; }
+</style>
+
+<h1>Dialects/Accents of Teochew</h1>
+
+<p>What is commonly known as the Teochew language actually consists of several different dialects or accents. There are three main categories of accents that are represented by the three rivers in the Teoswa (or <a href="https://en.wikipedia.org/wiki/Chaoshan">Chaoshan</a>) region of China. This site mainly uses the Gekion accent.</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Teochew Dialect</th>
+      <th>Peng'im</th>
+      <th>Simplified</th>
+      <th>Traditional</th>
+      <th>Other Name(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-secondary">
+      <th></th>
+      <th>hang5(7) gang1</th>
+      <th>韩江</th>
+      <th>韓江</th>
+      <th>Han River, Hanjiang</th>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Diojiu</th>
+      <td>dio5(7) jiu1</td>
+      <td>潮州</td>
+      <td>潮州</td>
+      <td>Teochew, Chaozhou</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Tenghai</th>
+      <td>teng5(7) hai2</td>
+      <td>澄海</td>
+      <td>澄海</td>
+      <td>Chenghai</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Suantao</th>
+      <td>suan1 tao5</td>
+      <td>汕头</td>
+      <td>汕頭</td>
+      <td>Shantou, Swatow</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Yiaopeng</th>
+      <td>yiao5(7) peng5</td>
+      <td>饶平</td>
+      <td>饒平</td>
+      <td>Raoping, Jaoping</td>
+    </tr>
+    <tr>
+      <th></th>
+      <th>iong5(7) gang1</th>
+      <th>榕江</th>
+      <th>榕江</th>
+      <th>South River, Jieyang River, Rongjiang</th>
+    </tr>
+    <tr>
+      <th scope="row">Gekion</th>
+      <td>gek4(8) ion5</td>
+      <td>揭阳</td>
+      <td>揭陽</td>
+      <td>Jieyang</td>
+    </tr>
+    <tr class="table-secondary">
+      <th></th>
+      <th>liang7 gang1</th>
+      <th>练江</th>
+      <th>練江</th>
+      <th>Lian River, Lianjiang</th>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Dioion</th>
+      <td>dio5(7) ion5</td>
+      <td>潮阳</td>
+      <td>潮陽</td>
+      <td>Chaoyang</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Pouleng</th>
+      <td>pou2(6) leng5</td>
+      <td>普宁</td>
+      <td>普寧</td>
+      <td>Puning</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Huilai</th>
+      <td>hui6(7) lai5</td>
+      <td>惠来</td>
+      <td>惠來</td>
+      <td>Hweilai</td>
+    </tr>
+  </tbody>
+
+</table>
+
