@@ -20,7 +20,7 @@
 
   <div class="container-md">
 
-  %= include 'flashcard_selection'
+  %= include 'menu'
 
   %= content html => begin
   <%= content %>
