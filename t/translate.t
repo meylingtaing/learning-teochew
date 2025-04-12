@@ -57,7 +57,7 @@ is_deeply [ map { $_->{pronunciations}[0]{pengim} } @$translations ],
 
 check_translation(
     { sentence => 'What are you doing?', words => ['you to_do what'] },
-    "leu2 mueh(4) mih(8) gai5"
+    "leu2 mueh(4) meh(8) gai5"
 );
 
 # Make sure we don't tone change when we have the '|'
