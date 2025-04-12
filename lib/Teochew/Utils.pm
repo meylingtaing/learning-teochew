@@ -53,10 +53,18 @@ my %tone_changes = (
 Given pengim, this will change the tone of the last syllable so it has the
 correct tone if it's before another word.
 
+You can optionally provide a hash of parameters. Right now the only parameter
+you can set is C<parens>, which is a boolean. If it is true, the format of
+the changed tones will use parentheses and will omit the base tone. If false,
+it will show both the base and the changed tone without parentheses.
+
 =cut
 
 sub change_tone {
-    my $input = shift;
+    my ($input, %params) = @_;
+
+    # Use parentheses by default, but the user can decide to omit them
+    my $parens = $params{parens} // 1;
 
     my @syllables = split / /, $input;
     my $pengim = pop @syllables;
@@ -73,7 +81,12 @@ sub change_tone {
         $pengim .= "$tone_changes{$tone_number}";
     }
     else {
-        $pengim .= "($tone_changes{$tone_number})";
+        if ($parens) {
+            $pengim .= "($tone_changes{$tone_number})";
+        }
+        else {
+            $pengim .= $tone_number . $tone_changes{$tone_number};
+        }
     }
 
     return join(' ', @syllables, $pengim);
