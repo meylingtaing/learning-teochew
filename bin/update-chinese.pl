@@ -18,7 +18,7 @@ use Term::ANSIColor qw(colored);
 
 use Teochew;
 use Teochew::Edit;
-use Teochew::Utils qw(split_out_parens);
+use Teochew::Utils qw(change_tone split_out_parens);
 use Input qw(confirm input_from_prompt);
 
 my $db = Teochew::Edit->new;
@@ -68,6 +68,42 @@ if ($pengim) {
     # Next, I need to double check that the pengim actually does match for the
     # particular syllable. And then I need to prompt the user to see if they want
     # to fix it
+    for my $teochew (@teochew_rows) {
+        my @teochew_pengim  = split / /, $teochew->{pengim};
+        my @teochew_chinese = split //,  $teochew->{chinese};
+
+        my $needs_update = 0;
+
+        for my $i (0..$#teochew_pengim) {
+            my $pengim_syllable  = $teochew_pengim[$i];
+            my $chinese_syllable = $teochew_chinese[$i];
+
+            # Is this the right syllable? We're using a regex here because
+            # there could be an extra number at the end for tone change
+            next unless $pengim_syllable =~ /^$row->{pengim}/;
+
+            # Does the chinese character match as well?
+            next unless $chinese_syllable eq $simplified;
+
+            # Okay, change it!
+            $needs_update = 1;
+            $teochew_pengim[$i] = $pengim;
+
+            # Apply tone change if the original pengim syllable had tone change
+            $teochew_pengim[$i] = change_tone($teochew_pengim[$i], parens => 0)
+                if $pengim_syllable =~ /\d\d/;
+        }
+
+        if ($needs_update) {
+            my $updated_pengim = join ' ', @teochew_pengim;
+            say "Changing pengim from '$teochew->{pengim}' to '$updated_pengim'";
+            if (confirm()) {
+                $db->dbh->do("update Teochew set pengim = ? where id = ?",
+                    undef, $updated_pengim, $teochew->{id});
+                say colored("Updated the pengim!", 'green');
+            }
+        }
+    }
 }
 
 if ($standard_pengim) {
