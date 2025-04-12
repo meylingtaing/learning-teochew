@@ -1,7 +1,5 @@
 #!/usr/bin/env -S perl -CA -Ilocal/lib/perl5
 
-# TODO: THIS SCRIPT IS NOT DONE
-
 use strict;
 use warnings;
 
@@ -27,7 +25,6 @@ my $db = Teochew::Edit->new;
 my $simplified = shift @ARGV;
 
 # Let's see what the user wants to update
-# TODO: Add more options
 my ($pengim, $standard_pengim);
 GetOptions(
     "pengim=s"          => \$pengim,
@@ -57,8 +54,12 @@ if (scalar @$rows > 1) {
 }
 
 if ($pengim) {
-    $db->dbh->do("update Chinese set pengim = ? where id = ?",
-        undef, $pengim, $row->{chinese_id});
+    say "Updating $simplified to have pengim '$pengim'";
+    if (confirm()) {
+        $db->dbh->do("update Chinese set pengim = ? where id = ?",
+            undef, $pengim, $row->{chinese_id});
+        say colored("Updated the chinese character pengim!", 'green');
+    }
 
     # Check and see if there are any teochew entries to update
     my @teochew_rows = $db->dbh->selectall_array(qq{
@@ -107,7 +108,14 @@ if ($pengim) {
 }
 
 if ($standard_pengim) {
-    $db->dbh->do("update Chinese set standard_pengim = ? where id = ?",
-        undef, $standard_pengim, $row->{chinese_id});
-    say colored("Added standard pengim!", "green");
+    $row->{standard_pengim} //= '';
+
+    say sprintf "Changing standard pengim from '%s' to '%s'",
+        $row->{standard_pengim}, $standard_pengim;
+
+    if (confirm()) {
+        $db->dbh->do("update Chinese set standard_pengim = ? where id = ?",
+            undef, $standard_pengim, $row->{chinese_id});
+        say colored("Added standard pengim!", "green");
+    }
 }
