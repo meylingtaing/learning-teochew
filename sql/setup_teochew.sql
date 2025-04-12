@@ -3115,6 +3115,7 @@ INSERT INTO TranslationExtra VALUES(3,401,'囝 is not the "official" character u
 INSERT INTO TranslationExtra VALUES(4,665,'I took the character from [the wiktionary](https://en.wiktionary.org/wiki/%E5%A3%8F). Apparently it''s the traditional version, but my computer can''t render the simplified one so I''m only displaying traditional here');
 INSERT INTO TranslationExtra VALUES(5,696,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(6,34,replace('侬 is the original character for this word, though 人 seems to be the more common and widely understood character\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(7,200,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
