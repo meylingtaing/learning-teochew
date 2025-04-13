@@ -505,6 +505,7 @@ sub translate_phrase {
             my $pengim = undef;
             if ($word =~ /\-(.*)$/) {
                 $pengim = $1;
+                $pengim =~ s/(\d)([a-z])/$1 $2/g;
                 $word =~ s/\-(.*)$//;
             }
 

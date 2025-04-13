@@ -55,10 +55,18 @@ is_deeply [ map { $_->{pronunciations}[0]{pengim} } @$translations ],
     [ 'ang(7) sek4', 'ang5' ],
     'Translations are correct and non-hidden one is shown first';
 
+# Check translations for sentences
 check_translation(
     { sentence => 'What are you doing?', words => ['you to_do what'] },
     "leu2 mueh(4) meh(8) gai5"
 );
+
+# We can also include a word in a sentence that would have multiple
+# translations
+check_translation({
+    sentence => "I'll talk to you more tomorrow",
+    words    => ['I to_say word_(spoken) with you tomorrow-mua32ki2| more'],
+}, "ua2 dan(2) ue7 gah(8) leu2 mua(2) ki2 ge1");
 
 # Make sure we don't tone change when we have the '|'
 check_translation({
