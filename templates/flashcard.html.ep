@@ -71,7 +71,7 @@
   % if (($type // '') ne 'phrase') {
     <div class="row mx-sm-1 my-1">
       <div class="col">
-        <a href="/english/<%= $flashcard->{english} %>" target="_blank"
+        <a href="/english/<%= $flashcard->{english_link} %>" target="_blank"
            id="english-page-link">
           View translation page for <b><%= $flashcard->{english} %></b>
         </a>
@@ -169,7 +169,7 @@
         // Update the link at the bottom
         $('#english-page-link')
             .html('View translation page for <b>' + flashcard.english + '</b>')
-            .attr('href', '/english/' + flashcard.english);
+            .attr('href', '/english/' + flashcard.english_link);
     }
 
     function resize_text(text_elt, container_elt) {
