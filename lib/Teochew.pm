@@ -547,8 +547,9 @@ Given some parameters, this will return a list of english words with
 translations, each as a hashref of this form:
 
     {
-        english => 'hello',
-        notes   => 'extra things that matter in chinese but not english',
+        english_link => 'hello', # in the url
+        english      => 'hello', # the display on the page
+        notes        => 'extra things that matter in chinese but not english',
         teochew => [
             [{ pengim => 'leu2 ho2', chinese => $characters, audio => leu2ho2 }],
             [{ pengim => 'alter', chinese => $character2 }]
@@ -608,12 +609,22 @@ sub generate_translation_word_list {
             teochew => translate($english, for_flashcards => $for_flashcards)
         );
 
+        # why...why is this a HASH sometimes and a string other times
         if (ref $english eq 'HASH') {
-            $flashcard{english} = $english->{word} || $english->{sentence};
-            $flashcard{notes}   = $english->{notes};
+            my $base_word = $english->{word};
+            $flashcard{english_link} = $base_word;
+
+            if ($base_word && ($english->{notes} // '') =~ /$base_word/) {
+                $flashcard{english} = $english->{notes};
+                $flashcard{notes} = undef;
+            }
+            else {
+                $flashcard{english} = $english->{word} || $english->{sentence};
+                $flashcard{notes}   = $english->{notes};
+            }
         }
         else {
-            $flashcard{english} = $english;
+            $flashcard{english} = $flashcard{english_link} = $english;
             $flashcard{notes}   = undef;
         }
 
@@ -1546,10 +1557,11 @@ needed to display in translation tables
 
 Expects a list of hashrefs, each with these fields
 
-    english
-    notes
-    chinese
-    pengim
+    english:      the English column of the table
+    english_link: the path of the url for /english/...
+    notes:        stuff in parentheses after the english word
+    chinese:      the Chinese column of the table
+    pengim:       the Peng'Im column of the table
 
 =cut
 
@@ -1559,15 +1571,20 @@ sub _format_for_translations_table {
     my @ret;
     for (@rows) {
 
+        my $base_word = $_->{english};
+        if (($_->{notes} // '') =~ /$base_word/) {
+            $_->{english} = $_->{notes};
+            $_->{notes} = undef;
+        }
+
         my $pengim = $_->{pengim};
         $pengim =~ s/\d(\d)/($1)/g;
         my $audio;
 
-        # TODO: Be able to display the non-gekion pronunciation here
-
         $audio ||= find_audio($pengim);
 
         push @ret, {
+            english_link => $base_word,
             english => $_->{english},
             notes   => $_->{notes},
             teochew => [{
