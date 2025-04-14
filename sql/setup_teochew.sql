@@ -670,6 +670,8 @@ INSERT INTO English VALUES(631,7,'next week',0,NULL,10);
 INSERT INTO English VALUES(632,7,'week',0,'a week',10);
 INSERT INTO English VALUES(633,7,'month',0,'a month',10);
 INSERT INTO English VALUES(634,7,'day',0,'a day',1);
+INSERT INTO English VALUES(635,7,'hour',0,'an hour',10);
+INSERT INTO English VALUES(636,7,'minute',0,'a minute',10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2237,6 +2239,8 @@ INSERT INTO Translation VALUES(709,629,723,0);
 INSERT INTO Translation VALUES(710,630,724,0);
 INSERT INTO Translation VALUES(711,375,725,0);
 INSERT INTO Translation VALUES(712,631,726,0);
+INSERT INTO Translation VALUES(713,635,727,0);
+INSERT INTO Translation VALUES(714,636,728,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2936,6 +2940,8 @@ INSERT INTO Teochew VALUES(723,'po6','抱');
 INSERT INTO Teochew VALUES(724,'in5','圆');
 INSERT INTO Teochew VALUES(725,'li26 loh84 jiah8','理落食');
 INSERT INTO Teochew VALUES(726,'e67 loi26 bai3','下礼拜');
+INSERT INTO Teochew VALUES(727,'jek84 diam26 jeng1','一点钟');
+INSERT INTO Teochew VALUES(728,'jek84 hung1 jeng1','一分钟');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
