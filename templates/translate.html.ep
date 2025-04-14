@@ -5,11 +5,11 @@
     font-weight: 500;
 }
 .list-group-item .notes {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 .list-group-item {
-    padding-top: .4em;
-    padding-bottom: .4em;
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
 .word-breakdown > :not(:last-child) {
     margin-bottom: .5rem;
@@ -35,8 +35,8 @@
       % for my $row (@{ $teochew_by_category->{$key}{teochew} }) {
         % ++$row_id;
         <li class="list-group-item">
+          <div class="notes text-secondary"><%= $row->{notes} %></div>
           %= include 'elements/translation', row => $row
-          <div class="notes"><%= $row->{notes} %></div>
 
 
           % if ($row->{compound} || $row->{extra_notes} || $row->{pronunciations}[1] || $row->{alt_chinese}) {
