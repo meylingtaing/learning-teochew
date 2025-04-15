@@ -675,6 +675,7 @@ INSERT INTO English VALUES(636,7,'minute',0,'a minute',10);
 INSERT INTO English VALUES(637,10,'to stir',0,NULL,NULL);
 INSERT INTO English VALUES(638,32,'enough',0,NULL,NULL);
 INSERT INTO English VALUES(639,9,'to clean and sweep',0,NULL,NULL);
+INSERT INTO English VALUES(640,10,'plate',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1262,6 +1263,7 @@ INSERT INTO Chinese VALUES(587,'挠','撓','la6',NULL);
 INSERT INTO Chinese VALUES(588,'𤰉',NULL,'la6',NULL);
 INSERT INTO Chinese VALUES(589,'收',NULL,'siu1',NULL);
 INSERT INTO Chinese VALUES(590,'扫','掃','sao3',NULL);
+INSERT INTO Chinese VALUES(591,'盘','盤','buan5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1370,6 +1372,7 @@ INSERT INTO Synonyms VALUES(100,616,'potato');
 INSERT INTO Synonyms VALUES(101,616,'yam');
 INSERT INTO Synonyms VALUES(102,629,'to hold in arms');
 INSERT INTO Synonyms VALUES(103,630,'circular');
+INSERT INTO Synonyms VALUES(104,640,'dish');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1460,7 +1463,7 @@ INSERT INTO Extra VALUES(10,344,replace('**ga lem** originates from the French w
 INSERT INTO Extra VALUES(11,110,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the 揭阳 Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is the 潮州 "Teochew-proper" way of saying it.\n','\n',char(10)));
 INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
 INSERT INTO Extra VALUES(13,281,replace('Alternatively, you may see 底珍 or 底滇 used.\n','\n',char(10)));
-INSERT INTO Extra VALUES(14,284,replace('Alternatively, you may see this as 怎呢.\n\nMy recorded pronunciation is a little overly formal; people normally pronounce the first syllable much more quickly.\n','\n',char(10)));
+INSERT INTO Extra VALUES(14,284,replace('My recorded pronunciation is a little overly formal; people normally pronounce the first syllable much more quickly.\n','\n',char(10)));
 INSERT INTO Extra VALUES(15,180,replace('Alternatively, you might see 树泥.\n','\n',char(10)));
 INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
@@ -1532,6 +1535,7 @@ INSERT INTO TeochewAltChinese VALUES(21,682,'疼');
 INSERT INTO TeochewAltChinese VALUES(22,702,'企');
 INSERT INTO TeochewAltChinese VALUES(23,712,'蕳砃');
 INSERT INTO TeochewAltChinese VALUES(24,37,'侬');
+INSERT INTO TeochewAltChinese VALUES(25,324,'怎呢');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2251,6 +2255,7 @@ INSERT INTO Translation VALUES(714,636,728,0);
 INSERT INTO Translation VALUES(715,637,729,0);
 INSERT INTO Translation VALUES(716,638,730,0);
 INSERT INTO Translation VALUES(717,639,731,0);
+INSERT INTO Translation VALUES(718,640,732,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2955,6 +2960,7 @@ INSERT INTO Teochew VALUES(728,'jek84 hung1 jeng1','一分钟');
 INSERT INTO Teochew VALUES(729,'la6','挠');
 INSERT INTO Teochew VALUES(730,'la6','𤰉');
 INSERT INTO Teochew VALUES(731,'siu1 sao3','收扫');
+INSERT INTO Teochew VALUES(732,'buan5','盘');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3232,12 +3238,25 @@ INSERT INTO PhraseTranslations VALUES(45,42,'she not-m6 to_know_(how_to_do_somet
 INSERT INTO PhraseTranslations VALUES(46,43,'I to_say word_(spoken) with you tomorrow-mua32ki2| more');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
+INSERT INTO Tags VALUES(2,'kitchenware');
 CREATE TABLE EnglishTags (
 id integer primary key,
 english_id integer references English(id),
 tag_id integer references Tag(id)
 );
 INSERT INTO EnglishTags VALUES(1,282,1);
+INSERT INTO EnglishTags VALUES(2,281,1);
+INSERT INTO EnglishTags VALUES(3,119,1);
+INSERT INTO EnglishTags VALUES(4,283,1);
+INSERT INTO EnglishTags VALUES(5,284,1);
+INSERT INTO EnglishTags VALUES(6,640,2);
+INSERT INTO EnglishTags VALUES(7,455,2);
+INSERT INTO EnglishTags VALUES(8,380,2);
+INSERT INTO EnglishTags VALUES(9,569,2);
+INSERT INTO EnglishTags VALUES(10,382,2);
+INSERT INTO EnglishTags VALUES(11,381,2);
+INSERT INTO EnglishTags VALUES(12,379,2);
+INSERT INTO EnglishTags VALUES(13,628,2);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
