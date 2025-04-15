@@ -3239,4 +3239,6 @@ tag_id integer references Tag(id)
 );
 INSERT INTO EnglishTags VALUES(1,282,1);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
+CREATE UNIQUE INDEX tag_id ON Tags(id);
+CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
 COMMIT;
