@@ -8,7 +8,7 @@ use JSON;
 use String::Util qw(trim);
 use Text::MultiMarkdown qw(markdown);
 use Lingua::EN::FindNumber qw(numify);
-use List::MoreUtils qw(all);
+use List::MoreUtils qw(all uniq);
 
 use Data::Dumper;
 
@@ -141,7 +141,9 @@ C<english> must be stashed
 sub english {
     my $c = shift;
     my $input = trim $c->stash('english');
+
     my $extra_notes = '';
+    my @all_tags;
 
     # All of the verbs in the database are stored like "to eat", but we should
     # allow someone to see the translation without typing the "to" part of it
@@ -237,7 +239,12 @@ sub english {
                     notes => $english_row->{notes},
                 };
             }
-        }
+
+            # Get any tags for this word
+            my @tags = Teochew::get_tags($english_row->{id});
+            push @all_tags, @tags;
+
+        } # end @english_rows loop
 
         $c->stash(teochew_by_category => \%categories);
         $c->stash(english  => $english_display);
@@ -249,7 +256,8 @@ sub english {
         }
         $c->stash(synonyms => \@synonyms);
 
-        $c->stash(extra_info => markdown($extra_notes));
+        $c->stash(tags => join ', ', uniq(@all_tags));
+        $c->stash(extra_info => $extra_notes ? markdown($extra_notes) : undef);
 
         $c->stash(words_containing =>
             Teochew::find_words_using_character(\@chinese, exclude_itself => 1)

@@ -819,19 +819,19 @@ sub get_synonyms {
 
 =head2 get_tags
 
-Given an English word, returns the tags for that word
+Given an English id, returns the tags for that word
 
 =cut
 
 sub get_tags {
-    my ($word) = @_;
+    my ($id) = @_;
     my $sql =
         "select Tags.name from Tags " .
-        "join TagLinks on Tags.id = TagLinks.tag_id " .
-        "join English on English.id = TagLinks.english_id " .
-        "where English.word = ?";
+        "join EnglishTags on Tags.id = EnglishTags.tag_id " .
+        "join English on English.id = EnglishTags.english_id " .
+        "where English.id = ?";
 
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $id);
     return map { $_->{name} } @rows;
 }
 
