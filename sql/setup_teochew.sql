@@ -672,6 +672,9 @@ INSERT INTO English VALUES(633,7,'month',0,'a month',10);
 INSERT INTO English VALUES(634,7,'day',0,'a day',1);
 INSERT INTO English VALUES(635,7,'hour',0,'an hour',10);
 INSERT INTO English VALUES(636,7,'minute',0,'a minute',10);
+INSERT INTO English VALUES(637,10,'to stir',0,NULL,NULL);
+INSERT INTO English VALUES(638,32,'enough',0,NULL,NULL);
+INSERT INTO English VALUES(639,9,'to clean and sweep',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1255,6 +1258,10 @@ INSERT INTO Chinese VALUES(583,'笼','籠','leng5',NULL);
 INSERT INTO Chinese VALUES(584,'床',NULL,'seung5',NULL);
 INSERT INTO Chinese VALUES(585,'抱',NULL,'po6',NULL);
 INSERT INTO Chinese VALUES(586,'理',NULL,'li2',NULL);
+INSERT INTO Chinese VALUES(587,'挠','撓','la6',NULL);
+INSERT INTO Chinese VALUES(588,'𤰉',NULL,'la6',NULL);
+INSERT INTO Chinese VALUES(589,'收',NULL,'siu1',NULL);
+INSERT INTO Chinese VALUES(590,'扫','掃','sao3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2241,6 +2248,9 @@ INSERT INTO Translation VALUES(711,375,725,0);
 INSERT INTO Translation VALUES(712,631,726,0);
 INSERT INTO Translation VALUES(713,635,727,0);
 INSERT INTO Translation VALUES(714,636,728,0);
+INSERT INTO Translation VALUES(715,637,729,0);
+INSERT INTO Translation VALUES(716,638,730,0);
+INSERT INTO Translation VALUES(717,639,731,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2942,6 +2952,9 @@ INSERT INTO Teochew VALUES(725,'li26 loh84 jiah8','理落食');
 INSERT INTO Teochew VALUES(726,'e67 loi26 bai3','下礼拜');
 INSERT INTO Teochew VALUES(727,'jek84 diam26 jeng1','一点钟');
 INSERT INTO Teochew VALUES(728,'jek84 hung1 jeng1','一分钟');
+INSERT INTO Teochew VALUES(729,'la6','挠');
+INSERT INTO Teochew VALUES(730,'la6','𤰉');
+INSERT INTO Teochew VALUES(731,'siu1 sao3','收扫');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
