@@ -21,10 +21,11 @@ use Input qw(confirm input_from_prompt);
 my $db = Teochew::Edit->new;
 
 # First argument should be the English word
-my $input = shift @ARGV;
+my $english_input = shift @ARGV;
 
 die colored("Must provide an English word!", "red") . "\n"
-    unless defined $input;
+    unless defined $english_input;
+
 
 # Let's see what the user wants to update
 my (
@@ -61,7 +62,7 @@ unless ($category ||
 }
 
 # Gather up the relevant information from the database for this translation
-my %translation = $db->choose_translation_from_english($input);
+my %translation = $db->choose_translation_from_english($english_input);
 
 my $english     = $translation{english};
 my $teochew     = $translation{teochew};
