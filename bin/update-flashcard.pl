@@ -35,6 +35,7 @@ my %options = (
     chinese       => 's',
     alt_chinese   => 's',
     pengim        => 's',
+    tag           => 's',
     hidden_from_flashcards => 'i',
 );
 
@@ -57,6 +58,9 @@ unless (any { defined $inputs{$_} } keys %inputs)
 # the user to choose which one they want to edit. Once we know which one,
 # gather up the relevant information from the database for this translation.
 my %translation = $db->choose_translation_from_english($english_input);
+
+# XXX: Actually, translation only matters for the teochew parts. hmm. maybe i'll
+# clean this up a bit later
 
 my $english = $translation{english};
 my $teochew = $translation{teochew};
@@ -98,6 +102,37 @@ if (my $category_sort = $inputs{category_sort}) {
 if (%update_english_params) {
     $db->update_english($english->{id}, %update_english_params);
     say colored("Updated english word!", "green");
+}
+
+# For now, I'm just going to support adding new tags
+if (my $tag = $inputs{tag}) {
+
+    # First see if the tag exists or not
+    my $tag_id = $db->tag_id($tag);
+
+    unless ($tag_id) {
+        say "Creating new tag '$tag'";
+        if (confirm()) {
+            $tag_id = $db->insert_tag($tag);
+            if ($tag_id) {
+                say colored("Added tag $tag!", "green");
+            }
+            else {
+                exit;
+            }
+        }
+    }
+
+    # Now add the tag to the english word
+    say "Adding tag '$tag' to '$english->{word}'";
+    if (confirm()) {
+        my $success = $db->add_tag_to_english(
+            english_id => $english->{id},
+            tag_id     => $tag_id
+        );
+        say colored("Added tag '$tag' to '$english->{word}'!", "green")
+            if $success;
+    }
 }
 
 if (my $alt_chinese = $inputs{alt_chinese}) {

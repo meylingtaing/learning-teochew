@@ -225,6 +225,55 @@ sub insert_synonym {
     return $sth->execute;
 }
 
+=head2 tag_id
+
+Returns the id of the tag with the given name
+
+XXX: Maybe this would be more appropriate in the Teochew class?
+
+=cut
+
+sub tag_id {
+    my ($self, $name) = @_;
+    $self = $self->new unless ref $self;
+
+    my $dbh = $self->dbh;
+    my $id = $dbh->selectrow_array('select id from Tags where name = ?',
+        undef, $name);
+
+    return $id;
+}
+
+=head2 insert_tag
+
+    my $id = $teochew->insert_tag('new tag name');
+
+=cut
+
+sub insert_tag {
+    my ($self, $tag_name) = @_;
+    $self = $self->new unless ref $self;
+
+    my $dbh = $self->dbh;
+    $dbh->do("insert into Tags (name) values (?)", undef, $tag_name);
+    return $dbh->sqlite_last_insert_rowid;
+}
+
+=head2 add_tag_to_english
+
+=cut
+
+sub add_tag_to_english {
+    my ($self, %params) = @_;
+    $self = $self->new unless ref $self;
+
+    my $english_id = $params{english_id};
+    my $tag_id     = $params{tag_id};
+
+    $self->dbh->do('insert into EnglishTags (english_id, tag_id) values (?,?)',
+        undef, $english_id, $tag_id);
+}
+
 =head2 insert_category
 
     my $id = $teochew->insert_category('NewCategoryName');
