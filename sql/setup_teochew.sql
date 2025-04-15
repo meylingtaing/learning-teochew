@@ -3230,5 +3230,13 @@ INSERT INTO PhraseTranslations VALUES(43,41,'she to_live_in to_be_at California'
 INSERT INTO PhraseTranslations VALUES(44,41,'she to_live_in to_be_at-na7 California');
 INSERT INTO PhraseTranslations VALUES(45,42,'she not-m6 to_know_(how_to_do_something) to_say Chinese_language');
 INSERT INTO PhraseTranslations VALUES(46,43,'I to_say word_(spoken) with you tomorrow-mua32ki2| more');
+CREATE TABLE Tags (id integer primary key, name text);
+INSERT INTO Tags VALUES(1,'question words');
+CREATE TABLE EnglishTags (
+id integer primary key,
+english_id integer references English(id),
+tag_id integer references Tag(id)
+);
+INSERT INTO EnglishTags VALUES(1,282,1);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 COMMIT;
