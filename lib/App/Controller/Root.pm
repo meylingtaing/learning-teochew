@@ -291,7 +291,7 @@ sub chinese {
         # simplified character for finding other words using this character
         my $simplified = $chinese->[0]{simplified};
 
-        $words      = Teochew::find_words_using_character($character);
+        $words      = Teochew::find_words_using_character($simplified);
         $alternates = Teochew::check_alternate_chinese(chinese => $character);
     }
 
