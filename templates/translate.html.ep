@@ -112,14 +112,14 @@
     % }
     </ul>
 
+  % if ($extra_info) {
+      <div class="mt-2"><%== $extra_info %></div>
+  % }
+
   % if ($tags) {
       <div class="mt-2 text-secondary tag-text">
       Tags: <%= $tags %>
       </div>
-  % }
-
-  % if ($extra_info) {
-      <div class="mt-2"><%== $extra_info %></div>
   % }
 
   <hr>
