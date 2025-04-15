@@ -12,6 +12,7 @@ binmode STDIN,  ':encoding(UTF-8)';
 use Data::Dumper;
 use Getopt::Long qw(GetOptionsFromArray);
 use Term::ANSIColor qw(colored);
+use List::Util qw(any);
 
 use Teochew;
 use Teochew::Edit;
@@ -26,50 +27,43 @@ my $english_input = shift @ARGV;
 die colored("Must provide an English word!", "red") . "\n"
     unless defined $english_input;
 
-
-# Let's see what the user wants to update
-my (
-    $category, $category_sort,
-    $chinese, $alt_chinese,
-    $pengim,
-    $hidden_from_flashcards);
-GetOptions(
-    "category=s"    => \$category,
-    "category-sort" => \$category_sort,
-    "chinese=s"     => \$chinese,
-    "alt-chinese=s" => \$alt_chinese,
-    "pengim=s"      => \$pengim,
-
-    "hidden-from-flashcards=i" => \$hidden_from_flashcards,
+# Let's see what the user wants to update about this flashcard
+my %inputs;
+my %options = (
+    category      => 's',
+    category_sort => '',
+    chinese       => 's',
+    alt_chinese   => 's',
+    pengim        => 's',
+    hidden_from_flashcards => 'i',
 );
 
-# XXX There's probably an easier way of handling this
-unless ($category ||
-        $category_sort ||
-        $alt_chinese ||
-        $pengim ||
-        $chinese ||
-        defined $hidden_from_flashcards)
+GetOptions( map {
+    my $key = $_;
+    $key .= '=' . $options{$_} if $options{$_};
+    $key => \$inputs{$_}
+} keys %options);
+
+# All of the %options are optional, but we need at least one of them
+# specified or else this script isn't doing anything
+unless (any { defined $inputs{$_} } keys %inputs)
 {
     say "Must provide one of these options:";
-    say "\t--category";
-    say "\t--category-sort";
-    say "\t--chinese";
-    say "\t--alt-chinese";
-    say "\t--pengim";
-    say "\t--hidden-from-flashcards";
+    say "\t--$_" for keys %options;
     exit;
 }
 
-# Gather up the relevant information from the database for this translation
+# It's possible that there is more than one translation here, so we need
+# the user to choose which one they want to edit. Once we know which one,
+# gather up the relevant information from the database for this translation.
 my %translation = $db->choose_translation_from_english($english_input);
 
-my $english     = $translation{english};
-my $teochew     = $translation{teochew};
+my $english = $translation{english};
+my $teochew = $translation{teochew};
 
 my %update_english_params;
 
-if ($category) {
+if (my $category = $inputs{category}) {
     # First check if category exists already (you can only add new categories
     # manually, using sql, for now)
     my %categories = map { $_->{name} => $_->{id} } Teochew::categories;
@@ -83,11 +77,11 @@ if ($category) {
         $english->{category_id} = $new_category_id;
     }
 
-    $category_sort = 1;
+    $inputs{category_sort} = 1;
 }
 
 # Sorta copy pasted from the insert-flashcards script
-if ($category_sort) {
+if (my $category_sort = $inputs{category_sort}) {
     my @words_by_sort =
         Teochew::category_words_by_sort_order($english->{category_id});
     for (@words_by_sort) {
@@ -106,7 +100,7 @@ if (%update_english_params) {
     say colored("Updated english word!", "green");
 }
 
-if ($alt_chinese) {
+if (my $alt_chinese = $inputs{alt_chinese}) {
 
     # First check and see if these Chinese characters exist in the database
     $db->ensure_chinese_is_in_database(
@@ -124,7 +118,7 @@ if ($alt_chinese) {
     }
 }
 
-if ($chinese) {
+if (my $chinese = $inputs{chinese}) {
     # First make sure these Chinese characters exist in the database
     $db->ensure_chinese_is_in_database(
         chinese => $chinese,
@@ -147,7 +141,7 @@ if ($chinese) {
     }
 }
 
-if ($pengim) {
+if (my $pengim = $inputs{pengim}) {
     say "Modifying $english->{word} translation from " .
         "'$teochew->{pengim}' to '$pengim'";
     if (confirm()) {
@@ -159,7 +153,8 @@ if ($pengim) {
     }
 }
 
-if (defined $hidden_from_flashcards) {
+if (defined $inputs{hidden_from_flashcards}) {
+    my $hidden_from_flashcards = $inputs{hidden_from_flashcards};
     my $msg = "Modifying $english->{word} translation to be";
     my $hidden_shown = $hidden_from_flashcards ? "hidden from flashcards" :
                                                  "shown in flashcards";
