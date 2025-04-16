@@ -161,8 +161,7 @@ elsif ($command eq 'hide') {
     }
 }
 elsif ($command eq 'insert_extra') {
-    die "This is not supported anymore. Use insert-extra-notes.pl instead\n"
-        unless $english;
+    die "This is not supported anymore. Use insert-extra-notes.pl instead\n";
 }
 else {
     die "Need an insert command!\n";
