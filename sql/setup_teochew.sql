@@ -676,6 +676,15 @@ INSERT INTO English VALUES(637,10,'to stir',0,NULL,NULL);
 INSERT INTO English VALUES(638,32,'enough',0,NULL,NULL);
 INSERT INTO English VALUES(639,9,'to clean and sweep',0,NULL,NULL);
 INSERT INTO English VALUES(640,10,'plate',0,NULL,NULL);
+INSERT INTO English VALUES(641,17,'five dollars',0,NULL,NULL);
+INSERT INTO English VALUES(642,17,'ten dollars',0,NULL,NULL);
+INSERT INTO English VALUES(643,33,'is',0,NULL,NULL);
+INSERT INTO English VALUES(644,23,'drizzle',0,NULL,NULL);
+INSERT INTO English VALUES(645,7,'all day',0,NULL,10);
+INSERT INTO English VALUES(646,16,'strength',0,NULL,NULL);
+INSERT INTO English VALUES(647,32,'thing',0,NULL,NULL);
+INSERT INTO English VALUES(648,10,'cake',0,NULL,NULL);
+INSERT INTO English VALUES(649,23,'sunny',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1264,6 +1273,12 @@ INSERT INTO Chinese VALUES(588,'𤰉',NULL,'la6',NULL);
 INSERT INTO Chinese VALUES(589,'收',NULL,'siu1',NULL);
 INSERT INTO Chinese VALUES(590,'扫','掃','sao3',NULL);
 INSERT INTO Chinese VALUES(591,'盘','盤','buan5',NULL);
+INSERT INTO Chinese VALUES(592,'顿','頓','deung3',NULL);
+INSERT INTO Chinese VALUES(593,'微',NULL,'mui5',NULL);
+INSERT INTO Chinese VALUES(594,'畅','暢','tang3',NULL);
+INSERT INTO Chinese VALUES(595,'幺',NULL,'iao2',NULL);
+INSERT INTO Chinese VALUES(596,'力',NULL,'lak8',NULL);
+INSERT INTO Chinese VALUES(597,'件',NULL,'gian6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1373,6 +1388,10 @@ INSERT INTO Synonyms VALUES(101,616,'yam');
 INSERT INTO Synonyms VALUES(102,629,'to hold in arms');
 INSERT INTO Synonyms VALUES(103,630,'circular');
 INSERT INTO Synonyms VALUES(104,640,'dish');
+INSERT INTO Synonyms VALUES(105,643,'to be');
+INSERT INTO Synonyms VALUES(106,643,'are');
+INSERT INTO Synonyms VALUES(107,643,'am');
+INSERT INTO Synonyms VALUES(108,232,'basil');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1486,6 +1505,7 @@ INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflo
 INSERT INTO Extra VALUES(36,552,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
 INSERT INTO Extra VALUES(37,610,replace('**huang1 bain5** is used to generally mean Southeast Asia, but my family sometimes uses it to mean Cambodia, because that''s where they''re from\n','\n',char(10)));
 INSERT INTO Extra VALUES(38,618,replace('**gang1 dang5** is apparently derived from the Malay word for potato, _kentang_. Other Teochew people might pronounce this slightly differently and with different tones, but this is what is closest to how my aunt pronounces it.\n\n**[huang1 jeu5](/english/sweet%20potato)** is technically the term for _sweet potato_, but my mom says she uses it for all kinds of potatoes, even non-sweet ones, so I''ve included it here. It seems like most people use huang1 jeu5 only for sweet potatoes.\n','\n',char(10)));
+INSERT INTO Extra VALUES(39,233,replace('My family often uses **chao(6) gian2** to mean basil, though others use it to generically mean fresh herbs.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2243,7 +2263,7 @@ INSERT INTO Translation VALUES(702,622,716,0);
 INSERT INTO Translation VALUES(703,623,717,0);
 INSERT INTO Translation VALUES(704,624,718,0);
 INSERT INTO Translation VALUES(705,625,719,0);
-INSERT INTO Translation VALUES(706,626,720,0);
+INSERT INTO Translation VALUES(706,626,720,1);
 INSERT INTO Translation VALUES(707,627,721,0);
 INSERT INTO Translation VALUES(708,628,722,0);
 INSERT INTO Translation VALUES(709,629,723,0);
@@ -2256,6 +2276,17 @@ INSERT INTO Translation VALUES(715,637,729,0);
 INSERT INTO Translation VALUES(716,638,730,0);
 INSERT INTO Translation VALUES(717,639,731,0);
 INSERT INTO Translation VALUES(718,640,732,0);
+INSERT INTO Translation VALUES(719,641,733,0);
+INSERT INTO Translation VALUES(720,642,734,0);
+INSERT INTO Translation VALUES(721,643,385,0);
+INSERT INTO Translation VALUES(722,206,735,0);
+INSERT INTO Translation VALUES(723,644,736,0);
+INSERT INTO Translation VALUES(724,645,737,0);
+INSERT INTO Translation VALUES(725,626,738,1);
+INSERT INTO Translation VALUES(726,646,739,0);
+INSERT INTO Translation VALUES(727,647,740,0);
+INSERT INTO Translation VALUES(728,648,741,0);
+INSERT INTO Translation VALUES(729,649,742,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -2961,6 +2992,16 @@ INSERT INTO Teochew VALUES(729,'la6','挠');
 INSERT INTO Teochew VALUES(730,'la6','𤰉');
 INSERT INTO Teochew VALUES(731,'siu1 sao3','收扫');
 INSERT INTO Teochew VALUES(732,'buan5','盘');
+INSERT INTO Teochew VALUES(733,'ngou67 kou1','五箍');
+INSERT INTO Teochew VALUES(734,'jap84 kou1','十箍');
+INSERT INTO Teochew VALUES(735,'ja26 deung3','早顿');
+INSERT INTO Teochew VALUES(736,'hou67 mui5','雨微');
+INSERT INTO Teochew VALUES(737,'tang32 yek8','畅日');
+INSERT INTO Teochew VALUES(738,'iao2','幺');
+INSERT INTO Teochew VALUES(739,'lak8','力');
+INSERT INTO Teochew VALUES(740,'mueh84 gian6','物件');
+INSERT INTO Teochew VALUES(741,'neung67 gue2','卵粿');
+INSERT INTO Teochew VALUES(742,'chuk48 yek8','出日');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3171,6 +3212,12 @@ INSERT INTO Compound VALUES(201,264,2,710);
 INSERT INTO Compound VALUES(202,263,1,427);
 INSERT INTO Compound VALUES(203,263,2,384);
 INSERT INTO Compound VALUES(204,263,3,710);
+INSERT INTO Compound VALUES(205,733,1,10);
+INSERT INTO Compound VALUES(206,733,2,360);
+INSERT INTO Compound VALUES(207,734,1,14);
+INSERT INTO Compound VALUES(208,734,2,360);
+INSERT INTO Compound VALUES(209,742,1,684);
+INSERT INTO Compound VALUES(210,742,2,486);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
