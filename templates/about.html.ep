@@ -14,7 +14,7 @@ But in 2018, I made it my New Year's resolution to try to learn Teochew again. A
 </p>
 
 <p>
-I've taken several breaks since I started this website, and since then, <b>many</b> more resources have popped up for learning Teochew, and it's much easier to connect with other "Teochew nang" on Discord and other social media. It still feels like I know so little! But I'm just taking it bit by bit, and I'm slowly adding more translations and features to this website every week.
+I've taken several breaks since I started this website, and since then, <b>many</b> more resources have popped up for learning Teochew, and it's much easier to connect with other "Teochew nang" on Discord and other social media. It still feels like I know so little! But I'm just taking it bit by bit, and I'm slowly adding more translations and features to this website every week. Right now there are over <%= $num_translations %> translations on the site!
 </p>
 
 <p>

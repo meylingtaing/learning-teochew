@@ -42,7 +42,7 @@ sub startup {
     $r->get('/updates/:page')->to('root#updates', page => 0);
 
     # Static pages
-    $r->get('/about');
+    $r->get('/about')->to('root#about');
     $r->get('/links');
 }
 

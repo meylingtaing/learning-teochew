@@ -338,4 +338,17 @@ sub lesson {
         $c->redirect_to("/flashcards");
 }
 
+=head2 about
+
+The 'About' page
+
+=cut
+
+sub about {
+    my $c = shift;
+
+    $c->stash(num_translations => Teochew::get_approx_num_translations);
+    $c->render(template => 'about');
+}
+
 1;
