@@ -436,7 +436,7 @@ sub make_fully_hidden {
 
     my $english_id = $params{english_id} || _get_english_id(%params);
     my $sth = $self->dbh->prepare(qq{
-        update English set hidden = 1, hidden_from_flashcards = 1 where id = ?
+        update English set hidden = 1 where id = ?
     });
     $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
     return $sth->execute;

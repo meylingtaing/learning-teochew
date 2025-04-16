@@ -152,12 +152,13 @@ elsif ($command eq 'hide') {
     die "Must include English!\n" unless $english;
 
     # Make sure the english word exists already
-    my $english_id = Teochew::Edit->_get_english_id(english => $english);
+    my $db = Teochew::Edit->new;
+    my $english_id = $db->_get_english_id(english => $english);
     die "$english does not exist!\n" unless $english_id;
 
     say "Hiding English word '$english'";
     if (confirm()) {
-        Teochew::Edit->make_fully_hidden(english_id => $english_id);
+        $db->make_fully_hidden(english_id => $english_id);
     }
 }
 elsif ($command eq 'insert_extra') {
