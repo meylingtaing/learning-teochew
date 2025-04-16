@@ -1616,6 +1616,30 @@ sub _is_date {
     return 1;
 }
 
+=head2 get_approx_num_translations
+
+Returns the number of non-hidden translations in both the Translation and the
+Phrases table. This isn't actually the number of translations because some
+sentences get expanded more, and this completely ignores all the number and
+clock time stuff. But it's I<at least> this much
+
+=cut
+
+sub get_approx_num_translations {
+    my $word_count = $dbh->selectrow_array(qq{
+        select count(*) from English
+        join Translation on English.id = Translation.english_id
+        where English.hidden = 0
+            and Translation.hidden_from_flashcards = 0;
+    });
+
+    my $sentence_count = $dbh->selectrow_array(qq{
+        select count(*) from Phrases where hidden = 0
+    });
+
+    return $word_count + $sentence_count;
+}
+
 # TODO
 #sub find_phrases_using_word {
 #}
