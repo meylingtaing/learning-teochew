@@ -105,9 +105,8 @@ sub insert_translation {
         $english_id,
         category_id => '',
         sort        => '',
+        hidden      => '',
     );
-
-I will support more types of updates in the future
 
 =cut
 
@@ -129,6 +128,11 @@ sub update_english {
     if ($params{sort}) {
         push @sets, "sort = ?";
         push @binds, $params{sort};
+    }
+
+    if (defined $params{hidden}) {
+        push @sets, "hidden = ?";
+        push @binds, $params{hidden};
     }
 
     $self->dbh->do(
