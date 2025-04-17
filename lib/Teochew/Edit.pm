@@ -103,6 +103,8 @@ sub insert_translation {
 
     $teochew->update_english(
         $english_id,
+        word        => '',
+        notes       => '',
         category_id => '',
         sort        => '',
         hidden      => '',
@@ -116,9 +118,18 @@ sub update_english {
 
     die "No english_id given!" unless $english_id;
 
-    my $sql = 'update english set ';
     my @binds;
     my @sets;
+
+    if ($params{word}) {
+        push @sets, "word = ?";
+        push @binds, $params{word};
+    }
+
+    if ($params{notes}) {
+        push @sets, "notes = ?";
+        push @binds, $params{notes};
+    }
 
     if ($params{category_id}) {
         push @sets, "category_id = ?";
@@ -135,11 +146,8 @@ sub update_english {
         push @binds, $params{hidden};
     }
 
-    $self->dbh->do(
-        'update english set ' . join(', ', @sets) .
-        ' where id = ?',
-        undef, @binds, $english_id
-    );
+    my $sql = 'update english set ' . join(', ', @sets) . ' where id = ?';
+    $self->dbh->do($sql, undef, @binds, $english_id);
 }
 
 =head2 insert_english
@@ -511,6 +519,7 @@ sub choose_translation_from_english {
     my %ret;
 
     my ($word, $notes) = split_out_parens($english);
+
     my ($english_row) = Teochew::get_english_from_database(
         word         => $word,
         notes        => $notes,
