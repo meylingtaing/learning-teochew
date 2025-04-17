@@ -36,6 +36,7 @@ my %options = (
     alt_chinese   => 's',
     pengim        => 's',
     tag           => 's',
+    hidden        => 'i',
     hidden_from_flashcards => 'i',
 );
 
@@ -96,6 +97,15 @@ if (my $category_sort = $inputs{category_sort}) {
     say "Changing sort order of english word to $sort";
     if (confirm()) {
         $update_english_params{sort} = $sort;
+    }
+}
+
+if (defined $inputs{hidden}) {
+    my $hidden = $inputs{hidden};
+    my $hiding = $hidden ? 'Hiding' : 'Un-hiding';
+    say "$hiding English word '$english->{word}'";
+    if (confirm()) {
+        $update_english_params{hidden} = $hidden;
     }
 }
 
