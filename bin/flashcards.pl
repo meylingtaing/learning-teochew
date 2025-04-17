@@ -147,19 +147,7 @@ elsif ($command eq 'insert_synonym') {
     die "This is not supported anymore. Use insert-synonym.pl instead\n";
 }
 elsif ($command eq 'hide') {
-    my ($english) = @ARGV;
-
-    die "Must include English!\n" unless $english;
-
-    # Make sure the english word exists already
-    my $db = Teochew::Edit->new;
-    my $english_id = $db->_get_english_id(english => $english);
-    die "$english does not exist!\n" unless $english_id;
-
-    say "Hiding English word '$english'";
-    if (confirm()) {
-        $db->make_fully_hidden(english_id => $english_id);
-    }
+    die "This is not supported anymore. Use update-flashcard.pl instead\n";
 }
 elsif ($command eq 'insert_extra') {
     die "This is not supported anymore. Use insert-extra-notes.pl instead\n";

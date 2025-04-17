@@ -428,24 +428,6 @@ sub insert_phrase {
     }, undef, $phrase_id, $params{words});
 }
 
-=head2 make_fully_hidden
-
-    $teochew->make_fully_hidden('hello');
-
-=cut
-
-sub make_fully_hidden {
-    my ($self, %params) = @_;
-    $self = $self->new unless ref $self;
-
-    my $english_id = $params{english_id} || _get_english_id(%params);
-    my $sth = $self->dbh->prepare(qq{
-        update English set hidden = 1 where id = ?
-    });
-    $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
-    return $sth->execute;
-}
-
 =head2 update_translation
 
     $teochew->update_translation(
