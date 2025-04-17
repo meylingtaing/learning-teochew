@@ -126,12 +126,11 @@ if (my $tag = $inputs{tag}) {
     # Now add the tag to the english word
     say "Adding tag '$tag' to '$english->{word}'";
     if (confirm()) {
-        my $success = $db->add_tag_to_english(
+        $db->add_tag_to_english(
             english_id => $english->{id},
             tag_id     => $tag_id
         );
-        say colored("Added tag '$tag' to '$english->{word}'!", "green")
-            if $success;
+        say colored("Added tag '$tag' to '$english->{word}'!", "green");
     }
 }
 

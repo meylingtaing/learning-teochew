@@ -32,7 +32,12 @@ use DBD::SQLite::Constants qw(:dbd_sqlite_string_mode);
 sub create_db_object {
     my ($class, $db_file) = @_;
 
-    my $dbh = DBI->connect("DBI:SQLite:dbname=$db_file") or die $DBI::errstr;
+    my $dbh = DBI->connect("DBI:SQLite:dbname=$db_file",
+        undef, # username
+        undef, # password
+        { RaiseError => 1 }
+    ) or die $DBI::errstr;
+
     $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
 
     my $self = { dbh => $dbh };
