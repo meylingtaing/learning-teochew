@@ -76,7 +76,8 @@ if (my $category = $inputs{category}) {
     my $new_category_id = $categories{$category};
     die "Category '$category' doesn't exist!" unless $new_category_id;
 
-    say "Changing category from $english->{category_name} to $category";
+    say sprintf("Changing '%s' category from %s to %s",
+        $english->{word}, $english->{category_name}, $category);
     if (confirm()) {
         $update_english_params{category_id} = $new_category_id;
         $english->{category_id} = $new_category_id;
@@ -94,7 +95,7 @@ if (my $category_sort = $inputs{category_sort}) {
         say "$_->{sort}: " . substr($_->{words}, 0, 50);
     }
     my $sort = input_from_prompt("Sort order:");
-    say "Changing sort order of english word to $sort";
+    say "Changing sort order of '$english->{word}' to $sort";
     if (confirm()) {
         $update_english_params{sort} = $sort;
     }
