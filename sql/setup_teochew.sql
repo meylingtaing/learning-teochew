@@ -309,7 +309,7 @@ INSERT INTO English VALUES(266,28,'watermelon',0,NULL,10);
 INSERT INTO English VALUES(267,28,'pineapple',0,NULL,10);
 INSERT INTO English VALUES(268,28,'tofu',0,NULL,10);
 INSERT INTO English VALUES(269,28,'cucumber',0,NULL,10);
-INSERT INTO English VALUES(270,10,'towel gourd',1,NULL,NULL);
+INSERT INTO English VALUES(270,10,'towel gourd',0,NULL,NULL);
 INSERT INTO English VALUES(271,28,'radish',0,NULL,10);
 INSERT INTO English VALUES(273,28,'onion',0,NULL,10);
 INSERT INTO English VALUES(274,28,'papaya',0,NULL,10);
@@ -685,6 +685,11 @@ INSERT INTO English VALUES(646,16,'strength',0,NULL,NULL);
 INSERT INTO English VALUES(647,32,'thing',0,NULL,NULL);
 INSERT INTO English VALUES(648,10,'cake',0,NULL,NULL);
 INSERT INTO English VALUES(649,23,'sunny',0,NULL,NULL);
+INSERT INTO English VALUES(650,8,'wet',0,NULL,NULL);
+INSERT INTO English VALUES(651,28,'mango',0,NULL,10);
+INSERT INTO English VALUES(652,10,'to peel',0,'with a blade',NULL);
+INSERT INTO English VALUES(653,10,'bitter',0,NULL,NULL);
+INSERT INTO English VALUES(654,7,'last night',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1279,6 +1284,10 @@ INSERT INTO Chinese VALUES(594,'畅','暢','tang3',NULL);
 INSERT INTO Chinese VALUES(595,'幺',NULL,'iao2',NULL);
 INSERT INTO Chinese VALUES(596,'力',NULL,'lak8',NULL);
 INSERT INTO Chinese VALUES(597,'件',NULL,'gian6',NULL);
+INSERT INTO Chinese VALUES(598,'㴷',NULL,'dam5',NULL);
+INSERT INTO Chinese VALUES(599,'澹',NULL,'dam5',NULL);
+INSERT INTO Chinese VALUES(600,'檨',NULL,'suain7',NULL);
+INSERT INTO Chinese VALUES(601,'批',NULL,'poi1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1556,6 +1565,7 @@ INSERT INTO TeochewAltChinese VALUES(22,702,'企');
 INSERT INTO TeochewAltChinese VALUES(23,712,'蕳砃');
 INSERT INTO TeochewAltChinese VALUES(24,37,'侬');
 INSERT INTO TeochewAltChinese VALUES(25,324,'怎呢');
+INSERT INTO TeochewAltChinese VALUES(26,743,'澹');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2287,6 +2297,11 @@ INSERT INTO Translation VALUES(726,646,739,0);
 INSERT INTO Translation VALUES(727,647,740,0);
 INSERT INTO Translation VALUES(728,648,741,0);
 INSERT INTO Translation VALUES(729,649,742,0);
+INSERT INTO Translation VALUES(730,650,743,0);
+INSERT INTO Translation VALUES(731,651,744,0);
+INSERT INTO Translation VALUES(732,652,745,0);
+INSERT INTO Translation VALUES(733,653,746,0);
+INSERT INTO Translation VALUES(734,654,747,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3002,6 +3017,11 @@ INSERT INTO Teochew VALUES(739,'lak8','力');
 INSERT INTO Teochew VALUES(740,'mueh84 gian6','物件');
 INSERT INTO Teochew VALUES(741,'neung67 gue2','卵粿');
 INSERT INTO Teochew VALUES(742,'chuk48 yek8','出日');
+INSERT INTO Teochew VALUES(743,'dam5','㴷');
+INSERT INTO Teochew VALUES(744,'suain7','檨');
+INSERT INTO Teochew VALUES(745,'poi1','批');
+INSERT INTO Teochew VALUES(746,'kou2','苦');
+INSERT INTO Teochew VALUES(747,'jao1 me5','昨暝');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3286,6 +3306,7 @@ INSERT INTO PhraseTranslations VALUES(46,43,'I to_say word_(spoken) with you tom
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
 INSERT INTO Tags VALUES(2,'kitchenware');
+INSERT INTO Tags VALUES(3,'food adjectives');
 CREATE TABLE EnglishTags (
 id integer primary key,
 english_id integer references English(id),
@@ -3304,6 +3325,7 @@ INSERT INTO EnglishTags VALUES(10,382,2);
 INSERT INTO EnglishTags VALUES(11,381,2);
 INSERT INTO EnglishTags VALUES(12,379,2);
 INSERT INTO EnglishTags VALUES(13,628,2);
+INSERT INTO EnglishTags VALUES(14,653,3);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
