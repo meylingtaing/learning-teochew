@@ -743,9 +743,15 @@ sub get_english_from_database {
         my $placeholder_string = join ',', @placeholders;
         $extra_where .= "and English.word in ($placeholder_string) ";
     }
-    if ($notes) {
-        $extra_where .= "and notes = ? ";
-        push @binds, $notes;
+
+    if (exists $params{notes}) {
+        if (defined $notes && $notes ne '') {
+            $extra_where .= "and notes = ? ";
+            push @binds, $notes;
+        }
+        else {
+            $extra_where .= "and notes is null ";
+        }
     }
 
     $extra_where .= "and hidden_from_flashcards = 0 " if $for_flashcards;
