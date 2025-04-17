@@ -530,9 +530,11 @@ sub choose_translation_from_english {
 
     my ($word, $notes) = split_out_parens($english);
     my ($english_row) = Teochew::get_english_from_database(
-                    word => $word,
-                    notes => $notes,
-                    include_category_in_output => 1);
+        word         => $word,
+        notes        => $notes,
+        allow_hidden => 1,
+        include_category_in_output => 1,
+    );
 
     die colored("$english does not exist!", "red") . "\n" unless $english_row;
 

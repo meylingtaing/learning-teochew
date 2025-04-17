@@ -690,6 +690,7 @@ Params:
     notes
     include_category_in_output
     check_synonyms
+    allow_hidden
 
 =cut
 
@@ -702,6 +703,7 @@ sub get_english_from_database {
     my $notes          = $params{notes};
     my $for_flashcards = $params{for_flashcards};
     my $check_synonyms = $params{check_synonyms};
+    my $allow_hidden   = $params{allow_hidden};
 
     my @synonym_words;
 
@@ -757,6 +759,8 @@ sub get_english_from_database {
         lower(FlashcardSet.name) as flashcard_set_name
     } : '';
 
+    my $hidden_clause = $allow_hidden ? '1=1' : 'English.hidden = 0';
+
     my $sql = qq{
         select
             English.id, English.word, notes$category_columns
@@ -766,7 +770,7 @@ sub get_english_from_database {
         join Translation on English.id = Translation.english_id
         left join Synonyms on English.id = Synonyms.english_id
         where
-            English.hidden = 0
+            $hidden_clause
             $extra_where
         group by English.id
         order by
