@@ -30,6 +30,7 @@ die colored("Must provide an English word!", "red") . "\n"
 # Let's see what the user wants to update about this flashcard
 my %inputs;
 my %options = (
+    new_word      => 's',
     category      => 's',
     category_sort => '',
     chinese       => 's',
@@ -67,6 +68,16 @@ my $english = $translation{english};
 my $teochew = $translation{teochew};
 
 my %update_english_params;
+
+if (my $new_word = $inputs{new_word}) {
+    say "Changing English word '$english->{word}' to '$new_word'";
+
+    my ($word, $notes) = split_out_parens($new_word);
+    if (confirm()) {
+        $update_english_params{word}  = $word;
+        $update_english_params{notes} = $notes if $notes ne '';
+    }
+}
 
 if (my $category = $inputs{category}) {
     # First check if category exists already (you can only add new categories
