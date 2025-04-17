@@ -77,7 +77,7 @@ if (my $category = $inputs{category}) {
     die "Category '$category' doesn't exist!" unless $new_category_id;
 
     say sprintf("Changing '%s' category from %s to %s",
-        $english->{word}, $english->{category_name}, $category);
+        $english->{word}, ucfirst($english->{category_name}), $category);
     if (confirm()) {
         $update_english_params{category_id} = $new_category_id;
         $english->{category_id} = $new_category_id;
@@ -90,14 +90,18 @@ if (my $category = $inputs{category}) {
 if (my $category_sort = $inputs{category_sort}) {
     my @words_by_sort =
         Teochew::category_words_by_sort_order($english->{category_id});
-    for (@words_by_sort) {
-        $_->{sort} //= '';
-        say "$_->{sort}: " . substr($_->{words}, 0, 50);
-    }
-    my $sort = input_from_prompt("Sort order:");
-    say "Changing sort order of '$english->{word}' to $sort";
-    if (confirm()) {
-        $update_english_params{sort} = $sort;
+    if (scalar @words_by_sort > 1 &&
+        ($english->{sort} // '') ne ($words_by_sort[0]{sort} //''))
+    {
+        for (@words_by_sort) {
+            $_->{sort} //= '';
+            say "$_->{sort}: " . substr($_->{words}, 0, 50);
+        }
+        my $sort = input_from_prompt("Sort order:");
+        say "Changing sort order of '$english->{word}' to $sort";
+        if (confirm()) {
+            $update_english_params{sort} = $sort;
+        }
     }
 }
 
