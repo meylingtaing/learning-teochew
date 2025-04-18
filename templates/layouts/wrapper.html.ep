@@ -27,6 +27,8 @@
   % end
 
   %= include 'footer'
+  <a href="#" id="dark-mode-toggle">dark mode</a>
+  <script src="/js/load-settings.js"></script>
   </div>
 </body>
 </html>
