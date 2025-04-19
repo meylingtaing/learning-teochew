@@ -38,6 +38,7 @@ INSERT INTO Categories VALUES(32,'Basics','Basic Words',12);
 INSERT INTO Categories VALUES(33,'Verbs','Linking/Transitive Verbs',12);
 INSERT INTO Categories VALUES(34,'Hidden',NULL,NULL);
 INSERT INTO Categories VALUES(35,'World','Around the World',8);
+INSERT INTO Categories VALUES(36,'Questions','Question Words',12);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -163,7 +164,7 @@ INSERT INTO English VALUES(114,29,'eggs',0,NULL,10);
 INSERT INTO English VALUES(115,17,'expensive',0,NULL,NULL);
 INSERT INTO English VALUES(116,17,'cheap',0,NULL,NULL);
 INSERT INTO English VALUES(117,11,'eye',0,NULL,NULL);
-INSERT INTO English VALUES(119,4,'what',0,NULL,3);
+INSERT INTO English VALUES(119,36,'what',0,NULL,3);
 INSERT INTO English VALUES(120,11,'hand',0,NULL,NULL);
 INSERT INTO English VALUES(121,30,'water',0,NULL,NULL);
 INSERT INTO English VALUES(122,10,'hungry',0,NULL,NULL);
@@ -309,7 +310,7 @@ INSERT INTO English VALUES(266,28,'watermelon',0,NULL,10);
 INSERT INTO English VALUES(267,28,'pineapple',0,NULL,10);
 INSERT INTO English VALUES(268,28,'tofu',0,NULL,10);
 INSERT INTO English VALUES(269,28,'cucumber',0,NULL,10);
-INSERT INTO English VALUES(270,10,'towel gourd',0,NULL,NULL);
+INSERT INTO English VALUES(270,28,'luffa',0,'ridged',10);
 INSERT INTO English VALUES(271,28,'radish',0,NULL,10);
 INSERT INTO English VALUES(273,28,'onion',0,NULL,10);
 INSERT INTO English VALUES(274,28,'papaya',0,NULL,10);
@@ -319,10 +320,10 @@ INSERT INTO English VALUES(277,30,'beer',0,NULL,NULL);
 INSERT INTO English VALUES(278,10,'garlic chive cake',0,NULL,NULL);
 INSERT INTO English VALUES(279,8,'hot',0,NULL,NULL);
 INSERT INTO English VALUES(280,32,'name',0,NULL,NULL);
-INSERT INTO English VALUES(281,4,'who',0,NULL,3);
-INSERT INTO English VALUES(282,4,'when',0,NULL,3);
-INSERT INTO English VALUES(283,4,'where',0,NULL,3);
-INSERT INTO English VALUES(284,4,'how',0,NULL,3);
+INSERT INTO English VALUES(281,36,'who',0,NULL,3);
+INSERT INTO English VALUES(282,36,'when',0,NULL,3);
+INSERT INTO English VALUES(283,36,'where',0,NULL,3);
+INSERT INTO English VALUES(284,36,'how',0,'in what way',3);
 INSERT INTO English VALUES(285,4,'we',0,'excluding person spoken to',1);
 INSERT INTO English VALUES(286,11,'hair',0,'on your head',NULL);
 INSERT INTO English VALUES(287,11,'forehead',1,NULL,NULL);
@@ -613,7 +614,7 @@ INSERT INTO English VALUES(574,10,'oyster sauce',0,NULL,NULL);
 INSERT INTO English VALUES(575,33,'to remember',0,NULL,NULL);
 INSERT INTO English VALUES(576,33,'to forget',0,NULL,NULL);
 INSERT INTO English VALUES(577,9,'to wake up',0,NULL,NULL);
-INSERT INTO English VALUES(578,32,'how much',0,NULL,NULL);
+INSERT INTO English VALUES(578,36,'how much',0,NULL,NULL);
 INSERT INTO English VALUES(579,6,'broken',0,NULL,NULL);
 INSERT INTO English VALUES(580,32,'one''s self',0,NULL,NULL);
 INSERT INTO English VALUES(581,10,'chicken bouillon',0,NULL,NULL);
@@ -690,6 +691,14 @@ INSERT INTO English VALUES(651,28,'mango',0,NULL,10);
 INSERT INTO English VALUES(652,10,'to peel',0,'with a blade',NULL);
 INSERT INTO English VALUES(653,10,'bitter',0,NULL,NULL);
 INSERT INTO English VALUES(654,7,'last night',0,NULL,10);
+INSERT INTO English VALUES(655,36,'how',0,'to what degree',NULL);
+INSERT INTO English VALUES(656,28,'luffa',0,'smooth',10);
+INSERT INTO English VALUES(657,8,'lazy',0,NULL,NULL);
+INSERT INTO English VALUES(658,4,'there',0,NULL,4);
+INSERT INTO English VALUES(659,4,'here',0,NULL,4);
+INSERT INTO English VALUES(660,7,'how late',0,NULL,10);
+INSERT INTO English VALUES(661,8,'how large',0,NULL,NULL);
+INSERT INTO English VALUES(662,8,'how high',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1288,6 +1297,10 @@ INSERT INTO Chinese VALUES(598,'㴷',NULL,'dam5',NULL);
 INSERT INTO Chinese VALUES(599,'澹',NULL,'dam5',NULL);
 INSERT INTO Chinese VALUES(600,'檨',NULL,'suain7',NULL);
 INSERT INTO Chinese VALUES(601,'批',NULL,'poi1',NULL);
+INSERT INTO Chinese VALUES(602,'偌',NULL,'yioh8',NULL);
+INSERT INTO Chinese VALUES(603,'须','鬚','chiu1',NULL);
+INSERT INTO Chinese VALUES(604,'惰',NULL,'duan6',NULL);
+INSERT INTO Chinese VALUES(605,'位',NULL,'ui7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1313,7 +1326,7 @@ INSERT INTO Synonyms VALUES(16,13,'eight');
 INSERT INTO Synonyms VALUES(17,47,'grandma');
 INSERT INTO Synonyms VALUES(18,48,'grandpa');
 INSERT INTO Synonyms VALUES(19,70,'telephone');
-INSERT INTO Synonyms VALUES(20,270,'luffa');
+INSERT INTO Synonyms VALUES(20,270,'towel gourd');
 INSERT INTO Synonyms VALUES(21,427,'adolescent');
 INSERT INTO Synonyms VALUES(22,427,'young person');
 INSERT INTO Synonyms VALUES(23,40,'kid');
@@ -1401,6 +1414,7 @@ INSERT INTO Synonyms VALUES(105,643,'to be');
 INSERT INTO Synonyms VALUES(106,643,'are');
 INSERT INTO Synonyms VALUES(107,643,'am');
 INSERT INTO Synonyms VALUES(108,232,'basil');
+INSERT INTO Synonyms VALUES(109,270,'Chinese okra');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1491,7 +1505,7 @@ INSERT INTO Extra VALUES(10,344,replace('**ga lem** originates from the French w
 INSERT INTO Extra VALUES(11,110,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the 揭阳 Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is the 潮州 "Teochew-proper" way of saying it.\n','\n',char(10)));
 INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
 INSERT INTO Extra VALUES(13,281,replace('Alternatively, you may see 底珍 or 底滇 used.\n','\n',char(10)));
-INSERT INTO Extra VALUES(14,284,replace('My recorded pronunciation is a little overly formal; people normally pronounce the first syllable much more quickly.\n','\n',char(10)));
+INSERT INTO Extra VALUES(14,284,replace('You''ll always see **yioh8** followed by an adjective, so it should actually be pronounced **yioh(4)**. It can be used as both a question and a statement.\n','\n',char(10)));
 INSERT INTO Extra VALUES(15,180,replace('Alternatively, you might see 树泥.\n','\n',char(10)));
 INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
@@ -1566,6 +1580,7 @@ INSERT INTO TeochewAltChinese VALUES(23,712,'蕳砃');
 INSERT INTO TeochewAltChinese VALUES(24,37,'侬');
 INSERT INTO TeochewAltChinese VALUES(25,324,'怎呢');
 INSERT INTO TeochewAltChinese VALUES(26,743,'澹');
+INSERT INTO TeochewAltChinese VALUES(27,748,'若');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2302,6 +2317,15 @@ INSERT INTO Translation VALUES(731,651,744,0);
 INSERT INTO Translation VALUES(732,652,745,0);
 INSERT INTO Translation VALUES(733,653,746,0);
 INSERT INTO Translation VALUES(734,654,747,0);
+INSERT INTO Translation VALUES(735,655,748,1);
+INSERT INTO Translation VALUES(736,656,749,0);
+INSERT INTO Translation VALUES(737,657,750,0);
+INSERT INTO Translation VALUES(738,658,751,0);
+INSERT INTO Translation VALUES(739,659,752,0);
+INSERT INTO Translation VALUES(740,659,753,0);
+INSERT INTO Translation VALUES(741,660,754,0);
+INSERT INTO Translation VALUES(742,661,755,0);
+INSERT INTO Translation VALUES(743,662,756,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3022,6 +3046,15 @@ INSERT INTO Teochew VALUES(744,'suain7','檨');
 INSERT INTO Teochew VALUES(745,'poi1','批');
 INSERT INTO Teochew VALUES(746,'kou2','苦');
 INSERT INTO Teochew VALUES(747,'jao1 me5','昨暝');
+INSERT INTO Teochew VALUES(748,'yioh8','偌');
+INSERT INTO Teochew VALUES(749,'chiu1 gue1','须瓜');
+INSERT INTO Teochew VALUES(750,'duan6','惰');
+INSERT INTO Teochew VALUES(751,'heu2 go3','许块');
+INSERT INTO Teochew VALUES(752,'ji2 go3','只块');
+INSERT INTO Teochew VALUES(753,'ji2 ui7','只位');
+INSERT INTO Teochew VALUES(754,'yioh84 am3','偌暗');
+INSERT INTO Teochew VALUES(755,'yioh84 dua7','偌大');
+INSERT INTO Teochew VALUES(756,'yioh84 guin5','偌危');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3238,6 +3271,10 @@ INSERT INTO Compound VALUES(207,734,1,14);
 INSERT INTO Compound VALUES(208,734,2,360);
 INSERT INTO Compound VALUES(209,742,1,684);
 INSERT INTO Compound VALUES(210,742,2,486);
+INSERT INTO Compound VALUES(211,755,1,735);
+INSERT INTO Compound VALUES(212,755,2,96);
+INSERT INTO Compound VALUES(213,756,1,735);
+INSERT INTO Compound VALUES(214,756,2,358);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
