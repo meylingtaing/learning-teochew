@@ -101,8 +101,7 @@ if (my $category = $inputs{category}) {
 if (my $category_sort = $inputs{category_sort}) {
     my @words_by_sort =
         Teochew::category_words_by_sort_order($english->{category_id});
-    if (scalar @words_by_sort > 1 &&
-        ($english->{sort} // '') ne ($words_by_sort[0]{sort} //''))
+    if (scalar @words_by_sort > 1)
     {
         for (@words_by_sort) {
             $_->{sort} //= '';
