@@ -15,6 +15,7 @@ use Getopt::Long qw(GetOptionsFromArray);
 use Input qw(confirm input_via_editor);
 use Teochew;
 use Teochew::Edit;
+use Teochew::Utils qw(split_out_parens);
 
 my ($english, @other_args) = @ARGV;
 
@@ -30,7 +31,9 @@ exit unless $getopt_success;
 my $db = Teochew::Edit->new;
 
 # Make sure the english word exists already
-my ($row) = Teochew::get_english_from_database(word => $english);
+my ($word, $notes) = split_out_parens($english);
+my ($row) = Teochew::get_english_from_database(
+    word => $word, notes => $notes);
 die "$english does not exist!\n" unless $row;
 
 # Do we want to insert notes for the english word or for any translations?
