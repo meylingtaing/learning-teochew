@@ -613,6 +613,7 @@ sub generate_translation_word_list {
         if (ref $english eq 'HASH') {
             my $base_word = $english->{word};
             $flashcard{english_link} = $base_word;
+            $flashcard{is_definition} = $english->{is_definition};
 
             if ($base_word && ($english->{notes} // '') =~ /$base_word/) {
                 $flashcard{english} = $english->{notes};
@@ -671,6 +672,7 @@ Returns a list of english words as a hashref like so:
     word  => 'hello',
     id    => 1,
     notes => undef,
+    is_definition => 0, # for grammar-y things that are more of a description
 
     # These are included if you provide 'include_category_in_output'
     category_name      => 'basics',
@@ -769,12 +771,18 @@ sub get_english_from_database {
 
     my $sql = qq{
         select
-            English.id, English.word, notes$category_columns
+            English.id, English.word, notes$category_columns,
+            case when GrammarDefinitions.id is not null
+                then 1
+                else 0
+            end as is_definition
         from English
         join Categories on Categories.id = category_id
         join FlashcardSet on FlashcardSet.id = flashcardset_id
         join Translation on English.id = Translation.english_id
         left join Synonyms on English.id = Synonyms.english_id
+        left join GrammarDefinitions
+            on English.id = GrammarDefinitions.english_id
         where
             $hidden_clause
             $extra_where
@@ -1333,11 +1341,17 @@ sub search {
             English.word as english,
             English.notes,
             Teochew.pengim,
-            Teochew.chinese
+            Teochew.chinese,
+            case when GrammarDefinitions.id is not null
+                then 1
+                else 0
+            end as is_definition
         from Teochew
         join Translation on Teochew.id = Translation.teochew_id
         join English on Translation.english_id = English.id
         left join Synonyms on English.id = Synonyms.english_id
+        left join GrammarDefinitions
+            on English.id = GrammarDefinitions.english_id
         where hidden = 0 and (
             English.word like ? or notes like ? or
             Synonyms.word like ? or
@@ -1567,11 +1581,13 @@ needed to display in translation tables
 
 Expects a list of hashrefs, each with these fields
 
-    english:      the English column of the table
-    english_link: the path of the url for /english/...
-    notes:        stuff in parentheses after the english word
-    chinese:      the Chinese column of the table
-    pengim:       the Peng'Im column of the table
+    english:       the English column of the table
+    english_link:  the path of the url for /english/...
+    notes:         stuff in parentheses after the english word
+    chinese:       the Chinese column of the table
+    pengim:        the Peng'Im column of the table
+    is_definition: true if this is more of a description than a translation.
+                   this will make the word show up italicized
 
 =cut
 
@@ -1597,6 +1613,7 @@ sub _format_for_translations_table {
             english_link => $base_word,
             english => $_->{english},
             notes   => $_->{notes},
+            is_definition => $_->{is_definition},
             teochew => [{
                 chinese => $_->{chinese},
                 pronunciations => [{

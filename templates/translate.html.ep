@@ -22,7 +22,7 @@
 % if (scalar keys %$teochew_by_category == 0) {
     Sorry! I don't know how to translate "<%= $english %>".
 % } else {
-    <h1 id="english-word"><%= $english %></h1>
+    <h1 id="english-word"><%== $english %></h1>
     <p id="synonyms" class="text-muted"><%= join(', ', @$synonyms) %></p>
     <ul id="translate-table" class="list-group">
 
@@ -123,7 +123,7 @@
   % }
 
   <hr>
-  <h5>Words containing <b><%= $english %></b>:</h5>
+  <h5>Words containing <b><%== $english %></b>:</h5>
 %= include 'elements/all-translations-table', translations => $words_containing
 % }
 

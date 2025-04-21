@@ -19,11 +19,21 @@
         <td class="align-middle english"
             rowspan="<%= scalar @{ $row->{teochew} } %>">
           % my $english_link = $row->{english_link} // $row->{english};
+
+          % if ($row->{is_definition}) {
+              <i>
+          % }
+
           % if (stash('hide_links')) {
             <%= $row->{english} %>
           % } else {
             <a href="/english/<%= $row->{english_link} %>"><%= $row->{english} %></a>
           % }
+
+          % if ($row->{is_definition}) {
+              </i>
+          % }
+
           % if ($row->{notes}) {
           <span class="notes">(<%= $row->{notes} %>)</span>
           % }

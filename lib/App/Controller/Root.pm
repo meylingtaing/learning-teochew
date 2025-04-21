@@ -247,6 +247,10 @@ sub english {
         } # end @english_rows loop
 
         $c->stash(teochew_by_category => \%categories);
+
+        if ($english_rows[0]{is_definition}) {
+            $english_display = "<i>$english_display</i>";
+        }
         $c->stash(english  => $english_display);
 
         my @synonyms = Teochew::get_synonyms($english);
