@@ -3371,6 +3371,9 @@ INSERT INTO EnglishTags VALUES(19,504,3);
 INSERT INTO EnglishTags VALUES(20,587,3);
 INSERT INTO EnglishTags VALUES(21,503,3);
 INSERT INTO EnglishTags VALUES(22,583,3);
+CREATE TABLE GrammarDefinitions (
+id integer primary key,
+english_id integer references English(id));
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
