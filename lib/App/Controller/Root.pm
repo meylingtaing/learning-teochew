@@ -72,7 +72,7 @@ sub translate {
     else {
         $c->redirect_to("/chinese/$search");
     }
-};
+}
 
 =head2 search
 
@@ -93,7 +93,7 @@ sub search {
     $c->stash(results => Teochew::search($search));
     $c->stash(search  => $search);
     $c->render(template => 'search');
-};
+}
 
 =head2 category
 
@@ -128,7 +128,7 @@ sub category {
     $c->stash(hide_links => $flashcard_set eq 'phrase');
 
     $c->render(template => 'category');
-};
+}
 
 =head2 english
 
