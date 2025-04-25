@@ -15,7 +15,11 @@
 % }
 <td><%= $word %></td>
 <td><%= $translation->{pronunciations}[0]{pengim} %></td>
-<td><%= $translation->{chinese} %></td>
+<td>
+  <span style="white-space:nowrap">
+    <%= $translation->{chinese}{simplified} %>
+  </span>
+</td>
 <td>
   % if ($translation->{pronunciations}[0]{audio}) {
   <%= include 'elements/play-teochew',

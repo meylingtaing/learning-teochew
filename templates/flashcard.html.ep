@@ -142,7 +142,7 @@
             elt.attr('id', '');
 
             elt.find('.pengim').html(translation.pronunciations[0].pengim);
-            elt.find('.chinese').html(translation.chinese);
+            elt.find('.chinese').html(translation.chinese.simplified);
             if (translation.pronunciations[0].audio) {
                 var play_elt = `<%= include 'elements/play-teochew' =%>`;
                 var audio = $(play_elt.trim());

@@ -45,7 +45,9 @@
           <td class="pengim">
             <%= $inner_row->{pronunciations}[0]{pengim} %>
           </td>
-          <td><%= $inner_row->{chinese} %></td>
+          <td>
+            %= $inner_row->{chinese}{simplified}
+          </td>
           <td>
             % if ($inner_row->{pronunciations}[0]{audio}) {
               <%= include 'elements/play-teochew',
