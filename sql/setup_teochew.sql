@@ -1101,7 +1101,7 @@ INSERT INTO Chinese VALUES(382,'橱','櫥','du5',NULL);
 INSERT INTO Chinese VALUES(383,'枕',NULL,'jim2',NULL);
 INSERT INTO Chinese VALUES(384,'厕','廁','che3',NULL);
 INSERT INTO Chinese VALUES(385,'所',NULL,'so2',NULL);
-INSERT INTO Chinese VALUES(386,'床','牀','cheung5',NULL);
+INSERT INTO Chinese VALUES(386,'床',NULL,'cheung5',NULL);
 INSERT INTO Chinese VALUES(387,'灇',NULL,'jang5',NULL);
 INSERT INTO Chinese VALUES(388,'洗',NULL,'soi2',NULL);
 INSERT INTO Chinese VALUES(389,'窗',NULL,'teng1',NULL);
@@ -1169,7 +1169,7 @@ INSERT INTO Chinese VALUES(450,'滴',NULL,'dih4',NULL);
 INSERT INTO Chinese VALUES(451,'屑',NULL,'suk4',NULL);
 INSERT INTO Chinese VALUES(452,'布',NULL,'bou3',NULL);
 INSERT INTO Chinese VALUES(453,'输','輸','su1',NULL);
-INSERT INTO Chinese VALUES(454,'表','錶','bio1',NULL);
+INSERT INTO Chinese VALUES(454,'錶',NULL,'bio1',NULL);
 INSERT INTO Chinese VALUES(455,'索',NULL,'soh4',NULL);
 INSERT INTO Chinese VALUES(456,'裙',NULL,'gung5',NULL);
 INSERT INTO Chinese VALUES(457,'松',NULL,'song5',NULL);
@@ -1627,6 +1627,8 @@ INSERT INTO TeochewAltChinese VALUES(26,743,'澹');
 INSERT INTO TeochewAltChinese VALUES(27,748,'若');
 INSERT INTO TeochewAltChinese VALUES(28,772,'差毋多');
 INSERT INTO TeochewAltChinese VALUES(29,777,'抠');
+INSERT INTO TeochewAltChinese VALUES(30,159,'牀');
+INSERT INTO TeochewAltChinese VALUES(31,535,'手表');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2909,7 +2911,7 @@ INSERT INTO Teochew VALUES(531,'da1','灱');
 INSERT INTO Teochew VALUES(532,'jui26 bou3','水布');
 INSERT INTO Teochew VALUES(533,'meng7 bou3','面布');
 INSERT INTO Teochew VALUES(534,'su1','输');
-INSERT INTO Teochew VALUES(535,'chiu26 bio1','手表');
+INSERT INTO Teochew VALUES(535,'chiu26 bio1','手錶');
 INSERT INTO Teochew VALUES(536,'chiu26 soh4','手索');
 INSERT INTO Teochew VALUES(537,'chiu26 ji2','手只');
 INSERT INTO Teochew VALUES(538,'gung5','裙');
