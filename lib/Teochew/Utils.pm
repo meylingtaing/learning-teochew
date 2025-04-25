@@ -166,9 +166,17 @@ sub link_teochew_words {
     }
 
     my $pengim  = join ' ', @pengim_parts;
-    my $chinese = join '', map { $_->{chinese} } @components;
+    my $simplified  = join '', map { $_->{simplified} } @components;
+    my $traditional = join '', map { $_->{traditional} || $_->{simplified} }
+                               @components;
 
-    return { pengim => $pengim, chinese => $chinese };
+    my $return = {
+        pengim      => $pengim,
+        simplified  => $simplified,
+    };
+    $return->{traditional} = $traditional if $simplified ne $traditional;
+
+    return $return;
 }
 
 =head2 split_out_parens

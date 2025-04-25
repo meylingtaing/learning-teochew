@@ -196,7 +196,10 @@ example given, using C<show_all_accents>:
     [{
         teochew_id => 1,
         translation_id => 1,
-        chinese => '银',
+        chinese => {
+            simplified  => '银',
+            traditional => undef,
+        },
         pronunciations => [
             { pengim => 'ngeng5', audio => 'ngeng5.mp3' },
             { pengim => 'nging5', audio => 'nging5.mp3' },
@@ -204,12 +207,18 @@ example given, using C<show_all_accents>:
     }, {
         teochew_id => 1,
         translation_id => 1,
-        chinese => '钱',
+        chinese => {
+            simplified  => '钱',
+            traditional => undef,
+        },
         pronunciations => [{ pengim => 'jin5', audio => 'jin5.mp3' }],
     }, {
         teochew_id => 1,
         translation_id => 1,
-        chinese => '镭',
+        chinese => {
+            simplified  => '镭',
+            traditional => undef,
+        },
         pronunciations => [{ pengim => 'lui1', audio => 'lui1.mp3' }],
     }]
 
@@ -276,7 +285,7 @@ sub translate {
     my @ret;
     for (@translations) {
         my $alt = _standard_pronunciation(
-            chinese => $_->{chinese},
+            chinese => $_->{simplified},
             pengim  => $_->{pengim}
         );
 
@@ -305,7 +314,11 @@ sub translate {
         push @ret, {
             translation_id => $_->{translation_id},
             teochew_id     => $_->{teochew_id},
-            chinese        => $_->{chinese} =~ s/\?/[?]/gr,
+            chinese        => {
+                simplified  => $_->{simplified} =~ s/\?/[?]/gr,
+                $_->{traditional} ?
+                    (traditional => $_->{traditional} =~ s/\?/[?]/gr) : (),
+            },
             pronunciations => $pronunciation,
         }
     }
@@ -1214,6 +1227,8 @@ arrayref contains a hashref with these fields:
 
     pengim
     chinese
+    simplified
+    traditional
 
 =cut
 
@@ -1246,7 +1261,11 @@ sub _lookup_all {
         where $cond
     };
 
-     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+    for my $row (@rows) {
+        $row->{simplified}  = $row->{chinese};
+        $row->{traditional} = get_traditional($row->{chinese});
+    }
 
     return @rows;
 }
@@ -1380,6 +1399,8 @@ Returns rows with
     teochew_id
     pengim
     chinese
+    simplified
+    traditional
 
 =cut
 
@@ -1399,7 +1420,17 @@ sub get_all_translations_by_id {
         $hidden_from_flashcards
         order by hidden_from_flashcards
     };
-    return $dbh->selectall_array($sql, { Slice => {} }, $english_id);
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $english_id);
+
+    # Check for traditional characters
+    for my $row (@rows) {
+        my $traditional = get_traditional($row->{chinese});
+
+        $row->{simplified}  = $row->{chinese};
+        $row->{traditional} = $traditional if $traditional;
+    }
+
+    return @rows;
 }
 
 =head2 find_audio
@@ -1584,7 +1615,7 @@ Expects a list of hashrefs, each with these fields
     english:       the English column of the table
     english_link:  the path of the url for /english/...
     notes:         stuff in parentheses after the english word
-    chinese:       the Chinese column of the table
+    chinese:       hashref with simplified and traditional
     pengim:        the Peng'Im column of the table
     is_definition: true if this is more of a description than a translation.
                    this will make the word show up italicized
@@ -1615,7 +1646,10 @@ sub _format_for_translations_table {
             notes   => $_->{notes},
             is_definition => $_->{is_definition},
             teochew => [{
-                chinese => $_->{chinese},
+                chinese => {
+                    simplified  => $_->{chinese},
+                    traditional => get_traditional($_->{chinese}),
+                },
                 pronunciations => [{
                     pengim  => $pengim,
                     audio   => $audio,
