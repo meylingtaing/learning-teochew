@@ -1667,6 +1667,32 @@ sub get_approx_num_translations {
     return $word_count + $sentence_count;
 }
 
+=head2 get_traditional
+
+Given a string with simplified Chinese characters, this checks to see if the
+traditional variant is different, and if it is, it will return that. This
+returns nothing if they are the same
+
+=cut
+
+sub get_traditional {
+    my $full_simplified = shift;
+    my @simplified = split //, $full_simplified;
+
+    my $full_traditional = '';
+
+    for my $i (0..$#simplified) {
+        my $traditional = $dbh->selectrow_array(qq{
+            select traditional from Chinese
+            where simplified = ?
+        }, undef, $simplified[$i]);
+
+        $full_traditional .= ($traditional || $simplified[$i]);
+    }
+
+    return $full_traditional if $full_traditional ne $full_simplified;
+}
+
 # TODO
 #sub find_phrases_using_word {
 #}
