@@ -736,6 +736,7 @@ INSERT INTO English VALUES(694,10,'spicy',0,NULL,NULL);
 INSERT INTO English VALUES(695,32,'not that...',0,NULL,NULL);
 INSERT INTO English VALUES(696,32,'some amount over',0,NULL,NULL);
 INSERT INTO English VALUES(697,17,'$2 something',0,NULL,NULL);
+INSERT INTO English VALUES(699,7,'year',0,'a year',10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1806,7 +1807,7 @@ INSERT INTO Translation VALUES(142,138,151,1);
 INSERT INTO Translation VALUES(143,139,152,1);
 INSERT INTO Translation VALUES(144,632,154,0);
 INSERT INTO Translation VALUES(145,633,155,0);
-INSERT INTO Translation VALUES(146,83,156,0);
+INSERT INTO Translation VALUES(146,699,156,0);
 INSERT INTO Translation VALUES(147,140,157,0);
 INSERT INTO Translation VALUES(148,141,158,0);
 INSERT INTO Translation VALUES(149,142,159,0);
