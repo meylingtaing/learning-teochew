@@ -642,6 +642,8 @@ sub generate_translation_word_list {
             $flashcard{notes}   = undef;
         }
 
+        $flashcard{english_link} =~ s/\./_/g;
+
         push @flashcards, \%flashcard;
     }
 
@@ -1639,6 +1641,8 @@ sub _format_for_translations_table {
         my $audio;
 
         $audio ||= find_audio($pengim);
+
+        $base_word =~ s/\./_/g;
 
         push @ret, {
             english_link => $base_word,

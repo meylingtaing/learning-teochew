@@ -64,6 +64,9 @@ sub translate {
     # Turn any english number words in the actual number
     $search = numify($search);
 
+    # Replace any . with _
+    $search =~ s/\./_/g;
+
     # Not very smart right now, this just checks if there are non-ascii
     # characters for switching to chinese
     if ($search =~ /^[[:ascii:]]+$/) {
@@ -141,6 +144,9 @@ C<english> must be stashed
 sub english {
     my $c = shift;
     my $input = trim $c->stash('english');
+
+    # Replace _ with .
+    $input =~ s/_/./g;
 
     my $extra_notes = '';
     my @all_tags;
