@@ -269,9 +269,11 @@ sub english {
         $c->stash(tags => join ', ', uniq(@all_tags));
         $c->stash(extra_info => $extra_notes ? markdown($extra_notes) : undef);
 
-        $c->stash(words_containing =>
-            Teochew::find_words_using_character(\@chinese, exclude_itself => 1)
-        );
+        my @simplified_chars = map { $_->{simplified} } @chinese;
+        $c->stash(words_containing => Teochew::find_words_using_character(
+            \@simplified_chars,
+            exclude_itself => 1
+        ));
 
         $c->render(template => 'translate');
         return;
