@@ -642,7 +642,9 @@ sub generate_translation_word_list {
             $flashcard{notes}   = undef;
         }
 
-        $flashcard{english_link} =~ s/\./_/g;
+        if ($flashcard{english_link}) {
+            $flashcard{english_link} =~ s/\./_/g;
+        }
 
         push @flashcards, \%flashcard;
     }
