@@ -84,9 +84,9 @@ for (my $i = 0; $i < scalar @chars; $i++) {
         from Teochew
         join Translation on Translation.teochew_id = Teochew.id
         left join English on Translation.english_id = English.id
-        where chinese = ? and pengim = ?
+        where chinese = ? and pengim like ?
         order by Teochew.id
-    }, { Slice => {} }, $chars[$i], $pengim_str);
+    }, { Slice => {} }, $chars[$i], "$pengim_str%");
 
     if (scalar @rows == 0) {
         say colored(
