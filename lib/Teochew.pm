@@ -949,7 +949,7 @@ sub compound_word_components {
         left join English on English.id = Translation.english_id
         left join Synonyms on English.id = Synonyms.english_id
         where parent_teochew_id = ?
-        group by English.id
+        group by Translation.id
         order by Compound.sort
     };
 
