@@ -741,6 +741,7 @@ INSERT INTO English VALUES(699,7,'year',0,'a year',10);
 INSERT INTO English VALUES(700,33,'to give',0,NULL,NULL);
 INSERT INTO English VALUES(701,6,'flashlight',0,NULL,NULL);
 INSERT INTO English VALUES(702,2,'50',0,NULL,NULL);
+INSERT INTO English VALUES(703,23,'rain',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2488,7 +2489,7 @@ INSERT INTO Translation VALUES(818,NULL,828,0);
 INSERT INTO Translation VALUES(819,NULL,829,0);
 INSERT INTO Translation VALUES(820,NULL,830,0);
 INSERT INTO Translation VALUES(821,NULL,831,0);
-INSERT INTO Translation VALUES(822,NULL,832,0);
+INSERT INTO Translation VALUES(822,703,832,0);
 INSERT INTO Translation VALUES(823,NULL,833,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
