@@ -97,7 +97,7 @@ for (my $i = 0; $i < scalar @chars; $i++) {
             # XXX fill this in...
             my $translation_id = $db->insert_translation(
                 chinese => $chars[$i],
-                pengim  => $syllables[$i],
+                pengim  => $pengim_str,
             );
             $rows[0] = {
                 translation_id => $translation_id,
