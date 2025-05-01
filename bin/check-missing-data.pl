@@ -126,7 +126,7 @@ if (grep /^compound_breakdown/, @commands_to_run) {
     # (if there's a space, then there are multiple syllables) that don't have
     # any corresponding "compound" entries
     @rows = $dbh->selectall_array(qq{
-        select word from English
+        select word, notes from English
         join Translation on English.id = Translation.english_id
         join Teochew on Translation.teochew_id = Teochew.id
         left join Compound on Compound.parent_teochew_id = Teochew.id
@@ -135,6 +135,10 @@ if (grep /^compound_breakdown/, @commands_to_run) {
     });
 
     say "Missing compound breakdowns";
-    say $_->[0] for @rows;
+    for (@rows) {
+        my $word = $_->[0];
+        $word .= " ($_->[1])" if $_->[1];
+        say $word;
+    }
     print "\n";
 }
