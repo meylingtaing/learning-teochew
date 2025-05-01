@@ -3558,6 +3558,8 @@ INSERT INTO Compound VALUES(291,414,1,37);
 INSERT INTO Compound VALUES(292,414,2,486);
 INSERT INTO Compound VALUES(293,508,1,803);
 INSERT INTO Compound VALUES(294,508,2,486);
+INSERT INTO Compound VALUES(295,118,1,804);
+INSERT INTO Compound VALUES(296,118,2,486);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
