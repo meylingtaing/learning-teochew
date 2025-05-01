@@ -88,15 +88,37 @@ sub insert_translation {
         $teochew_id = $self->dbh->sqlite_last_insert_rowid;
     }
 
-    # Now insert the Translation. If this is a dupe, this will fail since
-    # there is a unique constraint on each english/teochew translation pair
-    $self->dbh->do(qq{
-        insert into Translation
-        (english_id, teochew_id, hidden_from_flashcards)
-        values (?, ?, ?)
-    }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
+    # Now insert the Translation. First, check if there is an empty translation
+    # (no english id) that matches this
+    my $translation_id = $self->dbh->selectrow_array(qq{
+        select id from Translation
+        where teochew_id = ? and english_id is null
+    }, {}, $teochew_id);
 
-    return $self->dbh->sqlite_last_insert_rowid;
+    if ($translation_id) {
+        say colored(
+            "Translation already exists with no English entry. Update it?",
+            "yellow"
+        );
+        if (confirm()) {
+            $self->dbh->do(qq{
+                update Translation set english_id = ? where id = ?
+            }, {}, $english_id, $translation_id);
+
+            return $translation_id;
+        }
+    }
+    else {
+        # If this is a dupe, this will fail since
+        # there is a unique constraint on each english/teochew translation pair
+        $self->dbh->do(qq{
+            insert into Translation
+            (english_id, teochew_id, hidden_from_flashcards)
+            values (?, ?, ?)
+        }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
+
+        return $self->dbh->sqlite_last_insert_rowid;
+    }
 }
 
 =head2 update_english
