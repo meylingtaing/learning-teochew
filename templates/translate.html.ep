@@ -65,7 +65,7 @@
             %# that here
             % if (my $standard_pronunciation = $row->{pronunciations}[1]) {
               <div class="teochew-proper-pronunciation">
-              潮州: <%= $standard_pronunciation->{pengim} %>
+              Diojiu Accent: <%= $standard_pronunciation->{pengim} %>
               % if ($standard_pronunciation->{audio}) {
                 <%= include 'elements/play-teochew',
                       audio => $standard_pronunciation->{audio} %>
