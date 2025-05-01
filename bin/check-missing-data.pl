@@ -131,6 +131,7 @@ if (grep /^compound_breakdown/, @commands_to_run) {
         join Teochew on Translation.teochew_id = Teochew.id
         left join Compound on Compound.parent_teochew_id = Teochew.id
         where pengim like '% %' and Compound.id is null
+        and English.hidden = 0
     });
 
     say "Missing compound breakdowns";
