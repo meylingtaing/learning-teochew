@@ -740,6 +740,7 @@ INSERT INTO English VALUES(698,23,'wind',0,NULL,NULL);
 INSERT INTO English VALUES(699,7,'year',0,'a year',10);
 INSERT INTO English VALUES(700,33,'to give',0,NULL,NULL);
 INSERT INTO English VALUES(701,6,'flashlight',0,NULL,NULL);
+INSERT INTO English VALUES(702,2,'50',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1606,6 +1607,7 @@ INSERT INTO Extra VALUES(40,671,replace('You can add **a1** at the end of a stat
 INSERT INTO Extra VALUES(41,643,replace('You would use **si6(7)** if it comes before a noun, and **oi6(7)** if it comes before an adjective\n','\n',char(10)));
 INSERT INTO Extra VALUES(42,695,replace('You would say this following an adjective. For example, "not that late" would be **bho(7) meh(8) am3**\n','\n',char(10)));
 INSERT INTO Extra VALUES(43,696,replace('Use it as the word "something" when referring to an amount. Some examples are:\n\n* "20 something" - **yi(7) jap(4) ghua7**\n* "70 something degrees" - **chek(8) jap(4) ghua7 dou7**\n','\n',char(10)));
+INSERT INTO Extra VALUES(44,697,replace('You can leave off the **ngeng5** at the end if you''d like\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2453,6 +2455,7 @@ INSERT INTO Translation VALUES(785,701,795,0);
 INSERT INTO Translation VALUES(786,NULL,796,0);
 INSERT INTO Translation VALUES(787,NULL,797,0);
 INSERT INTO Translation VALUES(788,NULL,798,0);
+INSERT INTO Translation VALUES(789,702,799,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3224,6 +3227,7 @@ INSERT INTO Teochew VALUES(795,'chiu26 diang6','手电');
 INSERT INTO Teochew VALUES(796,NULL,'快乐');
 INSERT INTO Teochew VALUES(797,'cha1','差');
 INSERT INTO Teochew VALUES(798,'do1','多');
+INSERT INTO Teochew VALUES(799,'ngou67 jap8','五十');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3468,6 +3472,16 @@ INSERT INTO Compound VALUES(235,772,2,580);
 INSERT INTO Compound VALUES(236,772,3,788);
 INSERT INTO Compound VALUES(237,661,1,580);
 INSERT INTO Compound VALUES(238,661,2,644);
+INSERT INTO Compound VALUES(239,791,1,7);
+INSERT INTO Compound VALUES(240,791,2,360);
+INSERT INTO Compound VALUES(241,791,3,780);
+INSERT INTO Compound VALUES(242,791,4,475);
+INSERT INTO Compound VALUES(243,799,1,10);
+INSERT INTO Compound VALUES(244,799,2,14);
+INSERT INTO Compound VALUES(245,792,1,6);
+INSERT INTO Compound VALUES(246,792,2,360);
+INSERT INTO Compound VALUES(247,792,3,789);
+INSERT INTO Compound VALUES(248,792,4,775);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
