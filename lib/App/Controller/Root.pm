@@ -229,8 +229,12 @@ sub english {
                     $translation_row->{alt_chinese} = $alts;
                 }
 
+                # Get the compound word breakdown, but let's only display it
+                # if we have all the components filled in
                 my @components = Teochew::compound_word_components($teochew_id);
-                $translation_row->{compound} = \@components if @components;
+                if (@components && (all { $_->{word} ne '' } @components)) {
+                    $translation_row->{compound} = \@components;
+                }
 
                 my $extra_translation_notes =
                     Teochew::extra_translation_information_by_id(
