@@ -2456,6 +2456,21 @@ INSERT INTO Translation VALUES(786,NULL,796,0);
 INSERT INTO Translation VALUES(787,NULL,797,0);
 INSERT INTO Translation VALUES(788,NULL,798,0);
 INSERT INTO Translation VALUES(789,702,799,0);
+INSERT INTO Translation VALUES(790,NULL,800,0);
+INSERT INTO Translation VALUES(791,NULL,801,0);
+INSERT INTO Translation VALUES(792,NULL,802,0);
+INSERT INTO Translation VALUES(793,NULL,803,0);
+INSERT INTO Translation VALUES(794,NULL,804,0);
+INSERT INTO Translation VALUES(795,NULL,805,0);
+INSERT INTO Translation VALUES(796,NULL,806,0);
+INSERT INTO Translation VALUES(797,NULL,807,0);
+INSERT INTO Translation VALUES(798,NULL,808,0);
+INSERT INTO Translation VALUES(799,NULL,809,0);
+INSERT INTO Translation VALUES(800,NULL,810,0);
+INSERT INTO Translation VALUES(801,NULL,811,0);
+INSERT INTO Translation VALUES(802,NULL,812,0);
+INSERT INTO Translation VALUES(803,NULL,813,0);
+INSERT INTO Translation VALUES(804,NULL,814,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3228,6 +3243,21 @@ INSERT INTO Teochew VALUES(796,NULL,'快乐');
 INSERT INTO Teochew VALUES(797,'cha1','差');
 INSERT INTO Teochew VALUES(798,'do1','多');
 INSERT INTO Teochew VALUES(799,'ngou67 jap8','五十');
+INSERT INTO Teochew VALUES(800,'meh4','乜');
+INSERT INTO Teochew VALUES(801,'ang1','安');
+INSERT INTO Teochew VALUES(802,'he1','呵');
+INSERT INTO Teochew VALUES(803,'buk4','不');
+INSERT INTO Teochew VALUES(804,'dui3','对');
+INSERT INTO Teochew VALUES(805,'ju6','住');
+INSERT INTO Teochew VALUES(806,'cheng1','亲');
+INSERT INTO Teochew VALUES(807,'chek4','戚');
+INSERT INTO Teochew VALUES(808,'meung5','眠');
+INSERT INTO Teochew VALUES(809,'mua3','明');
+INSERT INTO Teochew VALUES(810,'ma3','明');
+INSERT INTO Teochew VALUES(811,'ja1','昨');
+INSERT INTO Teochew VALUES(812,'jao1','昨');
+INSERT INTO Teochew VALUES(813,'geng1','今');
+INSERT INTO Teochew VALUES(814,'gim1','今');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -3482,6 +3512,52 @@ INSERT INTO Compound VALUES(245,792,1,6);
 INSERT INTO Compound VALUES(246,792,2,360);
 INSERT INTO Compound VALUES(247,792,3,789);
 INSERT INTO Compound VALUES(248,792,4,775);
+INSERT INTO Compound VALUES(249,790,1,381);
+INSERT INTO Compound VALUES(250,790,2,790);
+INSERT INTO Compound VALUES(251,788,1,779);
+INSERT INTO Compound VALUES(252,788,2,778);
+INSERT INTO Compound VALUES(253,784,1,771);
+INSERT INTO Compound VALUES(254,784,2,76);
+INSERT INTO Compound VALUES(255,784,3,772);
+INSERT INTO Compound VALUES(256,774,1,791);
+INSERT INTO Compound VALUES(257,774,2,792);
+INSERT INTO Compound VALUES(258,773,1,787);
+INSERT INTO Compound VALUES(259,773,2,793);
+INSERT INTO Compound VALUES(260,773,3,788);
+INSERT INTO Compound VALUES(261,3,1,794);
+INSERT INTO Compound VALUES(262,3,2,580);
+INSERT INTO Compound VALUES(263,3,3,795);
+INSERT INTO Compound VALUES(264,66,1,796);
+INSERT INTO Compound VALUES(265,66,2,797);
+INSERT INTO Compound VALUES(266,106,1,453);
+INSERT INTO Compound VALUES(267,106,2,37);
+INSERT INTO Compound VALUES(268,107,1,456);
+INSERT INTO Compound VALUES(269,107,2,37);
+INSERT INTO Compound VALUES(270,108,1,798);
+INSERT INTO Compound VALUES(271,108,2,577);
+INSERT INTO Compound VALUES(272,108,3,582);
+INSERT INTO Compound VALUES(273,109,1,798);
+INSERT INTO Compound VALUES(274,109,2,577);
+INSERT INTO Compound VALUES(275,110,1,798);
+INSERT INTO Compound VALUES(276,110,2,582);
+INSERT INTO Compound VALUES(277,111,1,498);
+INSERT INTO Compound VALUES(278,111,2,582);
+INSERT INTO Compound VALUES(279,112,1,799);
+INSERT INTO Compound VALUES(280,112,2,577);
+INSERT INTO Compound VALUES(281,113,1,800);
+INSERT INTO Compound VALUES(282,113,2,577);
+INSERT INTO Compound VALUES(283,114,1,800);
+INSERT INTO Compound VALUES(284,114,2,486);
+INSERT INTO Compound VALUES(285,411,1,800);
+INSERT INTO Compound VALUES(286,411,2,582);
+INSERT INTO Compound VALUES(287,115,1,801);
+INSERT INTO Compound VALUES(288,115,2,486);
+INSERT INTO Compound VALUES(289,116,1,802);
+INSERT INTO Compound VALUES(290,116,2,486);
+INSERT INTO Compound VALUES(291,414,1,37);
+INSERT INTO Compound VALUES(292,414,2,486);
+INSERT INTO Compound VALUES(293,508,1,803);
+INSERT INTO Compound VALUES(294,508,2,486);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -3495,6 +3571,7 @@ INSERT INTO TranslationExtra VALUES(4,665,'I took the character from [the wiktio
 INSERT INTO TranslationExtra VALUES(5,696,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(6,34,replace('侬 is the original character for this word, though 人 seems to be the more common and widely understood character\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(7,200,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(8,100,replace('I think this is just a shortening of **ja1 bhou(6) gian2**, and the character 走 was chosen because it matched the pronunciation.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
