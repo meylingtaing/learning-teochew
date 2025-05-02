@@ -76,6 +76,9 @@ for (my $i = 0; $i < scalar @chars; $i++) {
     # searching
     $pengim_str =~ s/(\d)(\d)$/$1/;
 
+    # Actually, let's just omit the last tone altogether
+    my $pengim_str_search = $pengim_str =~ s/\d$//r;
+
     my @rows = $db->dbh->selectall_array(qq{
         select
             Translation.id translation_id,
@@ -86,7 +89,7 @@ for (my $i = 0; $i < scalar @chars; $i++) {
         left join English on Translation.english_id = English.id
         where chinese = ? and pengim like ?
         order by Teochew.id
-    }, { Slice => {} }, $chars[$i], "$pengim_str%");
+    }, { Slice => {} }, $chars[$i], "$pengim_str_search%");
 
     if (scalar @rows == 0) {
         say colored(
