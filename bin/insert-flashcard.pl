@@ -49,15 +49,7 @@ my $db = Teochew::Edit->new;
 my %categories = map { $_->{name} => $_->{id} } Teochew::categories;
 my $category_id = $categories{$category};
 
-unless ($category_id) {
-    say "Creating new category: $category";
-    if (confirm()) {
-        $category_id = $db->insert_category($category);
-    }
-    else {
-        exit;
-    }
-}
+die "Category '$category' doesn't exist!" unless $category_id;
 
 # So, sometimes I insert words and then they need to be sorted. Check the
 # sorts in the category and see if this makes sense to have a sort value
