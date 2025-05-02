@@ -489,6 +489,19 @@ sub update_translation {
 sub insert_compound_breakdown {
     my ($self, %params) = @_;
 
+    # First check if the breakdown already exists. If it does, we'll remove it
+    # because we're going to create a new one
+    my $deleted = $self->dbh->do(qq{
+        delete from Compound where parent_teochew_id = ?
+    }, undef, $params{parent_teochew_id});
+
+    if ($deleted > 0) {
+        say colored(
+            "Breakdown already exists. Removing it and creating new one",
+            "yellow"
+        );
+    }
+
     my $i = 0;
     my @binds;
     for my $child_id (@{ $params{translation_ids} }) {
