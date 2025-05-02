@@ -1609,6 +1609,43 @@ sub find_words_using_character {
     return _format_for_translations_table(@rows);
 }
 
+=head2 find_words_using_translation
+
+    find_words_using_translation([1, 2]);
+
+Takes an arrayref of C<$translation_ids>, and returns an arrayref of english
+words that include those translations
+
+Returns a data structure formatted similarly to L</find_words_using_character>
+
+=cut
+
+sub find_words_using_translation {
+    my ($translations, %params) = @_;
+
+    my $sql = qq{
+        select
+            English.word as english,
+            English.notes,
+            Teochew.chinese,
+            Teochew.pengim
+        from Compound
+        join Teochew on Teochew.id = Compound.parent_teochew_id
+        join Translation on Translation.teochew_id = Teochew.id
+        join English on Translation.english_id = English.id
+        where hidden = 0
+    };
+
+    my @binds = @$translations;
+    my @placeholders = map { '?' } @binds;
+    $sql .= " and Compound.translation_id IN (" .
+            join(",", @placeholders) . ")";
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+
+    return _format_for_translations_table(@rows);
+}
+
 =head2 _format_for_translations_table
 
 Given a set of rows that came directly from the database, returns the format

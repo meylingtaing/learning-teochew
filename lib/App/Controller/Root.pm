@@ -194,9 +194,10 @@ sub english {
             $is_synonym = 1;
         }
 
-        # Organize this by category. Also keep track of chinese characters.
+        # Organize this by category. Also keep track of translation ids
         my %categories;
-        my @chinese;
+        my @translation_ids;
+
         for my $english_row (@english_rows) {
 
             if (scalar @english_rows == 1 && $english_row->{notes}) {
@@ -243,7 +244,7 @@ sub english {
                 $translation_row->{extra_notes} = $extra_translation_notes ?
                     markdown($extra_translation_notes) : undef;
 
-                push @chinese, $translation_row->{chinese};
+                push @translation_ids, $translation_row->{translation_id};
                 push @{ $categories{$category}{teochew} }, {
                     %$translation_row,
                     notes => $english_row->{notes},
@@ -273,10 +274,8 @@ sub english {
         $c->stash(tags => join ', ', uniq(@all_tags));
         $c->stash(extra_info => $extra_notes ? markdown($extra_notes) : undef);
 
-        my @simplified_chars = map { $_->{simplified} } @chinese;
-        $c->stash(words_containing => Teochew::find_words_using_character(
-            \@simplified_chars,
-            exclude_itself => 1
+        $c->stash(words_containing => Teochew::find_words_using_translation(
+            \@translation_ids,
         ));
 
         $c->render(template => 'translate');
