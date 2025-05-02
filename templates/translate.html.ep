@@ -129,7 +129,7 @@
   % }
 
   <hr>
-  <h5>Words containing <b><%== $english %></b>:</h5>
+  <h5>Words and phrases containing <b><%== $english %></b>:</h5>
 %= include 'elements/all-translations-table', translations => $words_containing
 % }
 

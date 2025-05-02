@@ -39,7 +39,7 @@
   <hr>
 
 
-  <h5>Words containing <%= $character %>:</h5>
+  <h5>Words and phrases containing <%= $character %>:</h5>
   <%= include 'elements/all-translations-table',
     translations => $words, table_id => 'words-containing-chinese-character' %>
 
