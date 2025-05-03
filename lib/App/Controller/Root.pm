@@ -61,9 +61,6 @@ sub translate {
         return;
     }
 
-    # Turn any english number words in the actual number
-    $search = numify($search);
-
     # Replace any . with _
     $search =~ s/\./_/g;
 
@@ -152,8 +149,9 @@ sub english {
     my @all_tags;
 
     # All of the verbs in the database are stored like "to eat", but we should
-    # allow someone to see the translation without typing the "to" part of it
-    for my $english ("$input", "to $input") {
+    # allow someone to see the translation without typing the "to" part of it.
+    # And we should also check if the user typed a number
+    for my $english ("$input", "to $input", numify($input)) {
 
         # First, look for english words in the database that match. There might
         # be multiple
