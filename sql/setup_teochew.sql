@@ -41,6 +41,7 @@ INSERT INTO Categories VALUES(35,'World','Around the World',7);
 INSERT INTO Categories VALUES(36,'Questions','Question Words',12);
 INSERT INTO Categories VALUES(37,'Kitchen','Kitchen Tools',5);
 INSERT INTO Categories VALUES(38,'Travel',NULL,7);
+INSERT INTO Categories VALUES(39,'Location',NULL,12);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -362,7 +363,7 @@ INSERT INTO English VALUES(317,10,'strawberry',1,NULL,NULL);
 INSERT INTO English VALUES(318,14,'scissors',0,NULL,NULL);
 INSERT INTO English VALUES(320,36,'how many',0,NULL,NULL);
 INSERT INTO English VALUES(321,17,'money',0,NULL,NULL);
-INSERT INTO English VALUES(322,33,'to be at',0,NULL,NULL);
+INSERT INTO English VALUES(322,39,'to be at',0,NULL,NULL);
 INSERT INTO English VALUES(323,33,'to go',0,NULL,NULL);
 INSERT INTO English VALUES(324,16,'front',1,NULL,NULL);
 INSERT INTO English VALUES(325,16,'back',1,NULL,NULL);
@@ -522,7 +523,7 @@ INSERT INTO English VALUES(478,15,'fly',0,'insect',NULL);
 INSERT INTO English VALUES(479,13,'to wipe',0,NULL,NULL);
 INSERT INTO English VALUES(480,31,'toilet paper',0,NULL,NULL);
 INSERT INTO English VALUES(481,16,'pound',0,'lb.',NULL);
-INSERT INTO English VALUES(482,8,'far',0,NULL,NULL);
+INSERT INTO English VALUES(482,39,'far',0,NULL,NULL);
 INSERT INTO English VALUES(483,32,'quite',0,NULL,NULL);
 INSERT INTO English VALUES(484,32,'done',0,NULL,NULL);
 INSERT INTO English VALUES(485,32,'no',0,'not yet',NULL);
@@ -562,8 +563,8 @@ INSERT INTO English VALUES(520,10,'raw',0,NULL,NULL);
 INSERT INTO English VALUES(521,13,'to thank',0,NULL,NULL);
 INSERT INTO English VALUES(522,10,'meal',0,NULL,NULL);
 INSERT INTO English VALUES(523,7,'early',0,NULL,4);
-INSERT INTO English VALUES(524,16,'inside',0,NULL,NULL);
-INSERT INTO English VALUES(525,16,'side',0,NULL,NULL);
+INSERT INTO English VALUES(524,39,'inside',0,NULL,NULL);
+INSERT INTO English VALUES(525,39,'side',0,NULL,NULL);
 INSERT INTO English VALUES(526,7,'hour',0,NULL,10);
 INSERT INTO English VALUES(527,7,'minute',0,NULL,10);
 INSERT INTO English VALUES(528,28,'jicama',0,NULL,10);
@@ -636,7 +637,7 @@ INSERT INTO English VALUES(595,11,'stomach ache',0,NULL,NULL);
 INSERT INTO English VALUES(596,28,'Chinese broccoli',0,NULL,10);
 INSERT INTO English VALUES(597,28,'cauliflower',0,NULL,10);
 INSERT INTO English VALUES(598,28,'broccoli',0,NULL,10);
-INSERT INTO English VALUES(599,16,'top',0,NULL,NULL);
+INSERT INTO English VALUES(599,39,'top',0,NULL,NULL);
 INSERT INTO English VALUES(600,23,'mountain top',0,NULL,NULL);
 INSERT INTO English VALUES(601,38,'to go out and have fun',0,NULL,NULL);
 INSERT INTO English VALUES(602,38,'to go on a walk',0,NULL,NULL);
@@ -648,7 +649,7 @@ INSERT INTO English VALUES(607,13,'to be born',0,NULL,NULL);
 INSERT INTO English VALUES(608,9,'to live in',0,NULL,NULL);
 INSERT INTO English VALUES(609,35,'California',0,NULL,NULL);
 INSERT INTO English VALUES(610,35,'Southeast Asia',0,NULL,NULL);
-INSERT INTO English VALUES(611,16,'near',0,NULL,NULL);
+INSERT INTO English VALUES(611,39,'near',0,NULL,NULL);
 INSERT INTO English VALUES(612,13,'to enter',0,NULL,NULL);
 INSERT INTO English VALUES(613,8,'fake',0,NULL,NULL);
 INSERT INTO English VALUES(614,13,'to call out for someone',0,NULL,NULL);
@@ -695,8 +696,8 @@ INSERT INTO English VALUES(654,7,'last night',0,NULL,10);
 INSERT INTO English VALUES(655,36,'how',0,'to what degree',NULL);
 INSERT INTO English VALUES(656,28,'luffa',0,'smooth',10);
 INSERT INTO English VALUES(657,8,'lazy',0,NULL,NULL);
-INSERT INTO English VALUES(658,4,'there',0,NULL,4);
-INSERT INTO English VALUES(659,4,'here',0,NULL,4);
+INSERT INTO English VALUES(658,39,'there',0,NULL,NULL);
+INSERT INTO English VALUES(659,39,'here',0,NULL,NULL);
 INSERT INTO English VALUES(660,7,'how late',0,NULL,10);
 INSERT INTO English VALUES(661,8,'how large',0,NULL,NULL);
 INSERT INTO English VALUES(662,8,'how high',0,NULL,NULL);
@@ -707,7 +708,7 @@ INSERT INTO English VALUES(666,38,'car',0,'a car',NULL);
 INSERT INTO English VALUES(667,33,'to know',0,'recognize, be familiar with someone or something',NULL);
 INSERT INTO English VALUES(668,32,'type',0,'kind',NULL);
 INSERT INTO English VALUES(669,32,'many kinds of things',0,NULL,NULL);
-INSERT INTO English VALUES(670,32,'place',0,NULL,NULL);
+INSERT INTO English VALUES(670,39,'place',0,NULL,NULL);
 INSERT INTO English VALUES(671,36,'question particle',0,NULL,4);
 INSERT INTO English VALUES(672,23,'how many degrees',0,NULL,NULL);
 INSERT INTO English VALUES(673,37,'pan',0,NULL,NULL);
@@ -741,6 +742,11 @@ INSERT INTO English VALUES(700,33,'to give',0,NULL,NULL);
 INSERT INTO English VALUES(701,6,'flashlight',0,NULL,NULL);
 INSERT INTO English VALUES(702,2,'50',0,NULL,NULL);
 INSERT INTO English VALUES(703,23,'rain',0,NULL,NULL);
+INSERT INTO English VALUES(704,16,'red envelope',0,NULL,NULL);
+INSERT INTO English VALUES(705,39,'middle',0,NULL,NULL);
+INSERT INTO English VALUES(706,33,'to put',0,NULL,NULL);
+INSERT INTO English VALUES(707,7,'the first time',0,NULL,10);
+INSERT INTO English VALUES(708,1,'it''s okay',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1367,6 +1373,10 @@ INSERT INTO Chinese VALUES(626,'路',NULL,'lou7',NULL);
 INSERT INTO Chinese VALUES(627,'占',NULL,'jiam1',NULL);
 INSERT INTO Chinese VALUES(628,'互',NULL,'hou7',NULL);
 INSERT INTO Chinese VALUES(629,'予',NULL,'hou7',NULL);
+INSERT INTO Chinese VALUES(630,'中',NULL,'da1',NULL);
+INSERT INTO Chinese VALUES(631,'央',NULL,'eung1',NULL);
+INSERT INTO Chinese VALUES(632,'第',NULL,'doi6',NULL);
+INSERT INTO Chinese VALUES(633,'次',NULL,'cheu3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1489,6 +1499,12 @@ INSERT INTO Synonyms VALUES(114,677,'kind of');
 INSERT INTO Synonyms VALUES(115,678,'like this');
 INSERT INTO Synonyms VALUES(116,681,'to scrape');
 INSERT INTO Synonyms VALUES(117,681,'to shave off');
+INSERT INTO Synonyms VALUES(118,705,'center');
+INSERT INTO Synonyms VALUES(119,706,'to place');
+INSERT INTO Synonyms VALUES(120,611,'close');
+INSERT INTO Synonyms VALUES(121,708,'it''s alright');
+INSERT INTO Synonyms VALUES(122,708,'it''s nothing');
+INSERT INTO Synonyms VALUES(123,708,'no big deal');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2514,7 +2530,7 @@ INSERT INTO Translation VALUES(844,NULL,854,0);
 INSERT INTO Translation VALUES(845,NULL,855,0);
 INSERT INTO Translation VALUES(846,NULL,856,0);
 INSERT INTO Translation VALUES(847,NULL,857,0);
-INSERT INTO Translation VALUES(848,NULL,858,0);
+INSERT INTO Translation VALUES(848,706,858,0);
 INSERT INTO Translation VALUES(849,NULL,859,0);
 INSERT INTO Translation VALUES(850,NULL,860,0);
 INSERT INTO Translation VALUES(851,NULL,861,0);
@@ -2642,6 +2658,10 @@ INSERT INTO Translation VALUES(972,NULL,982,0);
 INSERT INTO Translation VALUES(973,NULL,983,0);
 INSERT INTO Translation VALUES(974,NULL,984,0);
 INSERT INTO Translation VALUES(975,NULL,985,0);
+INSERT INTO Translation VALUES(976,704,986,0);
+INSERT INTO Translation VALUES(977,705,987,0);
+INSERT INTO Translation VALUES(978,707,988,0);
+INSERT INTO Translation VALUES(979,708,989,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3600,6 +3620,10 @@ INSERT INTO Teochew VALUES(982,'sao3','扫');
 INSERT INTO Teochew VALUES(983,'mui5','微');
 INSERT INTO Teochew VALUES(984,'tang3','畅');
 INSERT INTO Teochew VALUES(985,'gian6','件');
+INSERT INTO Teochew VALUES(986,'ang57 bao1','红包');
+INSERT INTO Teochew VALUES(987,'da1 eung1','中央');
+INSERT INTO Teochew VALUES(988,'doi67 ek48 cheu3','第一次');
+INSERT INTO Teochew VALUES(989,'bhoi67 jo32 ni5','袂做呢');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4349,6 +4373,10 @@ INSERT INTO Compound VALUES(744,763,1,440);
 INSERT INTO Compound VALUES(745,763,2,749);
 INSERT INTO Compound VALUES(746,763,3,683);
 INSERT INTO Compound VALUES(747,763,4,727);
+INSERT INTO Compound VALUES(748,986,1,20);
+INSERT INTO Compound VALUES(749,986,2,834);
+INSERT INTO Compound VALUES(750,989,1,549);
+INSERT INTO Compound VALUES(751,989,2,312);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -4363,6 +4391,7 @@ INSERT INTO TranslationExtra VALUES(5,696,replace('These characters were chosen 
 INSERT INTO TranslationExtra VALUES(6,34,replace('侬 is the original character for this word, though 人 seems to be the more common and widely understood character\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(7,200,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(8,100,replace('I think this is just a shortening of **ja1 bhou(6) gian2**, and the character 走 was chosen because it matched the pronunciation.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(9,977,replace('Note that the 中 character by itself actually has readings of "dang", "dong", and "diong", and it might have just been shortened to "da" in this particular phrase. You might also see it as "dan".\n\nThe second syllable 央 might also be read as "ng", but the sounds "eung" and "ng" are pretty similar to my ears.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
