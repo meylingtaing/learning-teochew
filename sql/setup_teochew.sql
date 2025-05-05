@@ -491,7 +491,7 @@ INSERT INTO English VALUES(446,8,'fast',0,NULL,NULL);
 INSERT INTO English VALUES(447,11,'bone',0,NULL,NULL);
 INSERT INTO English VALUES(448,7,'day time',0,NULL,4);
 INSERT INTO English VALUES(449,3,'orange',0,'color',2);
-INSERT INTO English VALUES(450,13,'to look',0,NULL,NULL);
+INSERT INTO English VALUES(450,13,'to see',0,NULL,NULL);
 INSERT INTO English VALUES(451,16,'free time',0,NULL,NULL);
 INSERT INTO English VALUES(452,8,'busy',0,NULL,NULL);
 INSERT INTO English VALUES(453,31,'pee',0,NULL,NULL);
@@ -747,6 +747,9 @@ INSERT INTO English VALUES(705,39,'middle',0,NULL,NULL);
 INSERT INTO English VALUES(706,33,'to put',0,NULL,NULL);
 INSERT INTO English VALUES(707,7,'the first time',0,NULL,10);
 INSERT INTO English VALUES(708,1,'it''s okay',0,NULL,NULL);
+INSERT INTO English VALUES(709,32,'unable',0,NULL,NULL);
+INSERT INTO English VALUES(710,32,'correct',0,NULL,NULL);
+INSERT INTO English VALUES(712,1,'hello',0,'hello everyone',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1377,6 +1380,9 @@ INSERT INTO Chinese VALUES(630,'中',NULL,'da1',NULL);
 INSERT INTO Chinese VALUES(631,'央',NULL,'eung1',NULL);
 INSERT INTO Chinese VALUES(632,'第',NULL,'doi6',NULL);
 INSERT INTO Chinese VALUES(633,'次',NULL,'cheu3',NULL);
+INSERT INTO Chinese VALUES(634,'变','變','biang3',NULL);
+INSERT INTO Chinese VALUES(635,'见','見','giang3',NULL);
+INSERT INTO Chinese VALUES(636,'家',NULL,'ge1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1422,7 +1428,7 @@ INSERT INTO Synonyms VALUES(36,443,'dim');
 INSERT INTO Synonyms VALUES(37,361,'belly');
 INSERT INTO Synonyms VALUES(38,358,'film');
 INSERT INTO Synonyms VALUES(39,346,'to speak');
-INSERT INTO Synonyms VALUES(40,450,'to see');
+INSERT INTO Synonyms VALUES(40,450,'to look');
 INSERT INTO Synonyms VALUES(41,450,'to watch');
 INSERT INTO Synonyms VALUES(42,450,'to read');
 INSERT INTO Synonyms VALUES(43,195,'to try');
@@ -1610,7 +1616,7 @@ INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. l
 INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
 INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
 INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the 揭阳 Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
-INSERT INTO Extra VALUES(31,1,replace('This is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
+INSERT INTO Extra VALUES(31,1,replace('**leu2 ho2** is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
 INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
 INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
 INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/english/broccoli) are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
@@ -1624,6 +1630,9 @@ INSERT INTO Extra VALUES(41,643,replace('You would use **si6(7)** if it comes be
 INSERT INTO Extra VALUES(42,695,replace('You would say this following an adjective. For example, "not that late" would be **bho(7) meh(8) am3**\n','\n',char(10)));
 INSERT INTO Extra VALUES(43,696,replace('Use it as the word "something" when referring to an amount. Some examples are:\n\n* "20 something" - **yi(7) jap(4) ghua7**\n* "70 something degrees" - **chek(8) jap(4) ghua7 dou7**\n','\n',char(10)));
 INSERT INTO Extra VALUES(44,697,replace('You can leave off the **ngeng5** at the end if you''d like\n','\n',char(10)));
+INSERT INTO Extra VALUES(45,709,replace('You can add a verb after this to mean that you are unable to or don''t have the means to do something. For example, "unable to play" would be **bho(7) biang(2) seung2**\n\nYou could also say that as a phrase on its own, to mean something like "nothing you can do about it"\n','\n',char(10)));
+INSERT INTO Extra VALUES(46,450,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have seen something sucessfully.\n\nI''ve also heard it pronounced without sandhi-ing, which would be **toin2 giang3**\n','\n',char(10)));
+INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2662,6 +2671,13 @@ INSERT INTO Translation VALUES(976,704,986,0);
 INSERT INTO Translation VALUES(977,705,987,0);
 INSERT INTO Translation VALUES(978,707,988,0);
 INSERT INTO Translation VALUES(979,708,989,0);
+INSERT INTO Translation VALUES(980,709,990,0);
+INSERT INTO Translation VALUES(981,710,545,0);
+INSERT INTO Translation VALUES(982,450,991,0);
+INSERT INTO Translation VALUES(983,572,992,0);
+INSERT INTO Translation VALUES(984,712,993,0);
+INSERT INTO Translation VALUES(985,NULL,994,0);
+INSERT INTO Translation VALUES(986,NULL,995,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3624,6 +3640,12 @@ INSERT INTO Teochew VALUES(986,'ang57 bao1','红包');
 INSERT INTO Teochew VALUES(987,'da1 eung1','中央');
 INSERT INTO Teochew VALUES(988,'doi67 ek48 cheu3','第一次');
 INSERT INTO Teochew VALUES(989,'bhoi67 jo32 ni5','袂做呢');
+INSERT INTO Teochew VALUES(990,'bho57 biang3','无变');
+INSERT INTO Teochew VALUES(991,'toin26 giang3','睇见');
+INSERT INTO Teochew VALUES(992,'tian1 giang3','听见');
+INSERT INTO Teochew VALUES(993,'dai67 ge1 ho2','大家好');
+INSERT INTO Teochew VALUES(994,'dai67 ge1','大家');
+INSERT INTO Teochew VALUES(995,'giang3','见');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4377,6 +4399,12 @@ INSERT INTO Compound VALUES(748,986,1,20);
 INSERT INTO Compound VALUES(749,986,2,834);
 INSERT INTO Compound VALUES(750,989,1,549);
 INSERT INTO Compound VALUES(751,989,2,312);
+INSERT INTO Compound VALUES(752,993,1,985);
+INSERT INTO Compound VALUES(753,993,2,344);
+INSERT INTO Compound VALUES(754,991,1,503);
+INSERT INTO Compound VALUES(755,991,2,986);
+INSERT INTO Compound VALUES(756,992,1,641);
+INSERT INTO Compound VALUES(757,992,2,986);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
