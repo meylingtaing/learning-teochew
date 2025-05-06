@@ -3,6 +3,12 @@
       <hr>
       <a href="/updates">Updates</a> |
       <a href="/links">Links</a> |
-      <a href="/about">About</a>
+      <a href="/about">About</a> |
+
+      Dark mode
+      <span id="dark-mode-toggle">
+        %= include 'elements/toggle'
+        %= include 'elements/toggle-on'
+      </span>
     </div>
   </div>
