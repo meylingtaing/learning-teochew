@@ -39,6 +39,7 @@ my %options = (
     tag           => 's',
     hidden        => 'i',
     hidden_from_flashcards => 'i',
+    grammar_definition => 'i',
 );
 
 GetOptions( map {
@@ -121,6 +122,14 @@ if (defined $inputs{hidden}) {
     say "$hiding English word '$english->{word}'";
     if (confirm()) {
         $update_english_params{hidden} = $hidden;
+    }
+}
+
+if (defined $inputs{grammar_definition}) {
+    my $is_grammar = $inputs{grammar_definition} ? 1 : 0;
+    say "Setting grammar definition to $is_grammar";
+    if (confirm()) {
+        $update_english_params{grammar_definition} = $is_grammar;
     }
 }
 

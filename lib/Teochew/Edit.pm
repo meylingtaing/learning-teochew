@@ -168,8 +168,31 @@ sub update_english {
         push @binds, $params{hidden};
     }
 
-    my $sql = 'update english set ' . join(', ', @sets) . ' where id = ?';
-    $self->dbh->do($sql, undef, @binds, $english_id);
+    if (@binds) {
+        my $sql = 'update english set ' . join(', ', @sets) . ' where id = ?';
+        $self->dbh->do($sql, undef, @binds, $english_id);
+    }
+
+    if (defined $params{grammar_definition}) {
+        # First check if it already exists
+        my $is_grammar = $self->dbh->selectrow_array(
+            'select id from GrammarDefinitions where english_id = ?',
+            undef, $english_id
+        );
+
+        if ($is_grammar && $params{grammar_definition} == 0) {
+            $self->dbh->do(
+                'delete from GrammarDefinitions where english_id = ?',
+                undef, $english_id
+            );
+        }
+        elsif (!$is_grammar && $params{grammar_definition}) {
+            $self->dbh->do(
+                'insert into GrammarDefinitions (english_id) values (?)',
+                undef, $english_id
+            );
+        }
+    }
 }
 
 =head2 insert_english
@@ -180,6 +203,7 @@ sub update_english {
         notes        => $notes,
         hidden       => $hidden,
         english_sort => $sort,
+        grammar_definition => $grammar,
     );
 
 =cut
@@ -202,7 +226,14 @@ sub insert_english {
     $sth->bind_param(5, $params{english_sort}, SQL_INTEGER);
     $sth->execute;
 
-    return $dbh->sqlite_last_insert_rowid;
+    my $english_id = $dbh->sqlite_last_insert_rowid;
+
+    if ($params{grammar_definition}) {
+        $dbh->do("insert into GrammarDefinitions (english_id) values (?)",
+            undef, $english_id);
+    }
+
+    return $english_id;
 }
 
 =head2 update_teochew
