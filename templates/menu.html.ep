@@ -18,7 +18,7 @@
 
         <button class="navbar-toggler" type="button"
          data-toggle="collapse" data-target="#flashcards-navbar"
-         aria-controls="flascards-navbar" aria-expanded="false"
+         aria-controls="flashcards-navbar" aria-expanded="false"
          aria-label="Toggle navigation">
           <i class="ion-android-menu"></i>
         </button>

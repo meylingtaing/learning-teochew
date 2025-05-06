@@ -7,16 +7,18 @@
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/css/bootstrap1.min.css">
   <link rel="stylesheet" href="/css/ionicons.min.css">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main1.css">
+
+  <script src="/js/jquery-3.2.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap1.min.js"></script>
+  <script src="/js/load-settings.js"></script>
 
   <title>Teochew Flashcards</title>
 
 </head>
 
 <body>
-  <script src="/js/jquery-3.2.1.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap1.min.js"></script>
 
   <div class="container-md">
 
