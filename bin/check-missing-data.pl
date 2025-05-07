@@ -109,14 +109,18 @@ if (grep /^character_details$/, @commands_to_run) {
 
 if (grep /^hidden$/, @commands_to_run) {
     @rows = $dbh->selectall_array(qq{
-        select word from English
+        select word, notes from English
         join Translation on English.id = Translation.english_id
         join Teochew on Translation.teochew_id = Teochew.id
-        where hidden = 1 and hidden_from_flashcards = 1
+        where hidden = 1
     });
 
     say "Hidden words:";
-    say $_->[0] for @rows;
+    for (@rows) {
+        my $word = $_->[0];
+        $word .= " ($_->[1])" if $_->[1];
+        say $word;
+    }
     print "\n";
 }
 
