@@ -298,7 +298,7 @@ INSERT INTO English VALUES(250,11,'head',0,NULL,NULL);
 INSERT INTO English VALUES(251,28,'corn',0,NULL,10);
 INSERT INTO English VALUES(252,28,'bitter melon',0,NULL,10);
 INSERT INTO English VALUES(253,28,'tomato',0,NULL,10);
-INSERT INTO English VALUES(254,10,'pumpkin',1,NULL,NULL);
+INSERT INTO English VALUES(254,28,'pumpkin',0,NULL,10);
 INSERT INTO English VALUES(255,28,'taro',0,NULL,10);
 INSERT INTO English VALUES(256,28,'fruit',0,NULL,NULL);
 INSERT INTO English VALUES(257,10,'pear',1,NULL,NULL);
@@ -752,6 +752,14 @@ INSERT INTO English VALUES(709,32,'unable',0,NULL,NULL);
 INSERT INTO English VALUES(710,32,'correct',0,NULL,NULL);
 INSERT INTO English VALUES(712,1,'hello',0,'hello everyone',NULL);
 INSERT INTO English VALUES(713,7,'now',0,NULL,10);
+INSERT INTO English VALUES(714,15,'pig',0,NULL,NULL);
+INSERT INTO English VALUES(715,11,'heart',0,NULL,NULL);
+INSERT INTO English VALUES(716,10,'to braise',0,NULL,NULL);
+INSERT INTO English VALUES(717,29,'sweet soy sauce braised pork',0,NULL,10);
+INSERT INTO English VALUES(718,29,'sweet soy sauce braised egg',0,NULL,10);
+INSERT INTO English VALUES(719,23,'leaf',0,NULL,NULL);
+INSERT INTO English VALUES(720,32,'classifier',0,'for stick-like objects',NULL);
+INSERT INTO English VALUES(721,37,'fork',0,'a fork',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1386,6 +1394,10 @@ INSERT INTO Chinese VALUES(634,'变','變','biang3',NULL);
 INSERT INTO Chinese VALUES(635,'见','見','giang3',NULL);
 INSERT INTO Chinese VALUES(636,'家',NULL,'ge1',NULL);
 INSERT INTO Chinese VALUES(637,'阵','陣','jung5',NULL);
+INSERT INTO Chinese VALUES(638,'心',NULL,'sim1',NULL);
+INSERT INTO Chinese VALUES(639,'貢',NULL,'gong3',NULL);
+INSERT INTO Chinese VALUES(640,'箬',NULL,'hioh8',NULL);
+INSERT INTO Chinese VALUES(641,'支',NULL,'gi1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1637,6 +1649,7 @@ INSERT INTO Extra VALUES(44,697,replace('You can leave off the **ngeng5** at the
 INSERT INTO Extra VALUES(45,709,replace('You can add a verb after this to mean that you are unable to or don''t have the means to do something. For example, "unable to play" would be **bho(7) biang(2) seung2**\n\nYou could also say that as a phrase on its own, to mean something like "nothing you can do about it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(46,450,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have seen something sucessfully.\n\nI''ve also heard it pronounced without sandhi-ing, which would be **toin2 giang3**\n','\n',char(10)));
 INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
+INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2545,7 +2558,7 @@ INSERT INTO Translation VALUES(846,NULL,856,0);
 INSERT INTO Translation VALUES(847,NULL,857,0);
 INSERT INTO Translation VALUES(848,706,858,0);
 INSERT INTO Translation VALUES(849,NULL,859,0);
-INSERT INTO Translation VALUES(850,NULL,860,0);
+INSERT INTO Translation VALUES(850,714,860,0);
 INSERT INTO Translation VALUES(851,NULL,861,0);
 INSERT INTO Translation VALUES(852,NULL,862,0);
 INSERT INTO Translation VALUES(853,NULL,863,0);
@@ -2683,6 +2696,13 @@ INSERT INTO Translation VALUES(984,712,993,0);
 INSERT INTO Translation VALUES(985,NULL,994,0);
 INSERT INTO Translation VALUES(986,NULL,995,0);
 INSERT INTO Translation VALUES(987,713,996,0);
+INSERT INTO Translation VALUES(988,715,997,0);
+INSERT INTO Translation VALUES(989,716,998,0);
+INSERT INTO Translation VALUES(990,717,999,0);
+INSERT INTO Translation VALUES(991,718,1000,0);
+INSERT INTO Translation VALUES(992,719,1001,0);
+INSERT INTO Translation VALUES(993,720,1002,0);
+INSERT INTO Translation VALUES(994,721,1003,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3652,6 +3672,13 @@ INSERT INTO Teochew VALUES(993,'dai67 ge1 ho2','大家好');
 INSERT INTO Teochew VALUES(994,'dai67 ge1','大家');
 INSERT INTO Teochew VALUES(995,'giang3','见');
 INSERT INTO Teochew VALUES(996,'ji26 jung5','只阵');
+INSERT INTO Teochew VALUES(997,'sim1','心');
+INSERT INTO Teochew VALUES(998,'gong3','貢');
+INSERT INTO Teochew VALUES(999,'gong32 bhah4','貢肉');
+INSERT INTO Teochew VALUES(1000,'gong32 neung6','貢卵');
+INSERT INTO Teochew VALUES(1001,'hioh8','箬');
+INSERT INTO Teochew VALUES(1002,'gi1','支');
+INSERT INTO Teochew VALUES(1003,'jek84 gi1 che1','一支叉');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4411,6 +4438,13 @@ INSERT INTO Compound VALUES(754,991,1,503);
 INSERT INTO Compound VALUES(755,991,2,986);
 INSERT INTO Compound VALUES(756,992,1,641);
 INSERT INTO Compound VALUES(757,992,2,986);
+INSERT INTO Compound VALUES(758,999,1,989);
+INSERT INTO Compound VALUES(759,999,2,384);
+INSERT INTO Compound VALUES(760,1000,1,989);
+INSERT INTO Compound VALUES(761,1000,2,115);
+INSERT INTO Compound VALUES(762,1003,1,6);
+INSERT INTO Compound VALUES(763,1003,2,993);
+INSERT INTO Compound VALUES(764,1003,3,416);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -4518,6 +4552,7 @@ INSERT INTO GrammarDefinitions VALUES(2,605);
 INSERT INTO GrammarDefinitions VALUES(3,664);
 INSERT INTO GrammarDefinitions VALUES(4,665);
 INSERT INTO GrammarDefinitions VALUES(5,696);
+INSERT INTO GrammarDefinitions VALUES(6,720);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
