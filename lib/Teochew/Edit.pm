@@ -108,17 +108,16 @@ sub insert_translation {
             return $translation_id;
         }
     }
-    else {
-        # If this is a dupe, this will fail since
-        # there is a unique constraint on each english/teochew translation pair
-        $self->dbh->do(qq{
-            insert into Translation
-            (english_id, teochew_id, hidden_from_flashcards)
-            values (?, ?, ?)
-        }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
 
-        return $self->dbh->sqlite_last_insert_rowid;
-    }
+    # If this is a dupe, this will fail since
+    # there is a unique constraint on each english/teochew translation pair
+    $self->dbh->do(qq{
+        insert into Translation
+        (english_id, teochew_id, hidden_from_flashcards)
+        values (?, ?, ?)
+    }, {}, $english_id, $teochew_id, $params{hidden_from_flashcards} ? 1 : 0);
+
+    return $self->dbh->sqlite_last_insert_rowid;
 }
 
 =head2 update_english
