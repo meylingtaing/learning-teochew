@@ -522,6 +522,121 @@ sub update_translation {
     }, undef, $params{hidden_from_flashcards}, $translation_id);
 }
 
+=head2 confirm_and_insert_compound_breakdown
+
+    $teochew->confirm_and_insert_compound_breakdown(
+        parent_teochew_id => 1,
+        breakdown         => '礼拜,二',
+        pengim            => 'loi26 bai32 yi6',
+    );
+
+=cut
+
+sub confirm_and_insert_compound_breakdown {
+    my ($self, %params) = @_;
+
+    my $breakdown         = $params{breakdown};
+    my $pengim            = $params{pengim};
+    my $parent_teochew_id = $params{parent_teochew_id};
+
+    my $chinese = $breakdown =~ s/,//gr;
+
+    # Break down the word piece by piece and see if there are other
+    # Teochew entries that match
+    my @chars;
+    if ($breakdown =~ qr/,/) {
+        @chars = split /,/, $breakdown;
+    }
+    else {
+        @chars = split //, $breakdown;
+    }
+
+    my @syllables = split / /, $pengim;
+
+    my @child_ids;
+    my $confirm_str = "Compound breakdown:";
+    for (my $i = 0; $i < scalar @chars; $i++) {
+
+        # Determine the corresponding pengim for this set of characters
+        my @pengim_parts;
+        for (1..length($chars[$i])) {
+            my $syllable = shift @syllables;
+            push @pengim_parts, $syllable;
+        }
+        my $pengim_str = join ' ', @pengim_parts;
+
+        say "Character: $chars[$i]";
+        say "Pengim syllable: $pengim_str\n";
+
+        # The pengim might have a tone change, but we only want the base tone for
+        # searching
+        $pengim_str =~ s/(\d)(\d)$/$1/;
+
+        # Actually, let's just omit the last tone altogether
+        my $pengim_str_search = $pengim_str =~ s/\d$//r;
+
+        my @rows = $self->dbh->selectall_array(qq{
+            select
+                Translation.id translation_id,
+                English.word english,
+                English.notes notes
+            from Teochew
+            join Translation on Translation.teochew_id = Teochew.id
+            left join English on Translation.english_id = English.id
+            where chinese = ? and pengim like ?
+            order by Teochew.id
+        }, { Slice => {} }, $chars[$i], "$pengim_str_search%");
+
+        if (scalar @rows == 0) {
+            say colored(
+                "Need to create empty translation for $chars[$i] $pengim_str",
+                "yellow"
+            );
+            if (confirm()) {
+                # XXX fill this in...
+                my $translation_id = $self->insert_translation(
+                    chinese => $chars[$i],
+                    pengim  => $pengim_str,
+                );
+                $rows[0] = {
+                    translation_id => $translation_id,
+                    english        => undef,
+                    notes          => undef,
+                };
+            }
+        }
+
+        # If there's a single match, then use that. If there are multiple
+        # matches, prompt the user for the correct one
+        my $row_id = 0;
+        if (scalar @rows > 1) {
+            for (my $j = 0; $j < scalar @rows; $j++) {
+                my $msg = "$j: $rows[$j]{english}";
+                $msg .= " ($rows[$j]{notes})" if $rows[$j]{notes};
+                say $msg;
+            }
+            $row_id = input_from_prompt(
+                "Which translation to use for $chars[$i] $pengim_str?");
+        }
+
+        $rows[$row_id]{english} //= '--';
+
+        # XXX: I did not error check
+        push @child_ids, $rows[$row_id]{translation_id};
+        $confirm_str .= "\n\t$rows[$row_id]{english}";
+        $confirm_str .= " ($rows[$row_id]{notes})" if $rows[$row_id]{notes};
+    }
+
+    say $confirm_str;
+    if (confirm()) {
+        $self->insert_compound_breakdown(
+            parent_teochew_id => $parent_teochew_id,
+            translation_ids   => \@child_ids,
+        );
+        say colored("Added compound breakdown!", "green");
+    }
+}
+
 =head2 insert_compound_breakdown
 
     $teochew->insert_compound_breakdown(
