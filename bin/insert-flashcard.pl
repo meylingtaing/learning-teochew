@@ -35,10 +35,11 @@ $pengim   //= input_from_prompt("Pengim:");
 $chinese  //= input_from_prompt("Chinese characters:");
 
 # Also check and see if the user wanted to hide these words
-my ($hidden, $hidden_from_flashcards);
+my ($hidden, $hidden_from_flashcards, $is_grammar);
 my $getopt_success = GetOptionsFromArray(\@other_args,
     hidden => \$hidden,
-    hidden_from_flashcards => \$hidden_from_flashcards
+    hidden_from_flashcards => \$hidden_from_flashcards,
+    grammar_definition => \$is_grammar
 );
 
 exit unless $getopt_success;
@@ -86,6 +87,7 @@ say "\tSort: $sort" if defined $sort;
 
 say "\thidden: 1" if $hidden;
 say "\thidden_from_flashcards: 1" if $hidden_from_flashcards;
+say "\tgrammar_definition: 1" if $is_grammar;
 
 if (confirm()) {
 
@@ -99,6 +101,7 @@ if (confirm()) {
         chinese      => $simplified,
         hidden       => $hidden,
         hidden_from_flashcards => $hidden_from_flashcards,
+        grammar_definition => $is_grammar,
     );
     if ($success) {
         my $success_message = "Successfully added $english_main";
