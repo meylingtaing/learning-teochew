@@ -44,7 +44,7 @@ check_english_page('hello', {
     english_word     => 'hello',
     synonyms         => 'hi',
     categories       => ['Common Phrases'],
-    num_translations => 1,
+    num_translations => 2,
 });
 
 # 'hi' should be the same, but english word and synonyms are flipped
@@ -52,7 +52,7 @@ check_english_page('hi', {
     english_word     => 'hi',
     synonyms         => 'hello',
     categories       => ['Common Phrases'],
-    num_translations => 1,
+    num_translations => 2,
 });
 
 # 'bring' should end up pulling up 'to bring'
