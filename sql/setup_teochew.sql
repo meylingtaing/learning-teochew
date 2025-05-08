@@ -1671,6 +1671,7 @@ INSERT INTO Extra VALUES(45,709,replace('You can add a verb after this to mean t
 INSERT INTO Extra VALUES(46,450,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have seen something sucessfully.\n\nI''ve also heard it pronounced without sandhi-ing, which would be **toin2 giang3**\n','\n',char(10)));
 INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
 INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
+INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -3419,7 +3420,7 @@ INSERT INTO Teochew VALUES(694,'suan1 deng2','山顶');
 INSERT INTO Teochew VALUES(695,'tek48 to5','𨑨迌');
 INSERT INTO Teochew VALUES(696,'gian57 tek48 to5','行𨑨迌');
 INSERT INTO Teochew VALUES(697,'sen1 yek8','生日');
-INSERT INTO Teochew VALUES(698,'sen1 yek84 kuai32 lak8','生日快乐');
+INSERT INTO Teochew VALUES(698,'sen1 yek8 kuai32 lak8','生日快乐');
 INSERT INTO Teochew VALUES(699,'gai5','个');
 INSERT INTO Teochew VALUES(700,'chuk4','出');
 INSERT INTO Teochew VALUES(701,'chuk48 si3','出世');
