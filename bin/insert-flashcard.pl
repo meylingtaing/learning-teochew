@@ -152,6 +152,8 @@ if (%potential_breakdown) {
     }
 }
 
+exit if $added_breakdown;
+
 # If not, let's try and add one anyway with some empty bits
 my $compound_breakdown =
     input_from_prompt("Enter the breakdown for $simplified: ");
