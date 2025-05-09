@@ -4609,7 +4609,7 @@ INSERT INTO PhraseTranslations VALUES(26,26,'I to_wash bowl');
 INSERT INTO PhraseTranslations VALUES(27,27,'I must to_brush_teeth');
 INSERT INTO PhraseTranslations VALUES(28,28,'you to_eat rice done| no_(not_yet)');
 INSERT INTO PhraseTranslations VALUES(29,29,'I done no_(not_yet) to_eat');
-INSERT INTO PhraseTranslations VALUES(30,30,'she to_be_in_the_process_of to_look television');
+INSERT INTO PhraseTranslations VALUES(30,30,'she to_be_in_the_process_of to_see television');
 INSERT INTO PhraseTranslations VALUES(31,31,'she to_sleep| already');
 INSERT INTO PhraseTranslations VALUES(32,32,'I to_eat done| already');
 INSERT INTO PhraseTranslations VALUES(33,33,'to_eat completed');
