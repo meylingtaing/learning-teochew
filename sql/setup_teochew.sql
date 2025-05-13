@@ -782,6 +782,12 @@ INSERT INTO English VALUES(740,9,'to fix',0,NULL,NULL);
 INSERT INTO English VALUES(741,6,'battery',0,NULL,NULL);
 INSERT INTO English VALUES(742,7,'time',0,'it''s time',10);
 INSERT INTO English VALUES(743,10,'waffle',0,NULL,NULL);
+INSERT INTO English VALUES(744,31,'diarrhea',0,NULL,NULL);
+INSERT INTO English VALUES(745,16,'skin coining',0,NULL,NULL);
+INSERT INTO English VALUES(746,16,'dead',0,NULL,NULL);
+INSERT INTO English VALUES(747,16,'good idea',0,NULL,NULL);
+INSERT INTO English VALUES(748,29,'cured meat',0,NULL,10);
+INSERT INTO English VALUES(749,37,'chopsticks',0,'a pair of chopsticks',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1442,6 +1448,14 @@ INSERT INTO Chinese VALUES(660,'宾','賓','beng1',NULL);
 INSERT INTO Chinese VALUES(661,'唱',NULL,'chiang3',NULL);
 INSERT INTO Chinese VALUES(662,'歌',NULL,'go1',NULL);
 INSERT INTO Chinese VALUES(663,'拾',NULL,'sip8',NULL);
+INSERT INTO Chinese VALUES(664,'落',NULL,'lao3',NULL);
+INSERT INTO Chinese VALUES(665,'涝','澇','lao3',NULL);
+INSERT INTO Chinese VALUES(666,'刮',NULL,'gueh4',NULL);
+INSERT INTO Chinese VALUES(667,'痧',NULL,'sua1',NULL);
+INSERT INTO Chinese VALUES(668,'死',NULL,'si2',NULL);
+INSERT INTO Chinese VALUES(669,'主',NULL,'ju2',NULL);
+INSERT INTO Chinese VALUES(670,'思',NULL,'seu3',NULL);
+INSERT INTO Chinese VALUES(671,'双','雙','sang1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1575,6 +1589,7 @@ INSERT INTO Synonyms VALUES(125,729,'to photograph');
 INSERT INTO Synonyms VALUES(126,730,'Philly');
 INSERT INTO Synonyms VALUES(127,734,'to wish');
 INSERT INTO Synonyms VALUES(128,740,'to repair');
+INSERT INTO Synonyms VALUES(129,746,'to die');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1633,6 +1648,7 @@ INSERT INTO Phrases VALUES(42,'He doesn''t know how to speak Chinese',0);
 INSERT INTO Phrases VALUES(43,'I''ll talk to you more tomorrow',0);
 INSERT INTO Phrases VALUES(44,'Wishing you a happy birthday',0);
 INSERT INTO Phrases VALUES(45,'I didn''t hear it',0);
+INSERT INTO Phrases VALUES(46,'We''re going now',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1761,6 +1777,8 @@ INSERT INTO TeochewAltChinese VALUES(32,794,'予');
 INSERT INTO TeochewAltChinese VALUES(33,664,'若㩼');
 INSERT INTO TeochewAltChinese VALUES(34,1020,'吣');
 INSERT INTO TeochewAltChinese VALUES(35,1020,'斟');
+INSERT INTO TeochewAltChinese VALUES(36,1051,'漏屎');
+INSERT INTO TeochewAltChinese VALUES(37,1051,'涝屎 (澇屎)');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2804,6 +2822,19 @@ INSERT INTO Translation VALUES(1039,NULL,1047,0);
 INSERT INTO Translation VALUES(1040,741,1048,0);
 INSERT INTO Translation VALUES(1041,742,1049,0);
 INSERT INTO Translation VALUES(1042,743,1050,0);
+INSERT INTO Translation VALUES(1043,744,1051,0);
+INSERT INTO Translation VALUES(1044,NULL,1052,0);
+INSERT INTO Translation VALUES(1045,745,1053,0);
+INSERT INTO Translation VALUES(1046,NULL,1054,0);
+INSERT INTO Translation VALUES(1047,NULL,1055,0);
+INSERT INTO Translation VALUES(1048,746,1056,0);
+INSERT INTO Translation VALUES(1049,747,1057,0);
+INSERT INTO Translation VALUES(1050,NULL,1058,0);
+INSERT INTO Translation VALUES(1051,747,1059,0);
+INSERT INTO Translation VALUES(1052,NULL,1060,0);
+INSERT INTO Translation VALUES(1053,748,1061,0);
+INSERT INTO Translation VALUES(1054,749,1062,0);
+INSERT INTO Translation VALUES(1055,NULL,1063,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3827,6 +3858,19 @@ INSERT INTO Teochew VALUES(1047,'sip8','拾');
 INSERT INTO Teochew VALUES(1048,'diang67 tou5','电涂');
 INSERT INTO Teochew VALUES(1049,'jeng1 diam2','钟点');
 INSERT INTO Teochew VALUES(1050,'lou57 teng1 gue2','炉窗粿');
+INSERT INTO Teochew VALUES(1051,'lao32 sai2','落屎');
+INSERT INTO Teochew VALUES(1052,'lao3','落');
+INSERT INTO Teochew VALUES(1053,'gueh48 sua1','刮痧');
+INSERT INTO Teochew VALUES(1054,'gueh4','刮');
+INSERT INTO Teochew VALUES(1055,'sua1','痧');
+INSERT INTO Teochew VALUES(1056,'si2','死');
+INSERT INTO Teochew VALUES(1057,'ho26 ju26 i3','好主意');
+INSERT INTO Teochew VALUES(1058,'ju26 i3','主意');
+INSERT INTO Teochew VALUES(1059,'ho26 sim1 seu3','好心思');
+INSERT INTO Teochew VALUES(1060,'sim1 seu3','心思');
+INSERT INTO Teochew VALUES(1061,'lah84 bhah4','腊肉');
+INSERT INTO Teochew VALUES(1062,'jek84 sang1 deu7','一双箸');
+INSERT INTO Teochew VALUES(1063,'sang1','双');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4645,6 +4689,19 @@ INSERT INTO Compound VALUES(817,1049,2,69);
 INSERT INTO Compound VALUES(818,1050,1,168);
 INSERT INTO Compound VALUES(819,1050,2,817);
 INSERT INTO Compound VALUES(820,1050,3,805);
+INSERT INTO Compound VALUES(821,1051,1,1044);
+INSERT INTO Compound VALUES(822,1051,2,430);
+INSERT INTO Compound VALUES(823,1053,1,1046);
+INSERT INTO Compound VALUES(824,1053,2,1047);
+INSERT INTO Compound VALUES(825,1057,1,344);
+INSERT INTO Compound VALUES(826,1057,2,1050);
+INSERT INTO Compound VALUES(827,1059,1,344);
+INSERT INTO Compound VALUES(828,1059,2,1052);
+INSERT INTO Compound VALUES(829,1061,1,859);
+INSERT INTO Compound VALUES(830,1061,2,384);
+INSERT INTO Compound VALUES(831,1062,1,6);
+INSERT INTO Compound VALUES(832,1062,2,1055);
+INSERT INTO Compound VALUES(833,1062,3,414);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -4714,6 +4771,7 @@ INSERT INTO PhraseTranslations VALUES(45,42,'she not-m6 to_know_(how_to_do_somet
 INSERT INTO PhraseTranslations VALUES(46,43,'I to_say word_(spoken) with you tomorrow-mua32ki2| more');
 INSERT INTO PhraseTranslations VALUES(47,44,'to_offer_good_wishes you happy_birthday');
 INSERT INTO PhraseTranslations VALUES(48,45,'I no_(don''t_have) to_hear-tian1giang3');
+INSERT INTO PhraseTranslations VALUES(49,46,'we_(including_person_spoken_to)| to_go| already');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
 INSERT INTO Tags VALUES(2,'kitchenware');
