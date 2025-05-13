@@ -109,12 +109,32 @@ sub flashcard_set_name {
         return $name;
     }
 
-    # Everything else is a simple lookup in the database
-    my @rows = $dbh->selectall_array(qq{
-        select display_name from FlashcardSet where name = ? collate nocase
-    }, {}, $type);
+    # Everything else is a lookup in the database
+    my @flashcardset_rows = $dbh->selectall_array(qq{
+        select id, display_name
+        from FlashcardSet where name = ?
+        collate nocase
+    }, { Slice => {} }, $type);
 
-    return scalar @rows ? $rows[0]->[0] : ucfirst $type;
+    # Uhhh, I guess if we didn't find anything, just return the type that we
+    # were given (because this is how Clock Time works I think?)
+    return ucfirst $type if !@flashcardset_rows;
+
+    # If we're given a "subtype" here, that should be a category,
+    # so look that up
+    if ($subtype) {
+        my $display_name = $dbh->selectrow_array(qq{
+            select coalesce(display_name, name) from Categories
+            where flashcardset_id = ? and name = ?
+            collate nocase
+        }, undef, $flashcardset_rows[0]{id}, $subtype);
+
+        # If we found the category, great, use that, if not, we'll just default
+        # to the full flashcard set
+        return $display_name if $display_name;
+    }
+
+    return $flashcardset_rows[0]{display_name};
 }
 
 =head2 flashcard_sets
@@ -671,6 +691,7 @@ sub generate_flashcards {
     my %params = (shuffle => 1, count => 20, for_flashcards => 1);
     if ($type) {
         $params{flashcard_set} = $type;
+        $params{category}      = $subtype;
         $params{subcategory}   = $subtype;
     }
 
