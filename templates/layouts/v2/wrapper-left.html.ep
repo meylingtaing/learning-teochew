@@ -1,0 +1,9 @@
+% extends 'layouts/v2/wrapper';
+% content html => begin
+
+    <div class="row mx-sm-1 my-1">
+      <div class="col" id="main-body-content">
+        <%= content %>
+      </div>
+    </div>
+% end
