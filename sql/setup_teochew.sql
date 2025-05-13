@@ -1717,6 +1717,7 @@ INSERT INTO Extra VALUES(46,450,replace('In this case, **giang3** indicates succ
 INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
 INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
 INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
+INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
