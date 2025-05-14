@@ -349,18 +349,24 @@ sub add_tag_to_english {
 
 =head2 insert_category
 
-    my $id = $teochew->insert_category('NewCategoryName', 'Basics');
+    my $id = $teochew->insert_category(
+        category      => 'NewCategoryName',
+        display_name  => 'Display',
+        flashcard_set => 'Basics',
+    );
 
 Requires the name of the new category as well as the name of the flashcard set.
 Returns the id of the Categories row that was inserted
 
-TODO: Be able to set the display name as well
-
 =cut
 
 sub insert_category {
-    my ($self, $category, $flashcardset) = @_;
+    my ($self, %params) = @_;
     $self = $self->new unless ref $self;
+
+    my $flashcardset = $params{flashcard_set};
+    my $category     = $params{category};
+    my $display_name = $params{display_name} // undef;
 
     my $dbh = $self->dbh;
 
@@ -372,9 +378,10 @@ sub insert_category {
 
     die "Flashcard set $flashcardset does not exist!" unless $flashcardset_id;
 
-    $dbh->do("insert into Categories (name, flashcardset_id) values (?, ?)",
-        undef,
-        $category, $flashcardset_id);
+    $dbh->do(qq{
+        insert into Categories (name, flashcardset_id, display_name)
+        values (?, ?, ?)
+    }, undef, $category, $flashcardset_id, $display_name);
 
     return $dbh->sqlite_last_insert_rowid;
 }
