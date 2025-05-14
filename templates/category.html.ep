@@ -1,10 +1,26 @@
 % layout 'wrapper-left';
+<style>
+/* uh, for some reason the margin messes with the vertical alignment of the
+   flashcards button next to each header */
+h1 { margin-bottom: 0 }
+</style>
 
 % for my $row (@$categories) {
   % my $category = $row->{name};
-  <h1 id="<%= $category %>">
-    <%= $category_translations->{$category}{category_name} %>
-  </h1>
+  <div class="container pl-0 mb-1">
+    <div class="row">
+      <div class="col-auto">
+      <h1 id="<%= $category %>">
+        <%= $category_translations->{$category}{category_name} %>
+      </h1>
+      </div>
+      <div class="col-auto align-self-center">
+        <a class="btn btn-primary"
+           href="/flashcards/<%= $flashcard_set %>/<%= $category %>"
+           role="button">Flashcards</a>
+      </div>
+    </div>
+  </div>
   <%= include 'elements/all-translations-table',
         translations => $category_translations->{$category}{translations} %>
 % }

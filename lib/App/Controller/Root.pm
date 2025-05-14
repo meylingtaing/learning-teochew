@@ -122,7 +122,8 @@ sub category {
         ],
     } } @categories;
 
-    $c->stash(categories => \@categories);
+    $c->stash(flashcard_set         => $flashcard_set);
+    $c->stash(categories            => \@categories);
     $c->stash(category_translations => \%category_translations);
 
     $c->stash(hide_links => $flashcard_set eq 'phrase');
