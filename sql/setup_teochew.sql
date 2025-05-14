@@ -12,7 +12,7 @@ INSERT INTO Categories VALUES(3,'Colors','Colors',1);
 INSERT INTO Categories VALUES(4,'Pronouns',NULL,12);
 INSERT INTO Categories VALUES(5,'Family','Family',2);
 INSERT INTO Categories VALUES(6,'Electronics',NULL,4);
-INSERT INTO Categories VALUES(7,'Datetime','Date/Time',3);
+INSERT INTO Categories VALUES(7,'Datetime','General Date/Time',3);
 INSERT INTO Categories VALUES(8,'Adjectives',NULL,8);
 INSERT INTO Categories VALUES(9,'House','Around the House',4);
 INSERT INTO Categories VALUES(10,'Food','General Food/Drink',5);
@@ -797,6 +797,9 @@ INSERT INTO English VALUES(753,16,'stocks',0,NULL,NULL);
 INSERT INTO English VALUES(754,10,'Chinese fried dough stick',0,NULL,NULL);
 INSERT INTO English VALUES(755,10,'dough',0,NULL,NULL);
 INSERT INTO English VALUES(756,8,'few',0,NULL,NULL);
+INSERT INTO English VALUES(757,15,'snake',0,NULL,NULL);
+INSERT INTO English VALUES(758,38,'airplane',0,NULL,NULL);
+INSERT INTO English VALUES(759,13,'to hold',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1473,6 +1476,10 @@ INSERT INTO Chinese VALUES(676,'票',NULL,'pio3',NULL);
 INSERT INTO Chinese VALUES(677,'炸',NULL,'ja3',NULL);
 INSERT INTO Chinese VALUES(678,'粞',NULL,'choi3',NULL);
 INSERT INTO Chinese VALUES(679,'减','減','giam2',NULL);
+INSERT INTO Chinese VALUES(680,'蛇',NULL,'jua5',NULL);
+INSERT INTO Chinese VALUES(681,'飞','飛','bue1',NULL);
+INSERT INTO Chinese VALUES(682,'拰',NULL,'nim6',NULL);
+INSERT INTO Chinese VALUES(683,'捻',NULL,'nim6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1801,6 +1808,7 @@ INSERT INTO TeochewAltChinese VALUES(34,1020,'吣');
 INSERT INTO TeochewAltChinese VALUES(35,1020,'斟');
 INSERT INTO TeochewAltChinese VALUES(36,1051,'漏屎');
 INSERT INTO TeochewAltChinese VALUES(37,1051,'涝屎 (澇屎)');
+INSERT INTO TeochewAltChinese VALUES(38,1079,'捻');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2868,6 +2876,10 @@ INSERT INTO Translation VALUES(1064,754,1072,0);
 INSERT INTO Translation VALUES(1065,NULL,1073,0);
 INSERT INTO Translation VALUES(1066,755,1074,0);
 INSERT INTO Translation VALUES(1067,756,1075,0);
+INSERT INTO Translation VALUES(1068,757,1076,0);
+INSERT INTO Translation VALUES(1069,758,1077,0);
+INSERT INTO Translation VALUES(1070,NULL,1078,0);
+INSERT INTO Translation VALUES(1071,759,1079,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3916,6 +3928,10 @@ INSERT INTO Teochew VALUES(1072,'iu57 ja31 gue2','油炸粿');
 INSERT INTO Teochew VALUES(1073,'ja3','炸');
 INSERT INTO Teochew VALUES(1074,'choi3','粞');
 INSERT INTO Teochew VALUES(1075,'giam2','减');
+INSERT INTO Teochew VALUES(1076,'jua5','蛇');
+INSERT INTO Teochew VALUES(1077,'bue1 gi1','飞机');
+INSERT INTO Teochew VALUES(1078,'bue1','飞');
+INSERT INTO Teochew VALUES(1079,'nim6','拰');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4757,6 +4773,8 @@ INSERT INTO Compound VALUES(848,1069,2,1063);
 INSERT INTO Compound VALUES(849,1072,1,402);
 INSERT INTO Compound VALUES(850,1072,2,1065);
 INSERT INTO Compound VALUES(851,1072,3,805);
+INSERT INTO Compound VALUES(852,1077,1,1070);
+INSERT INTO Compound VALUES(853,1077,2,827);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -4772,6 +4790,7 @@ INSERT INTO TranslationExtra VALUES(6,34,replace('侬 is the original character 
 INSERT INTO TranslationExtra VALUES(7,200,replace('These characters were chosen because they match phonetically, and it has nothing to do with the meaning of the individual characters\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(8,100,replace('I think this is just a shortening of **ja1 bhou(6) gian2**, and the character 走 was chosen because it matched the pronunciation.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(9,977,replace('Note that the 中 character by itself actually has readings of "dang", "dong", and "diong", and it might have just been shortened to "da" in this particular phrase. You might also see it as "dan".\n\nThe second syllable 央 might also be read as "ng", but the sounds "eung" and "ng" are pretty similar to my ears.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(10,1071,replace('I really wasn''t sure about the character for this one, but 拰 seems to be what was used in the Gaginang discord.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
