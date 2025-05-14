@@ -57,12 +57,10 @@
                 <a class="dropdown-item" href="/flashcards/number/1000">
                   Up to 1000
                 </a>
+                <a class="dropdown-item" href="/flashcards/time">
+                  Clock Time
+                </a>
               </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/flashcards/time">
-                Clock Time
-              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/flashcards/phrase">
