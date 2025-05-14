@@ -1659,10 +1659,17 @@ sub find_words_using_translation {
 
     my @binds = @$translations;
     my @placeholders = map { '?' } @binds;
+
+    # We need to make sure the words use this translation in the breakdown, but
+    # also exclude ones that are already part of the given translation list.
+    # (See the "cousin" translation page for an example of why this matters)
     $sql .= " and Compound.translation_id IN (" .
             join(",", @placeholders) . ")";
 
-    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
+    $sql .= " and Translation.id NOT IN (" .
+            join(",", @placeholders) . ")";
+
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds, @binds);
 
     return _format_for_translations_table(@rows);
 }
