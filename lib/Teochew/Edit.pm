@@ -45,8 +45,12 @@ sub new { shift->create_db_object('Teochew.sqlite') }
         english_sort => $sort,
         pengim       => $pengim,
         chinese      => $simplified,
-        hidden       => $hidden,
-        hidden_from_flashcards => 1,
+
+        # these are all boolean, and optional, and will default to 0 if not
+        # specified
+        hidden                 => $hidden,
+        hidden_from_flashcards => $hidden_from_flashcards,
+        grammar_definition     => $grammar_definition,
     );
 
 =cut
@@ -58,9 +62,14 @@ sub insert_translation {
     if (defined $params{english}) {
         # Insert into the English table. It's possible this is a dupe, so check
         # for that first
-        my %english_params =
-            map { $_ => $params{$_} }
-            qw(english notes category_id hidden english_sort);
+        my %english_params = map { $_ => $params{$_} } qw(
+            english
+            notes
+            category_id
+            hidden
+            english_sort
+            grammar_definition
+        );
 
         $english_id = $self->_get_english_id(%english_params) ||
                          $self->insert_english(%english_params);
