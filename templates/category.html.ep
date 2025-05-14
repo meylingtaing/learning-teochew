@@ -2,17 +2,36 @@
 <style>
 /* uh, for some reason the margin messes with the vertical alignment of the
    flashcards button next to each header */
-h1 { margin-bottom: 0 }
+h1, h2 { margin-bottom: 0 }
 </style>
+
+% if (scalar @$categories > 1) {
+<div class="container pl-0 mb-1 mt-2">
+  <div class="row">
+    <div class="col-auto">
+    <h1>
+      %= $flashcard_set_display
+    </h1>
+    </div>
+    <div class="col-auto align-self-center">
+      <a class="btn btn-lg btn-primary"
+         href="/flashcards/<%= $flashcard_set %>"
+         role="button">All flashcards</a>
+    </div>
+  </div>
+</div>
+
+<hr>
+% }
 
 % for my $row (@$categories) {
   % my $category = $row->{name};
-  <div class="container pl-0 mb-1">
+  <div class="container pl-0 mb-1 mt-2">
     <div class="row">
       <div class="col-auto">
-      <h1 id="<%= $category %>">
+      <h2 id="<%= $category %>">
         <%= $category_translations->{$category}{category_name} %>
-      </h1>
+      </h2>
       </div>
       <div class="col-auto align-self-center">
         <a class="btn btn-primary"

@@ -122,7 +122,10 @@ sub category {
         ],
     } } @categories;
 
-    $c->stash(flashcard_set         => $flashcard_set);
+    $c->stash(flashcard_set => $flashcard_set);
+    $c->stash(flashcard_set_display =>
+        Teochew::flashcard_set_name($flashcard_set));
+
     $c->stash(categories            => \@categories);
     $c->stash(category_translations => \%category_translations);
 
