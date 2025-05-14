@@ -36,7 +36,7 @@
                 % for my $category (@categories) {
                     % my $name    = $category->{name};
                     % my $display = $category->{display_name};
-                    <a class="dropdown-item" href="/flashcards/<%= $name %>">
+                    <a class="dropdown-item" href="/category/<%= $name %>">
                       %= $display
                     </a>
                 % }
@@ -45,7 +45,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" href="#">
-                Numbers
+                Number Flashcards
               </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/flashcards/number/20">
