@@ -6,7 +6,7 @@
   <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="stylesheet" href="/css/bootstrap5.min.css">
+  <link rel="stylesheet" href="/css/bootstrap5_custom.min.css">
 
   <!-- XXX: Am I even using this anymore??? -->
   <link rel="stylesheet" href="/css/ionicons.min.css">
