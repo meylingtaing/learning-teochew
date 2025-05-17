@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'v2/wrapper-left';
 <style>
 .hover-details:hover { color: #007bff; cursor: default; }
 .table .play-teochew { font-size: 1.5em }
