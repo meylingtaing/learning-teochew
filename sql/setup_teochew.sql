@@ -814,6 +814,14 @@ INSERT INTO English VALUES(768,44,'skinny',0,NULL,NULL);
 INSERT INTO English VALUES(769,44,'fat',0,NULL,NULL);
 INSERT INTO English VALUES(770,37,'rice paddle',0,NULL,NULL);
 INSERT INTO English VALUES(771,37,'strainer',0,NULL,NULL);
+INSERT INTO English VALUES(772,40,'two days ago',0,NULL,3);
+INSERT INTO English VALUES(773,40,'three days ago',0,NULL,4);
+INSERT INTO English VALUES(774,40,'four days ago',0,NULL,5);
+INSERT INTO English VALUES(775,40,'five days ago',0,NULL,6);
+INSERT INTO English VALUES(776,40,'in two days',0,NULL,7);
+INSERT INTO English VALUES(777,40,'in three days',0,NULL,8);
+INSERT INTO English VALUES(778,40,'in four days',0,NULL,9);
+INSERT INTO English VALUES(779,40,'in five days',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1669,8 +1677,6 @@ INSERT INTO Phrases VALUES(7,'What time is it?',0);
 INSERT INTO Phrases VALUES(8,'Where are you?',0);
 INSERT INTO Phrases VALUES(9,'Where are you going?',0);
 INSERT INTO Phrases VALUES(10,'I am at home',0);
-INSERT INTO Phrases VALUES(11,'$smallnumber days ago',1);
-INSERT INTO Phrases VALUES(12,'in $smallnumber days',1);
 INSERT INTO Phrases VALUES(13,'How much does this cost?',0);
 INSERT INTO Phrases VALUES(14,'I went to the store',0);
 INSERT INTO Phrases VALUES(15,'I''m going to buy vegetables',0);
@@ -2926,6 +2932,14 @@ INSERT INTO Translation VALUES(1083,769,1090,0);
 INSERT INTO Translation VALUES(1084,770,1091,0);
 INSERT INTO Translation VALUES(1085,771,1092,0);
 INSERT INTO Translation VALUES(1086,NULL,1093,0);
+INSERT INTO Translation VALUES(1087,772,1094,0);
+INSERT INTO Translation VALUES(1088,773,1095,0);
+INSERT INTO Translation VALUES(1089,774,1096,0);
+INSERT INTO Translation VALUES(1090,775,1097,0);
+INSERT INTO Translation VALUES(1091,776,1098,0);
+INSERT INTO Translation VALUES(1092,777,1099,0);
+INSERT INTO Translation VALUES(1093,778,1100,0);
+INSERT INTO Translation VALUES(1094,779,1101,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3992,6 +4006,14 @@ INSERT INTO Teochew VALUES(1090,'bui5','肥');
 INSERT INTO Teochew VALUES(1091,'beung7 si5','饭匙');
 INSERT INTO Teochew VALUES(1092,'beung7 loi7','饭篱');
 INSERT INTO Teochew VALUES(1093,'loi7','篱');
+INSERT INTO Teochew VALUES(1094,'no67 yek84 jain5','二日前');
+INSERT INTO Teochew VALUES(1095,'san1 yek84 jain5','三日前');
+INSERT INTO Teochew VALUES(1096,'si32 yek84 jain5','四日前');
+INSERT INTO Teochew VALUES(1097,'ngou67 yek84 jain5','五日前');
+INSERT INTO Teochew VALUES(1098,'no67 yek84 ao6','二日后');
+INSERT INTO Teochew VALUES(1099,'san1 yek84 ao6','三日后');
+INSERT INTO Teochew VALUES(1100,'si32 yek84 ao6','四日后');
+INSERT INTO Teochew VALUES(1101,'ngou67 yek84 ao6','五日后');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4843,6 +4865,30 @@ INSERT INTO Compound VALUES(858,1091,1,331);
 INSERT INTO Compound VALUES(859,1091,2,821);
 INSERT INTO Compound VALUES(860,1092,1,331);
 INSERT INTO Compound VALUES(861,1092,2,1086);
+INSERT INTO Compound VALUES(862,1094,1,7);
+INSERT INTO Compound VALUES(863,1094,2,486);
+INSERT INTO Compound VALUES(864,1094,3,772);
+INSERT INTO Compound VALUES(865,1095,1,8);
+INSERT INTO Compound VALUES(866,1095,2,486);
+INSERT INTO Compound VALUES(867,1095,3,772);
+INSERT INTO Compound VALUES(868,1096,1,9);
+INSERT INTO Compound VALUES(869,1096,2,486);
+INSERT INTO Compound VALUES(870,1096,3,772);
+INSERT INTO Compound VALUES(871,1097,1,10);
+INSERT INTO Compound VALUES(872,1097,2,486);
+INSERT INTO Compound VALUES(873,1097,3,772);
+INSERT INTO Compound VALUES(874,1098,1,7);
+INSERT INTO Compound VALUES(875,1098,2,486);
+INSERT INTO Compound VALUES(876,1098,3,356);
+INSERT INTO Compound VALUES(877,1099,1,8);
+INSERT INTO Compound VALUES(878,1099,2,486);
+INSERT INTO Compound VALUES(879,1099,3,356);
+INSERT INTO Compound VALUES(880,1100,1,9);
+INSERT INTO Compound VALUES(881,1100,2,486);
+INSERT INTO Compound VALUES(882,1100,3,356);
+INSERT INTO Compound VALUES(883,1101,1,10);
+INSERT INTO Compound VALUES(884,1101,2,486);
+INSERT INTO Compound VALUES(885,1101,3,356);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -4875,8 +4921,6 @@ INSERT INTO PhraseTranslations VALUES(7,7,'how_many time_(hour)');
 INSERT INTO PhraseTranslations VALUES(8,8,'you to_be_at where');
 INSERT INTO PhraseTranslations VALUES(9,9,'you to_go where');
 INSERT INTO PhraseTranslations VALUES(10,10,'I to_be_at house-lai6');
-INSERT INTO PhraseTranslations VALUES(11,11,'$smallnumber day front');
-INSERT INTO PhraseTranslations VALUES(12,12,'$smallnumber day back');
 INSERT INTO PhraseTranslations VALUES(13,13,'this| how_many dollar');
 INSERT INTO PhraseTranslations VALUES(14,14,'I to_go store');
 INSERT INTO PhraseTranslations VALUES(15,15,'I to_go to_buy vegetables');
