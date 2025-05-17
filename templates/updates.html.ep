@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'v2/wrapper-left';
 
 % for my $update (@$updates) {
 <h3><%= $update->{time_stamp} %></h3>

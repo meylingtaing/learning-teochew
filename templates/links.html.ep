@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'v2/wrapper-left';
 <h2>Resources for learning</h2>
 <ul>
   <li>
