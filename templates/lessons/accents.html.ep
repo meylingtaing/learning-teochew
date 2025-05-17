@@ -1,15 +1,10 @@
-% layout 'wrapper-left';
-<style>
-.hover-details:hover { color: #007bff; cursor: default; }
-.table .play-teochew { font-size: 1.5em }
-.large-translation { margin-bottom: 2rem; }
-</style>
+% layout 'v2/wrapper-left';
 
 <h1>Dialects/Accents of Teochew</h1>
 
 <p>What is commonly known as the Teochew language actually consists of several different dialects or accents. There are three main categories of accents that are represented by the three rivers in the Teoswa (or <a href="https://en.wikipedia.org/wiki/Chaoshan">Chaoshan</a>) region of China. This site mainly uses the Gekion accent.</p>
 
-<table class="table">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Teochew Dialect</th>
