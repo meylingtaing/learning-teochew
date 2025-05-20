@@ -822,6 +822,7 @@ INSERT INTO English VALUES(776,40,'in two days',0,NULL,7);
 INSERT INTO English VALUES(777,40,'in three days',0,NULL,8);
 INSERT INTO English VALUES(778,40,'in four days',0,NULL,9);
 INSERT INTO English VALUES(779,40,'in five days',0,NULL,10);
+INSERT INTO English VALUES(780,14,'smart',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1514,6 +1515,9 @@ INSERT INTO Chinese VALUES(692,'占','佔','jiam2',NULL);
 INSERT INTO Chinese VALUES(693,'㾪',NULL,'sang2',NULL);
 INSERT INTO Chinese VALUES(694,'肥',NULL,'bui5',NULL);
 INSERT INTO Chinese VALUES(695,'篱','籬','loi7',NULL);
+INSERT INTO Chinese VALUES(696,'𠢕',NULL,'ghao5',NULL);
+INSERT INTO Chinese VALUES(697,'强','強','kiang3',NULL);
+INSERT INTO Chinese VALUES(698,'贤','賢','ghao5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1654,6 +1658,8 @@ INSERT INTO Synonyms VALUES(132,754,'youtiao');
 INSERT INTO Synonyms VALUES(133,754,'Chinese cruller');
 INSERT INTO Synonyms VALUES(134,768,'thin');
 INSERT INTO Synonyms VALUES(135,768,'slim');
+INSERT INTO Synonyms VALUES(136,780,'skilled');
+INSERT INTO Synonyms VALUES(137,780,'clever');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1781,6 +1787,7 @@ INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates succ
 INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
 INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
 INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
+INSERT INTO Extra VALUES(51,780,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1846,6 +1853,7 @@ INSERT INTO TeochewAltChinese VALUES(37,1051,'涝屎 (澇屎)');
 INSERT INTO TeochewAltChinese VALUES(38,1079,'捻');
 INSERT INTO TeochewAltChinese VALUES(39,1088,'暂 (暫)');
 INSERT INTO TeochewAltChinese VALUES(40,1088,'占 (佔)');
+INSERT INTO TeochewAltChinese VALUES(41,1102,'贤 (賢)');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2940,6 +2948,8 @@ INSERT INTO Translation VALUES(1091,776,1098,0);
 INSERT INTO Translation VALUES(1092,777,1099,0);
 INSERT INTO Translation VALUES(1093,778,1100,0);
 INSERT INTO Translation VALUES(1094,779,1101,0);
+INSERT INTO Translation VALUES(1095,780,1102,0);
+INSERT INTO Translation VALUES(1096,780,1103,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4014,6 +4024,8 @@ INSERT INTO Teochew VALUES(1098,'no67 yek84 ao6','二日后');
 INSERT INTO Teochew VALUES(1099,'san1 yek84 ao6','三日后');
 INSERT INTO Teochew VALUES(1100,'si32 yek84 ao6','四日后');
 INSERT INTO Teochew VALUES(1101,'ngou67 yek84 ao6','五日后');
+INSERT INTO Teochew VALUES(1102,'ghao5','𠢕');
+INSERT INTO Teochew VALUES(1103,'kiang3','强');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4905,6 +4917,7 @@ INSERT INTO TranslationExtra VALUES(7,200,replace('These characters were chosen 
 INSERT INTO TranslationExtra VALUES(8,100,replace('I think this is just a shortening of **ja1 bhou(6) gian2**, and the character 走 was chosen because it matched the pronunciation.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(9,977,replace('Note that the 中 character by itself actually has readings of "dang", "dong", and "diong", and it might have just been shortened to "da" in this particular phrase. You might also see it as "dan".\n\nThe second syllable 央 might also be read as "ng", but the sounds "eung" and "ng" are pretty similar to my ears.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(10,1071,replace('I really wasn''t sure about the character for this one, but 拰 seems to be what was used in the Gaginang discord.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(11,1095,replace('The character 𠢕 is part of CJK Unified Ideographs Extension B, which is often not included in system Chinese fonts. In order to make sure it''s displayed here, I''ve included it using a different font, which is why it might look stylistically different than the other Chinese characters on the site.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
