@@ -1,6 +1,8 @@
 @font-face {
     font-family: "LXGW-Wenkai-TC";
-    src: url("/fonts/LXGWWenKaiTC-Regular.woff") format("woff");
+    src:
+        url("/fonts/LXGWWenKaiTC-Regular.woff2") format("woff2"),
+        url("/fonts/LXGWWenKaiTC-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 
