@@ -5,6 +5,7 @@
         url("/fonts/LXGWWenKaiTC-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 
     /* Yes, this is a very specific Unicode character that most system CJK
      * fonts don't seem to include. This is a hack-y way of making sure it will
