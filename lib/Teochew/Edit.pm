@@ -971,6 +971,9 @@ sub _get_english_id {
         $sql .= "and notes = ?";
         push @binds, $note;
     }
+    else {
+        $sql .= "and notes is null";
+    }
     my @rows = $self->dbh->selectall_array($sql, {}, @binds);
 
     return unless scalar @rows;
