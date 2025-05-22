@@ -48,6 +48,7 @@ INSERT INTO Categories VALUES(42,'Flavorings','Oils, Sauces, and Seasonings',5);
 INSERT INTO Categories VALUES(43,'Food_verb','Food Actions',5);
 INSERT INTO Categories VALUES(44,'Medical','Health and Medicine',6);
 INSERT INTO Categories VALUES(45,'Timeofday','Time of Day',3);
+INSERT INTO Categories VALUES(46,'People','General People Words',2);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -95,7 +96,7 @@ INSERT INTO English VALUES(36,4,'they',0,NULL,1);
 INSERT INTO English VALUES(37,4,'people',0,NULL,2);
 INSERT INTO English VALUES(38,5,'father',0,'addressing',NULL);
 INSERT INTO English VALUES(39,5,'mother',0,'addressing',NULL);
-INSERT INTO English VALUES(40,5,'child',0,NULL,NULL);
+INSERT INTO English VALUES(40,46,'child',0,NULL,NULL);
 INSERT INTO English VALUES(41,5,'older brother',0,NULL,NULL);
 INSERT INTO English VALUES(42,5,'younger brother',0,NULL,NULL);
 INSERT INTO English VALUES(43,5,'older sister',0,NULL,NULL);
@@ -463,14 +464,14 @@ INSERT INTO English VALUES(413,13,'to win',0,NULL,NULL);
 INSERT INTO English VALUES(414,17,'bank',0,NULL,NULL);
 INSERT INTO English VALUES(415,13,'to pray',0,NULL,NULL);
 INSERT INTO English VALUES(416,13,'to play',0,NULL,NULL);
-INSERT INTO English VALUES(417,16,'male',0,NULL,NULL);
-INSERT INTO English VALUES(418,16,'female',0,NULL,NULL);
+INSERT INTO English VALUES(417,46,'male',0,NULL,NULL);
+INSERT INTO English VALUES(418,46,'female',0,NULL,NULL);
 INSERT INTO English VALUES(419,15,'sheep',0,NULL,NULL);
 INSERT INTO English VALUES(420,13,'melt',1,NULL,NULL);
 INSERT INTO English VALUES(421,13,'to run',0,NULL,NULL);
 INSERT INTO English VALUES(422,16,'company',1,NULL,NULL);
 INSERT INTO English VALUES(423,31,'to shower',0,NULL,NULL);
-INSERT INTO English VALUES(424,5,'friend',0,NULL,NULL);
+INSERT INTO English VALUES(424,46,'friend',0,NULL,NULL);
 INSERT INTO English VALUES(425,18,'shorts',0,NULL,NULL);
 INSERT INTO English VALUES(426,18,'jacket',0,NULL,NULL);
 INSERT INTO English VALUES(427,5,'teenager',1,NULL,NULL);
@@ -499,7 +500,7 @@ INSERT INTO English VALUES(449,3,'orange',0,'color',2);
 INSERT INTO English VALUES(450,13,'to see',0,NULL,NULL);
 INSERT INTO English VALUES(451,16,'free time',0,NULL,NULL);
 INSERT INTO English VALUES(452,8,'busy',0,NULL,NULL);
-INSERT INTO English VALUES(453,31,'pee',0,NULL,NULL);
+INSERT INTO English VALUES(453,31,'urine',0,NULL,NULL);
 INSERT INTO English VALUES(454,32,'the same',0,NULL,NULL);
 INSERT INTO English VALUES(455,37,'bowl',0,NULL,NULL);
 INSERT INTO English VALUES(456,23,'winter',0,NULL,NULL);
@@ -567,7 +568,7 @@ INSERT INTO English VALUES(519,13,'to rise',0,NULL,NULL);
 INSERT INTO English VALUES(520,41,'raw',0,NULL,NULL);
 INSERT INTO English VALUES(521,13,'to thank',0,NULL,NULL);
 INSERT INTO English VALUES(522,10,'meal',0,NULL,NULL);
-INSERT INTO English VALUES(523,45,'early',0,NULL,4);
+INSERT INTO English VALUES(523,7,'early',0,NULL,4);
 INSERT INTO English VALUES(524,39,'inside',0,NULL,NULL);
 INSERT INTO English VALUES(525,39,'side',0,NULL,NULL);
 INSERT INTO English VALUES(526,7,'hour',0,NULL,10);
@@ -583,7 +584,7 @@ INSERT INTO English VALUES(535,23,'outside',1,NULL,NULL);
 INSERT INTO English VALUES(536,5,'offspring',1,NULL,NULL);
 INSERT INTO English VALUES(537,6,'electricity',0,NULL,NULL);
 INSERT INTO English VALUES(538,13,'to look',1,NULL,NULL);
-INSERT INTO English VALUES(539,11,'brain',1,NULL,NULL);
+INSERT INTO English VALUES(539,11,'brain',0,NULL,NULL);
 INSERT INTO English VALUES(540,14,'word',0,'spoken',NULL);
 INSERT INTO English VALUES(542,7,'part of day',1,NULL,4);
 INSERT INTO English VALUES(543,16,'low',1,NULL,NULL);
@@ -823,6 +824,17 @@ INSERT INTO English VALUES(777,40,'in three days',0,NULL,8);
 INSERT INTO English VALUES(778,40,'in four days',0,NULL,9);
 INSERT INTO English VALUES(779,40,'in five days',0,NULL,10);
 INSERT INTO English VALUES(780,14,'smart',0,NULL,NULL);
+INSERT INTO English VALUES(781,43,'to deep fry',0,NULL,NULL);
+INSERT INTO English VALUES(782,43,'to steam',0,NULL,NULL);
+INSERT INTO English VALUES(783,43,'to roast',0,NULL,NULL);
+INSERT INTO English VALUES(784,13,'to dance',0,NULL,NULL);
+INSERT INTO English VALUES(785,11,'saliva',0,NULL,NULL);
+INSERT INTO English VALUES(786,7,'late',0,NULL,NULL);
+INSERT INTO English VALUES(787,46,'brat',0,NULL,NULL);
+INSERT INTO English VALUES(788,9,'to throw away',0,NULL,NULL);
+INSERT INTO English VALUES(789,8,'smelly',0,NULL,NULL);
+INSERT INTO English VALUES(790,43,'to pour',0,NULL,NULL);
+INSERT INTO English VALUES(791,38,'to pump gas',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1518,6 +1530,18 @@ INSERT INTO Chinese VALUES(695,'篱','籬','loi7',NULL);
 INSERT INTO Chinese VALUES(696,'𠢕',NULL,'ghao5',NULL);
 INSERT INTO Chinese VALUES(697,'强','強','kiang3',NULL);
 INSERT INTO Chinese VALUES(698,'贤','賢','ghao5',NULL);
+INSERT INTO Chinese VALUES(699,'浮',NULL,'pu5',NULL);
+INSERT INTO Chinese VALUES(700,'炊',NULL,'chue1',NULL);
+INSERT INTO Chinese VALUES(701,'焙',NULL,'bue7',NULL);
+INSERT INTO Chinese VALUES(702,'跳',NULL,'tiao3',NULL);
+INSERT INTO Chinese VALUES(703,'舞',NULL,'bhu2',NULL);
+INSERT INTO Chinese VALUES(704,'涎',NULL,'nua6',NULL);
+INSERT INTO Chinese VALUES(705,'澜','瀾','nua6',NULL);
+INSERT INTO Chinese VALUES(706,'晏',NULL,'uan3',NULL);
+INSERT INTO Chinese VALUES(707,'痞',NULL,'pai2',NULL);
+INSERT INTO Chinese VALUES(708,'捔',NULL,'gak8',NULL);
+INSERT INTO Chinese VALUES(709,'臭',NULL,'chao3',NULL);
+INSERT INTO Chinese VALUES(710,'倒',NULL,'do3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1646,7 +1670,7 @@ INSERT INTO Synonyms VALUES(120,611,'close');
 INSERT INTO Synonyms VALUES(121,708,'it''s alright');
 INSERT INTO Synonyms VALUES(122,708,'it''s nothing');
 INSERT INTO Synonyms VALUES(123,708,'no big deal');
-INSERT INTO Synonyms VALUES(124,453,'urine');
+INSERT INTO Synonyms VALUES(124,453,'pee');
 INSERT INTO Synonyms VALUES(125,729,'to photograph');
 INSERT INTO Synonyms VALUES(126,730,'Philly');
 INSERT INTO Synonyms VALUES(127,734,'to wish');
@@ -1660,6 +1684,10 @@ INSERT INTO Synonyms VALUES(134,768,'thin');
 INSERT INTO Synonyms VALUES(135,768,'slim');
 INSERT INTO Synonyms VALUES(136,780,'skilled');
 INSERT INTO Synonyms VALUES(137,780,'clever');
+INSERT INTO Synonyms VALUES(138,783,'to bake');
+INSERT INTO Synonyms VALUES(139,785,'spit');
+INSERT INTO Synonyms VALUES(140,787,'hooligan');
+INSERT INTO Synonyms VALUES(141,789,'stinky');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1788,6 +1816,7 @@ INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally thin
 INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
 INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
 INSERT INTO Extra VALUES(51,780,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
+INSERT INTO Extra VALUES(52,786,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1795,7 +1824,7 @@ CREATE TABLE FlashcardSet (
     hidden boolean default 0,
     sort integer);
 INSERT INTO FlashcardSet VALUES(1,'Colors','Colors',0,3);
-INSERT INTO FlashcardSet VALUES(2,'Family','Family',0,2);
+INSERT INTO FlashcardSet VALUES(2,'People','People',0,2);
 INSERT INTO FlashcardSet VALUES(3,'Datetime','Date/Time',0,4);
 INSERT INTO FlashcardSet VALUES(4,'House','Around the House',0,6);
 INSERT INTO FlashcardSet VALUES(5,'Food','Food/Drink',0,5);
@@ -1854,6 +1883,7 @@ INSERT INTO TeochewAltChinese VALUES(38,1079,'捻');
 INSERT INTO TeochewAltChinese VALUES(39,1088,'暂 (暫)');
 INSERT INTO TeochewAltChinese VALUES(40,1088,'占 (佔)');
 INSERT INTO TeochewAltChinese VALUES(41,1102,'贤 (賢)');
+INSERT INTO TeochewAltChinese VALUES(42,1110,'澜 (瀾)');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2950,6 +2980,21 @@ INSERT INTO Translation VALUES(1093,778,1100,0);
 INSERT INTO Translation VALUES(1094,779,1101,0);
 INSERT INTO Translation VALUES(1095,780,1102,0);
 INSERT INTO Translation VALUES(1096,780,1103,0);
+INSERT INTO Translation VALUES(1097,781,1104,0);
+INSERT INTO Translation VALUES(1098,782,1105,0);
+INSERT INTO Translation VALUES(1099,783,1106,0);
+INSERT INTO Translation VALUES(1100,784,1107,0);
+INSERT INTO Translation VALUES(1101,NULL,1108,0);
+INSERT INTO Translation VALUES(1102,NULL,1109,0);
+INSERT INTO Translation VALUES(1103,785,1110,0);
+INSERT INTO Translation VALUES(1104,786,1111,0);
+INSERT INTO Translation VALUES(1105,787,1112,0);
+INSERT INTO Translation VALUES(1106,NULL,1113,0);
+INSERT INTO Translation VALUES(1107,788,1114,0);
+INSERT INTO Translation VALUES(1108,NULL,1115,0);
+INSERT INTO Translation VALUES(1109,789,1116,0);
+INSERT INTO Translation VALUES(1110,790,1117,0);
+INSERT INTO Translation VALUES(1111,791,1118,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4026,6 +4071,21 @@ INSERT INTO Teochew VALUES(1100,'si32 yek84 ao6','四日后');
 INSERT INTO Teochew VALUES(1101,'ngou67 yek84 ao6','五日后');
 INSERT INTO Teochew VALUES(1102,'ghao5','𠢕');
 INSERT INTO Teochew VALUES(1103,'kiang3','强');
+INSERT INTO Teochew VALUES(1104,'pu5','浮');
+INSERT INTO Teochew VALUES(1105,'chue1','炊');
+INSERT INTO Teochew VALUES(1106,'bue7','焙');
+INSERT INTO Teochew VALUES(1107,'tiao32 bhu2','跳舞');
+INSERT INTO Teochew VALUES(1108,'tiao3','跳');
+INSERT INTO Teochew VALUES(1109,'bhu2','舞');
+INSERT INTO Teochew VALUES(1110,'nua6','涎');
+INSERT INTO Teochew VALUES(1111,'uan3','晏');
+INSERT INTO Teochew VALUES(1112,'pai26 gian2','痞囝');
+INSERT INTO Teochew VALUES(1113,'pai2','痞');
+INSERT INTO Teochew VALUES(1114,'gak84 diao7','捔掉');
+INSERT INTO Teochew VALUES(1115,'gak8','捔');
+INSERT INTO Teochew VALUES(1116,'chao3','臭');
+INSERT INTO Teochew VALUES(1117,'do3','倒');
+INSERT INTO Teochew VALUES(1118,'do32 iu5','倒油');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4901,6 +4961,14 @@ INSERT INTO Compound VALUES(882,1100,3,356);
 INSERT INTO Compound VALUES(883,1101,1,10);
 INSERT INTO Compound VALUES(884,1101,2,486);
 INSERT INTO Compound VALUES(885,1101,3,356);
+INSERT INTO Compound VALUES(886,1107,1,1101);
+INSERT INTO Compound VALUES(887,1107,2,1102);
+INSERT INTO Compound VALUES(888,1112,1,1106);
+INSERT INTO Compound VALUES(889,1112,2,37);
+INSERT INTO Compound VALUES(890,1114,1,1108);
+INSERT INTO Compound VALUES(891,1114,2,954);
+INSERT INTO Compound VALUES(892,1118,1,1110);
+INSERT INTO Compound VALUES(893,1118,2,402);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
