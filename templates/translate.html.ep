@@ -29,7 +29,9 @@
     % for my $key (keys %$teochew_by_category) {
       % if ($teochew_by_category->{$key}{flashcard_set}) {
       <li class="list-group-item list-group-item-primary category-header">
-        <a href="/category/<%= $teochew_by_category->{$key}{flashcard_set} %>#<%= $key %>">
+        <a class="link-underline
+                  link-underline-opacity-0 link-underline-opacity-100-hover"
+           href="/category/<%= $teochew_by_category->{$key}{flashcard_set} %>#<%= $key %>">
           <%= $teochew_by_category->{$key}{display} %>
         </a>
       </li>
@@ -43,7 +45,10 @@
 
 
           % if ($row->{compound} || $row->{extra_notes} || $row->{pronunciations}[1] || $row->{alt_chinese} || $row->{chinese}{traditional}) {
-            <a data-toggle="collapse" href="#word-breakdown-<%= $row_id %>">
+            <a data-bs-toggle="collapse" href="#word-breakdown-<%= $row_id %>"
+               class="link-underline
+                      link-underline-opacity-0
+                      link-underline-opacity-100-hover">
               <small>
                 More details <i class="ion-arrow-down-b"></i>
               </small>
@@ -76,7 +81,7 @@
             %# Compound breakdown
             % if ($row->{compound}) {
             <table class="table table-bordered w-auto">
-              <thead class="thead-light"><tr>
+              <thead class="table-info"><tr>
               % for my $component (@{ $row->{compound} }) {
                   <th class="py-1 text-center">
                     <%= $component->{word} %>

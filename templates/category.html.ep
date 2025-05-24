@@ -5,8 +5,10 @@
 h1, h2 { margin-bottom: 0 }
 </style>
 
+%# The header for the page, which only shows up if there is more than one
+%# subcategory
 % if (scalar @$categories > 1) {
-<div class="container pl-0 mb-1 mt-2">
+<div class="container px-0 mb-1 mt-2">
   <div class="row">
     <div class="col-auto">
     <h1>
@@ -24,9 +26,12 @@ h1, h2 { margin-bottom: 0 }
 <hr>
 % }
 
+%# Each of the categories
 % for my $row (@$categories) {
+
+  %# The header for the category
   % my $category = $row->{name};
-  <div class="container pl-0 mb-1 mt-2">
+  <div class="container px-0 mb-2 mt-3">
     <div class="row">
       <div class="col-auto">
       <h2 id="<%= $category %>">
@@ -40,6 +45,8 @@ h1, h2 { margin-bottom: 0 }
       </div>
     </div>
   </div>
+
+  %# The actual table with words in the category
   <%= include 'elements/all-translations-table',
         translations => $category_translations->{$category}{translations} %>
 % }

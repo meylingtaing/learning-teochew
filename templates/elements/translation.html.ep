@@ -3,9 +3,9 @@
 % my $style = stash('hidden') ? 'style="display:none"' : '';
 % my $id = stash('id') ? 'id="' . stash('id') . '"' : '';
 <div class="translation" <%== $id %> <%== $style %>>
-  <span class="chinese nowrap mr-2 align-middle"><%= $row->{chinese}{simplified} %></span>
+  <span class="chinese nowrap me-2 align-middle"><%= $row->{chinese}{simplified} %></span>
   % my $pronunciation = $row->{pronunciations}[0];
-  <span class="pengim nowrap mr-2 align-middle">
+  <span class="pengim nowrap me-2 align-middle">
     <%= $pronunciation->{pengim} %>
   </span>
   % if ($pronunciation->{audio}) {

@@ -1,7 +1,7 @@
 % layout 'wrapper-left';
 
 % if ($chinese and scalar @$chinese) {
-  <div class="text-sm-left text-center">
+  <div class="text-sm-start text-center">
     <h1 id="main-chinese-character">
       <%= $chinese->[0]->{simplified} %>
       % if ($chinese->[0]->{traditional}) {

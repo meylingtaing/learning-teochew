@@ -6,7 +6,7 @@
 }
 
 .flashcard {
-    background-color: var(--primary);
+    background-color: var(--bs-primary);
     min-width: 15rem;
     line-height: 1;
     -webkit-box-shadow: 3px 3px 5px 0px #999;
@@ -72,7 +72,9 @@
     <div class="row mx-sm-1 my-1">
       <div class="col">
         <a href="/english/<%= $flashcard->{english_link} %>" target="_blank"
-           id="english-page-link">
+           id="english-page-link"
+           class="link-underline
+                  link-underline-opacity-0 link-underline-opacity-100-hover">
           View translation page for <b><%= $flashcard->{english} %></b>
         </a>
       </div>
@@ -82,7 +84,9 @@
   % if ($type) {
     <div class="row mx-sm-1 my-1">
       <div class="col">
-        <a href="/category/<%= $type %>/<%= $subtype %>">
+        <a href="/category/<%= $type %>/<%= $subtype %>"
+           class="link-underline
+                  link-underline-opacity-0 link-underline-opacity-100-hover">
           All translations in <%= $flashcard_set_name %>
         </a>
       </div>

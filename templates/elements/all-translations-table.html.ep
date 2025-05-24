@@ -13,7 +13,7 @@
       <th>Audio</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     % for my $row (@{ stash('translations') }) {
         <tr>
         <td class="align-middle english"
@@ -27,7 +27,12 @@
           % if (stash('hide_links')) {
             <%= $row->{english} %>
           % } else {
-            <a href="/english/<%= $row->{english_link} %>"><%= $row->{english} %></a>
+            <a href="/english/<%= $row->{english_link} %>"
+               class="link-underline
+                      link-underline-opacity-0
+                      link-underline-opacity-100-hover">
+              <%= $row->{english} %>
+            </a>
           % }
 
           % if ($row->{is_definition}) {
