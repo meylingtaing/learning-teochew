@@ -15,7 +15,7 @@
 }
 
 /* I just took the default font-family from Bootstrap, and modified it to
- * include one custom font */
+ * include one custom font. I also rearranged this a bit */
 body {
     font-family:
         -apple-system,
@@ -23,8 +23,8 @@ body {
         "Segoe UI",
         Roboto,
         "Helvetica Neue",
-        Arial,
         "Noto Sans",
+        Arial,
         "Liberation Sans",
         sans-serif,
         "LXGW-Wenkai-TC",
