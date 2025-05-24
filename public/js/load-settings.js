@@ -1,15 +1,11 @@
 function set_dark() {
+    $('html').attr('data-bs-theme', 'dark');
     $('html').addClass('dark-mode');
-    $(function() {
-        $('.dropdown-menu').addClass('bg-secondary');
-    });
 }
 
 function set_light() {
+    $('html').attr('data-bs-theme', 'light');
     $('html').removeClass('dark-mode');
-    $(function() {
-        $('.dropdown-menu').removeClass('bg-secondary');
-    });
 }
 
 if (localStorage.getItem('darkMode') == '1') {

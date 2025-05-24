@@ -50,49 +50,6 @@ body {
     font-size: 1.5em;
 }
 
-/* All the dark mode settings */
-
-.dark-mode body {
-    background-color: #222;
-    color: #ddd;
-}
-
-/* uhhh, I copied these color values from bootstrap's css */
-.dark-mode hr {
-    border-color: #6c757d;
-}
-
-.dark-mode .navbar,
-.dark-mode .navbar-brand {
-    /* ugh bootstrap, making me use !important here */
-    background-color: #343a40 !important;
-    color: #fff !important;
-}
-
-.dark-mode .navbar-nav .nav-link {
-    color: #f8f9fa !important;
-}
-
-.dark-mode #translate,
-.dark-mode .list-group-item:not(.list-group-item-primary) {
-    border-color: #6c757d;
-    background-color: #343a40;
-    color: #ddd;
-}
-
-.dark-mode td, .dark-mode th, .dark-mode thead th {
-    border-color: #454d55;
-}
-
-.dark-mode table {
-    background-color: #343a40;
-    color: #fff;
-}
-
-.dark-mode .table-secondary > th,
-.dark-mode .table-secondary > td {
-    background-color: #6c757d;
-}
 
 #toggle-off, .dark-mode #toggle-on {
     display: unset;
