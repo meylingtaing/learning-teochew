@@ -28,7 +28,7 @@ month in isolation,
 <li>but the word 'month' changes to a low tone</li>
 </ul>
 
-<div class="alert alert-secondary">
+<div class="alert alert-info">
 The folks in the Gaginang discord refer to this phenomena as
 <i>tone neutralization</i>, where a multi-syllable utterance has the first
 syllable retains its base tone and the following syllables change to a
@@ -91,7 +91,7 @@ To say the full date, you would say the month, then the day. And this time you <
     'November 12',
 ] %>
 
-<div class="alert alert-secondary">
+<div class="alert alert-info">
 Generally, when there's more at the end of the "month phrase", you do apply tone change to the number portion of the month. But remember, not everyone follows these tone change rules exactly as I've stated them. I have heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
 </div>
 
