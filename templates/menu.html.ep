@@ -1,5 +1,4 @@
 <style>
-.nav-link { color: #0056b3; }
 .navbar-toggler { font-size: 1.5em }
 
 /* Make the navbar be the full width of the page, but we'll have the text in
@@ -112,8 +111,7 @@ header { background-color: var(--bs-primary-bg-subtle); }
     <div class="row mx-sm-1">
     <div class="col">
       <div id="search-form" class="d-md-block collapse">
-      <form class="form-row mt-3"
-       method="get" action="/translate">
+      <form class="row mt-2 g-2" method="get" action="/translate">
         <div class="col-sm-auto col-12">
           <input id="translate" name="search" type="text"
            placeholder="Enter english or chinese word"
