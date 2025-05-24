@@ -50,6 +50,7 @@ body {
     font-size: 1.5em;
 }
 
+tbody.table-group-divider { border-top-color: var(--bs-border-color); }
 
 #toggle-off, .dark-mode #toggle-on {
     display: unset;
