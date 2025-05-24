@@ -21,26 +21,26 @@ header { background-color: var(--bs-primary-bg-subtle); }
 
         <!-- hamburger and search icons -->
         <span class="navbar-buttons">
-        <button class="navbar-toggler" type="button"
-         data-toggle="collapse" data-target="#search-form"
-         aria-controls="search-form" aria-expanded="false"
-         aria-label="Toggle search">
-          <i class="ion-search"></i>
-        </button>
+          <button class="navbar-toggler" type="button"
+           data-bs-toggle="collapse" data-bs-target="#search-form"
+           aria-controls="search-form" aria-expanded="false"
+           aria-label="Toggle search">
+            <i class="ion-search"></i>
+          </button>
 
-        <button class="navbar-toggler" type="button"
-         data-toggle="collapse" data-target="#flashcards-navbar"
-         aria-controls="flashcards-navbar" aria-expanded="false"
-         aria-label="Toggle navigation">
-          <i class="ion-android-menu"></i>
-        </button>
+          <button class="navbar-toggler" type="button"
+           data-bs-toggle="collapse" data-bs-target="#flashcards-navbar"
+           aria-controls="flashcards-navbar" aria-expanded="false"
+           aria-label="Toggle navigation">
+            <i class="ion-android-menu"></i>
+          </button>
         </span>
 
         <!-- the menu links -->
         <div id="flashcards-navbar" class="collapse navbar-collapse">
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" href="#">
                 Words
               </a>
@@ -56,7 +56,7 @@ header { background-color: var(--bs-primary-bg-subtle); }
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" href="#">
                 Number Flashcards
               </a>
@@ -81,7 +81,7 @@ header { background-color: var(--bs-primary-bg-subtle); }
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" href="#">
                 Lessons
               </a>
