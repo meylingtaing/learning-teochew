@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/css/bootstrap1.min.css">
+
+  <link rel="stylesheet" href="/css/bootstrap5_custom.min.css">
   <link rel="stylesheet" href="/css/ionicons.min.css">
   <link rel="stylesheet" href="/css/main3.css">
 
   <script src="/js/jquery-3.2.1.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap1.min.js"></script>
+  <script src="/js/bootstrap5.bundle.min.js"></script>
   <script src="/js/load-settings.js"></script>
 
   <title>Teochew Flashcards</title>
