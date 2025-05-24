@@ -1,11 +1,22 @@
 <style>
 .nav-link { color: #0056b3; }
 .navbar-toggler { font-size: 1.5em }
+
+/* Make the navbar be the full width of the page, but we'll have the text in
+   the navbar be limited to the width of the container, to match the rest of
+   the page */
+header { background-color: var(--bs-primary-bg-subtle); }
 </style>
 
-  <div class="row mx-sm-1 my-2">
-    <div class="col">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <!-- the navbar -->
+    <header>
+      <nav class="container-md navbar navbar-expand-md bg-primary-subtle">
+
+        <!-- for some reason, using a margin of "3" is what makes this line up
+        with the rest of the page. if I don't include a margin, the navbar text
+        ends up being slightly wider. idk why, but I don't feel like digging
+        into it further -->
+        <div class="container-fluid mx-sm-3">
         <a class="navbar-brand" href="/flashcards">Flashcards</a>
 
         <span class="navbar-buttons">
@@ -91,6 +102,12 @@
 
         </div>
       </nav>
+  </header>
+
+  <!-- the search/translate input -->
+  <div class="container-md">
+    <div class="row mx-sm-1">
+    <div class="col">
       <div id="search-form" class="d-md-block collapse">
       <form class="form-row mt-3"
        method="get" action="/translate">
@@ -115,5 +132,6 @@
       </div>
 
       <hr>
+    </div>
     </div>
   </div>

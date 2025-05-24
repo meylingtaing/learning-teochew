@@ -20,9 +20,9 @@
 
 <body>
 
-  <div class="container-md">
-
   %= include 'menu'
+
+  <div class="container-md">
 
   %= content html => begin
   <%= content %>
