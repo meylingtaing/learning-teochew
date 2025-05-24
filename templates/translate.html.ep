@@ -26,6 +26,7 @@
     <p id="synonyms" class="text-muted"><%= join(', ', @$synonyms) %></p>
     <ul id="translate-table" class="list-group">
 
+    % my $row_id = 0;
     % for my $key (keys %$teochew_by_category) {
       % if ($teochew_by_category->{$key}{flashcard_set}) {
       <li class="list-group-item list-group-item-primary category-header">
@@ -36,7 +37,6 @@
         </a>
       </li>
       % }
-      % my $row_id = 0;
       % for my $row (@{ $teochew_by_category->{$key}{teochew} }) {
         % ++$row_id;
         <li class="list-group-item">
