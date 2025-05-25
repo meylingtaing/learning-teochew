@@ -835,6 +835,12 @@ INSERT INTO English VALUES(788,9,'to throw away',0,NULL,NULL);
 INSERT INTO English VALUES(789,8,'smelly',0,NULL,NULL);
 INSERT INTO English VALUES(790,43,'to pour',0,NULL,NULL);
 INSERT INTO English VALUES(791,38,'to pump gas',0,NULL,NULL);
+INSERT INTO English VALUES(792,38,'boat',0,NULL,NULL);
+INSERT INTO English VALUES(793,7,'long',0,'time',10);
+INSERT INTO English VALUES(794,41,'soft',0,'mushy',NULL);
+INSERT INTO English VALUES(795,43,'to pour',0,'over something',NULL);
+INSERT INTO English VALUES(796,43,'to pour soup over something',0,NULL,NULL);
+INSERT INTO English VALUES(797,13,'to blow',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1542,6 +1548,11 @@ INSERT INTO Chinese VALUES(707,'痞',NULL,'pai2',NULL);
 INSERT INTO Chinese VALUES(708,'捔',NULL,'gak8',NULL);
 INSERT INTO Chinese VALUES(709,'臭',NULL,'chao3',NULL);
 INSERT INTO Chinese VALUES(710,'倒',NULL,'do3',NULL);
+INSERT INTO Chinese VALUES(711,'船',NULL,'jung5',NULL);
+INSERT INTO Chinese VALUES(712,'久',NULL,'gu2',NULL);
+INSERT INTO Chinese VALUES(713,'肭',NULL,'nap4',NULL);
+INSERT INTO Chinese VALUES(714,'淋',NULL,'nam5',NULL);
+INSERT INTO Chinese VALUES(715,'歕',NULL,'bung5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1817,6 +1828,7 @@ INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my 
 INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
 INSERT INTO Extra VALUES(51,780,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
 INSERT INTO Extra VALUES(52,786,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
+INSERT INTO Extra VALUES(53,790,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**. Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2995,6 +3007,12 @@ INSERT INTO Translation VALUES(1108,NULL,1115,0);
 INSERT INTO Translation VALUES(1109,789,1116,0);
 INSERT INTO Translation VALUES(1110,790,1117,0);
 INSERT INTO Translation VALUES(1111,791,1118,0);
+INSERT INTO Translation VALUES(1112,792,1119,0);
+INSERT INTO Translation VALUES(1113,793,1120,0);
+INSERT INTO Translation VALUES(1114,794,1121,0);
+INSERT INTO Translation VALUES(1115,795,1122,0);
+INSERT INTO Translation VALUES(1116,796,1123,0);
+INSERT INTO Translation VALUES(1117,797,1124,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4086,6 +4104,12 @@ INSERT INTO Teochew VALUES(1115,'gak8','捔');
 INSERT INTO Teochew VALUES(1116,'chao3','臭');
 INSERT INTO Teochew VALUES(1117,'do3','倒');
 INSERT INTO Teochew VALUES(1118,'do32 iu5','倒油');
+INSERT INTO Teochew VALUES(1119,'jung5','船');
+INSERT INTO Teochew VALUES(1120,'gu2','久');
+INSERT INTO Teochew VALUES(1121,'nap4','肭');
+INSERT INTO Teochew VALUES(1122,'nam5','淋');
+INSERT INTO Teochew VALUES(1123,'nam57 teung1','淋汤');
+INSERT INTO Teochew VALUES(1124,'bung5','歕');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4969,6 +4993,8 @@ INSERT INTO Compound VALUES(890,1114,1,1108);
 INSERT INTO Compound VALUES(891,1114,2,954);
 INSERT INTO Compound VALUES(892,1118,1,1110);
 INSERT INTO Compound VALUES(893,1118,2,402);
+INSERT INTO Compound VALUES(894,1123,1,1115);
+INSERT INTO Compound VALUES(895,1123,2,341);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
