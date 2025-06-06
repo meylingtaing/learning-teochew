@@ -155,7 +155,7 @@ sub english {
     # All of the verbs in the database are stored like "to eat", but we should
     # allow someone to see the translation without typing the "to" part of it.
     # And we should also check if the user typed a number
-    for my $english ("$input", "to $input", numify($input)) {
+    for my $english ("$input", "$input...", "to $input", numify($input)) {
 
         # First, look for english words in the database that match. There might
         # be multiple
