@@ -202,6 +202,17 @@ sub english {
 
         for my $english_row (@english_rows) {
 
+            # This is kinda weird, but if we're searching a word like "hard",
+            # which has its own entry, but is also a synonym for "difficult",
+            # then let's actually display "difficult" in the grayed out note
+            # above the translation
+            if (scalar(@english_rows) > 1 &&
+                !$is_synonym &&
+                lc($english_row->{word}) ne lc($english))
+            {
+                $english_row->{notes} //= $english_row->{word};
+            }
+
             if (scalar @english_rows == 1 && $english_row->{notes}) {
                 $english_display .= " ($english_row->{notes})";
                 $english_row->{notes} = undef;
