@@ -841,6 +841,14 @@ INSERT INTO English VALUES(794,41,'soft',0,'mushy',NULL);
 INSERT INTO English VALUES(795,43,'to pour',0,'over something',NULL);
 INSERT INTO English VALUES(796,43,'to pour soup over something',0,NULL,NULL);
 INSERT INTO English VALUES(797,13,'to blow',0,NULL,NULL);
+INSERT INTO English VALUES(798,43,'to heat up',0,'food',NULL);
+INSERT INTO English VALUES(799,8,'hard',0,'firm, stiff',NULL);
+INSERT INTO English VALUES(800,28,'water spinach',0,NULL,10);
+INSERT INTO English VALUES(801,16,'ball',0,NULL,NULL);
+INSERT INTO English VALUES(802,13,'to play sports',0,'with a ball',NULL);
+INSERT INTO English VALUES(803,32,'classifier',0,'for instances of time',NULL);
+INSERT INTO English VALUES(804,7,'one more time',0,NULL,10);
+INSERT INTO English VALUES(805,32,'or...',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1553,6 +1561,12 @@ INSERT INTO Chinese VALUES(712,'久',NULL,'gu2',NULL);
 INSERT INTO Chinese VALUES(713,'肭',NULL,'nap4',NULL);
 INSERT INTO Chinese VALUES(714,'淋',NULL,'nam5',NULL);
 INSERT INTO Chinese VALUES(715,'歕',NULL,'bung5',NULL);
+INSERT INTO Chinese VALUES(716,'煴','熅','dim1',NULL);
+INSERT INTO Chinese VALUES(717,'橂',NULL,'dain7',NULL);
+INSERT INTO Chinese VALUES(718,'蕹',NULL,'eng3',NULL);
+INSERT INTO Chinese VALUES(719,'球',NULL,'giu5',NULL);
+INSERT INTO Chinese VALUES(720,'匝',NULL,'jua7',NULL);
+INSERT INTO Chinese VALUES(721,'帀',NULL,'jua7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1699,6 +1713,8 @@ INSERT INTO Synonyms VALUES(138,783,'to bake');
 INSERT INTO Synonyms VALUES(139,785,'spit');
 INSERT INTO Synonyms VALUES(140,787,'hooligan');
 INSERT INTO Synonyms VALUES(141,789,'stinky');
+INSERT INTO Synonyms VALUES(142,798,'to microwave');
+INSERT INTO Synonyms VALUES(143,800,'morning glory');
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1829,6 +1845,7 @@ INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 s
 INSERT INTO Extra VALUES(51,780,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
 INSERT INTO Extra VALUES(52,786,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
 INSERT INTO Extra VALUES(53,790,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**. Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
+INSERT INTO Extra VALUES(54,798,replace('We typically use **dim1** if we''re heating up food using a microwave, but I don''t think it''s exclusive to microwaving. You could use it for heating up food on a stove too.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -1896,6 +1913,7 @@ INSERT INTO TeochewAltChinese VALUES(39,1088,'暂 (暫)');
 INSERT INTO TeochewAltChinese VALUES(40,1088,'占 (佔)');
 INSERT INTO TeochewAltChinese VALUES(41,1102,'贤 (賢)');
 INSERT INTO TeochewAltChinese VALUES(42,1110,'澜 (瀾)');
+INSERT INTO TeochewAltChinese VALUES(43,1133,'帀');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -3013,6 +3031,17 @@ INSERT INTO Translation VALUES(1114,794,1121,0);
 INSERT INTO Translation VALUES(1115,795,1122,0);
 INSERT INTO Translation VALUES(1116,796,1123,0);
 INSERT INTO Translation VALUES(1117,797,1124,0);
+INSERT INTO Translation VALUES(1118,798,1125,0);
+INSERT INTO Translation VALUES(1119,799,1126,0);
+INSERT INTO Translation VALUES(1120,800,1127,0);
+INSERT INTO Translation VALUES(1121,NULL,1128,0);
+INSERT INTO Translation VALUES(1122,801,1129,0);
+INSERT INTO Translation VALUES(1123,802,1130,0);
+INSERT INTO Translation VALUES(1124,593,1131,0);
+INSERT INTO Translation VALUES(1125,NULL,1132,0);
+INSERT INTO Translation VALUES(1126,803,1133,0);
+INSERT INTO Translation VALUES(1127,804,1134,0);
+INSERT INTO Translation VALUES(1128,805,1135,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4110,6 +4139,17 @@ INSERT INTO Teochew VALUES(1121,'nap4','肭');
 INSERT INTO Teochew VALUES(1122,'nam5','淋');
 INSERT INTO Teochew VALUES(1123,'nam57 teung1','淋汤');
 INSERT INTO Teochew VALUES(1124,'bung5','歕');
+INSERT INTO Teochew VALUES(1125,'dim1','煴');
+INSERT INTO Teochew VALUES(1126,'dain7','橂');
+INSERT INTO Teochew VALUES(1127,'eng32 chai3','蕹菜');
+INSERT INTO Teochew VALUES(1128,'eng3','蕹');
+INSERT INTO Teochew VALUES(1129,'giu5','球');
+INSERT INTO Teochew VALUES(1130,'pah48 giu5','拍球');
+INSERT INTO Teochew VALUES(1131,'chang1 guang2','餐馆');
+INSERT INTO Teochew VALUES(1132,'guang2','馆');
+INSERT INTO Teochew VALUES(1133,'jua7','匝');
+INSERT INTO Teochew VALUES(1134,'jek84 jua7 ge1','一匝加');
+INSERT INTO Teochew VALUES(1135,'a1 si67','啊是');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -4995,6 +5035,15 @@ INSERT INTO Compound VALUES(892,1118,1,1110);
 INSERT INTO Compound VALUES(893,1118,2,402);
 INSERT INTO Compound VALUES(894,1123,1,1115);
 INSERT INTO Compound VALUES(895,1123,2,341);
+INSERT INTO Compound VALUES(896,1127,1,1121);
+INSERT INTO Compound VALUES(897,1127,2,230);
+INSERT INTO Compound VALUES(898,1130,1,639);
+INSERT INTO Compound VALUES(899,1130,2,1122);
+INSERT INTO Compound VALUES(900,1131,1,581);
+INSERT INTO Compound VALUES(901,1131,2,1125);
+INSERT INTO Compound VALUES(902,1134,1,6);
+INSERT INTO Compound VALUES(903,1134,2,1126);
+INSERT INTO Compound VALUES(904,1134,3,706);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5110,6 +5159,7 @@ INSERT INTO GrammarDefinitions VALUES(6,720);
 INSERT INTO GrammarDefinitions VALUES(7,750);
 INSERT INTO GrammarDefinitions VALUES(8,726);
 INSERT INTO GrammarDefinitions VALUES(9,766);
+INSERT INTO GrammarDefinitions VALUES(10,803);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
