@@ -871,6 +871,12 @@ INSERT INTO English VALUES(824,23,'humid',0,NULL,NULL);
 INSERT INTO English VALUES(825,10,'peanut',0,NULL,NULL);
 INSERT INTO English VALUES(826,28,'mung bean',0,NULL,10);
 INSERT INTO English VALUES(827,15,'monkey',0,NULL,NULL);
+INSERT INTO English VALUES(828,7,'a short while',0,NULL,10);
+INSERT INTO English VALUES(829,13,'to stack things',0,NULL,NULL);
+INSERT INTO English VALUES(830,43,'to drink',0,NULL,NULL);
+INSERT INTO English VALUES(831,11,'blood',0,NULL,NULL);
+INSERT INTO English VALUES(832,15,'butterfly',0,NULL,NULL);
+INSERT INTO English VALUES(833,43,'to sip soup',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1608,6 +1614,13 @@ INSERT INTO Chinese VALUES(737,'熻',NULL,'hip4',NULL);
 INSERT INTO Chinese VALUES(738,'地',NULL,'di7',NULL);
 INSERT INTO Chinese VALUES(739,'仁',NULL,'yeng5',NULL);
 INSERT INTO Chinese VALUES(740,'猴',NULL,'gao5',NULL);
+INSERT INTO Chinese VALUES(741,'咪',NULL,'mi6',NULL);
+INSERT INTO Chinese VALUES(742,'下',NULL,'e7',NULL);
+INSERT INTO Chinese VALUES(743,'叠','疊','tiap8',NULL);
+INSERT INTO Chinese VALUES(744,'噜','嚕','luh4',NULL);
+INSERT INTO Chinese VALUES(745,'血',NULL,'hueh4',NULL);
+INSERT INTO Chinese VALUES(746,'蝴',NULL,'hu5',NULL);
+INSERT INTO Chinese VALUES(747,'蝶',NULL,'diap8',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1758,6 +1771,10 @@ INSERT INTO Synonyms VALUES(143,800,'morning glory',1);
 INSERT INTO Synonyms VALUES(144,818,'below',1);
 INSERT INTO Synonyms VALUES(145,818,'under',1);
 INSERT INTO Synonyms VALUES(146,818,'downstairs',1);
+INSERT INTO Synonyms VALUES(147,828,'a bit',1);
+INSERT INTO Synonyms VALUES(148,829,'to pile up in an organized way',1);
+INSERT INTO Synonyms VALUES(149,829,'to organize',1);
+INSERT INTO Synonyms VALUES(150,830,'to sip',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1816,6 +1833,7 @@ INSERT INTO Phrases VALUES(44,'Wishing you a happy birthday',0);
 INSERT INTO Phrases VALUES(45,'I didn''t hear it',0);
 INSERT INTO Phrases VALUES(46,'We''re going now',0);
 INSERT INTO Phrases VALUES(47,'I just got here',0);
+INSERT INTO Phrases VALUES(48,'It''s time for me to go meet my friend now',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -1890,6 +1908,8 @@ INSERT INTO Extra VALUES(52,786,replace('If you are late to something, you would
 INSERT INTO Extra VALUES(53,790,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**. Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
 INSERT INTO Extra VALUES(54,798,replace('We typically use **dim1** if we''re heating up food using a microwave, but I don''t think it''s exclusive to microwaving. You could use it for heating up food on a stove too.\n','\n',char(10)));
 INSERT INTO Extra VALUES(55,820,replace('I think this word is borrowed from Thai\n','\n',char(10)));
+INSERT INTO Extra VALUES(56,829,replace('**tiap8** has the connotation of making things more organized. While it literally means to stack or to pile up, my family has also used it to generally mean organizing or putting things away.\n','\n',char(10)));
+INSERT INTO Extra VALUES(57,830,replace('It seems like some people have **luh4** and some other people have **luh8** for this. My family uses luh4.\n\nI''ve personally never used this to mean drinking a drink. I''ve only used this word in **luh(8) teung1** to mean "to sip soup".\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -3123,6 +3143,15 @@ INSERT INTO Translation VALUES(1161,NULL,1168,0);
 INSERT INTO Translation VALUES(1162,826,1169,0);
 INSERT INTO Translation VALUES(1163,827,1170,0);
 INSERT INTO Translation VALUES(1164,NULL,1171,0);
+INSERT INTO Translation VALUES(1165,351,1172,0);
+INSERT INTO Translation VALUES(1166,828,1173,0);
+INSERT INTO Translation VALUES(1167,829,1174,0);
+INSERT INTO Translation VALUES(1168,830,1175,0);
+INSERT INTO Translation VALUES(1169,831,1176,0);
+INSERT INTO Translation VALUES(1170,832,1177,0);
+INSERT INTO Translation VALUES(1171,NULL,1178,0);
+INSERT INTO Translation VALUES(1172,NULL,1179,0);
+INSERT INTO Translation VALUES(1173,833,1180,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4267,6 +4296,15 @@ INSERT INTO Teochew VALUES(1168,'yeng5','仁');
 INSERT INTO Teochew VALUES(1169,'lek84 dao7','绿豆');
 INSERT INTO Teochew VALUES(1170,'lao67 gao5','老猴');
 INSERT INTO Teochew VALUES(1171,'gao5','猴');
+INSERT INTO Teochew VALUES(1172,'mi6','咪');
+INSERT INTO Teochew VALUES(1173,'jek84 e7','一下');
+INSERT INTO Teochew VALUES(1174,'tiap8','叠');
+INSERT INTO Teochew VALUES(1175,'luh4','噜');
+INSERT INTO Teochew VALUES(1176,'hueh4','血');
+INSERT INTO Teochew VALUES(1177,'hu57 diap8','蝴蝶');
+INSERT INTO Teochew VALUES(1178,'hu5','蝴');
+INSERT INTO Teochew VALUES(1179,'diap8','蝶');
+INSERT INTO Teochew VALUES(1180,'luh48 teung1','噜汤');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5194,6 +5232,10 @@ INSERT INTO Compound VALUES(934,1169,1,129);
 INSERT INTO Compound VALUES(935,1169,2,268);
 INSERT INTO Compound VALUES(936,1170,1,114);
 INSERT INTO Compound VALUES(937,1170,2,1164);
+INSERT INTO Compound VALUES(938,1177,1,1171);
+INSERT INTO Compound VALUES(939,1177,2,1172);
+INSERT INTO Compound VALUES(940,1180,1,1168);
+INSERT INTO Compound VALUES(941,1180,2,341);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5211,6 +5253,7 @@ INSERT INTO TranslationExtra VALUES(8,100,replace('I think this is just a shorte
 INSERT INTO TranslationExtra VALUES(9,977,replace('Note that the 中 character by itself actually has readings of "dang", "dong", and "diong", and it might have just been shortened to "da" in this particular phrase. You might also see it as "dan".\n\nThe second syllable 央 might also be read as "ng", but the sounds "eung" and "ng" are pretty similar to my ears.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(10,1071,replace('I really wasn''t sure about the character for this one, but 拰 seems to be what was used in the Gaginang discord.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(11,1095,replace('The character 𠢕 is part of CJK Unified Ideographs Extension B, which is often not included in system Chinese fonts. In order to make sure it''s displayed here, I''ve included it using a different font, which is why it might look stylistically different than the other Chinese characters on the site.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(12,1165,replace('This is a contraction of **m(7) si6**\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
@@ -5265,6 +5308,7 @@ INSERT INTO PhraseTranslations VALUES(47,44,'to_offer_good_wishes you happy_birt
 INSERT INTO PhraseTranslations VALUES(48,45,'I no_(don''t_have) to_hear-tian1giang3');
 INSERT INTO PhraseTranslations VALUES(49,46,'we_(including_person_spoken_to)| to_go| already');
 INSERT INTO PhraseTranslations VALUES(50,47,'I just_now to_come');
+INSERT INTO PhraseTranslations VALUES(51,48,'time_(it''s_time)| I to_go to_meet I friend| already');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
 INSERT INTO Tags VALUES(2,'kitchenware');
