@@ -645,6 +645,22 @@ sub generate_translation_word_list {
         # why...why is this a HASH sometimes and a string other times
         if (ref $english eq 'HASH') {
             my $base_word = $english->{word};
+
+            # Also check if there are any synonyms we want to show on the
+            # flashcard
+            if ($for_flashcards && !$english->{notes}) {
+                my @synonyms =
+                    get_synonyms($base_word, show_on_flashcard => 1);
+                if (@synonyms) {
+                    # Randomly pick one of the words (between the main word and
+                    # the synonyms) to show on the flashcard. Also show the
+                    # other synonyms
+                    @synonyms = shuffle(@synonyms, $base_word);
+                    $english->{word}  = $base_word = shift @synonyms;
+                    $english->{notes} = join ", ", @synonyms;
+                }
+            }
+
             $flashcard{english_link} = $base_word;
             $flashcard{is_definition} = $english->{is_definition};
 
@@ -863,11 +879,18 @@ Given an English word, returns the synonyms for that word
 =cut
 
 sub get_synonyms {
-    my ($word) = @_;
+    my ($word, %params) = @_;
+
+    my $show_on_flashcard = $params{show_on_flashcard};
+
     my $sql =
         'select Synonyms.word as word ' .
         'from Synonyms join English on English.id = english_id ' .
         'where English.word = ?';
+
+    if ($show_on_flashcard) {
+        $sql .= ' and show_on_flashcard = 1';
+    }
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
     return map { $_->{word} } @rows;
