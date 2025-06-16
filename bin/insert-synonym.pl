@@ -27,6 +27,8 @@ my ($row) = Teochew::get_english_from_database(word => $word);
 
 die "$english does not exist!\n" unless $row;
 
+# TODO: Be able to say that we're showing this on flashcard
+
 say "Inserting $synonym as synonym for $word";
 if (confirm()) {
     Teochew::Edit->insert_synonym(
