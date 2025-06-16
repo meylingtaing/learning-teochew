@@ -278,7 +278,8 @@ sub update_teochew {
 
     $teochew->insert_synonym(
         english => 'hello',
-        synonym => 'hi'
+        synonym => 'hi',
+        show_on_flashcard => 0,
     );
 
 =cut
@@ -290,11 +291,15 @@ sub insert_synonym {
     my $english_id = $params{english_id} || _get_english_id(%params);
     return unless $english_id;
 
-    my $sth = $self->dbh->prepare(
-        "insert into Synonyms (english_id, word) values (?,?)"
-    );
+    my $show_on_flashcard = $params{show_on_flashcard} // 0;
+
+    my $sth = $self->dbh->prepare(qq{
+        insert into Synonyms (english_id, word, show_on_flashcard)
+        values (?,?,?)
+    });
     $sth->bind_param(1, $params{english_id}, SQL_INTEGER);
     $sth->bind_param(2, $params{synonym});
+    $sth->bind_param(3, $show_on_flashcard, SQL_INTEGER);
     return $sth->execute;
 }
 
