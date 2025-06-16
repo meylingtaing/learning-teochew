@@ -664,7 +664,7 @@ sub generate_translation_word_list {
             $flashcard{english_link} = $base_word;
             $flashcard{is_definition} = $english->{is_definition};
 
-            if ($base_word && ($english->{notes} // '') =~ /$base_word/) {
+            if ($base_word && ($english->{notes} // '') =~ /\b$base_word\b/) {
                 $flashcard{english} = $english->{notes};
                 $flashcard{notes} = undef;
             }
