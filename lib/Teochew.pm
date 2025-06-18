@@ -971,9 +971,17 @@ sub check_alternate_chinese {
 Given a teochew id, this will return the compound word breakdown (if
 applicable), in the form of an array of hashrefs, each containing
 
-    chinese
-    pengim
-    word
+    chinese => {
+        simplified  => String,
+        traditional => String,
+    },
+    pengim   => String
+    word     => String
+    notes    => String
+    synonyms => String
+
+XXX: I'm not entirely sure if including synonyms in the return is necessary
+here, but I don't feel like digging into that now
 
 =cut
 
@@ -999,11 +1007,17 @@ sub compound_word_components {
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, $teochew_id);
 
-    for (@rows) {
+    for my $row (@rows) {
         # Uhh, this is awkward
-        $_->{word} .= ", $_->{synonyms}"
-            if $_->{synonyms} &&
-               length($_->{word}) + length($_->{synonyms}) < 15;
+        $row->{word} .= ", $row->{synonyms}"
+            if $row->{synonyms} &&
+               length($row->{word}) + length($row->{synonyms}) < 15;
+
+        # Get the traditional character
+        $row->{chinese} = {
+            simplified  => $row->{chinese},
+            traditional => get_traditional($row->{chinese}),
+        };
     }
 
     return @rows;
@@ -1799,7 +1813,7 @@ sub get_approx_num_translations {
 
 Given a string with simplified Chinese characters, this checks to see if the
 traditional variant is different, and if it is, it will return that. This
-returns nothing if they are the same
+returns undef if they are the same
 
 =cut
 
@@ -1819,6 +1833,7 @@ sub get_traditional {
     }
 
     return $full_traditional if $full_traditional ne $full_simplified;
+    return undef;
 }
 
 # TODO

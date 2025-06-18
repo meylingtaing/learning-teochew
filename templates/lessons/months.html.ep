@@ -57,7 +57,10 @@ syllable retains its base tone and the following syllables change to a
 
 <p>
 When you're referring to a specific day in a month, you would say the number
-followed by <b>ho7&nbsp;号</b>
+followed by <b>ho7&nbsp;
+<%= include 'elements/chinese-characters',
+        chinese => { simplified  => '号', traditional => '號' } =%>
+</b>
 <%= include 'elements/play-teochew', audio => 'h/ho7.mp3' %>.
 For example, <b>the&nbsp;18th</b> would be
 </p>

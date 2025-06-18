@@ -21,6 +21,11 @@ sub startup {
             $c->helpers->timing->begin('mojo.timer');
             return qq{$method "$path"};
         });
+
+        # Check if the user wants traditional characters. This is used all over
+        # the place which is why I'm adding it here at the beginning
+        my $traditional = ($c->cookie('simptrad') // '') eq 'traditional';
+        $c->stash(traditional => $traditional);
     });
 
     my $r = $app->routes;

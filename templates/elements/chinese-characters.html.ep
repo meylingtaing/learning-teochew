@@ -1,0 +1,26 @@
+%# For displaying chinese characters
+
+%# Required stash params:
+%#   * chinese - hashref with simplified and traditional values
+%# Optional stash params:
+%#   * traditional - boolean to determine whether traditional or simplified
+%#     characters are shown
+%#   * elt_classes - string with any classes that should be set on the span
+%#     element
+
+% my $simplified  = $chinese->{simplified};
+% my $traditional = $chinese->{traditional} || $chinese->{simplified};
+
+% my $classes = "chinese";
+% $classes .= " " . stash('elt_classes') if stash('elt_classes');
+
+<span data-simplified="<%= $simplified %>"
+      data-traditional="<%= $traditional %>"
+      class="<%= $classes %>">
+  % if (stash('traditional')) {
+      %= $traditional
+  % }
+  % else {
+      %= $simplified
+  % }
+</span>

@@ -9,6 +9,13 @@
       <span id="dark-mode-toggle">
         %= include 'elements/toggle'
         %= include 'elements/toggle-on'
-      </span>
+      </span> |
+
+      % if (stash('traditional')) {
+        <a href="#" id="set-simplified">Show Simplified</a>
+      % }
+      % else {
+        <a href="#" id="set-traditional">Show Traditional</a>
+      % }
     </div>
   </div>
