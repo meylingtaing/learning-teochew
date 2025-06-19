@@ -877,6 +877,11 @@ INSERT INTO English VALUES(830,43,'to drink',0,NULL,NULL);
 INSERT INTO English VALUES(831,11,'blood',0,NULL,NULL);
 INSERT INTO English VALUES(832,15,'butterfly',0,NULL,NULL);
 INSERT INTO English VALUES(833,43,'to sip soup',0,NULL,NULL);
+INSERT INTO English VALUES(834,23,'cloudy',0,NULL,NULL);
+INSERT INTO English VALUES(835,13,'to cover',0,NULL,NULL);
+INSERT INTO English VALUES(836,40,'weekend',0,NULL,2);
+INSERT INTO English VALUES(837,8,'dangerous',0,NULL,NULL);
+INSERT INTO English VALUES(838,9,'to decorate',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1621,6 +1626,16 @@ INSERT INTO Chinese VALUES(744,'噜','嚕','luh4',NULL);
 INSERT INTO Chinese VALUES(745,'血',NULL,'hueh4',NULL);
 INSERT INTO Chinese VALUES(746,'蝴',NULL,'hu5',NULL);
 INSERT INTO Chinese VALUES(747,'蝶',NULL,'diap8',NULL);
+INSERT INTO Chinese VALUES(748,'禁',NULL,'him3',NULL);
+INSERT INTO Chinese VALUES(749,'云','雲','hung5',NULL);
+INSERT INTO Chinese VALUES(750,'盖','蓋','kain3',NULL);
+INSERT INTO Chinese VALUES(751,'尾',NULL,'bhue2',NULL);
+INSERT INTO Chinese VALUES(752,'危',NULL,'ngui5',NULL);
+INSERT INTO Chinese VALUES(753,'险','險','hiam2',NULL);
+INSERT INTO Chinese VALUES(754,'打',NULL,'da2',NULL);
+INSERT INTO Chinese VALUES(755,'扮',NULL,'bang3',NULL);
+INSERT INTO Chinese VALUES(756,'东','東','dang1',NULL);
+INSERT INTO Chinese VALUES(757,'窿',NULL,'long5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1775,6 +1790,9 @@ INSERT INTO Synonyms VALUES(147,828,'a bit',1);
 INSERT INTO Synonyms VALUES(148,829,'to pile up in an organized way',1);
 INSERT INTO Synonyms VALUES(149,829,'to organize',1);
 INSERT INTO Synonyms VALUES(150,830,'to sip',1);
+INSERT INTO Synonyms VALUES(151,838,'to adorn',1);
+INSERT INTO Synonyms VALUES(152,838,'to do make up',1);
+INSERT INTO Synonyms VALUES(153,127,'toilet',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3152,6 +3170,23 @@ INSERT INTO Translation VALUES(1170,832,1177,0);
 INSERT INTO Translation VALUES(1171,NULL,1178,0);
 INSERT INTO Translation VALUES(1172,NULL,1179,0);
 INSERT INTO Translation VALUES(1173,833,1180,0);
+INSERT INTO Translation VALUES(1174,834,1181,0);
+INSERT INTO Translation VALUES(1175,NULL,1182,0);
+INSERT INTO Translation VALUES(1176,NULL,1183,0);
+INSERT INTO Translation VALUES(1177,835,1184,0);
+INSERT INTO Translation VALUES(1178,836,1185,0);
+INSERT INTO Translation VALUES(1179,NULL,1186,0);
+INSERT INTO Translation VALUES(1180,837,1187,0);
+INSERT INTO Translation VALUES(1181,NULL,1188,0);
+INSERT INTO Translation VALUES(1182,NULL,1189,0);
+INSERT INTO Translation VALUES(1183,838,1190,0);
+INSERT INTO Translation VALUES(1184,NULL,1191,0);
+INSERT INTO Translation VALUES(1185,NULL,1192,0);
+INSERT INTO Translation VALUES(1186,127,1193,0);
+INSERT INTO Translation VALUES(1187,NULL,1194,0);
+INSERT INTO Translation VALUES(1188,NULL,1195,0);
+INSERT INTO Translation VALUES(1189,127,1196,0);
+INSERT INTO Translation VALUES(1190,NULL,1197,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4305,6 +4340,23 @@ INSERT INTO Teochew VALUES(1177,'hu57 diap8','蝴蝶');
 INSERT INTO Teochew VALUES(1178,'hu5','蝴');
 INSERT INTO Teochew VALUES(1179,'diap8','蝶');
 INSERT INTO Teochew VALUES(1180,'luh48 teung1','噜汤');
+INSERT INTO Teochew VALUES(1181,'him32 hung5','禁云');
+INSERT INTO Teochew VALUES(1182,'him3','禁');
+INSERT INTO Teochew VALUES(1183,'hung5','云');
+INSERT INTO Teochew VALUES(1184,'kain3','盖');
+INSERT INTO Teochew VALUES(1185,'bai32 bhue2','拜尾');
+INSERT INTO Teochew VALUES(1186,'bhue2','尾');
+INSERT INTO Teochew VALUES(1187,'ngui57 hiam2','危险');
+INSERT INTO Teochew VALUES(1188,'ngui5','危');
+INSERT INTO Teochew VALUES(1189,'hiam2','险');
+INSERT INTO Teochew VALUES(1190,'da26 bang3','打扮');
+INSERT INTO Teochew VALUES(1191,'da2','打');
+INSERT INTO Teochew VALUES(1192,'bang3','扮');
+INSERT INTO Teochew VALUES(1193,'dang1 si1','东司');
+INSERT INTO Teochew VALUES(1194,'dang1','东');
+INSERT INTO Teochew VALUES(1195,'si1','司');
+INSERT INTO Teochew VALUES(1196,'gong1 si1 long5','公司窿');
+INSERT INTO Teochew VALUES(1197,'long5','窿');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5236,6 +5288,18 @@ INSERT INTO Compound VALUES(938,1177,1,1171);
 INSERT INTO Compound VALUES(939,1177,2,1172);
 INSERT INTO Compound VALUES(940,1180,1,1168);
 INSERT INTO Compound VALUES(941,1180,2,341);
+INSERT INTO Compound VALUES(942,1181,1,1175);
+INSERT INTO Compound VALUES(943,1181,2,1176);
+INSERT INTO Compound VALUES(944,1185,1,450);
+INSERT INTO Compound VALUES(945,1185,2,1179);
+INSERT INTO Compound VALUES(946,1187,1,1181);
+INSERT INTO Compound VALUES(947,1187,2,1182);
+INSERT INTO Compound VALUES(948,1190,1,1184);
+INSERT INTO Compound VALUES(949,1190,2,1185);
+INSERT INTO Compound VALUES(950,1193,1,1187);
+INSERT INTO Compound VALUES(951,1193,2,1188);
+INSERT INTO Compound VALUES(952,1196,1,457);
+INSERT INTO Compound VALUES(953,1196,2,1190);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5254,6 +5318,7 @@ INSERT INTO TranslationExtra VALUES(9,977,replace('Note that the 中 character b
 INSERT INTO TranslationExtra VALUES(10,1071,replace('I really wasn''t sure about the character for this one, but 拰 seems to be what was used in the Gaginang discord.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(11,1095,replace('The character 𠢕 is part of CJK Unified Ideographs Extension B, which is often not included in system Chinese fonts. In order to make sure it''s displayed here, I''ve included it using a different font, which is why it might look stylistically different than the other Chinese characters on the site.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(12,1165,replace('This is a contraction of **m(7) si6**\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(13,1174,replace('The 禁 character was taken from [_A pronouncing and defining dictionary of the Swatow dialect, arranged according to syllables and tones_](https://en.wikisource.org/wiki/Dictionary_of_the_Swatow_dialect/him), and means "cover" in this context. If you look up this character in other dictionaries, you''ll probably see other definitions and a different pronunciation.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
