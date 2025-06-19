@@ -1636,6 +1636,9 @@ INSERT INTO Chinese VALUES(754,'打',NULL,'da2',NULL);
 INSERT INTO Chinese VALUES(755,'扮',NULL,'bang3',NULL);
 INSERT INTO Chinese VALUES(756,'东','東','dang1',NULL);
 INSERT INTO Chinese VALUES(757,'窿',NULL,'long5',NULL);
+INSERT INTO Chinese VALUES(758,'珍',NULL,'diang5',NULL);
+INSERT INTO Chinese VALUES(759,'滇',NULL,'diang5',NULL);
+INSERT INTO Chinese VALUES(760,'柅',NULL,'ni5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1876,31 +1879,29 @@ CREATE TABLE Extra (
     foreign key(english_id) references English(id)
 );
 INSERT INTO Extra VALUES(1,6,replace('If you are counting the numbers, or you are referring to one of something, you would use **jek8**. **ek4** is typically used when the number 1 is part of another word, like **jap(4) ek4** for the word 11, or **loi(6) bai(2) ek4** for Monday.\n','\n',char(10)));
-INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 for 2. 两 is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
-INSERT INTO Extra VALUES(3,111,replace('**chu3** 厝 refers to a house as a building, whereas **lai6** 内 is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
-INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as 起 **ki2** means to go up and 早 **ja2** means early.\n','\n',char(10)));
+INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 (兩) for 2. 两 (兩) is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
+INSERT INTO Extra VALUES(3,111,replace('**chu3** refers to a house as a building, whereas **lai6** is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
+INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as **ki2** means to go up and **ja2** means early.\n','\n',char(10)));
 INSERT INTO Extra VALUES(5,30,'My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that ''pin7 hung1 sek4'' was like the smoke that comes out of the nose.');
 INSERT INTO Extra VALUES(7,47,replace('Note that you should always just use **ma2** when addressing your grandmother. **lai7 ma2** and **ghua7 ma2** can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.\n','\n',char(10)));
 INSERT INTO Extra VALUES(8,48,replace('Note that you should always just use **gong1** when addressing your grandfather. **lai7 gong1** and **ghua7 gong1** can be used when referring to your grandfather, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandfather.\n','\n',char(10)));
 INSERT INTO Extra VALUES(10,344,replace('**ga lem** originates from the French word crème. We just throw a teochew accent on it (:\n','\n',char(10)));
-INSERT INTO Extra VALUES(11,110,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the 揭阳 Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is the 潮州 "Teochew-proper" way of saying it.\n','\n',char(10)));
+INSERT INTO Extra VALUES(11,110,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is more common in other accents.\n','\n',char(10)));
 INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
-INSERT INTO Extra VALUES(13,281,replace('Alternatively, you may see 底珍 or 底滇 used.\n','\n',char(10)));
 INSERT INTO Extra VALUES(14,284,replace('You''ll always see **yioh8** followed by an adjective, so it should actually be pronounced **yioh(4)**. It can be used as both a question and a statement.\n','\n',char(10)));
-INSERT INTO Extra VALUES(15,180,replace('Alternatively, you might see 树泥.\n','\n',char(10)));
 INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
 INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
 INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
 INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
-INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip** the filling, so this is not limited to just dough.\n\nI''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
+INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip(4)** the filling, so this is not limited to just dough.\n','\n',char(10)));
 INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
 INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too much"\n','\n',char(10)));
 INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
 INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
 INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
-INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the 揭阳 Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
+INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
 INSERT INTO Extra VALUES(31,1,replace('**leu2 ho2** is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
 INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
 INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
@@ -1997,6 +1998,9 @@ INSERT INTO TeochewAltChinese VALUES(41,1102,'贤 (賢)');
 INSERT INTO TeochewAltChinese VALUES(42,1110,'澜 (瀾)');
 INSERT INTO TeochewAltChinese VALUES(43,1133,'帀');
 INSERT INTO TeochewAltChinese VALUES(44,375,'爱 (愛)');
+INSERT INTO TeochewAltChinese VALUES(45,321,'底珍');
+INSERT INTO TeochewAltChinese VALUES(46,321,'底滇');
+INSERT INTO TeochewAltChinese VALUES(47,202,'树柅 (樹柅)');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -5319,6 +5323,7 @@ INSERT INTO TranslationExtra VALUES(10,1071,replace('I really wasn''t sure about
 INSERT INTO TranslationExtra VALUES(11,1095,replace('The character 𠢕 is part of CJK Unified Ideographs Extension B, which is often not included in system Chinese fonts. In order to make sure it''s displayed here, I''ve included it using a different font, which is why it might look stylistically different than the other Chinese characters on the site.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(12,1165,replace('This is a contraction of **m(7) si6**\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(13,1174,replace('The 禁 character was taken from [_A pronouncing and defining dictionary of the Swatow dialect, arranged according to syllables and tones_](https://en.wikisource.org/wiki/Dictionary_of_the_Swatow_dialect/him), and means "cover" in this context. If you look up this character in other dictionaries, you''ll probably see other definitions and a different pronunciation.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(14,612,replace('I''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 (撏) is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
