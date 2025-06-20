@@ -11,7 +11,7 @@
     padding-top: .5em;
     padding-bottom: .5em;
 }
-.word-breakdown > :not(:last-child) {
+.more-details > :not(:last-child) {
     margin-bottom: .5rem;
 }
 .tag-text {
@@ -44,8 +44,12 @@
           %= include 'elements/translation', row => $row
 
 
-          % if ($row->{compound} || $row->{extra_notes} || $row->{pronunciations}[1] || $row->{alt_chinese} || $row->{chinese}{traditional}) {
-            <a data-bs-toggle="collapse" href="#word-breakdown-<%= $row_id %>"
+          % if ($row->{compound}          ||
+          %     $row->{extra_notes}       ||
+          %     $row->{pronunciations}[1] ||
+          %     $row->{alt_chinese}       ||
+          %     $row->{chinese}{simplified} && $row->{chinese}{traditional}) {
+            <a data-bs-toggle="collapse" href="#more-details-<%= $row_id %>"
                class="link-underline
                       link-underline-opacity-0
                       link-underline-opacity-100-hover">
@@ -54,14 +58,16 @@
               </small>
             </a>
 
-            %# XXX: I should rename this class since it contains more than just
-            %# the compound word breakdowns now
-            <div id="word-breakdown-<%= $row_id %>"
-                 class="word-breakdown collapse my-2">
+            <div id="more-details-<%= $row_id %>"
+                 class="more-details collapse my-2">
 
-            % if (my $traditional = $row->{chinese}{traditional}) {
-                <div class="traditional">
-                  Traditional: <%= $traditional %>
+            %# Traditional/simplified
+            % if ($row->{chinese}{traditional} && $row->{chinese}{simplified}) {
+                % my $class = stash('traditional') ? 'simplified' : 'traditional';
+                <div class="<%= $class %>"
+                     data-traditional="<%= $row->{chinese}{traditional} %>"
+                     data-simplified="<%= $row->{chinese}{simplified} %>">
+                  <%= ucfirst($class) %>: <%= $row->{chinese}{$class} %>
                 </div>
             % }
 
@@ -94,7 +100,10 @@
               <tr>
               % for my $component (@{ $row->{compound} }) {
                   <td class="py-2 text-center">
-                    <h1 class="mb-0"><%= $component->{chinese} %></h1>
+                    <h1 class="mb-0">
+                      <%= include 'elements/chinese-characters',
+                            chinese => $component->{chinese} %>
+                    </h1>
                     <span><%= $component->{pengim} %></span>
                   </td>
               % }
@@ -115,7 +124,7 @@
             </div>
             % }
 
-            </div> <!-- word-breakdown -->
+            </div> <!-- more-details -->
           % }
 
         </li>

@@ -1,9 +1,13 @@
 %# A single translation, as shown on the English page, or in the Flashcards
 %# Must have 'row' stashed
+
 % my $style = stash('hidden') ? 'style="display:none"' : '';
 % my $id = stash('id') ? 'id="' . stash('id') . '"' : '';
+
 <div class="translation" <%== $id %> <%== $style %>>
-  <span class="chinese nowrap me-2 align-middle"><%= $row->{chinese}{simplified} %></span>
+    <%= include 'elements/chinese-characters',
+            chinese => $row->{chinese},
+            elt_classes => "nowrap me-2 align-middle" %>
   % my $pronunciation = $row->{pronunciations}[0];
   <span class="pengim nowrap me-2 align-middle">
     <%= $pronunciation->{pengim} %>

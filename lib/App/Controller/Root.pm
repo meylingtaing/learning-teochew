@@ -144,6 +144,10 @@ C<english> must be stashed
 
 sub english {
     my $c = shift;
+
+    #my $traditional = $c->cookie('simptrad') eq 'traditional';
+    #$c->stash(traditional => $traditional);
+
     my $input = trim $c->stash('english');
 
     # Replace _ with .
@@ -237,6 +241,7 @@ sub english {
             for my $translation_row (@$translation_rows) {
                 my $teochew_id = $translation_row->{teochew_id};
 
+                # I think alts technically already show both simp and trad?
                 my $alternates = Teochew::check_alternate_chinese(
                     teochew_id => $teochew_id);
                 if (my $alts = $alternates->{has_alts}) {
@@ -250,6 +255,8 @@ sub english {
                     $translation_row->{compound} = \@components;
                 }
 
+                # TODO: Don't forget to check the extra notes in the db to see
+                # if we need to add special logic for it!
                 my $extra_translation_notes =
                     Teochew::extra_translation_information_by_id(
                         $translation_row->{translation_id}
