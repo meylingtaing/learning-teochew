@@ -1,6 +1,6 @@
 % layout 'wrapper-left';
 
-<h1>About me and this website</h1>
+<h1>About me</h1>
 <p>
 My name is Kirsten, but I often use my middle/Chinese name Meyling. As a child, the first language I knew how to speak was Chinese, but I didn't actually know what kind of Chinese it was, just that it wasn't Mandarin or Cantonese. Later in life, I learned that it was called Teochew (潮州).
 </p>
@@ -10,17 +10,24 @@ Once I started school, I spoke a lot more English and I quickly forgot a lot of 
 </p>
 
 <p>
-But in 2018, I made it my New Year's resolution to try to learn Teochew again. And because I like coding, I decided to keep track of everything that I was learning in a website. In all my research, I realized that there are <a href="https://en.wikipedia.org/wiki/Chaoshan_Min#Classification">so many variations</a> in how people say things in Teochew! My family speaks the Gekion dialect (揭阳话) and they are generally from Cambodia, so the translations and my accent in the audio recordings are representative of that.
-</p>
+But in 2018, I made it my New Year's resolution to try to learn Teochew again. And because I like coding, I decided to keep track of everything that I was learning in a website. In all my research, I realized that there are <a href="https://en.wikipedia.org/wiki/Chaoshan_Min#Classification">so many variations</a> in how people say things in Teochew, and it was really overwhelming. </p>
 
 <p>
 I've taken several breaks since I started this website, and since then, <b>many</b> more resources have popped up for learning Teochew, and it's much easier to connect with other "Teochew nang" on Discord and other social media. It still feels like I know so little! But I'm just taking it bit by bit, and I'm slowly adding more translations and features to this website every week. Right now there are over <%= $num_translations %> translations on the site!
 </p>
 
-<p>
-Finally, this is all open source! Feel free to check out the code on <a href="https://github.com/meylingtaing/learning-teochew">github</a>.
-</p>
+<h1>About this website</h1>
+
+<p>Teochew is such a diverse language, and you may find that some of my translations don't match up to what you're used to. My family speaks the Gekion dialect (揭阳话) and they are generally from Cambodia, so the translations and my accent in the audio recordings are representative of that. But there are also words that we say a little differently, even to other Cambodian Teochew!</p>
+
+<p>This site uses Gaginang Peng'im (GGNPI) for all the pronunciations. There are other peng'im systems, but I find that this is easiest for my American brain to understand.</p>
+
+<p>There isn't a unified standard for Chinese characters in Teochew like there is in Mandarin. I've done my best to use what seems to be most common, or whatever the Gaginang community has agreed on. Sometimes this means using characters that aren't available in your system Chinese font. I used glyphs from <a href="https://glyphwiki.org/">GlyphWiki</a> to display any uncommon characters.</p>
 
 <p>
-Disclaimer: Some of my translations may be inaccurate. Some of my pronunciation might be bad. Feel free to contact me at meylingtaing@gmail.com or find me on the Gaginang discord server.
+This site was programmed in perl and uses a sqlite database. I also use Bootstrap and some jQuery on the frontend. It's kind of old school, but it works! This is all open source. Feel free to check out the code on <a href="https://github.com/meylingtaing/learning-teochew">github</a>.
 </p>
+
+<hr>
+
+<i>Disclaimer: Some of my translations may be inaccurate. Some of my pronunciation might be bad. Feel free to contact me at meylingtaing@gmail.com or find me on the Gaginang discord server.</i>
