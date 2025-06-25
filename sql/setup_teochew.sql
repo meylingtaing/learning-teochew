@@ -882,6 +882,12 @@ INSERT INTO English VALUES(835,13,'to cover',0,NULL,NULL);
 INSERT INTO English VALUES(836,40,'weekend',0,NULL,2);
 INSERT INTO English VALUES(837,8,'dangerous',0,NULL,NULL);
 INSERT INTO English VALUES(838,9,'to decorate',0,NULL,NULL);
+INSERT INTO English VALUES(839,35,'east',0,NULL,NULL);
+INSERT INTO English VALUES(840,35,'west',0,NULL,NULL);
+INSERT INTO English VALUES(841,35,'south',0,NULL,NULL);
+INSERT INTO English VALUES(842,35,'north',0,NULL,NULL);
+INSERT INTO English VALUES(843,35,'east, west, south, north',0,NULL,NULL);
+INSERT INTO English VALUES(844,35,'Asia',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1639,6 +1645,11 @@ INSERT INTO Chinese VALUES(757,'窿',NULL,'long5',NULL);
 INSERT INTO Chinese VALUES(758,'珍',NULL,'diang5',NULL);
 INSERT INTO Chinese VALUES(759,'滇',NULL,'diang5',NULL);
 INSERT INTO Chinese VALUES(760,'柅',NULL,'ni5',NULL);
+INSERT INTO Chinese VALUES(761,'食',NULL,'sek8',NULL);
+INSERT INTO Chinese VALUES(762,'南',NULL,'nam5',NULL);
+INSERT INTO Chinese VALUES(763,'北',NULL,'bak4',NULL);
+INSERT INTO Chinese VALUES(764,'亚','亞','a1',NULL);
+INSERT INTO Chinese VALUES(765,'洲',NULL,'jiu1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3187,10 +3198,20 @@ INSERT INTO Translation VALUES(1183,838,1190,0);
 INSERT INTO Translation VALUES(1184,NULL,1191,0);
 INSERT INTO Translation VALUES(1185,NULL,1192,0);
 INSERT INTO Translation VALUES(1186,127,1193,0);
-INSERT INTO Translation VALUES(1187,NULL,1194,0);
+INSERT INTO Translation VALUES(1187,839,1194,0);
 INSERT INTO Translation VALUES(1188,NULL,1195,0);
 INSERT INTO Translation VALUES(1189,127,1196,0);
 INSERT INTO Translation VALUES(1190,NULL,1197,0);
+INSERT INTO Translation VALUES(1191,126,1198,0);
+INSERT INTO Translation VALUES(1192,NULL,1199,0);
+INSERT INTO Translation VALUES(1193,840,1200,0);
+INSERT INTO Translation VALUES(1194,841,1201,0);
+INSERT INTO Translation VALUES(1195,842,1202,0);
+INSERT INTO Translation VALUES(1196,843,1203,0);
+INSERT INTO Translation VALUES(1197,844,1204,0);
+INSERT INTO Translation VALUES(1198,NULL,1205,0);
+INSERT INTO Translation VALUES(1199,NULL,1206,0);
+INSERT INTO Translation VALUES(1200,610,1207,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4361,6 +4382,16 @@ INSERT INTO Teochew VALUES(1194,'dang1','东');
 INSERT INTO Teochew VALUES(1195,'si1','司');
 INSERT INTO Teochew VALUES(1196,'gong1 si1 long5','公司窿');
 INSERT INTO Teochew VALUES(1197,'long5','窿');
+INSERT INTO Teochew VALUES(1198,'hue26 sek8','火食');
+INSERT INTO Teochew VALUES(1199,'sek8','食');
+INSERT INTO Teochew VALUES(1200,'sai1','西');
+INSERT INTO Teochew VALUES(1201,'nam5','南');
+INSERT INTO Teochew VALUES(1202,'bak4','北');
+INSERT INTO Teochew VALUES(1203,'dang1 sai1 nam57 bak4','东西南北');
+INSERT INTO Teochew VALUES(1204,'a1 jiu1','亚洲');
+INSERT INTO Teochew VALUES(1205,'a1','亚');
+INSERT INTO Teochew VALUES(1206,'jiu1','洲');
+INSERT INTO Teochew VALUES(1207,'dang1 nam57 a1','东南亚');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5304,6 +5335,17 @@ INSERT INTO Compound VALUES(950,1193,1,1187);
 INSERT INTO Compound VALUES(951,1193,2,1188);
 INSERT INTO Compound VALUES(952,1196,1,457);
 INSERT INTO Compound VALUES(953,1196,2,1190);
+INSERT INTO Compound VALUES(954,1198,1,445);
+INSERT INTO Compound VALUES(955,1198,2,1192);
+INSERT INTO Compound VALUES(956,1203,1,1187);
+INSERT INTO Compound VALUES(957,1203,2,1193);
+INSERT INTO Compound VALUES(958,1203,3,1194);
+INSERT INTO Compound VALUES(959,1203,4,1195);
+INSERT INTO Compound VALUES(960,1204,1,1198);
+INSERT INTO Compound VALUES(961,1204,2,1199);
+INSERT INTO Compound VALUES(962,1207,1,1187);
+INSERT INTO Compound VALUES(963,1207,2,1194);
+INSERT INTO Compound VALUES(964,1207,3,1198);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
