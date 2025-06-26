@@ -7,15 +7,15 @@
 header { background-color: var(--bs-primary-bg-subtle); }
 </style>
 
-    <!-- the navbar -->
-    <header>
-      <nav class="container-md navbar navbar-expand-md bg-primary-subtle">
+  <!-- the navbar -->
+  <header>
+    <nav class="container-md navbar navbar-expand-md bg-primary-subtle">
 
-        <!-- for some reason, using a margin of "3" is what makes this line up
-        with the rest of the page. if I don't include a margin, the navbar text
-        ends up being slightly wider. idk why, but I don't feel like digging
-        into it further -->
-        <div class="container-fluid mx-sm-3">
+      <!-- for some reason, using a margin of "3" is what makes this line up
+      with the rest of the page. if I don't include a margin, the navbar text
+      ends up being slightly wider. idk why, but I don't feel like digging
+      into it further -->
+      <div class="container-fluid mx-sm-3">
         <a class="navbar-brand" href="/flashcards">Flashcards</a>
 
         <!-- hamburger and search icons -->
@@ -100,10 +100,11 @@ header { background-color: var(--bs-primary-bg-subtle); }
               </div>
             </li>
           </ul>
+
         </div> <!-- #flashcards-navbar -->
 
-        </div> <!-- .container-fluid inside navbar -->
-      </nav>
+      </div> <!-- .container-fluid inside navbar -->
+    </nav>
   </header>
 
   <!-- the search/translate input -->
