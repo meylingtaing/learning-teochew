@@ -44,7 +44,11 @@
           %= include 'elements/translation', row => $row
 
 
-          % if ($row->{compound} || $row->{extra_notes} || $row->{pronunciations}[1] || $row->{alt_chinese} || $row->{chinese}{traditional}) {
+          % if ($row->{compound}          ||
+          %     $row->{extra_notes}       ||
+          %     $row->{pronunciations}[1] ||
+          %     $row->{alt_chinese}       ||
+          %     $row->{chinese}{simplified} && $row->{chinese}{traditional}) {
             <a data-bs-toggle="collapse" href="#more-details-<%= $row_id %>"
                class="link-underline
                       link-underline-opacity-0
@@ -57,9 +61,13 @@
             <div id="more-details-<%= $row_id %>"
                  class="more-details collapse my-2">
 
-            % if (my $traditional = $row->{chinese}{traditional}) {
-                <div class="traditional">
-                  Traditional: <%= $traditional %>
+            %# Traditional/simplified
+            % if ($row->{chinese}{traditional} && $row->{chinese}{simplified}) {
+                % my $class = stash('traditional') ? 'simplified' : 'traditional';
+                <div class="<%= $class %>"
+                     data-traditional="<%= $row->{chinese}{traditional} %>"
+                     data-simplified="<%= $row->{chinese}{simplified} %>">
+                  <%= ucfirst($class) %>: <%= $row->{chinese}{$class} %>
                 </div>
             % }
 
