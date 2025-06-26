@@ -1799,7 +1799,7 @@ sub get_approx_num_translations {
 
 Given a string with simplified Chinese characters, this checks to see if the
 traditional variant is different, and if it is, it will return that. This
-returns nothing if they are the same
+returns undef if they are the same
 
 =cut
 
@@ -1819,6 +1819,7 @@ sub get_traditional {
     }
 
     return $full_traditional if $full_traditional ne $full_simplified;
+    return undef;
 }
 
 # TODO
