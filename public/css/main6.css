@@ -62,3 +62,7 @@ tbody.table-group-divider { border-top-color: var(--bs-border-color); }
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.nowrap {
+    white-space: nowrap;
+}
