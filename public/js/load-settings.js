@@ -37,4 +37,18 @@ $(function() {
             set_dark();
         }
     });
+
+    // Toggle traditional/simplified characters when user changes the setting
+    $('input[name=chinese-character-setting]').on("change", function(e) {
+        e.preventDefault();
+
+        if ($(this).val() == 'traditional') {
+            document.cookie = "simptrad=traditional; max-age=2592000; path=/";
+            use_traditional = true;
+        }
+        else {
+            document.cookie = "simptrad=simplified; max-age=2592000; path=/";
+            use_traditional = false;
+        }
+    });
 });

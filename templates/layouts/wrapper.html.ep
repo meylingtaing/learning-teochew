@@ -19,6 +19,10 @@
 </head>
 
 <body>
+  <script>
+  % my $use_traditional = stash('traditional') ? 'true' : 'false';
+  var use_traditional = <%= $use_traditional %>
+  </script>
 
   %= include 'menu'
 
