@@ -142,7 +142,23 @@
             elt.attr('id', '');
 
             elt.find('.pengim').html(translation.pronunciations[0].pengim);
-            elt.find('.chinese').html(translation.chinese.simplified);
+
+            // Update the chinese characters, making sure to correctly pick
+            // simplified or traditional
+            var traditional = translation.chinese.traditional ??
+                              translation.chinese.simplified;
+            var simplified  = translation.chinese.simplified;
+
+            if (use_traditional) {
+                new_chinese = traditional;
+            }
+            else {
+                new_chinese = simplified;
+            }
+            elt.find('.chinese').html(new_chinese)
+                                .attr('data-traditional', traditional)
+                                .attr('data-simplified', simplified);
+
             if (translation.pronunciations[0].audio) {
                 var play_elt = `<%= include 'elements/play-teochew' =%>`;
                 var audio = $(play_elt.trim());
