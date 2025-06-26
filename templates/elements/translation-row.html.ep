@@ -16,9 +16,8 @@
 <td><%= $word %></td>
 <td><%= $translation->{pronunciations}[0]{pengim} %></td>
 <td>
-  <span style="white-space:nowrap">
-    <%= $translation->{chinese}{simplified} %>
-  </span>
+  <%= include 'elements/chinese-characters',
+        chinese => $translation->{chinese}, elt_classes => 'nowrap' %>
 </td>
 <td>
   % if ($translation->{pronunciations}[0]{audio}) {

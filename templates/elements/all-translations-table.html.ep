@@ -51,7 +51,8 @@
             <%= $inner_row->{pronunciations}[0]{pengim} %>
           </td>
           <td>
-            %= $inner_row->{chinese}{simplified}
+            <%= include 'elements/chinese-characters',
+                    chinese => $inner_row->{chinese} %>
           </td>
           <td>
             % if ($inner_row->{pronunciations}[0]{audio}) {
