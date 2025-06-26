@@ -42,11 +42,38 @@ $(function() {
     $('input[name=chinese-character-setting]').on("change", function(e) {
         e.preventDefault();
 
+        // Set all the Chinese characters to be traditional
         if ($(this).val() == 'traditional') {
+            $('.chinese').html(function() {
+                const traditional_chars = $(this).attr('data-traditional');
+                if (traditional_chars) {
+                    return traditional_chars;
+                }
+            });
+
+            // But there's one edge case, where we show the opposite in "More
+            // Details", so handle that case specifically here
+            $('.traditional').addClass('simplified').removeClass('traditional')
+                .text(function() {
+                    return "Simplified: " + $(this).attr('data-simplified');
+                });
+
             document.cookie = "simptrad=traditional; max-age=2592000; path=/";
             use_traditional = true;
         }
         else {
+            $('.chinese').html(function() {
+                const simplified_chars = $(this).attr('data-simplified');
+                if (simplified_chars) {
+                    return simplified_chars;
+                }
+            });
+
+            $('.simplified').addClass('traditional').removeClass('simplified')
+                .text(function() {
+                    return "Traditional: " + $(this).attr('data-traditional');
+                });
+
             document.cookie = "simptrad=simplified; max-age=2592000; path=/";
             use_traditional = false;
         }
