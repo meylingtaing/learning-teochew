@@ -92,7 +92,10 @@
               <tr>
               % for my $component (@{ $row->{compound} }) {
                   <td class="py-2 text-center">
-                    <h1 class="mb-0"><%= $component->{chinese} %></h1>
+                    <h1 class="mb-0">
+                      <%= include 'elements/chinese-characters',
+                            chinese => $component->{chinese} %>
+                    </h1>
                     <span><%= $component->{pengim} %></span>
                   </td>
               % }
