@@ -888,6 +888,13 @@ INSERT INTO English VALUES(841,35,'south',0,NULL,NULL);
 INSERT INTO English VALUES(842,35,'north',0,NULL,NULL);
 INSERT INTO English VALUES(843,35,'east, west, south, north',0,NULL,NULL);
 INSERT INTO English VALUES(844,35,'Asia',0,NULL,NULL);
+INSERT INTO English VALUES(845,35,'Mandarin',0,'language',NULL);
+INSERT INTO English VALUES(846,16,'package, wrapped',1,NULL,NULL);
+INSERT INTO English VALUES(847,13,'to yawn',0,NULL,NULL);
+INSERT INTO English VALUES(848,43,'to order food',0,NULL,NULL);
+INSERT INTO English VALUES(849,29,'chicken thigh',0,NULL,10);
+INSERT INTO English VALUES(850,29,'chicken wings',0,NULL,10);
+INSERT INTO English VALUES(851,32,'some',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1650,6 +1657,13 @@ INSERT INTO Chinese VALUES(762,'南',NULL,'nam5',NULL);
 INSERT INTO Chinese VALUES(763,'北',NULL,'bak4',NULL);
 INSERT INTO Chinese VALUES(764,'亚','亞','a1',NULL);
 INSERT INTO Chinese VALUES(765,'洲',NULL,'jiu1',NULL);
+INSERT INTO Chinese VALUES(766,'语','語','gheu2',NULL);
+INSERT INTO Chinese VALUES(767,'㼦',NULL,'gong2',NULL);
+INSERT INTO Chinese VALUES(768,'喝',NULL,'huah4',NULL);
+INSERT INTO Chinese VALUES(769,'腿',NULL,'tui2',NULL);
+INSERT INTO Chinese VALUES(770,'翼',NULL,'sek8',NULL);
+INSERT INTO Chinese VALUES(771,'零',NULL,'lang5',NULL);
+INSERT INTO Chinese VALUES(772,'颗','顆','lo2',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1807,6 +1821,9 @@ INSERT INTO Synonyms VALUES(150,830,'to sip',1);
 INSERT INTO Synonyms VALUES(151,838,'to adorn',1);
 INSERT INTO Synonyms VALUES(152,838,'to do make up',1);
 INSERT INTO Synonyms VALUES(153,127,'toilet',1);
+INSERT INTO Synonyms VALUES(154,258,'mandarin orange',0);
+INSERT INTO Synonyms VALUES(155,849,'chicken leg',0);
+INSERT INTO Synonyms VALUES(156,849,'drumstick',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1940,6 +1957,8 @@ INSERT INTO Extra VALUES(54,798,replace('We typically use **dim1** if we''re hea
 INSERT INTO Extra VALUES(55,820,replace('I think this word is borrowed from Thai\n','\n',char(10)));
 INSERT INTO Extra VALUES(56,829,replace('**tiap8** has the connotation of making things more organized. While it literally means to stack or to pile up, my family has also used it to generally mean organizing or putting things away.\n','\n',char(10)));
 INSERT INTO Extra VALUES(57,830,replace('It seems like some people have **luh4** and some other people have **luh8** for this. My family uses luh4.\n\nI''ve personally never used this to mean drinking a drink. I''ve only used this word in **luh(8) teung1** to mean "to sip soup".\n','\n',char(10)));
+INSERT INTO Extra VALUES(58,845,replace('**gok(8) gheu2** literally means "national language"\n','\n',char(10)));
+INSERT INTO Extra VALUES(59,569,replace('**bue1** is a cup used for drinking. **gong2** is used for other cylindrical containers.\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -2845,7 +2864,7 @@ INSERT INTO Translation VALUES(830,NULL,840,0);
 INSERT INTO Translation VALUES(831,NULL,841,0);
 INSERT INTO Translation VALUES(832,NULL,842,0);
 INSERT INTO Translation VALUES(833,NULL,843,0);
-INSERT INTO Translation VALUES(834,NULL,844,0);
+INSERT INTO Translation VALUES(834,846,844,0);
 INSERT INTO Translation VALUES(835,NULL,845,0);
 INSERT INTO Translation VALUES(836,NULL,846,0);
 INSERT INTO Translation VALUES(837,NULL,847,0);
@@ -3212,6 +3231,19 @@ INSERT INTO Translation VALUES(1197,844,1204,0);
 INSERT INTO Translation VALUES(1198,NULL,1205,0);
 INSERT INTO Translation VALUES(1199,NULL,1206,0);
 INSERT INTO Translation VALUES(1200,610,1207,0);
+INSERT INTO Translation VALUES(1201,845,1208,0);
+INSERT INTO Translation VALUES(1202,NULL,1209,0);
+INSERT INTO Translation VALUES(1203,569,1210,0);
+INSERT INTO Translation VALUES(1204,847,1211,0);
+INSERT INTO Translation VALUES(1205,NULL,1212,0);
+INSERT INTO Translation VALUES(1206,848,1213,0);
+INSERT INTO Translation VALUES(1207,849,1214,0);
+INSERT INTO Translation VALUES(1208,NULL,1215,0);
+INSERT INTO Translation VALUES(1209,850,1216,0);
+INSERT INTO Translation VALUES(1210,NULL,1217,0);
+INSERT INTO Translation VALUES(1211,851,1218,0);
+INSERT INTO Translation VALUES(1212,NULL,1219,0);
+INSERT INTO Translation VALUES(1213,NULL,1220,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4392,6 +4424,19 @@ INSERT INTO Teochew VALUES(1204,'a1 jiu1','亚洲');
 INSERT INTO Teochew VALUES(1205,'a1','亚');
 INSERT INTO Teochew VALUES(1206,'jiu1','洲');
 INSERT INTO Teochew VALUES(1207,'dang1 nam57 a1','东南亚');
+INSERT INTO Teochew VALUES(1208,'gok48 gheu2','国语');
+INSERT INTO Teochew VALUES(1209,'gheu2','语');
+INSERT INTO Teochew VALUES(1210,'gong2','㼦');
+INSERT INTO Teochew VALUES(1211,'huah48 hi3','喝戏');
+INSERT INTO Teochew VALUES(1212,'huah4','喝');
+INSERT INTO Teochew VALUES(1213,'diam26 chai3','点菜');
+INSERT INTO Teochew VALUES(1214,'goi1 tui2','鸡腿');
+INSERT INTO Teochew VALUES(1215,'tui2','腿');
+INSERT INTO Teochew VALUES(1216,'goi1 sek8','鸡翼');
+INSERT INTO Teochew VALUES(1217,'sek8','翼');
+INSERT INTO Teochew VALUES(1218,'lang57 lo2','零颗');
+INSERT INTO Teochew VALUES(1219,'lang5','零');
+INSERT INTO Teochew VALUES(1220,'lo2','颗');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5346,6 +5391,18 @@ INSERT INTO Compound VALUES(961,1204,2,1199);
 INSERT INTO Compound VALUES(962,1207,1,1187);
 INSERT INTO Compound VALUES(963,1207,2,1194);
 INSERT INTO Compound VALUES(964,1207,3,1198);
+INSERT INTO Compound VALUES(965,1208,1,967);
+INSERT INTO Compound VALUES(966,1208,2,1202);
+INSERT INTO Compound VALUES(967,1211,1,1205);
+INSERT INTO Compound VALUES(968,1211,2,896);
+INSERT INTO Compound VALUES(969,1213,1,69);
+INSERT INTO Compound VALUES(970,1213,2,230);
+INSERT INTO Compound VALUES(971,1214,1,211);
+INSERT INTO Compound VALUES(972,1214,2,1208);
+INSERT INTO Compound VALUES(973,1216,1,211);
+INSERT INTO Compound VALUES(974,1216,2,1210);
+INSERT INTO Compound VALUES(975,1218,1,1212);
+INSERT INTO Compound VALUES(976,1218,2,1213);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
