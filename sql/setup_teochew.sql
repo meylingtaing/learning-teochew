@@ -895,6 +895,11 @@ INSERT INTO English VALUES(848,43,'to order food',0,NULL,NULL);
 INSERT INTO English VALUES(849,29,'chicken thigh',0,NULL,10);
 INSERT INTO English VALUES(850,29,'chicken wings',0,NULL,10);
 INSERT INTO English VALUES(851,32,'some',0,NULL,NULL);
+INSERT INTO English VALUES(852,14,'to take a break',0,NULL,NULL);
+INSERT INTO English VALUES(853,37,'saucer',0,'small plate for sauce',NULL);
+INSERT INTO English VALUES(854,37,'pot',0,NULL,NULL);
+INSERT INTO English VALUES(855,44,'sick',0,NULL,NULL);
+INSERT INTO English VALUES(856,37,'jar',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1664,6 +1669,12 @@ INSERT INTO Chinese VALUES(769,'腿',NULL,'tui2',NULL);
 INSERT INTO Chinese VALUES(770,'翼',NULL,'sek8',NULL);
 INSERT INTO Chinese VALUES(771,'零',NULL,'lang5',NULL);
 INSERT INTO Chinese VALUES(772,'颗','顆','lo2',NULL);
+INSERT INTO Chinese VALUES(773,'休',NULL,'hiu1',NULL);
+INSERT INTO Chinese VALUES(774,'息',NULL,'sek4',NULL);
+INSERT INTO Chinese VALUES(775,'碟',NULL,'dih8',NULL);
+INSERT INTO Chinese VALUES(776,'锅','鍋','ue1',NULL);
+INSERT INTO Chinese VALUES(777,'病',NULL,'ben7',NULL);
+INSERT INTO Chinese VALUES(778,'筒',NULL,'dang6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1824,6 +1835,7 @@ INSERT INTO Synonyms VALUES(153,127,'toilet',1);
 INSERT INTO Synonyms VALUES(154,258,'mandarin orange',0);
 INSERT INTO Synonyms VALUES(155,849,'chicken leg',0);
 INSERT INTO Synonyms VALUES(156,849,'drumstick',0);
+INSERT INTO Synonyms VALUES(157,855,'ill',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1959,6 +1971,7 @@ INSERT INTO Extra VALUES(56,829,replace('**tiap8** has the connotation of making
 INSERT INTO Extra VALUES(57,830,replace('It seems like some people have **luh4** and some other people have **luh8** for this. My family uses luh4.\n\nI''ve personally never used this to mean drinking a drink. I''ve only used this word in **luh(8) teung1** to mean "to sip soup".\n','\n',char(10)));
 INSERT INTO Extra VALUES(58,845,replace('**gok(8) gheu2** literally means "national language"\n','\n',char(10)));
 INSERT INTO Extra VALUES(59,569,replace('**bue1** is a cup used for drinking. **gong2** is used for other cylindrical containers.\n','\n',char(10)));
+INSERT INTO Extra VALUES(60,615,replace('**ka3** on its own technically means "to hit" or "to strike", but I''ve used it to mean calling someone on the phone. I realized that if I say "ua2 ka(2) leu2" to people outside my family, they might think I''m saying that I''m hitting them 😅\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -3244,6 +3257,14 @@ INSERT INTO Translation VALUES(1210,NULL,1217,0);
 INSERT INTO Translation VALUES(1211,851,1218,0);
 INSERT INTO Translation VALUES(1212,NULL,1219,0);
 INSERT INTO Translation VALUES(1213,NULL,1220,0);
+INSERT INTO Translation VALUES(1214,852,1221,0);
+INSERT INTO Translation VALUES(1215,NULL,1222,0);
+INSERT INTO Translation VALUES(1216,853,1223,0);
+INSERT INTO Translation VALUES(1217,854,1224,0);
+INSERT INTO Translation VALUES(1218,855,1225,0);
+INSERT INTO Translation VALUES(1219,855,1226,0);
+INSERT INTO Translation VALUES(1220,856,1227,0);
+INSERT INTO Translation VALUES(1221,615,1228,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4437,6 +4458,14 @@ INSERT INTO Teochew VALUES(1217,'sek8','翼');
 INSERT INTO Teochew VALUES(1218,'lang57 lo2','零颗');
 INSERT INTO Teochew VALUES(1219,'lang5','零');
 INSERT INTO Teochew VALUES(1220,'lo2','颗');
+INSERT INTO Teochew VALUES(1221,'hiun1 sek4','休息');
+INSERT INTO Teochew VALUES(1222,'sek4','息');
+INSERT INTO Teochew VALUES(1223,'dih8','碟');
+INSERT INTO Teochew VALUES(1224,'ue1','锅');
+INSERT INTO Teochew VALUES(1225,'nang5 mo2','人孬');
+INSERT INTO Teochew VALUES(1226,'ben7','病');
+INSERT INTO Teochew VALUES(1227,'dang6','筒');
+INSERT INTO Teochew VALUES(1228,'ka32 diang67 ue7','敲电话');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5403,6 +5432,12 @@ INSERT INTO Compound VALUES(973,1216,1,211);
 INSERT INTO Compound VALUES(974,1216,2,1210);
 INSERT INTO Compound VALUES(975,1218,1,1212);
 INSERT INTO Compound VALUES(976,1218,2,1213);
+INSERT INTO Compound VALUES(977,1221,1,1011);
+INSERT INTO Compound VALUES(978,1221,2,1215);
+INSERT INTO Compound VALUES(979,1225,1,34);
+INSERT INTO Compound VALUES(980,1225,2,343);
+INSERT INTO Compound VALUES(981,1228,1,693);
+INSERT INTO Compound VALUES(982,1228,2,66);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
