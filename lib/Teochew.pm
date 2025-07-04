@@ -1334,23 +1334,33 @@ sub _lookup_all {
 
 =head2 extra_information_by_id
 
-Gets extra information about an english word if it exists. You must pass in the
-English.id
+Gets extra information about an english word if it exists. This takes a list of
+english ids, and it will return a string with all the extra notes that are
+attached to those english words
 
 =cut
 
 sub extra_information_by_id {
-    my $english_id = shift;
+    my @english_ids = @_;
+    my @placeholders = map { '?' } @english_ids;
 
+    # Doing this in two sql statements so I can get the distinct extra_id's
+    # first, and then I'll get the actual notes. We need distinct because some
+    # notes are connected to multiple english words
     my $sql = qq{
-        select Extra.info from English
-        join Extra on English.id = Extra.english_id
-        where English.id = ?
+        select distinct extra_id from EnglishExtraNotes
+        where english_id IN ( @placeholders )
     };
 
-    my @rows = $dbh->selectall_array($sql, {}, $english_id);
-    return undef unless scalar @rows;
-    return $rows[0]->[0];
+    my $extra_ids = $dbh->selectcol_arrayref($sql, {}, @english_ids);
+
+    @placeholders = map { '?' } @$extra_ids;
+    $sql = "select info from Extra where Extra.id IN ( @placeholders )";
+
+    my $rows = $dbh->selectcol_arrayref($sql, {}, @$extra_ids);
+
+    return undef unless scalar @$rows;
+    return join("\n\n",  @$rows);
 }
 
 =head2 extra_translation_information_by_id

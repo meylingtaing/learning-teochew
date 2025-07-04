@@ -149,7 +149,6 @@ sub english {
     # Replace _ with .
     $input =~ s/_/./g;
 
-    my $extra_notes = '';
     my @all_tags;
 
     # All of the verbs in the database are stored like "to eat", but we should
@@ -224,10 +223,6 @@ sub english {
                 flashcard_set => $english_row->{flashcard_set_name},
             };
 
-            # Add any extra notes
-            $extra_notes .=
-                Teochew::extra_information_by_id($english_row->{id}) // '';
-
             # Get the translation
             my $translation_rows = Teochew::translate(
                 $english_row,
@@ -285,6 +280,10 @@ sub english {
         $c->stash(synonyms => \@synonyms);
 
         $c->stash(tags => join ', ', uniq(@all_tags));
+
+        # Add any extra notes
+        my $extra_notes =  Teochew::extra_information_by_id(
+                                map { $_->{id} } @english_rows) // '';
         $c->stash(extra_info => $extra_notes ? markdown($extra_notes) : undef);
 
         $c->stash(words_containing => Teochew::find_words_using_translation(
