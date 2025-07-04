@@ -5558,6 +5558,67 @@ INSERT INTO GrammarDefinitions VALUES(8,726);
 INSERT INTO GrammarDefinitions VALUES(9,766);
 INSERT INTO GrammarDefinitions VALUES(10,803);
 INSERT INTO GrammarDefinitions VALUES(11,814);
+CREATE TABLE EnglishExtraNotes (
+    id integer PRIMARY KEY,
+    english_id integer,
+    extra_id integer,
+    FOREIGN KEY(english_id) REFERENCES English(id),
+    FOREIGN KEY(extra_id) REFERENCES Extra(id)
+);
+INSERT INTO EnglishExtraNotes VALUES(1,6,1);
+INSERT INTO EnglishExtraNotes VALUES(2,7,2);
+INSERT INTO EnglishExtraNotes VALUES(3,111,3);
+INSERT INTO EnglishExtraNotes VALUES(4,108,4);
+INSERT INTO EnglishExtraNotes VALUES(5,30,5);
+INSERT INTO EnglishExtraNotes VALUES(6,47,7);
+INSERT INTO EnglishExtraNotes VALUES(7,48,8);
+INSERT INTO EnglishExtraNotes VALUES(8,344,10);
+INSERT INTO EnglishExtraNotes VALUES(9,110,11);
+INSERT INTO EnglishExtraNotes VALUES(10,274,12);
+INSERT INTO EnglishExtraNotes VALUES(11,284,14);
+INSERT INTO EnglishExtraNotes VALUES(12,493,16);
+INSERT INTO EnglishExtraNotes VALUES(13,496,17);
+INSERT INTO EnglishExtraNotes VALUES(14,34,18);
+INSERT INTO EnglishExtraNotes VALUES(15,497,19);
+INSERT INTO EnglishExtraNotes VALUES(16,25,22);
+INSERT INTO EnglishExtraNotes VALUES(17,531,23);
+INSERT INTO EnglishExtraNotes VALUES(18,549,24);
+INSERT INTO EnglishExtraNotes VALUES(19,155,25);
+INSERT INTO EnglishExtraNotes VALUES(20,559,26);
+INSERT INTO EnglishExtraNotes VALUES(21,220,27);
+INSERT INTO EnglishExtraNotes VALUES(22,564,28);
+INSERT INTO EnglishExtraNotes VALUES(23,567,29);
+INSERT INTO EnglishExtraNotes VALUES(24,580,30);
+INSERT INTO EnglishExtraNotes VALUES(25,1,31);
+INSERT INTO EnglishExtraNotes VALUES(26,586,32);
+INSERT INTO EnglishExtraNotes VALUES(27,264,33);
+INSERT INTO EnglishExtraNotes VALUES(28,597,34);
+INSERT INTO EnglishExtraNotes VALUES(29,598,35);
+INSERT INTO EnglishExtraNotes VALUES(30,552,36);
+INSERT INTO EnglishExtraNotes VALUES(31,610,37);
+INSERT INTO EnglishExtraNotes VALUES(32,618,38);
+INSERT INTO EnglishExtraNotes VALUES(33,233,39);
+INSERT INTO EnglishExtraNotes VALUES(34,671,40);
+INSERT INTO EnglishExtraNotes VALUES(35,643,41);
+INSERT INTO EnglishExtraNotes VALUES(36,695,42);
+INSERT INTO EnglishExtraNotes VALUES(37,696,43);
+INSERT INTO EnglishExtraNotes VALUES(38,697,44);
+INSERT INTO EnglishExtraNotes VALUES(39,709,45);
+INSERT INTO EnglishExtraNotes VALUES(40,450,46);
+INSERT INTO EnglishExtraNotes VALUES(41,572,47);
+INSERT INTO EnglishExtraNotes VALUES(42,716,48);
+INSERT INTO EnglishExtraNotes VALUES(43,604,49);
+INSERT INTO EnglishExtraNotes VALUES(44,744,50);
+INSERT INTO EnglishExtraNotes VALUES(45,780,51);
+INSERT INTO EnglishExtraNotes VALUES(46,786,52);
+INSERT INTO EnglishExtraNotes VALUES(47,790,53);
+INSERT INTO EnglishExtraNotes VALUES(48,798,54);
+INSERT INTO EnglishExtraNotes VALUES(49,820,55);
+INSERT INTO EnglishExtraNotes VALUES(50,829,56);
+INSERT INTO EnglishExtraNotes VALUES(51,830,57);
+INSERT INTO EnglishExtraNotes VALUES(52,845,58);
+INSERT INTO EnglishExtraNotes VALUES(53,569,59);
+INSERT INTO EnglishExtraNotes VALUES(54,615,60);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
