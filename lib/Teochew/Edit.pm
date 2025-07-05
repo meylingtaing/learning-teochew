@@ -451,8 +451,8 @@ sub insert_alt_chinese {
 =head2 insert_extra
 
     $teochew->insert_extra(
-        english_id => '',
-        info       => '',
+        english_ids => [1, 2],
+        info        => 'Extra stuff goes here',
     );
 
 This will replace whatever extra information is already stored for this
@@ -467,25 +467,67 @@ sub insert_extra {
     my $dbh = $self->dbh;
     my $sth;
 
+    my @english_ids = @{ $params{english_ids} };
+
+    my $placeholder_str = join(",", (map { '?' } @english_ids));
+
+    # Check if an existing note exists
+    my $extra_note_id = $dbh->selectrow_array(qq{
+        SELECT ExtraNotes.id FROM ExtraNotes
+        JOIN EnglishExtraNotes ON extra_note_id = ExtraNotes.id
+        WHERE english_id = ?
+    }, undef, $english_ids[0]);
+
+    # Handle deletion
     if (!defined $params{info}) {
-        $dbh->do("delete from Extra where english_id = ?", undef,
-            $params{english_id});
+        if ($extra_note_id) {
+            $dbh->do(qq{
+                delete from EnglishExtraNotes
+                WHERE english_id IN ($placeholder_str)
+            }, undef, @english_ids);
+            $dbh->do("delete from ExtraNotes where id = ?",
+                undef, $extra_note_id);
+        }
+        else {
+            say "Nothing to do!";
+        }
         return;
     }
 
-    if (defined Teochew::extra_information_by_id($params{english_id})) {
+    # Handle updating/inserting the info
+    if ($extra_note_id) {
         $sth = $dbh->prepare(
-            "update Extra set info = ? where english_id = ?"
+            "update ExtraNotes set info = ? where id = ?"
         );
     }
     else {
         $sth = $dbh->prepare(
-            "insert into Extra (info, english_id) values (?,?)"
+            "insert into ExtraNotes (info, id) values (?,?)"
         );
+        $extra_note_id = $self->dbh->sqlite_last_insert_rowid;
     }
     $sth->bind_param(1, $params{info});
-    $sth->bind_param(2, $params{english_id});
+    $sth->bind_param(2, $extra_note_id);
     $sth->execute;
+
+    # And make sure the linking tables are good too
+    for my $english_id (@english_ids) {
+        my $linked_note_id = $dbh->selectrow_array(qq{
+            SELECT extra_note_id FROM EnglishExtraNotes
+            WHERE english_id = ?
+        }, undef, $english_id);
+
+        # TODO: I can make this better, but I'm lazy now
+        if ($linked_note_id && $linked_note_id != $extra_note_id) {
+            die "English id $english_id is linked to a different note!";
+        }
+        elsif (!$linked_note_id) {
+            $dbh->do(qq{
+                insert into EnglishExtraNotes (english_id, extra_note_id)
+                VALUES (?, ?)
+            }, undef, $english_id, $extra_note_id);
+        }
+    }
 }
 
 =head2 insert_phrase

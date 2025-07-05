@@ -1343,19 +1343,24 @@ attached to those english words
 sub extra_information_by_id {
     my @english_ids = @_;
     my @placeholders = map { '?' } @english_ids;
+    my $placeholder_str = join ",", @placeholders;
 
-    # Doing this in two sql statements so I can get the distinct extra_id's
-    # first, and then I'll get the actual notes. We need distinct because some
-    # notes are connected to multiple english words
+    # Doing this in two sql statements so I can get the distinct
+    # extra_note_id's first, and then I'll get the actual notes. We need
+    # distinct because some notes are connected to multiple english words
     my $sql = qq{
-        select distinct extra_id from EnglishExtraNotes
-        where english_id IN ( @placeholders )
+        select distinct extra_note_id from EnglishExtraNotes
+        where english_id IN ( $placeholder_str )
     };
 
     my $extra_ids = $dbh->selectcol_arrayref($sql, {}, @english_ids);
 
     @placeholders = map { '?' } @$extra_ids;
-    $sql = "select info from Extra where Extra.id IN ( @placeholders )";
+    $placeholder_str = join ",", @placeholders;
+    $sql = qq{
+        select info from ExtraNotes where id IN ( $placeholder_str )
+        order by id
+    };
 
     my $rows = $dbh->selectcol_arrayref($sql, {}, @$extra_ids);
 

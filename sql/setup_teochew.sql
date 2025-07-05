@@ -603,7 +603,7 @@ INSERT INTO English VALUES(555,38,'car',0,NULL,NULL);
 INSERT INTO English VALUES(556,38,'to drive',0,NULL,NULL);
 INSERT INTO English VALUES(557,38,'to drive a car',0,NULL,NULL);
 INSERT INTO English VALUES(558,23,'weather',0,NULL,NULL);
-INSERT INTO English VALUES(559,32,'too',0,NULL,NULL);
+INSERT INTO English VALUES(559,32,'too',0,'excessively',NULL);
 INSERT INTO English VALUES(560,8,'too hot',0,NULL,NULL);
 INSERT INTO English VALUES(561,8,'quite hot',0,NULL,NULL);
 INSERT INTO English VALUES(562,23,'good weather',0,NULL,NULL);
@@ -1912,66 +1912,6 @@ INSERT INTO CategoryLinks VALUES(7,3,121);
 INSERT INTO CategoryLinks VALUES(8,3,187);
 INSERT INTO CategoryLinks VALUES(9,3,188);
 INSERT INTO CategoryLinks VALUES(10,2,398);
-CREATE TABLE Extra (
-    id integer primary key,
-    english_id integer,
-    info text,
-    foreign key(english_id) references English(id)
-);
-INSERT INTO Extra VALUES(1,6,replace('If you are counting the numbers, or you are referring to one of something, you would use **jek8**. **ek4** is typically used when the number 1 is part of another word, like **jap(4) ek4** for the word 11, or **loi(6) bai(2) ek4** for Monday.\n','\n',char(10)));
-INSERT INTO Extra VALUES(2,7,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 (兩) for 2. 两 (兩) is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
-INSERT INTO Extra VALUES(3,111,replace('**chu3** refers to a house as a building, whereas **lai6** is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
-INSERT INTO Extra VALUES(4,108,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as **ki2** means to go up and **ja2** means early.\n','\n',char(10)));
-INSERT INTO Extra VALUES(5,30,'My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that ''pin7 hung1 sek4'' was like the smoke that comes out of the nose.');
-INSERT INTO Extra VALUES(7,47,replace('Note that you should always just use **ma2** when addressing your grandmother. **lai7 ma2** and **ghua7 ma2** can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.\n','\n',char(10)));
-INSERT INTO Extra VALUES(8,48,replace('Note that you should always just use **gong1** when addressing your grandfather. **lai7 gong1** and **ghua7 gong1** can be used when referring to your grandfather, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandfather.\n','\n',char(10)));
-INSERT INTO Extra VALUES(10,344,replace('**ga lem** originates from the French word crème. We just throw a teochew accent on it (:\n','\n',char(10)));
-INSERT INTO Extra VALUES(11,110,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is more common in other accents.\n','\n',char(10)));
-INSERT INTO Extra VALUES(12,274,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
-INSERT INTO Extra VALUES(14,284,replace('You''ll always see **yioh8** followed by an adjective, so it should actually be pronounced **yioh(4)**. It can be used as both a question and a statement.\n','\n',char(10)));
-INSERT INTO Extra VALUES(16,493,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
-INSERT INTO Extra VALUES(17,496,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(18,34,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(19,497,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(22,25,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
-INSERT INTO Extra VALUES(23,531,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
-INSERT INTO Extra VALUES(24,549,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip(4)** the filling, so this is not limited to just dough.\n','\n',char(10)));
-INSERT INTO Extra VALUES(25,155,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations here.\n','\n',char(10)));
-INSERT INTO Extra VALUES(26,559,replace('"too" to mean _excessively_, as in "too much"\n','\n',char(10)));
-INSERT INTO Extra VALUES(27,220,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
-INSERT INTO Extra VALUES(28,564,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
-INSERT INTO Extra VALUES(29,567,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
-INSERT INTO Extra VALUES(30,580,replace('**ga1 di7** is the Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
-INSERT INTO Extra VALUES(31,1,replace('**leu2 ho2** is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
-INSERT INTO Extra VALUES(32,586,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
-INSERT INTO Extra VALUES(33,264,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
-INSERT INTO Extra VALUES(34,597,replace('I guess cauliflower and [broccoli](/english/broccoli) are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
-INSERT INTO Extra VALUES(35,598,replace('I guess [cauliflower](/english/cauliflower) and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
-INSERT INTO Extra VALUES(36,552,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
-INSERT INTO Extra VALUES(37,610,replace('**huang1 bain5** more literally translates to a foreign place. I''ve found that Teochew people that are from countries other than China will use it to refer to the country that they are from, which is generally somewhere in Southeast Asia. My family uses it to mean Cambodia, because that''s where they''re from\n','\n',char(10)));
-INSERT INTO Extra VALUES(38,618,replace('**gang1 dang5** is apparently derived from the Malay word for potato, _kentang_. Other Teochew people might pronounce this slightly differently and with different tones, but this is what is closest to how my aunt pronounces it.\n\n**[huang1 jeu5](/english/sweet%20potato)** is technically the term for _sweet potato_, but my mom says she uses it for all kinds of potatoes, even non-sweet ones, so I''ve included it here. It seems like most people use huang1 jeu5 only for sweet potatoes.\n','\n',char(10)));
-INSERT INTO Extra VALUES(39,233,replace('My family often uses **chao(6) gian2** to mean basil, though others use it to generically mean fresh herbs.\n','\n',char(10)));
-INSERT INTO Extra VALUES(40,671,replace('You can add **a1** at the end of a statement to turn it into a question.\n','\n',char(10)));
-INSERT INTO Extra VALUES(41,643,replace('You would use **si6(7)** if it comes before a noun, and **oi6(7)** if it comes before an adjective\n','\n',char(10)));
-INSERT INTO Extra VALUES(42,695,replace('You would say this following an adjective. For example, "not that late" would be **bho(7) meh(8) am3**\n','\n',char(10)));
-INSERT INTO Extra VALUES(43,696,replace('Use it as the word "something" when referring to an amount. Some examples are:\n\n* "20 something" - **yi(7) jap(4) ghua7**\n* "70 something degrees" - **chek(8) jap(4) ghua7 dou7**\n','\n',char(10)));
-INSERT INTO Extra VALUES(44,697,replace('You can leave off the **ngeng5** at the end if you''d like\n','\n',char(10)));
-INSERT INTO Extra VALUES(45,709,replace('You can add a verb after this to mean that you are unable to or don''t have the means to do something. For example, "unable to play" would be **bho(7) biang(2) seung2**\n\nYou could also say that as a phrase on its own, to mean something like "nothing you can do about it"\n','\n',char(10)));
-INSERT INTO Extra VALUES(46,450,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have seen something sucessfully.\n\nI''ve also heard it pronounced without sandhi-ing, which would be **toin2 giang3**\n','\n',char(10)));
-INSERT INTO Extra VALUES(47,572,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
-INSERT INTO Extra VALUES(48,716,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
-INSERT INTO Extra VALUES(49,604,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
-INSERT INTO Extra VALUES(50,744,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
-INSERT INTO Extra VALUES(51,780,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
-INSERT INTO Extra VALUES(52,786,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
-INSERT INTO Extra VALUES(53,790,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**. Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
-INSERT INTO Extra VALUES(54,798,replace('We typically use **dim1** if we''re heating up food using a microwave, but I don''t think it''s exclusive to microwaving. You could use it for heating up food on a stove too.\n','\n',char(10)));
-INSERT INTO Extra VALUES(55,820,replace('I think this word is borrowed from Thai\n','\n',char(10)));
-INSERT INTO Extra VALUES(56,829,replace('**tiap8** has the connotation of making things more organized. While it literally means to stack or to pile up, my family has also used it to generally mean organizing or putting things away.\n','\n',char(10)));
-INSERT INTO Extra VALUES(57,830,replace('It seems like some people have **luh4** and some other people have **luh8** for this. My family uses luh4.\n\nI''ve personally never used this to mean drinking a drink. I''ve only used this word in **luh(8) teung1** to mean "to sip soup".\n','\n',char(10)));
-INSERT INTO Extra VALUES(58,845,replace('**gok(8) gheu2** literally means "national language"\n','\n',char(10)));
-INSERT INTO Extra VALUES(59,569,replace('**bue1** is a cup used for drinking. **gong2** is used for other cylindrical containers.\n','\n',char(10)));
-INSERT INTO Extra VALUES(60,615,replace('**ka3** on its own technically means "to hit" or "to strike", but I''ve used it to mean calling someone on the phone. I realized that if I say "ua2 ka(2) leu2" to people outside my family, they might think I''m saying that I''m hitting them 😅\n','\n',char(10)));
 CREATE TABLE FlashcardSet (
     id           integer primary key,
     name         text,
@@ -5558,20 +5498,77 @@ INSERT INTO GrammarDefinitions VALUES(8,726);
 INSERT INTO GrammarDefinitions VALUES(9,766);
 INSERT INTO GrammarDefinitions VALUES(10,803);
 INSERT INTO GrammarDefinitions VALUES(11,814);
+CREATE TABLE ExtraNotes (
+    id integer primary key,
+    info text
+);
+INSERT INTO ExtraNotes VALUES(1,replace('If you are counting the numbers, or you are referring to one of something, you would use **jek8**. **ek4** is typically used when the number 1 is part of another word, like **jap(4) ek4** for the word 11, or **loi(6) bai(2) ek4** for Monday.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(2,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 (兩) for 2. 两 (兩) is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(3,replace('**chu3** refers to a house as a building, whereas **lai6** is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(4,replace('Each of these translations starts with the same character (明). This can be pronounced in a variety of different ways. Some of these translations can also be used to mean "tomorrow morning" as **ki2** means to go up and **ja2** means early.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(5,replace('My family never uses the word ''gray'', so it''s not really familiar to me. When I asked my aunt how to say it in Teochew, she said that **pin7 hung1 sek4** was like the smoke that comes out of the nose.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(7,replace('Note that you should always just use **ma2** when addressing your grandmother. **lai7 ma2** and **ghua7 ma2** can be used when referring to your grandmother, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandmother.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(8,replace('Note that you should always just use **gong1** when addressing your grandfather. **lai7 gong1** and **ghua7 gong1** can be used when referring to your grandfather, to be more specific and differentiate when talking to someone else, but it should not be what you call your grandfather.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(10,replace('**ga lem** originates from the French word crème. We just throw a teochew accent on it (:\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(11,replace('There are many different variations in the way people say "today" in Teochew! My dad''s family tends to say **geng1 yek8**, and my mom''s family tends to say **gian(6) yek8**. And while I mainly have the Gekion pronunciations on this site, I have also included **gim1 yik8**, which I think is more common in other accents.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(12,replace('**la hong** comes from Cambodian ​ល្ហុង, and is often used among Cambodian Teochew speakers.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(14,replace('You''ll always see **yioh8** followed by an adjective, so it should actually be pronounced **yioh(4)**. It can be used as both a question and a statement.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(16,replace('This is like using -ing on an action. You would say **do** in front of the verb. So if you wanted to say "I am washing dishes", you would say "ua2 **do(7)** soi(6) uan2"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(17,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(18,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(19,replace('Teochew uses the same word for "he", "she", and "it"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(22,replace('**chen1** might also be used to mean blue or blue-green.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(23,replace('We often use this term when cooking. When something is crispy or golden brown, it''s **chiah(8) chiah4**.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(24,replace('My mom used this word when we were making dumplings, and she told me I needed to **chip(4)** the filling, so this is not limited to just dough.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(25,replace('I think I hear my family use **liang(7) gi1** for this, but it seems like **ne(6) ki3** is mainly what''s used by other people in the Gaginang discord.\n\nMy great uncle said that it''s more proper to say **liang(7) ki(2) gi1** or just **liang(7) ki3**, so I''ve included all variations on the translations page.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(27,replace('**ngang5** is colder than **liang5**. liang5 is more like "cool"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(28,replace('My family has always used **yih8** to mean "to fold", so we would say **yih(4) san1 kou3** to mean "to fold clothes" or **yih(4) pue6** to mean "to fold the blanket". I wasn''t able to find this in the online dictionaries. Instead, they use **jih4**, and other people in the Gaginang discord server also use jih4. So, I have included both versions here.\n\nI''ve also asked my soi2 gou1, and it sounds like she has said "yih(8) san1 kou3", so I''m not entirely sure on the tone or whether my mom''s family and dad''s family say this word the same way. yih8(4) seems more natural to me though.\n\nIt looks like there is 揤 yih8, meaning "to press" though I am not sure if my family is using the word for press or if they just pronounce "fold" a little differently.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(29,replace('See the extra notes under the entry for [to fold](/english/to%20fold), which explains why I have multiple translations for this.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(30,replace('**ga1 di7** is the Gekion pronunciation, but I have also included **ga1 gi7** as a separate translation because it uses different characters and because it''s part of "Gaginang", which is one of the largest online Teochew communities.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(31,replace('**leu2 ho2** is basically the equivalent of saying 你好 **nǐ hǎo** in Mandarin. I don''t know if people actually say **leu2 ho2** in normal conversation. I''ve never used it, and will normally just say "hi" or "hello" in English.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(32,replace('If you want to say something like "number 5", you would say **ngou(7) ho7**. You can also place ho7 after a number to refer to a date in a month.\n\nThere are many other uses of **ho7**, but I don''t know enough about them.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(33,replace('If you need to differentiate between lemon and lime, I would use color. So you could say **eung(7) seung1 gan1** for lemon and **chen1 seung1 gan1** for lime.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(34,replace('I guess cauliflower and broccoli are seen as the same vegetable (kind of like lemon and lime), so if you want to differentiate, you should use color (white for cauliflower and green for broccoli). If you don''t specify color, I think people will assume you mean cauliflower.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(36,replace('I personally am very inconsistent with what tone I use for this word, switching between gah4(8) and gah8(4) depending on what flows better in context. I''ve seen different sources/people use different tones. WhatTCSay has **gah4** while Mogher and CZYZD both have **gah8**.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(37,replace('**huang1 bain5** more literally translates to a foreign place. I''ve found that Teochew people that are from countries other than China will use it to refer to the country that they are from, which is generally somewhere in Southeast Asia. My family uses it to mean Cambodia, because that''s where they''re from\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(38,replace('**gang1 dang5** is apparently derived from the Malay word for potato, _kentang_. Other Teochew people might pronounce this slightly differently and with different tones, but this is what is closest to how my aunt pronounces it.\n\n**[huang1 jeu5](/english/sweet%20potato)** is technically the term for _sweet potato_, but my mom says she uses it for all kinds of potatoes, even non-sweet ones. It seems like most people use huang1 jeu5 only for sweet potatoes.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(39,replace('My family often uses **chao(6) gian2** to mean basil, though others use it to generically mean fresh herbs.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(40,replace('You can add **a1** at the end of a statement to turn it into a question.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(41,replace('You would use **si6(7)** if it comes before a noun, and **oi6(7)** if it comes before an adjective\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(42,replace('You would say this following an adjective. For example, "not that late" would be **bho(7) meh(8) am3**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(43,replace('Use it as the word "something" when referring to an amount. Some examples are:\n\n* "20 something" - **yi(7) jap(4) ghua7**\n* "70 something degrees" - **chek(8) jap(4) ghua7 dou7**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(44,replace('You can leave off the **ngeng5** at the end if you''d like\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(45,replace('You can add a verb after this to mean that you are unable to or don''t have the means to do something. For example, "unable to play" would be **bho(7) biang(2) seung2**\n\nYou could also say that as a phrase on its own, to mean something like "nothing you can do about it"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(46,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have seen something sucessfully.\n\nI''ve also heard it pronounced without sandhi-ing, which would be **toin2 giang3**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(47,replace('In this case, **giang3** indicates success, so **toin(6) giang3** means to have heard something sucessfully.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(48,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(49,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(50,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(51,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(52,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(53,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(54,replace('We typically use **dim1** if we''re heating up food using a microwave, but I don''t think it''s exclusive to microwaving. You could use it for heating up food on a stove too.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(55,replace('I think this word is borrowed from Thai\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(56,replace('**tiap8** has the connotation of making things more organized. While it literally means to stack or to pile up, my family has also used it to generally mean organizing or putting things away.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(57,replace('It seems like some people have **luh4** and some other people have **luh8** for this. My family uses luh4.\n\nI''ve personally never used this to mean drinking a drink. I''ve only used this word in **luh(8) teung1** to mean "to sip soup".\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(58,replace('**gok(8) gheu2** literally means "national language"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(59,replace('**bue1** is a cup used for drinking. **gong2** is used for other cylindrical containers.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(60,replace('**ka3** on its own technically means "to hit" or "to strike", but I''ve used it to mean calling someone on the phone. I realized that if I say "ua2 ka(2) leu2" to people outside my family, they might think I''m saying that I''m hitting them 😅\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(61,replace(' Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
-    extra_id integer,
+    extra_note_id integer,
     FOREIGN KEY(english_id) REFERENCES English(id),
-    FOREIGN KEY(extra_id) REFERENCES Extra(id)
+    FOREIGN KEY(extra_note_id) REFERENCES ExtraNotes(id)
 );
 INSERT INTO EnglishExtraNotes VALUES(1,6,1);
 INSERT INTO EnglishExtraNotes VALUES(2,7,2);
 INSERT INTO EnglishExtraNotes VALUES(3,111,3);
 INSERT INTO EnglishExtraNotes VALUES(4,108,4);
 INSERT INTO EnglishExtraNotes VALUES(5,30,5);
-INSERT INTO EnglishExtraNotes VALUES(6,47,7);
-INSERT INTO EnglishExtraNotes VALUES(7,48,8);
+INSERT INTO EnglishExtraNotes VALUES(6,49,7);
+INSERT INTO EnglishExtraNotes VALUES(7,51,8);
 INSERT INTO EnglishExtraNotes VALUES(8,344,10);
 INSERT INTO EnglishExtraNotes VALUES(9,110,11);
 INSERT INTO EnglishExtraNotes VALUES(10,274,12);
@@ -5584,7 +5581,6 @@ INSERT INTO EnglishExtraNotes VALUES(16,25,22);
 INSERT INTO EnglishExtraNotes VALUES(17,531,23);
 INSERT INTO EnglishExtraNotes VALUES(18,549,24);
 INSERT INTO EnglishExtraNotes VALUES(19,155,25);
-INSERT INTO EnglishExtraNotes VALUES(20,559,26);
 INSERT INTO EnglishExtraNotes VALUES(21,220,27);
 INSERT INTO EnglishExtraNotes VALUES(22,564,28);
 INSERT INTO EnglishExtraNotes VALUES(23,567,29);
@@ -5593,7 +5589,6 @@ INSERT INTO EnglishExtraNotes VALUES(25,1,31);
 INSERT INTO EnglishExtraNotes VALUES(26,586,32);
 INSERT INTO EnglishExtraNotes VALUES(27,264,33);
 INSERT INTO EnglishExtraNotes VALUES(28,597,34);
-INSERT INTO EnglishExtraNotes VALUES(29,598,35);
 INSERT INTO EnglishExtraNotes VALUES(30,552,36);
 INSERT INTO EnglishExtraNotes VALUES(31,610,37);
 INSERT INTO EnglishExtraNotes VALUES(32,618,38);
@@ -5619,6 +5614,10 @@ INSERT INTO EnglishExtraNotes VALUES(51,830,57);
 INSERT INTO EnglishExtraNotes VALUES(52,845,58);
 INSERT INTO EnglishExtraNotes VALUES(53,569,59);
 INSERT INTO EnglishExtraNotes VALUES(54,615,60);
+INSERT INTO EnglishExtraNotes VALUES(55,50,7);
+INSERT INTO EnglishExtraNotes VALUES(56,52,8);
+INSERT INTO EnglishExtraNotes VALUES(57,598,34);
+INSERT INTO EnglishExtraNotes VALUES(64,795,61);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
