@@ -5441,7 +5441,7 @@ INSERT INTO PhraseTranslations VALUES(37,37,'I to_want to_say word_(spoken) with
 INSERT INTO PhraseTranslations VALUES(38,38,'tonight| I to_go restaurant| to_eat');
 INSERT INTO PhraseTranslations VALUES(39,38,'tonight| I to_go to_eat to_be_at-na7 restaurant');
 INSERT INTO PhraseTranslations VALUES(40,22,'you to_come when');
-INSERT INTO PhraseTranslations VALUES(41,39,'don''t too late_(at_night)| to_go to_sleep');
+INSERT INTO PhraseTranslations VALUES(41,39,'don''t too_(excessively) late_(at_night)| to_go to_sleep');
 INSERT INTO PhraseTranslations VALUES(42,40,'I with I classifier_(generic) friend| to_go to_go_on_a_walk');
 INSERT INTO PhraseTranslations VALUES(43,41,'she to_live_in to_be_at California');
 INSERT INTO PhraseTranslations VALUES(44,41,'she to_live_in to_be_at-na7 California');
