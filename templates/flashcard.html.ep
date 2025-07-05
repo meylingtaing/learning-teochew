@@ -62,6 +62,12 @@
             pronunciations => [{ pengim => 'dummy', chinese => 'dummy' }]
         } %>
 
+    <div class="row" id="extra-notes" style="display: none">
+      <div class="col-lg-8 offset-lg-2 text-sm-center text-start">
+        %== $flashcard->{extra_notes}
+      </div>
+    </div>
+
   </div>
 
   % if (($type // '') ne 'phrase') {
@@ -102,6 +108,7 @@
     function show_translation() {
         $('#flashcard-teochew').find('.translation').show();
         $('#flashcard-teochew').show();
+        $('#extra-notes').show();
 
         resize_teochew_text($('#flashcard-teochew').find('.card-body'));
     }
@@ -135,6 +142,7 @@
         // Hide the translation
         $('#flashcard-teochew').hide();
         $('#flashcard-teochew').find('.card-body').html('');
+        $('#extra-notes').hide();
 
         // Create the new translation
         translations.forEach(function(translation) {
@@ -181,6 +189,9 @@
 
         resize_text(english_elt, $('#flashcard-english').find('.card-body'));
         update_header();
+
+        // Add the extra notes
+        $('#extra-notes').children().first().html(flashcard.extra_notes);
 
         // Update the link at the bottom
         $('#english-page-link')

@@ -36,6 +36,12 @@ sub flashcards {
         return;
     }
 
+    for my $flashcard (@$flashcards) {
+        my $extra_notes = Teochew::extra_information_by_id($flashcard->{english_id})
+            if $flashcard->{english_id};
+        $flashcard->{extra_notes} = $extra_notes ? markdown($extra_notes) : '';
+    }
+
     $c->stash(flashcard_set_name => Teochew::flashcard_set_name($type, $subtype));
     $c->stash(flashcard          => $flashcards->[0]);
     $c->stash(flashcard_list     => to_json($flashcards));

@@ -639,6 +639,7 @@ sub generate_translation_word_list {
     for my $english (@english_list) {
 
         my %flashcard = (
+            ref $english eq 'HASH' ? (english_id => $english->{id}) : (),
             teochew => translate($english, for_flashcards => $for_flashcards)
         );
 
