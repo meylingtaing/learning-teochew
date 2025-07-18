@@ -1698,7 +1698,7 @@ sub find_words_using_translation {
     my ($translations, %params) = @_;
 
     my $sql = qq{
-        select
+        select distinct
             English.word as english,
             English.notes,
             Teochew.chinese,
