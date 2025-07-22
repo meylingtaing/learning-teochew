@@ -18,10 +18,10 @@ $(function() {
     // Make sure the correct radio button (Dark mode/Light mode) is selected
     // by default
     if (localStorage.getItem('darkMode') == '1') {
-        $('#dark-mode-input').prop('checked', true);
+        $('.dark-mode-input').prop('checked', true);
     }
     else {
-        $('#light-mode-input').prop('checked', true);
+        $('.light-mode-input').prop('checked', true);
     }
 
     // Toggle dark/light mode when the user changes the setting

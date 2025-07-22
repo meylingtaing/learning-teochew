@@ -11,7 +11,8 @@
       <h6><b>Display</b></h6>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="display-mode"
+        <input class="form-check-input light-mode-input" type="radio"
+               name="display-mode"
                value="light-mode" id="light-mode-input-<%= $id %>" checked />
         <label class="form-check-label" for="light-mode-input-<%= $id %>">
           Light mode
@@ -19,7 +20,8 @@
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="display-mode"
+        <input class="form-check-input dark-mode-input" type="radio"
+               name="display-mode"
                value="dark-mode" id="dark-mode-input-<%= $id %>" />
         <label class="form-check-label" for="dark-mode-input-<%= $id %>">
           Dark mode
