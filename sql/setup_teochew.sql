@@ -49,6 +49,7 @@ INSERT INTO Categories VALUES(43,'Food_verb','Food Actions',5);
 INSERT INTO Categories VALUES(44,'Medical','Health and Medicine',6);
 INSERT INTO Categories VALUES(45,'Timeofday','Time of Day',3);
 INSERT INTO Categories VALUES(46,'People','General People Words',2);
+INSERT INTO Categories VALUES(47,'Bedroom',NULL,4);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -183,7 +184,7 @@ INSERT INTO English VALUES(125,9,'living room',0,NULL,NULL);
 INSERT INTO English VALUES(126,9,'kitchen',0,NULL,NULL);
 INSERT INTO English VALUES(127,31,'restroom',0,NULL,NULL);
 INSERT INTO English VALUES(128,31,'bathroom',0,NULL,NULL);
-INSERT INTO English VALUES(129,9,'bedroom',0,NULL,NULL);
+INSERT INTO English VALUES(129,47,'bedroom',0,NULL,NULL);
 INSERT INTO English VALUES(130,9,'door',0,NULL,NULL);
 INSERT INTO English VALUES(131,9,'room',0,NULL,NULL);
 INSERT INTO English VALUES(132,5,'cousin',0,'older male with same family name',NULL);
@@ -197,15 +198,15 @@ INSERT INTO English VALUES(139,5,'cousin',0,'older male with different family na
 INSERT INTO English VALUES(140,9,'stairs',0,NULL,NULL);
 INSERT INTO English VALUES(141,9,'window',0,NULL,NULL);
 INSERT INTO English VALUES(142,9,'table',0,NULL,NULL);
-INSERT INTO English VALUES(143,9,'pillow',0,NULL,NULL);
-INSERT INTO English VALUES(144,9,'blanket',0,NULL,NULL);
+INSERT INTO English VALUES(143,47,'pillow',0,NULL,NULL);
+INSERT INTO English VALUES(144,47,'blanket',0,NULL,NULL);
 INSERT INTO English VALUES(145,9,'fridge',0,NULL,NULL);
 INSERT INTO English VALUES(146,2,'1000',0,NULL,NULL);
 INSERT INTO English VALUES(147,9,'keys',0,NULL,NULL);
 INSERT INTO English VALUES(148,9,'umbrella',0,NULL,NULL);
-INSERT INTO English VALUES(149,9,'body pillow',0,NULL,NULL);
+INSERT INTO English VALUES(149,47,'body pillow',0,NULL,NULL);
 INSERT INTO English VALUES(150,9,'chair',0,NULL,NULL);
-INSERT INTO English VALUES(151,9,'bed',0,NULL,NULL);
+INSERT INTO English VALUES(151,47,'bed',0,NULL,NULL);
 INSERT INTO English VALUES(152,9,'wall',0,NULL,NULL);
 INSERT INTO English VALUES(153,9,'drawers',1,NULL,NULL);
 INSERT INTO English VALUES(154,9,'closet',1,NULL,NULL);
@@ -387,7 +388,7 @@ INSERT INTO English VALUES(336,18,'shoes',0,NULL,NULL);
 INSERT INTO English VALUES(337,18,'sock',0,NULL,NULL);
 INSERT INTO English VALUES(338,33,'to like',0,NULL,NULL);
 INSERT INTO English VALUES(339,8,'short',0,'length',NULL);
-INSERT INTO English VALUES(340,8,'short',1,'height',NULL);
+INSERT INTO English VALUES(340,8,'short',0,'height',NULL);
 INSERT INTO English VALUES(341,32,'yes',0,'that''s right',NULL);
 INSERT INTO English VALUES(342,14,'to graduate',1,NULL,NULL);
 INSERT INTO English VALUES(343,16,'age',1,NULL,NULL);
@@ -444,7 +445,7 @@ INSERT INTO English VALUES(393,15,'cow',0,NULL,NULL);
 INSERT INTO English VALUES(394,13,'to cry',0,NULL,NULL);
 INSERT INTO English VALUES(395,13,'to hate',0,NULL,NULL);
 INSERT INTO English VALUES(396,31,'poop',0,NULL,NULL);
-INSERT INTO English VALUES(397,9,'to sleep',0,NULL,NULL);
+INSERT INTO English VALUES(397,47,'to sleep',0,NULL,NULL);
 INSERT INTO English VALUES(398,8,'sleepy',0,NULL,NULL);
 INSERT INTO English VALUES(399,11,'booger',0,NULL,NULL);
 INSERT INTO English VALUES(400,33,'to come',0,NULL,NULL);
@@ -621,7 +622,7 @@ INSERT INTO English VALUES(573,15,'oyster',0,NULL,NULL);
 INSERT INTO English VALUES(574,42,'oyster sauce',0,NULL,NULL);
 INSERT INTO English VALUES(575,33,'to remember',0,NULL,NULL);
 INSERT INTO English VALUES(576,33,'to forget',0,NULL,NULL);
-INSERT INTO English VALUES(577,9,'to wake up',0,NULL,NULL);
+INSERT INTO English VALUES(577,47,'to wake up',0,NULL,NULL);
 INSERT INTO English VALUES(578,36,'how much',0,NULL,NULL);
 INSERT INTO English VALUES(579,6,'broken',0,NULL,NULL);
 INSERT INTO English VALUES(580,32,'one''s self',0,NULL,NULL);
@@ -906,6 +907,14 @@ INSERT INTO English VALUES(859,13,'to exchange',0,NULL,NULL);
 INSERT INTO English VALUES(860,13,'to swim',0,NULL,NULL);
 INSERT INTO English VALUES(861,8,'soft',0,NULL,NULL);
 INSERT INTO English VALUES(862,41,'watery',0,NULL,NULL);
+INSERT INTO English VALUES(863,10,'curry',0,NULL,NULL);
+INSERT INTO English VALUES(864,47,'dream',0,NULL,NULL);
+INSERT INTO English VALUES(865,13,'to dream',0,NULL,NULL);
+INSERT INTO English VALUES(866,38,'to fly',0,NULL,NULL);
+INSERT INTO English VALUES(867,28,'peas',0,NULL,10);
+INSERT INTO English VALUES(868,44,'runny nose',0,NULL,NULL);
+INSERT INTO English VALUES(869,44,'throat mucus',0,NULL,NULL);
+INSERT INTO English VALUES(870,37,'ladle',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1686,6 +1695,11 @@ INSERT INTO Chinese VALUES(780,'帽',NULL,'bho7',NULL);
 INSERT INTO Chinese VALUES(781,'换','換','uan7',NULL);
 INSERT INTO Chinese VALUES(782,'泅',NULL,'siu5',NULL);
 INSERT INTO Chinese VALUES(783,'软','軟','neung2',NULL);
+INSERT INTO Chinese VALUES(784,'喱',NULL,'li5',NULL);
+INSERT INTO Chinese VALUES(785,'梦','夢','mang7',NULL);
+INSERT INTO Chinese VALUES(786,'流',NULL,'lao5',NULL);
+INSERT INTO Chinese VALUES(787,'痰',NULL,'tam5',NULL);
+INSERT INTO Chinese VALUES(788,'勺',NULL,'chiah8',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2370,7 +2384,7 @@ INSERT INTO Translation VALUES(368,336,380,0);
 INSERT INTO Translation VALUES(369,337,381,0);
 INSERT INTO Translation VALUES(370,338,382,0);
 INSERT INTO Translation VALUES(371,339,383,0);
-INSERT INTO Translation VALUES(372,340,384,1);
+INSERT INTO Translation VALUES(372,340,384,0);
 INSERT INTO Translation VALUES(373,341,385,0);
 INSERT INTO Translation VALUES(374,342,386,1);
 INSERT INTO Translation VALUES(375,343,387,0);
@@ -3065,7 +3079,7 @@ INSERT INTO Translation VALUES(1066,755,1074,0);
 INSERT INTO Translation VALUES(1067,756,1075,0);
 INSERT INTO Translation VALUES(1068,757,1076,0);
 INSERT INTO Translation VALUES(1069,758,1077,0);
-INSERT INTO Translation VALUES(1070,NULL,1078,0);
+INSERT INTO Translation VALUES(1070,866,1078,0);
 INSERT INTO Translation VALUES(1071,759,1079,0);
 INSERT INTO Translation VALUES(1072,760,1080,0);
 INSERT INTO Translation VALUES(1073,761,1080,0);
@@ -3226,6 +3240,16 @@ INSERT INTO Translation VALUES(1228,860,1235,0);
 INSERT INTO Translation VALUES(1229,861,1236,0);
 INSERT INTO Translation VALUES(1230,861,1237,0);
 INSERT INTO Translation VALUES(1231,862,1238,0);
+INSERT INTO Translation VALUES(1232,863,1239,0);
+INSERT INTO Translation VALUES(1233,NULL,1240,0);
+INSERT INTO Translation VALUES(1234,NULL,1241,0);
+INSERT INTO Translation VALUES(1235,864,1242,0);
+INSERT INTO Translation VALUES(1236,865,1242,0);
+INSERT INTO Translation VALUES(1237,867,1243,0);
+INSERT INTO Translation VALUES(1238,868,1244,0);
+INSERT INTO Translation VALUES(1239,NULL,1245,0);
+INSERT INTO Translation VALUES(1240,869,1246,0);
+INSERT INTO Translation VALUES(1241,870,1247,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4436,6 +4460,15 @@ INSERT INTO Teochew VALUES(1235,'siu57 jui2','泅水');
 INSERT INTO Teochew VALUES(1236,'neung2','软');
 INSERT INTO Teochew VALUES(1237,'neung26 neung2','软软');
 INSERT INTO Teochew VALUES(1238,'jui26 jui2','水水');
+INSERT INTO Teochew VALUES(1239,'ga1 li5','咖喱');
+INSERT INTO Teochew VALUES(1240,'ga1','咖');
+INSERT INTO Teochew VALUES(1241,'li5','喱');
+INSERT INTO Teochew VALUES(1242,'mang7','梦');
+INSERT INTO Teochew VALUES(1243,'dao7 liap8','豆粒');
+INSERT INTO Teochew VALUES(1244,'lao57 pin7','流鼻');
+INSERT INTO Teochew VALUES(1245,'lao5','流');
+INSERT INTO Teochew VALUES(1246,'tam5','痰');
+INSERT INTO Teochew VALUES(1247,'chiah8','勺');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5416,6 +5449,12 @@ INSERT INTO Compound VALUES(989,1237,1,1229);
 INSERT INTO Compound VALUES(990,1237,2,1229);
 INSERT INTO Compound VALUES(991,1238,1,121);
 INSERT INTO Compound VALUES(992,1238,2,121);
+INSERT INTO Compound VALUES(993,1239,1,1233);
+INSERT INTO Compound VALUES(994,1239,2,1234);
+INSERT INTO Compound VALUES(995,1243,1,268);
+INSERT INTO Compound VALUES(996,1243,2,745);
+INSERT INTO Compound VALUES(997,1244,1,1239);
+INSERT INTO Compound VALUES(998,1244,2,319);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
