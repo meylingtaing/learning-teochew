@@ -21,8 +21,8 @@ use Input qw(confirm input_from_prompt);
 
 my $db = Teochew::Edit->new;
 
-# First argument should be the simplified Chinese character
-my $simplified = shift @ARGV;
+# First argument should be the traditional Chinese character
+my $traditional = shift @ARGV;
 
 # Let's see what the user wants to update
 my ($pengim, $standard_pengim);
@@ -36,9 +36,9 @@ die colored ("Must provide pengim or standard-pengim!", "red") . "\n"
 
 # Find the Chinese character in the database
 my $rows = Teochew::chinese_character_details(
-    $simplified, undef, no_alt_pengim => 1);
+    $traditional, undef, no_alt_pengim => 1);
 
-die colored("Could not find entry in the database for $simplified!", "red") . "\n"
+die colored("Could not find entry in the database for $traditional!", "red") . "\n"
     unless $rows;
 
 my $row = $rows->[0];
@@ -54,7 +54,7 @@ if (scalar @$rows > 1) {
 }
 
 if ($pengim) {
-    say "Updating $simplified to have pengim '$pengim'";
+    say "Updating $traditional to have pengim '$pengim'";
     if (confirm()) {
         $db->dbh->do("update Chinese set pengim = ? where id = ?",
             undef, $pengim, $row->{chinese_id});
@@ -64,7 +64,7 @@ if ($pengim) {
     # Check and see if there are any teochew entries to update
     my @teochew_rows = $db->dbh->selectall_array(qq{
         select * from Teochew where Chinese like ? and pengim like ?
-    }, { Slice => {} }, "%$simplified%", "%$row->{pengim}%");
+    }, { Slice => {} }, "%$traditional%", "%$row->{pengim}%");
 
     # Next, I need to double check that the pengim actually does match for the
     # particular syllable. And then I need to prompt the user to see if they want
@@ -84,7 +84,7 @@ if ($pengim) {
             next unless $pengim_syllable =~ /^$row->{pengim}/;
 
             # Does the chinese character match as well?
-            next unless $chinese_syllable eq $simplified;
+            next unless $chinese_syllable eq $traditional;
 
             # Okay, change it!
             $needs_update = 1;

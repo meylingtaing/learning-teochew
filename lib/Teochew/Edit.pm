@@ -44,7 +44,7 @@ sub new { shift->create_db_object('Teochew.sqlite') }
         notes        => $notes,
         english_sort => $sort,
         pengim       => $pengim,
-        chinese      => $simplified,
+        chinese      => $traditional,
 
         # these are all boolean, and optional, and will default to 0 if not
         # specified
@@ -266,11 +266,11 @@ sub update_teochew {
 
     if (my $chinese = $params{chinese}) {
         # If we're getting both simplified and traditional, just insert the
-        # simplified
+        # traditional
         my ($simplified, $traditional) = split_out_parens($chinese);
         $self->dbh->do(qq{
             update Teochew set chinese = ? where Teochew.id = ?
-        }, undef, $simplified, $teochew_id);
+        }, undef, $traditional, $teochew_id);
     }
 }
 
@@ -394,10 +394,10 @@ sub insert_category {
 =head2 insert_chinese
 
     $teochew->insert_chinese(
-        pengim          => 'chek8',
+        pengim          => 'chek8', # required
         standard_pengim => 'chik8', # optional
-        simplified      => '',
-        traditional     => '',
+        simplified      => '',      # optional
+        traditional     => '',      # required
     );
 
 =cut
@@ -406,12 +406,12 @@ sub insert_chinese {
     my ($self, %params) = @_;
     $self = $self->new unless ref $self;
 
-    my @columns = qw(simplified pengim);
-    my @binds = ($params{simplified}, $params{pengim});
+    my @columns = qw(traditional pengim);
+    my @binds = ($params{traditional}, $params{pengim});
 
-    if ($params{traditional}) {
-        push @columns, 'traditional';
-        push @binds, $params{traditional};
+    if ($params{simplified}) {
+        push @columns, 'simplified';
+        push @binds, $params{simplified};
     }
 
     if ($params{standard_pengim}) {
@@ -826,7 +826,7 @@ sub choose_translation_from_english {
 Given a "simp (trad)" Chinese string and its corresponding pengim, this will
 check each character, and make sure it exists in the database.
 
-Returns the simplified Chinese string on success, and undef on error
+Returns the traditional Chinese string on success, and undef on error
 
 =cut
 
@@ -866,15 +866,17 @@ sub ensure_chinese_is_in_database {
             unless $pengim_orig =~ /(1|2|3|4|5|6|7|8)$/;
 
         # Insert Chinese if it doesn't exist
+        my $traditional_char = $traditional_chars[$i] // $simplified_chars[$i];
+        my $simplified_char  = $simplified_chars[$i];
         my $inserted = $self->confirm_and_insert_chinese(
-            simplified  => $simplified_chars[$i],
-            traditional => ($traditional_chars[$i] // ''),
+            simplified  => $simplified_char,
+            traditional => $traditional_char,
             pengim      => $pengim_orig,
         );
         return undef unless $inserted;
     }
 
-    return $simplified;
+    return $traditional || $simplified;
 }
 
 =head2 confirm_and_insert_chinese
@@ -893,26 +895,26 @@ sub confirm_and_insert_chinese {
     my $pengim          = $params{pengim};
     my $standard_pengim = $params{standard_pengim};
 
-    unless (scalar Teochew::chinese_character_details($simplified, $pengim))
+    unless (scalar Teochew::chinese_character_details($traditional, $pengim))
     {
-        # Only insert the traditional character if it's different than
-        # the simplified one
-        my $insert_traditional =
-            !$traditional               ? '' :
-            $simplified eq $traditional ? '' : $traditional;
+        # Only insert the simplified character if it's different than
+        # the traditional one
+        my $insert_simplified =
+            $simplified eq $traditional ? '' : $simplified;
 
-        my $prompt = sprintf "Inserting Chinese [%s (%s), %s]",
-            $simplified,
-            $insert_traditional,
-            $pengim;
+        my $chinese_string = $insert_simplified ? "$simplified ($traditional)"
+                                                : "$traditional";
+
+        my $prompt = sprintf "Inserting Chinese [%s, %s]",
+            $chinese_string, $pengim;
 
         $prompt .= ", standard pengim '$standard_pengim'" if $standard_pengim;
 
         say $prompt;
         if (confirm()) {
             $self->insert_chinese(
-                simplified      => $simplified,
-                traditional     => $insert_traditional,
+                simplified      => $insert_simplified,
+                traditional     => $traditional,
                 pengim          => $pengim,
                 standard_pengim => $standard_pengim,
             );

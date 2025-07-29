@@ -65,11 +65,11 @@ if (scalar @words_by_sort > 1) {
 }
 
 # Make sure the Chinese characters are in the database
-my $simplified = $db->ensure_chinese_is_in_database(
+my $traditional = $db->ensure_chinese_is_in_database(
     chinese => $chinese,
     pengim  => $pengim,
 );
-exit unless $simplified;
+exit unless $traditional;
 
 # Split notes out of english if applicable
 my ($english_main, $notes) = split_out_parens($english);
@@ -81,7 +81,7 @@ $pengim =~ s/(\d) \( (\d) \)/$1$2/gx;
 say "Inserting into $category ";
 say "\tEnglish: $english";
 say "\tPeng'im: $pengim";
-say "\tSimplified Chinese: $simplified";
+say "\tTraditional Chinese: $traditional";
 
 say "\tSort: $sort" if defined $sort;
 
@@ -98,7 +98,7 @@ if (confirm()) {
         notes        => $notes,
         english_sort => $sort,
         pengim       => $pengim,
-        chinese      => $simplified,
+        chinese      => $traditional,
         hidden       => $hidden,
         hidden_from_flashcards => $hidden_from_flashcards,
         grammar_definition => $is_grammar,
@@ -110,18 +110,18 @@ if (confirm()) {
     }
 }
 
-my $syllables = length $simplified;
+my $syllables = length $traditional;
 exit unless $syllables > 1;
 
 my $added_breakdown = 0;
 
 # Check and see if we can automatically add a compound breakdown
 my %potential_breakdown = $db->potential_compound_breakdown(
-    chinese => $simplified,
+    chinese => $traditional,
     pengim  => $pengim,
 );
 
-my %translation = $db->choose_translation_from_english($english, $simplified);
+my %translation = $db->choose_translation_from_english($english, $traditional);
 my $teochew = $translation{teochew};
 
 if (%potential_breakdown) {
@@ -156,7 +156,7 @@ exit if $added_breakdown;
 
 # If not, let's try and add one anyway with some empty bits
 my $compound_breakdown =
-    input_from_prompt("Enter the breakdown for $simplified: ");
+    input_from_prompt("Enter the breakdown for $traditional: ");
 
 $db->confirm_and_insert_compound_breakdown(
     breakdown         => $compound_breakdown || $teochew->{chinese},

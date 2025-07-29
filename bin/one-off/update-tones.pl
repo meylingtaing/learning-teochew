@@ -69,7 +69,7 @@ for my $row (@rows) {
 
         my @chinese_rows = $dbh->selectall_array(qq{
             select pengim from chinese
-            where simplified = ? and pengim like ?
+            where traditional = ? and pengim like ?
         }, { Slice => {} }, $chinese, "$pengim_without_tone%");
 
         if (scalar @chinese_rows == 0) {
