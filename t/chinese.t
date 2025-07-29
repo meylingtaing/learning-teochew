@@ -31,7 +31,16 @@ $t->element_exists_not('h2#main-pengim-with-audio',
 $t->content_like(qr/Sorry! I don't have the character 你 in my database!/,
     "Error message is shown when searching a character that doesn't exist");
 
+# Load a page for a character with different traditional and simplified - beung7
+$t->get_ok("/chinese/饭")->status_is(200);
+
+$t->text_like('h1#main-chinese-character', qr/饭\s+\(飯\)/,
+    "Showing both simplified and traditional for 'rice'");
+
+$t->get_ok("/chinese/飯")->status_is(200);
+$t->text_like('h1#main-chinese-character', qr/饭\s+\(飯\)/,
+    "Page is the same when searching the traditional character");
+
 # XXX Something with Alternates
-# XXX Something with traditional and simplified
 
 done_testing;
