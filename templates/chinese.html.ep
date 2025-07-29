@@ -3,9 +3,12 @@
 % if ($chinese and scalar @$chinese) {
   <div class="text-sm-start text-center">
     <h1 id="main-chinese-character">
-      <%= $chinese->[0]->{simplified} %>
-      % if ($chinese->[0]->{traditional}) {
-          (<%= $chinese->[0]->{traditional} %>)
+      %# Traditional will always be defined. If the simplified variant is
+      %# different, then that will be defined. If they are the same, then
+      %# simplified will be undefined
+      <%= $chinese->[0]{simplified} || $chinese->[0]{traditional} %>
+      % if ($chinese->[0]{simplified}) {
+          (<%= $chinese->[0]{traditional} %>)
       % }
     </h1>
 

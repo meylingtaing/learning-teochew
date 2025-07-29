@@ -217,8 +217,8 @@ example given, using C<show_all_accents>:
         teochew_id => 1,
         translation_id => 1,
         chinese => {
-            simplified  => '银',
-            traditional => undef,
+            traditional  => '银',
+            simplified => undef,
         },
         pronunciations => [
             { pengim => 'ngeng5', audio => 'ngeng5.mp3' },
@@ -228,16 +228,16 @@ example given, using C<show_all_accents>:
         teochew_id => 1,
         translation_id => 1,
         chinese => {
-            simplified  => '钱',
-            traditional => undef,
+            traditional  => '钱',
+            simplified => undef,
         },
         pronunciations => [{ pengim => 'jin5', audio => 'jin5.mp3' }],
     }, {
         teochew_id => 1,
         translation_id => 1,
         chinese => {
-            simplified  => '镭',
-            traditional => undef,
+            traditional  => '镭',
+            simplified => undef,
         },
         pronunciations => [{ pengim => 'lui1', audio => 'lui1.mp3' }],
     }]
@@ -305,7 +305,7 @@ sub translate {
     my @ret;
     for (@translations) {
         my $alt = _standard_pronunciation(
-            chinese => $_->{simplified},
+            chinese => $_->{traditional},
             pengim  => $_->{pengim}
         );
 
@@ -335,9 +335,9 @@ sub translate {
             translation_id => $_->{translation_id},
             teochew_id     => $_->{teochew_id},
             chinese        => {
-                simplified  => $_->{simplified} =~ s/\?/[?]/gr,
-                $_->{traditional} ?
-                    (traditional => $_->{traditional} =~ s/\?/[?]/gr) : (),
+                traditional  => $_->{traditional} =~ s/\?/[?]/gr,
+                $_->{simplified} ?
+                    (simplified => $_->{simplified} =~ s/\?/[?]/gr) : (),
             },
             pronunciations => $pronunciation,
         }
@@ -1014,10 +1014,10 @@ sub compound_word_components {
             if $row->{synonyms} &&
                length($row->{word}) + length($row->{synonyms}) < 15;
 
-        # Get the traditional character
+        # Get the simplified character
         $row->{chinese} = {
-            simplified  => $row->{chinese},
-            traditional => get_traditional($row->{chinese}),
+            traditional  => $row->{chinese},
+            simplified => get_simplified($row->{chinese}),
         };
     }
 
@@ -1158,7 +1158,7 @@ sub _standard_pronunciation {
         my $alt = $dbh->selectrow_array(qq{
             select standard_pengim
             from Chinese
-            where simplified = ? and pengim = ?
+            where traditional = ? and pengim = ?
         }, { Slice => {} }, $characters[$i], $words[$i]);
 
         if ($alt) {
@@ -1326,8 +1326,8 @@ sub _lookup_all {
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
     for my $row (@rows) {
-        $row->{simplified}  = $row->{chinese};
-        $row->{traditional} = get_traditional($row->{chinese});
+        $row->{traditional}  = $row->{chinese};
+        $row->{simplified} = get_simplified($row->{chinese});
     }
 
     return @rows;
@@ -1500,12 +1500,12 @@ sub get_all_translations_by_id {
     };
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, $english_id);
 
-    # Check for traditional characters
+    # Check for simplified characters
     for my $row (@rows) {
-        my $traditional = get_traditional($row->{chinese});
+        my $simplified = get_simplified($row->{chinese});
 
-        $row->{simplified}  = $row->{chinese};
-        $row->{traditional} = $traditional if $traditional;
+        $row->{traditional}  = $row->{chinese};
+        $row->{simplified} = $simplified if $simplified;
     }
 
     return @rows;
@@ -1556,8 +1556,8 @@ this form:
 
     {
         chinese_id      => 1,
-        simplified      => '汝'
-        traditional     => undef,
+        traditional     => '汝'
+        simplified      => undef,
         pengim          => 'leu2'
         audio           => 'l/leu2.mp3',
     }
@@ -1771,8 +1771,8 @@ sub _format_for_translations_table {
             is_definition => $_->{is_definition},
             teochew => [{
                 chinese => {
-                    simplified  => $_->{chinese},
-                    traditional => get_traditional($_->{chinese}),
+                    traditional => $_->{chinese},
+                    simplified  => get_simplified($_->{chinese}),
                 },
                 pronunciations => [{
                     pengim  => $pengim,
@@ -1825,30 +1825,30 @@ sub get_approx_num_translations {
     return $word_count + $sentence_count;
 }
 
-=head2 get_traditional
+=head2 get_simplified
 
-Given a string with simplified Chinese characters, this checks to see if the
-traditional variant is different, and if it is, it will return that. This
+Given a string with traditional Chinese characters, this checks to see if the
+simplified variant is different, and if it is, it will return that. This
 returns undef if they are the same
 
 =cut
 
-sub get_traditional {
-    my $full_simplified = shift;
-    my @simplified = split //, $full_simplified;
+sub get_simplified {
+    my $full_traditional = shift;
+    my @traditional = split //, $full_traditional;
 
-    my $full_traditional = '';
+    my $full_simplified = '';
 
-    for my $i (0..$#simplified) {
-        my $traditional = $dbh->selectrow_array(qq{
-            select traditional from Chinese
-            where simplified = ?
-        }, undef, $simplified[$i]);
+    for my $i (0..$#traditional) {
+        my $simplified = $dbh->selectrow_array(qq{
+            select simplified from Chinese
+            where traditional = ?
+        }, undef, $traditional[$i]);
 
-        $full_traditional .= ($traditional || $simplified[$i]);
+        $full_simplified .= ($simplified || $traditional[$i]);
     }
 
-    return $full_traditional if $full_traditional ne $full_simplified;
+    return $full_simplified if $full_simplified ne $full_traditional;
     return undef;
 }
 

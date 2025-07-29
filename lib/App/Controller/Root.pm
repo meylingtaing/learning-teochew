@@ -320,11 +320,11 @@ sub chinese {
     my ($words, $alternates);
     if ($chinese) {
 
-        # It's possible that the traditional character was searched. Use the
-        # simplified character for finding other words using this character
-        my $simplified = $chinese->[0]{simplified};
+        # It's possible that the simplified character was searched. Use the
+        # traditional character for finding other words using this character
+        my $traditional = $chinese->[0]{traditional};
 
-        $words      = Teochew::find_words_using_character($simplified);
+        $words      = Teochew::find_words_using_character($traditional);
         $alternates = Teochew::check_alternate_chinese(chinese => $character);
     }
 

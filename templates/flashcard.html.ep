@@ -153,9 +153,9 @@
 
             // Update the chinese characters, making sure to correctly pick
             // simplified or traditional
-            var traditional = translation.chinese.traditional ??
-                              translation.chinese.simplified;
-            var simplified  = translation.chinese.simplified;
+            var traditional = translation.chinese.traditional;
+            var simplified  = translation.chinese.simplified ??
+                              translation.chinese.traditional;
 
             if (use_traditional) {
                 new_chinese = traditional;

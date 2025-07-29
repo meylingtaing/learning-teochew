@@ -166,15 +166,16 @@ sub link_teochew_words {
     }
 
     my $pengim  = join ' ', @pengim_parts;
-    my $simplified  = join '', map { $_->{simplified} } @components;
-    my $traditional = join '', map { $_->{traditional} || $_->{simplified} }
+    my $simplified  = join '', map { $_->{simplified} || $_->{traditional} }
+                               @components;
+    my $traditional = join '', map { $_->{traditional} }
                                @components;
 
     my $return = {
         pengim      => $pengim,
-        simplified  => $simplified,
+        traditional => $traditional,
     };
-    $return->{traditional} = $traditional if $simplified ne $traditional;
+    $return->{simplified} = $simplified if $simplified ne $traditional;
 
     return $return;
 }

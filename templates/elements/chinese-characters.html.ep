@@ -8,8 +8,8 @@
 %#   * elt_classes - string with any classes that should be set on the span
 %#     element
 
-% my $simplified  = $chinese->{simplified};
-% my $traditional = $chinese->{traditional} || $chinese->{simplified};
+% my $simplified  = $chinese->{simplified} || $chinese->{traditional};
+% my $traditional = $chinese->{traditional};
 
 % my $classes = "chinese";
 % $classes .= " " . stash('elt_classes') if stash('elt_classes');
