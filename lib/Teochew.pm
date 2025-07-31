@@ -960,10 +960,20 @@ sub check_alternate_chinese {
     return {} unless @rows;
 
     if ($rows[0]{alt} eq $chinese) {
+        # XXX: Come back to this...
         return { alt_of => $rows[0]{main} };
     }
     else {
-        return { has_alts => [ map { $_->{alt} } @rows ] };
+        my @alts;
+        for my $row (@rows) {
+            my $alt = $row->{alt};
+            my $simplified = get_simplified($alt);
+            if ($simplified) {
+                $alt = "$simplified ($alt)";
+            }
+            push @alts, $alt;
+        }
+        return { has_alts => \@alts };
     }
 }
 
