@@ -922,6 +922,7 @@ INSERT INTO English VALUES(874,14,'manager',0,NULL,NULL);
 INSERT INTO English VALUES(875,37,'bottle',0,NULL,NULL);
 INSERT INTO English VALUES(876,18,'necklace',0,NULL,NULL);
 INSERT INTO English VALUES(877,18,'earring',0,NULL,NULL);
+INSERT INTO English VALUES(878,37,'spatula',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1712,6 +1713,7 @@ INSERT INTO Chinese VALUES(791,NULL,'罐','guang3',NULL);
 INSERT INTO Chinese VALUES(792,NULL,'樽','jung1',NULL);
 INSERT INTO Chinese VALUES(793,NULL,'罇','jung1',NULL);
 INSERT INTO Chinese VALUES(794,'钩','鈎','gao1',NULL);
+INSERT INTO Chinese VALUES(795,'𮣶','鑢','leu1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3278,6 +3280,8 @@ INSERT INTO Translation VALUES(1253,875,1259,0);
 INSERT INTO Translation VALUES(1254,876,1260,0);
 INSERT INTO Translation VALUES(1255,877,1261,0);
 INSERT INTO Translation VALUES(1256,NULL,1262,0);
+INSERT INTO Translation VALUES(1257,878,1263,0);
+INSERT INTO Translation VALUES(1258,NULL,1264,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4512,6 +4516,8 @@ INSERT INTO Teochew VALUES(1259,'jung1','樽');
 INSERT INTO Teochew VALUES(1260,'am67 soh4','頷索');
 INSERT INTO Teochew VALUES(1261,'hin67 gao1','耳鈎');
 INSERT INTO Teochew VALUES(1262,'gao1','鈎');
+INSERT INTO Teochew VALUES(1263,'dian26 leu1','鼎鑢');
+INSERT INTO Teochew VALUES(1264,'leu1','鑢');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5510,6 +5516,8 @@ INSERT INTO Compound VALUES(1007,1260,1,325);
 INSERT INTO Compound VALUES(1008,1260,2,930);
 INSERT INTO Compound VALUES(1009,1261,1,318);
 INSERT INTO Compound VALUES(1010,1261,2,1256);
+INSERT INTO Compound VALUES(1011,1263,1,754);
+INSERT INTO Compound VALUES(1012,1263,2,1258);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
