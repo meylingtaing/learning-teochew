@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "learning-teochew-custom-font";
+    font-family: "learning-teochew-custom-font1";
     src: url("/fonts/learning-teochew-custom-font1.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
@@ -25,7 +25,7 @@ body {
         Arial,
         "Liberation Sans",
         sans-serif,
-        "learning-teochew-custom-font",
+        "learning-teochew-custom-font1",
         "Apple Color Emoji",
         "Segoe UI Emoji",
         "Segoe UI Symbol",
