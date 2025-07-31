@@ -9,7 +9,7 @@
      * fonts don't seem to include. This is a hack-y way of making sure it will
      * show up (without having to always load the font). I'll
      * probably have to expand this more later */
-    unicode-range: U+20895, U+30291, U+2E8F6;
+    unicode-range: U+20895, U+2E8F6, U+30291;
 }
 
 /* I just took the default font-family from Bootstrap, and modified it to
