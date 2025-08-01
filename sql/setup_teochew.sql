@@ -1714,6 +1714,8 @@ INSERT INTO Chinese VALUES(792,NULL,'樽','jung1',NULL);
 INSERT INTO Chinese VALUES(793,NULL,'罇','jung1',NULL);
 INSERT INTO Chinese VALUES(794,'钩','鈎','gao1',NULL);
 INSERT INTO Chinese VALUES(795,'𮣶','鑢','leu1',NULL);
+INSERT INTO Chinese VALUES(796,'鸡','雞','goi1',NULL);
+INSERT INTO Chinese VALUES(797,'钩','鉤','gao1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2025,6 +2027,12 @@ INSERT INTO TeochewAltChinese VALUES(45,321,'底珍');
 INSERT INTO TeochewAltChinese VALUES(46,321,'底滇');
 INSERT INTO TeochewAltChinese VALUES(47,202,'樹柅');
 INSERT INTO TeochewAltChinese VALUES(48,1259,'罇');
+INSERT INTO TeochewAltChinese VALUES(49,221,'雞');
+INSERT INTO TeochewAltChinese VALUES(50,222,'雞肉');
+INSERT INTO TeochewAltChinese VALUES(51,668,'雞精');
+INSERT INTO TeochewAltChinese VALUES(52,1214,'雞腿');
+INSERT INTO TeochewAltChinese VALUES(53,1216,'雞翼');
+INSERT INTO TeochewAltChinese VALUES(54,1261,'耳鉤');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
