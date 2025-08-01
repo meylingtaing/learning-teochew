@@ -171,7 +171,7 @@ if (my $tag = $inputs{tag}) {
 if (my $alt_chinese = $inputs{alt_chinese}) {
 
     # First check and see if these Chinese characters exist in the database
-    $db->ensure_chinese_is_in_database(
+    my $traditional = $db->ensure_chinese_is_in_database(
         chinese => $alt_chinese,
         pengim  => $teochew->{pengim},
     );
@@ -180,7 +180,7 @@ if (my $alt_chinese = $inputs{alt_chinese}) {
     if (confirm()) {
         $db->insert_alt_chinese(
             teochew_id => $teochew->{teochew_id},
-            chinese    => $alt_chinese
+            chinese    => $traditional
         );
         say colored("Added $alt_chinese as an alternate!", "green");
     }
