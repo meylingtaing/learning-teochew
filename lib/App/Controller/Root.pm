@@ -313,26 +313,33 @@ The page for seeing details for a Chinese character
 sub chinese {
     my $c = shift;
 
-    my $character  = $c->stash('character');
-    my $chinese    = Teochew::chinese_character_details($character);
+    my $character  = $c->stash('characters');
+    if (length($character) == 1) {
+        my $chinese    = Teochew::chinese_character_details($character);
 
-    # Look up extra details about this character if it exists in our database
-    my ($words, $alternates);
-    if ($chinese) {
+        # Look up extra details about this character if it exists in our database
+        my ($words, $alternates);
+        if ($chinese) {
 
-        # It's possible that the simplified character was searched. Use the
-        # traditional character for finding other words using this character
-        my $traditional = $chinese->[0]{traditional};
+            # It's possible that the simplified character was searched. Use the
+            # traditional character for finding other words using this character
+            my $traditional = $chinese->[0]{traditional};
 
-        $words      = Teochew::find_words_using_character($traditional);
-        $alternates = Teochew::check_alternate_chinese(chinese => $character);
+            $words      = Teochew::find_words_using_character($traditional);
+            $alternates = Teochew::check_alternate_chinese(chinese => $character);
+        }
+
+        $c->stash(chinese => $chinese);
+        $c->stash(words => $words);
+        $c->stash(alternates => $alternates);
+        $c->render(template => 'chinese');
     }
-
-    $c->stash(chinese => $chinese);
-    $c->stash(words => $words);
-    $c->stash(alternates => $alternates);
-    $c->render(template => 'chinese');
-};
+    else {
+        my $words = Teochew::parse_chinese($character);
+        $c->stash(chinese => $words);
+        $c->stash(template => 'parse-chinese');
+    }
+}
 
 =head2 updates
 
@@ -361,7 +368,7 @@ sub updates {
 
     $c->stash(updates => $updates);
     $c->render(template => 'updates');
-};
+}
 
 sub lesson {
     my $c = shift;

@@ -51,5 +51,5 @@
 
 % }
 % else {
-    <h5>Sorry! I don't have the character <%= $character %> in my database!</h5>
+    <h5>Sorry! I don't have the character <%= $characters %> in my database!</h5>
 % }

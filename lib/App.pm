@@ -41,7 +41,7 @@ sub startup {
     $r->get('/translate')->to('root#translate');
     $r->get('/search')->to('root#search');
     $r->get('/english/:english')->to('root#english');
-    $r->get('/chinese/:character')->to('root#chinese');
+    $r->get('/chinese/:characters')->to('root#chinese');
 
     $r->get('/lesson/:lesson')->to('root#lesson');
     $r->get('/updates/:page')->to('root#updates', page => 0);

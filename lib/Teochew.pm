@@ -1632,6 +1632,76 @@ sub chinese_character_details {
     return \@return;
 }
 
+=head2 parse_chinese
+
+Takes the given string of chinese characters and tries to find words in the
+database that represent them. Returns an arrayref, with each element being a
+hashref in this form:
+
+    {
+        chinese => ''
+        pengim => ''
+    }
+
+=cut
+
+sub parse_chinese {
+    my ($characters) = @_;
+
+    my $i = 0;
+    my @found_words;
+
+    while ($i < length($characters)) {
+        # Find the longest word possible
+        my $word_length = 5;
+        my $found_word = undef;
+
+        while (!$found_word) {
+            my $word_to_check = substr($characters, $i, $word_length);
+            if (length($word_to_check) < $word_length) {
+                $word_length = length($word_to_check);
+            }
+
+            my $sql = qq{
+                select pengim, english.word as english
+                from teochew
+                left join translation on translation.teochew_id = teochew.id
+                left join english on translation.english_id = english.id
+                where chinese = ?
+            };
+            my @rows = $dbh->selectall_array($sql, { Slice => {} },
+                $word_to_check);
+
+            if (scalar @rows) {
+                $found_word = {
+                    chinese => $word_to_check,
+                    all_pengim => join(", ", uniq(map { $_->{pengim} } @rows)),
+                    english => join(", ", map { $_->{english} } @rows),
+                    translations => [map +{
+                        english => $_->{english},
+                        pengim  => $_->{pengim}
+                    }, @rows],
+                };
+            }
+            else {
+                if ($word_length == 1) {
+                    $found_word = {
+                        chinese => $word_to_check,
+                        all_pengim => '',
+                    };
+                }
+                else {
+                    $word_length--;
+                }
+            }
+        }
+        push @found_words, $found_word;
+        $i += $word_length;
+    }
+
+    return \@found_words;
+}
+
 =head2 find_words_using_character
 
     find_words_using_character('姑');
