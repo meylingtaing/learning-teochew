@@ -926,6 +926,10 @@ INSERT INTO English VALUES(878,37,'spatula',0,NULL,NULL);
 INSERT INTO English VALUES(879,17,'to pay',0,NULL,NULL);
 INSERT INTO English VALUES(880,17,'to borrow',0,NULL,NULL);
 INSERT INTO English VALUES(881,1,'no big deal',0,NULL,NULL);
+INSERT INTO English VALUES(882,32,'never would have thought',0,NULL,NULL);
+INSERT INTO English VALUES(883,32,'classifier',0,'for words and sentences',NULL);
+INSERT INTO English VALUES(884,14,'word',0,'a word',NULL);
+INSERT INTO English VALUES(885,40,'last week',0,NULL,2);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1724,6 +1728,9 @@ INSERT INTO Chinese VALUES(799,'还','還','hain5',NULL);
 INSERT INTO Chinese VALUES(800,NULL,'借','jioh4',NULL);
 INSERT INTO Chinese VALUES(801,NULL,'相','siang1',NULL);
 INSERT INTO Chinese VALUES(802,NULL,'干','gang1',NULL);
+INSERT INTO Chinese VALUES(803,NULL,'句','gu3',NULL);
+INSERT INTO Chinese VALUES(804,NULL,'上','jion6',NULL);
+INSERT INTO Chinese VALUES(805,'聪','聰','chong1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1886,6 +1893,7 @@ INSERT INTO Synonyms VALUES(155,849,'chicken leg',0);
 INSERT INTO Synonyms VALUES(156,849,'drumstick',0);
 INSERT INTO Synonyms VALUES(157,855,'ill',0);
 INSERT INTO Synonyms VALUES(158,859,'to change',0);
+INSERT INTO Synonyms VALUES(159,780,'intelligent',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2043,6 +2051,7 @@ INSERT INTO TeochewAltChinese VALUES(51,668,'雞精');
 INSERT INTO TeochewAltChinese VALUES(52,1214,'雞腿');
 INSERT INTO TeochewAltChinese VALUES(53,1216,'雞翼');
 INSERT INTO TeochewAltChinese VALUES(54,1261,'耳鉤');
+INSERT INTO TeochewAltChinese VALUES(55,1273,'想毋到');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -3308,6 +3317,14 @@ INSERT INTO Translation VALUES(1263,880,1269,0);
 INSERT INTO Translation VALUES(1264,881,1270,0);
 INSERT INTO Translation VALUES(1265,NULL,1271,0);
 INSERT INTO Translation VALUES(1266,NULL,1272,0);
+INSERT INTO Translation VALUES(1267,882,1273,0);
+INSERT INTO Translation VALUES(1268,883,1274,0);
+INSERT INTO Translation VALUES(1269,884,1275,0);
+INSERT INTO Translation VALUES(1270,885,1276,0);
+INSERT INTO Translation VALUES(1271,NULL,1277,0);
+INSERT INTO Translation VALUES(1272,780,1278,0);
+INSERT INTO Translation VALUES(1273,NULL,1279,0);
+INSERT INTO Translation VALUES(1274,NULL,1280,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4552,6 +4569,14 @@ INSERT INTO Teochew VALUES(1269,'jioh4','借');
 INSERT INTO Teochew VALUES(1270,'bho57 siang1 gang1','無相干');
 INSERT INTO Teochew VALUES(1271,'siang1','相');
 INSERT INTO Teochew VALUES(1272,'gang1','干');
+INSERT INTO Teochew VALUES(1273,'sion67 m67 gao3','想唔到');
+INSERT INTO Teochew VALUES(1274,'gu3','句');
+INSERT INTO Teochew VALUES(1275,'jek84 gu32 ue7','一句話');
+INSERT INTO Teochew VALUES(1276,'jion67 loi26 bai3','上禮拜');
+INSERT INTO Teochew VALUES(1277,'jion6','上');
+INSERT INTO Teochew VALUES(1278,'chong1 meng5','聰明');
+INSERT INTO Teochew VALUES(1279,'chong1','聰');
+INSERT INTO Teochew VALUES(1280,'meng5','明');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5560,6 +5585,16 @@ INSERT INTO Compound VALUES(1017,1268,2,352);
 INSERT INTO Compound VALUES(1018,1270,1,381);
 INSERT INTO Compound VALUES(1019,1270,2,1265);
 INSERT INTO Compound VALUES(1020,1270,3,1266);
+INSERT INTO Compound VALUES(1021,1273,1,545);
+INSERT INTO Compound VALUES(1022,1273,2,580);
+INSERT INTO Compound VALUES(1023,1273,3,704);
+INSERT INTO Compound VALUES(1024,1275,1,6);
+INSERT INTO Compound VALUES(1025,1275,2,1268);
+INSERT INTO Compound VALUES(1026,1275,3,600);
+INSERT INTO Compound VALUES(1027,1276,1,1271);
+INSERT INTO Compound VALUES(1028,1276,2,76);
+INSERT INTO Compound VALUES(1029,1278,1,1273);
+INSERT INTO Compound VALUES(1030,1278,2,1274);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5728,7 +5763,7 @@ INSERT INTO ExtraNotes VALUES(47,replace('In this case, **giang3** indicates suc
 INSERT INTO ExtraNotes VALUES(48,replace('When I hear **gong3**, I generally think of **gong(2) bhah4**, a sweet soy sauce braised pork, which typically also has hard boiled eggs in it.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(49,replace('I didn''t get this translation from my family because I guess we never said "happy birthday" in Chinese. So I''m not sure how common of a phrase this is.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(50,replace('I''ve actually pronounced this **lao7 sai2**, but I couldn''t find any confirmation from other people that pronounce it that way. **lao(2) sai2** seems to be the common pronunciation of this word.\n','\n',char(10)));
-INSERT INTO ExtraNotes VALUES(51,replace('While both of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(51,replace('While all of these words generally mean "smart", I would also use **ghao5** to describe someone that is well-behaved or is a good person. I think of **kiang3** as skilled or clever.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(52,replace('If you are late to something, you would use **uan3**. **am3** implies that it''s late and it''s dark, so you can use am3 to say that it''s too late in the day to go out.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(53,replace('If you are pouring water into a glass, you would use **do3**.\n\nIf you are pouring soup or sauce over your rice, you would use **nam5**.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(54,replace('We typically use **dim1** if we''re heating up food using a microwave, but I don''t think it''s exclusive to microwaving. You could use it for heating up food on a stove too.\n','\n',char(10)));
