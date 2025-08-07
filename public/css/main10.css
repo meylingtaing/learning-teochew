@@ -66,3 +66,5 @@ tbody.table-group-divider { border-top-color: var(--bs-border-color); }
 .nowrap {
     white-space: nowrap;
 }
+
+.hover-details:hover { color: #007bff; cursor: default; }

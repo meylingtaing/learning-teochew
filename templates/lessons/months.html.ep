@@ -1,6 +1,5 @@
 % layout 'wrapper-left';
 <style>
-.hover-details:hover { color: #007bff; cursor: default; }
 .table .play-teochew { font-size: 1.5em }
 .large-translation { margin-bottom: 2rem; }
 </style>
@@ -98,10 +97,5 @@ To say the full date, you would say the month, then the day. And this time you <
 Generally, when there's more at the end of the "month phrase", you do apply tone change to the number portion of the month. But remember, not everyone follows these tone change rules exactly as I've stated them. I have heard that some people will sandhi the number, even when saying the month name by itself. So, I don't know, sandhi it or don't sandhi it, it's probably fine and people will know what you mean.
 </div>
 
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
-
 %= include 'elements/play_teochew'
+%= include 'elements/tooltip-js'
