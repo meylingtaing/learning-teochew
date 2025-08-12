@@ -1676,7 +1676,10 @@ sub parse_chinese {
                 $found_word = {
                     chinese => $word_to_check,
                     all_pengim => join(", ", uniq(map { $_->{pengim} } @rows)),
-                    english => join(", ", map { $_->{english} } @rows),
+                    english => join(", ", uniq(
+                        grep { defined $_ }
+                        map  { $_->{english} } @rows
+                    )),
                     translations => [map +{
                         english => $_->{english},
                         pengim  => $_->{pengim}
