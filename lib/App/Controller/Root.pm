@@ -335,7 +335,8 @@ sub chinese {
         $c->render(template => 'chinese');
     }
     else {
-        my $words = Teochew::parse_chinese($character);
+        my $words = length($character) <= 100 ? Teochew::parse_chinese($character)
+                                              : [];
         $c->stash(chinese => $words);
         $c->stash(template => 'parse-chinese');
     }

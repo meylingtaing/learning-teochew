@@ -1,14 +1,19 @@
 % layout 'wrapper-left';
 <ul class="list-group list-group-horizontal mb-2">
-% for my $word (@$chinese) {
-    <li class="list-group-item text-center">
-        <div class="fs-1 hover-details"
-             data-toggle="tooltip" data-placement="bottom"
-             title="<%= $word->{english} %>">
-          <%= $word->{chinese} %>
-        </div>
-        <%= $word->{all_pengim} %>
-    </li>
+% if (@$chinese) {
+    % for my $word (@$chinese) {
+        <li class="list-group-item text-center">
+            <div class="fs-1 hover-details"
+                 data-toggle="tooltip" data-placement="bottom"
+                 title="<%= $word->{english} %>">
+              <%= $word->{chinese} %>
+            </div>
+            <%= $word->{all_pengim} %>
+        </li>
+    % }
+% }
+% else {
+    Your search was too long. Please shorten it.
 % }
 </ul>
 
