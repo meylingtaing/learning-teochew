@@ -803,12 +803,15 @@ sub choose_translation_from_english {
     }
     elsif (scalar @rows > 1) {
         # Need the user to select which translation they want to modify
+        my @valid_inputs;
         for (my $i = 0; $i < scalar @rows; $i++) {
             my $row = $rows[$i];
             say "$i: $row->{chinese} $row->{pengim}";
+            push @valid_inputs, $i;
         }
+
         $row_id = input_from_prompt(
-            "Which translation would you like to modify?");
+            "Which translation would you like to modify?", \@valid_inputs);
     }
 
     $ret{teochew} = $rows[$row_id];

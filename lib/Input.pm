@@ -63,18 +63,28 @@ sub input_via_editor {
 =head2 input_from_prompt
 
 This prompts the user with the given prompt, and reads and returns input
-from STDIN
+from STDIN. You can optionally also pass an array of strings, which will
+require the user to input one of those
 
 =cut
 
 sub input_from_prompt {
-    my ($prompt) = @_;
+    my ($prompt, $valid_inputs) = @_;
 
     croak "Must provide prompt to input_from_prompt!\n" unless defined $prompt;
 
     print "$prompt ";
+
     my $input = <STDIN>;
     chomp $input;
+
+    while ($valid_inputs && !grep(/^$input$/, @$valid_inputs)) {
+        my $valid_input_str = join ", ", @$valid_inputs;
+        print "Invalid input. Please provide one of [$valid_input_str]: ";
+        $input = <STDIN>;
+        chomp $input
+    }
+
     return $input;
 }
 
