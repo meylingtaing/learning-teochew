@@ -1648,33 +1648,76 @@ hashref in this form:
 sub parse_chinese {
     my ($characters) = @_;
 
+    # Each character given could be interpreted as traditional or simplified,
+    # but all the words in the database are stored as traditional. Some
+    # traditional characters map to the same simplified. So for each
+    # character in the string, we need to determine all the possible characters
+    # it could represent
+    my %char_map;
+    for my $char (split //, $characters) {
+        next if exists $char_map{$char};
+
+        my @traditional_chars = get_all_possible_traditional_chars($char);
+        if (@traditional_chars) {
+            $char_map{$char} = \@traditional_chars;
+        }
+    }
+
+    # Now go through each portion of the string one at a time, and look for
+    # words that it could represent
     my $i = 0;
     my @found_words;
 
     while ($i < length($characters)) {
-        # Find the longest word possible
+
+        # Find the longest word possible--nothing in the database is longer
+        # than 5 characters. So we'll start with the first five characters, and
+        # then if it doesn't match anything, go down to first four, etc
         my $word_length = 5;
         my $found_word = undef;
 
         while (!$found_word) {
-            my $word_to_check = substr($characters, $i, $word_length);
-            if (length($word_to_check) < $word_length) {
-                $word_length = length($word_to_check);
+            my $substring = substr($characters, $i, $word_length);
+
+            # There might not actually be 5 characters left in the word, so
+            # shorten the word length to the length of the string
+            if (length($substring) < $word_length) {
+                $word_length = length($substring);
             }
 
+            # Get all possible strings based on the character map we made above
+            my $combinations = Set::CrossProduct->new(\%char_map);
+
+            my @words_to_check;
+            my @placeholders;
+            while (my $combo = $combinations->get) {
+                my $word_to_check = $substring;
+                while (my ($orig, $trad) = each %$combo) {
+                    $word_to_check =~ s/$orig/$trad/ if $orig ne $trad;
+                }
+                push @words_to_check, $word_to_check;
+                push @placeholders, '?';
+            }
+
+            # Search for all the strings in the teochew table
+            my $placeholder_str = join(',', @placeholders);
             my $sql = qq{
                 select pengim, english.word as english
                 from teochew
                 left join translation on translation.teochew_id = teochew.id
                 left join english on translation.english_id = english.id
-                where chinese = ?
+                where chinese in ($placeholder_str)
             };
             my @rows = $dbh->selectall_array($sql, { Slice => {} },
-                $word_to_check);
+                @words_to_check);
 
+            # If we got something, log it into $found_word. If not, lower the
+            # word length if possible. If we're at 1 character already, that
+            # means this character doesn't exist in our database and we can't
+            # provide any sort of translation for it, so exit out of the loop
             if (scalar @rows) {
                 $found_word = {
-                    chinese => $word_to_check,
+                    chinese => $substring,
                     all_pengim => join(", ", uniq(map { $_->{pengim} } @rows)),
                     english => join(", ", uniq(
                         grep { defined $_ }
@@ -1689,7 +1732,7 @@ sub parse_chinese {
             else {
                 if ($word_length == 1) {
                     $found_word = {
-                        chinese => $word_to_check,
+                        chinese => $substring,
                         all_pengim => '',
                     };
                 }
@@ -1933,6 +1976,24 @@ sub get_simplified {
 
     return $full_simplified if $full_simplified ne $full_traditional;
     return undef;
+}
+
+=head2 get_all_possible_traditional_chars
+
+This takes a single Chinese character and searches for it in the database under
+BOTH the traditional and simplified field. It will return all the possible
+traditional characters that it finds in those rows
+
+=cut
+
+sub get_all_possible_traditional_chars {
+    my $character = shift;
+    my @rows = $dbh->selectall_array(qq{
+        select distinct traditional from Chinese
+        where simplified = ? or traditional = ?
+    }, undef, $character, $character);
+
+    return map { $_->[0] } @rows;
 }
 
 # TODO
