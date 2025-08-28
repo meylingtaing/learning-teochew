@@ -1643,6 +1643,8 @@ hashref in this form:
         pengim => ''
     }
 
+XXX: Look in the alt_chinese table too!!
+
 =cut
 
 sub parse_chinese {
@@ -1686,7 +1688,10 @@ sub parse_chinese {
             }
 
             # Get all possible strings based on the character map we made above
-            my $combinations = Set::CrossProduct->new(\%char_map);
+            my $combinations = Set::CrossProduct->new({
+                %char_map,
+                fake_key => ['1'],
+            });
 
             my @words_to_check;
             my @placeholders;
