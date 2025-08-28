@@ -925,7 +925,7 @@ INSERT INTO English VALUES(877,18,'earring',0,NULL,NULL);
 INSERT INTO English VALUES(878,37,'spatula',0,NULL,NULL);
 INSERT INTO English VALUES(879,17,'to pay',0,NULL,NULL);
 INSERT INTO English VALUES(880,17,'to borrow',0,NULL,NULL);
-INSERT INTO English VALUES(881,1,'no big deal',0,NULL,NULL);
+INSERT INTO English VALUES(881,1,'not a big deal',0,NULL,NULL);
 INSERT INTO English VALUES(882,32,'never would have thought',0,NULL,NULL);
 INSERT INTO English VALUES(883,32,'classifier',0,'for words and sentences',NULL);
 INSERT INTO English VALUES(884,14,'word',0,'a word',NULL);
@@ -935,6 +935,9 @@ INSERT INTO English VALUES(887,15,'deer',0,NULL,NULL);
 INSERT INTO English VALUES(888,13,'to drag',0,NULL,NULL);
 INSERT INTO English VALUES(889,43,'to dip in',0,NULL,NULL);
 INSERT INTO English VALUES(890,43,'to scoop',0,NULL,NULL);
+INSERT INTO English VALUES(891,8,'tired',0,NULL,NULL);
+INSERT INTO English VALUES(892,16,'whistle',0,NULL,NULL);
+INSERT INTO English VALUES(893,13,'to pressure someone into doing something',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1741,6 +1744,13 @@ INSERT INTO Chinese VALUES(807,NULL,'鹿','dek8',NULL);
 INSERT INTO Chinese VALUES(808,NULL,'拖','tua1',NULL);
 INSERT INTO Chinese VALUES(809,'揾','搵','ung3',NULL);
 INSERT INTO Chinese VALUES(810,NULL,'舀','io2',NULL);
+INSERT INTO Chinese VALUES(811,NULL,'乏','hek8',NULL);
+INSERT INTO Chinese VALUES(812,NULL,'兮','hi1',NULL);
+INSERT INTO Chinese VALUES(813,NULL,'呼','hu5',NULL);
+INSERT INTO Chinese VALUES(814,NULL,'嘻','hi1',NULL);
+INSERT INTO Chinese VALUES(815,NULL,'浮','hu5',NULL);
+INSERT INTO Chinese VALUES(816,'压','壓','iap4',NULL);
+INSERT INTO Chinese VALUES(817,NULL,'逼','bek4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1906,6 +1916,8 @@ INSERT INTO Synonyms VALUES(158,859,'to change',0);
 INSERT INTO Synonyms VALUES(159,780,'intelligent',0);
 INSERT INTO Synonyms VALUES(160,888,'to pull',1);
 INSERT INTO Synonyms VALUES(161,890,'to ladle',1);
+INSERT INTO Synonyms VALUES(162,892,'flute',1);
+INSERT INTO Synonyms VALUES(163,893,'to force',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2064,6 +2076,8 @@ INSERT INTO TeochewAltChinese VALUES(52,1214,'雞腿');
 INSERT INTO TeochewAltChinese VALUES(53,1216,'雞翼');
 INSERT INTO TeochewAltChinese VALUES(54,1261,'耳鉤');
 INSERT INTO TeochewAltChinese VALUES(55,1273,'想毋到');
+INSERT INTO TeochewAltChinese VALUES(56,1287,'嘻呼');
+INSERT INTO TeochewAltChinese VALUES(57,1287,'兮浮');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -3342,6 +3356,13 @@ INSERT INTO Translation VALUES(1276,887,1282,0);
 INSERT INTO Translation VALUES(1277,888,1283,0);
 INSERT INTO Translation VALUES(1278,889,1284,0);
 INSERT INTO Translation VALUES(1279,890,1285,0);
+INSERT INTO Translation VALUES(1280,891,1286,0);
+INSERT INTO Translation VALUES(1281,892,1287,0);
+INSERT INTO Translation VALUES(1282,NULL,1288,0);
+INSERT INTO Translation VALUES(1283,NULL,1289,0);
+INSERT INTO Translation VALUES(1284,893,1290,0);
+INSERT INTO Translation VALUES(1285,NULL,1291,0);
+INSERT INTO Translation VALUES(1286,NULL,1292,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -3651,7 +3672,7 @@ INSERT INTO Teochew VALUES(316,'pu57 do5','葡萄');
 INSERT INTO Teochew VALUES(317,'bhek84 jiu2','蜜酒');
 INSERT INTO Teochew VALUES(318,'gu26 chai32 gue2','韭菜粿');
 INSERT INTO Teochew VALUES(319,'yuah8','熱');
-INSERT INTO Teochew VALUES(320,'mian5','名');
+INSERT INTO Teochew VALUES(320,'mia5','名');
 INSERT INTO Teochew VALUES(321,'di7 diang5','底誰');
 INSERT INTO Teochew VALUES(322,'diang1 si5','當時');
 INSERT INTO Teochew VALUES(323,'di7 go3','底塊');
@@ -4599,6 +4620,13 @@ INSERT INTO Teochew VALUES(1282,'dek8','鹿');
 INSERT INTO Teochew VALUES(1283,'tua1','拖');
 INSERT INTO Teochew VALUES(1284,'ung3','搵');
 INSERT INTO Teochew VALUES(1285,'io2','舀');
+INSERT INTO Teochew VALUES(1286,'hek8','乏');
+INSERT INTO Teochew VALUES(1287,'hi1 hu5','兮呼');
+INSERT INTO Teochew VALUES(1288,'hi1','兮');
+INSERT INTO Teochew VALUES(1289,'hu5','呼');
+INSERT INTO Teochew VALUES(1290,'iap48 bek4','壓逼');
+INSERT INTO Teochew VALUES(1291,'iap4','壓');
+INSERT INTO Teochew VALUES(1292,'bek4','逼');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5617,6 +5645,10 @@ INSERT INTO Compound VALUES(1027,1276,1,1271);
 INSERT INTO Compound VALUES(1028,1276,2,76);
 INSERT INTO Compound VALUES(1029,1278,1,1273);
 INSERT INTO Compound VALUES(1030,1278,2,1274);
+INSERT INTO Compound VALUES(1031,1287,1,1282);
+INSERT INTO Compound VALUES(1032,1287,2,1283);
+INSERT INTO Compound VALUES(1033,1290,1,1285);
+INSERT INTO Compound VALUES(1034,1290,2,1286);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5636,6 +5668,7 @@ INSERT INTO TranslationExtra VALUES(11,1095,replace('The character 𠢕 is part 
 INSERT INTO TranslationExtra VALUES(12,1165,replace('This is a contraction of **m(7) si6**\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(13,1174,replace('The 禁 character was taken from [_A pronouncing and defining dictionary of the Swatow dialect, arranged according to syllables and tones_](https://en.wikisource.org/wiki/Dictionary_of_the_Swatow_dialect/him), and means "cover" in this context. If you look up this character in other dictionaries, you''ll probably see other definitions and a different pronunciation.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(14,612,replace('I''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 (撏) is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(15,1281,replace('I suspect this might just be an onomatopoeia, and so there isn''t a perfect match for what Chinese characters should be used here. The characters that you see for "hu5" in this word don''t normally have the reading "hu5".\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
