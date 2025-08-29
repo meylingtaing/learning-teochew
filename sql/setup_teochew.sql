@@ -938,6 +938,8 @@ INSERT INTO English VALUES(890,43,'to scoop',0,NULL,NULL);
 INSERT INTO English VALUES(891,8,'tired',0,NULL,NULL);
 INSERT INTO English VALUES(892,16,'whistle',0,NULL,NULL);
 INSERT INTO English VALUES(893,13,'to pressure someone into doing something',0,NULL,NULL);
+INSERT INTO English VALUES(894,38,'bicycle',0,NULL,NULL);
+INSERT INTO English VALUES(895,35,'white person',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1751,6 +1753,7 @@ INSERT INTO Chinese VALUES(814,NULL,'嘻','hi1',NULL);
 INSERT INTO Chinese VALUES(815,NULL,'浮','hu5',NULL);
 INSERT INTO Chinese VALUES(816,'压','壓','iap4',NULL);
 INSERT INTO Chinese VALUES(817,NULL,'逼','bek4',NULL);
+INSERT INTO Chinese VALUES(818,NULL,'跤','ka1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1918,6 +1921,9 @@ INSERT INTO Synonyms VALUES(160,888,'to pull',1);
 INSERT INTO Synonyms VALUES(161,890,'to ladle',1);
 INSERT INTO Synonyms VALUES(162,892,'flute',1);
 INSERT INTO Synonyms VALUES(163,893,'to force',1);
+INSERT INTO Synonyms VALUES(164,894,'bike',0);
+INSERT INTO Synonyms VALUES(165,895,'white people',0);
+INSERT INTO Synonyms VALUES(166,895,'Caucasian',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1979,6 +1985,7 @@ INSERT INTO Phrases VALUES(47,'I just got here',0);
 INSERT INTO Phrases VALUES(48,'It''s time for me to go meet my friend now',0);
 INSERT INTO Phrases VALUES(49,'Can I borrow two dollars from you?',0);
 INSERT INTO Phrases VALUES(50,'I borrowed two dollars from you',0);
+INSERT INTO Phrases VALUES(51,'I learned one new word',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -2044,7 +2051,7 @@ INSERT INTO TeochewAltChinese VALUES(20,681,'那');
 INSERT INTO TeochewAltChinese VALUES(21,682,'疼');
 INSERT INTO TeochewAltChinese VALUES(22,702,'企');
 INSERT INTO TeochewAltChinese VALUES(23,712,'蕳砃');
-INSERT INTO TeochewAltChinese VALUES(24,37,'侬');
+INSERT INTO TeochewAltChinese VALUES(24,37,'儂');
 INSERT INTO TeochewAltChinese VALUES(25,324,'怎呢');
 INSERT INTO TeochewAltChinese VALUES(26,743,'澹');
 INSERT INTO TeochewAltChinese VALUES(27,748,'若');
@@ -2078,6 +2085,9 @@ INSERT INTO TeochewAltChinese VALUES(54,1261,'耳鉤');
 INSERT INTO TeochewAltChinese VALUES(55,1273,'想毋到');
 INSERT INTO TeochewAltChinese VALUES(56,1287,'嘻呼');
 INSERT INTO TeochewAltChinese VALUES(57,1287,'兮浮');
+INSERT INTO TeochewAltChinese VALUES(58,344,'跤');
+INSERT INTO TeochewAltChinese VALUES(59,344,'脚');
+INSERT INTO TeochewAltChinese VALUES(60,1293,'跤車');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2949,7 +2959,7 @@ INSERT INTO Translation VALUES(868,NULL,878,0);
 INSERT INTO Translation VALUES(869,NULL,879,0);
 INSERT INTO Translation VALUES(870,NULL,880,0);
 INSERT INTO Translation VALUES(871,NULL,881,0);
-INSERT INTO Translation VALUES(872,NULL,882,0);
+INSERT INTO Translation VALUES(872,895,882,0);
 INSERT INTO Translation VALUES(873,NULL,883,0);
 INSERT INTO Translation VALUES(874,NULL,884,0);
 INSERT INTO Translation VALUES(875,NULL,885,0);
@@ -3363,6 +3373,9 @@ INSERT INTO Translation VALUES(1283,NULL,1289,0);
 INSERT INTO Translation VALUES(1284,893,1290,0);
 INSERT INTO Translation VALUES(1285,NULL,1291,0);
 INSERT INTO Translation VALUES(1286,NULL,1292,0);
+INSERT INTO Translation VALUES(1287,894,1293,0);
+INSERT INTO Translation VALUES(1288,253,1294,0);
+INSERT INTO Translation VALUES(1289,895,1295,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4627,6 +4640,9 @@ INSERT INTO Teochew VALUES(1289,'hu5','呼');
 INSERT INTO Teochew VALUES(1290,'iap48 bek4','壓逼');
 INSERT INTO Teochew VALUES(1291,'iap4','壓');
 INSERT INTO Teochew VALUES(1292,'bek4','逼');
+INSERT INTO Teochew VALUES(1293,'ka1 chia1','腳車');
+INSERT INTO Teochew VALUES(1294,'seung1 gio5','酸茄');
+INSERT INTO Teochew VALUES(1295,'beh84 nang5','白人');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5649,6 +5665,14 @@ INSERT INTO Compound VALUES(1031,1287,1,1282);
 INSERT INTO Compound VALUES(1032,1287,2,1283);
 INSERT INTO Compound VALUES(1033,1290,1,1285);
 INSERT INTO Compound VALUES(1034,1290,2,1286);
+INSERT INTO Compound VALUES(1035,1293,1,332);
+INSERT INTO Compound VALUES(1036,1293,2,620);
+INSERT INTO Compound VALUES(1037,1294,1,658);
+INSERT INTO Compound VALUES(1038,1294,2,236);
+INSERT INTO Compound VALUES(1039,882,1,20);
+INSERT INTO Compound VALUES(1040,882,2,123);
+INSERT INTO Compound VALUES(1041,1295,1,19);
+INSERT INTO Compound VALUES(1042,1295,2,34);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5726,6 +5750,7 @@ INSERT INTO PhraseTranslations VALUES(50,47,'I just_now to_come');
 INSERT INTO PhraseTranslations VALUES(51,48,'time_(it''s_time)| I to_go to_meet I friend| already');
 INSERT INTO PhraseTranslations VALUES(53,49,'I good to_borrow you 2 dollar money_(silver,_coins)| no_(don''t_have)');
 INSERT INTO PhraseTranslations VALUES(54,50,'I to_borrow you 2 dollar money_(silver,_coins)');
+INSERT INTO PhraseTranslations VALUES(55,51,'I to_learn 1 classifier_(for_words_and_sentences) new word_(spoken)');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
 INSERT INTO Tags VALUES(2,'kitchenware');
