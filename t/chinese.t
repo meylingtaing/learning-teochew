@@ -18,7 +18,7 @@ $t->text_like('h2#main-pengim-with-audio', qr/gio5\s+\|\s+gia1/,
 $t->element_exists('table#words-containing-chinese-character',
     "Table with words containing this character is shown");
 $t->element_count_is('table#words-containing-chinese-character > tbody > tr',
-    3, "Showing three words that contain this character");
+    4, "Showing four words that contain this character");
 
 # Now let's load the page for a character we don't have
 $t->get_ok("/chinese/你")->status_is(200);
