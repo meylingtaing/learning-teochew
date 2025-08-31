@@ -940,6 +940,8 @@ INSERT INTO English VALUES(892,16,'whistle',0,NULL,NULL);
 INSERT INTO English VALUES(893,13,'to pressure someone into doing something',0,NULL,NULL);
 INSERT INTO English VALUES(894,38,'bicycle',0,NULL,NULL);
 INSERT INTO English VALUES(895,35,'white person',0,NULL,NULL);
+INSERT INTO English VALUES(896,32,'ever',0,NULL,NULL);
+INSERT INTO English VALUES(897,8,'nasty',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1754,6 +1756,7 @@ INSERT INTO Chinese VALUES(815,NULL,'浮','hu5',NULL);
 INSERT INTO Chinese VALUES(816,'压','壓','iap4',NULL);
 INSERT INTO Chinese VALUES(817,NULL,'逼','bek4',NULL);
 INSERT INTO Chinese VALUES(818,NULL,'跤','ka1',NULL);
+INSERT INTO Chinese VALUES(819,'过','過','gue3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1924,6 +1927,7 @@ INSERT INTO Synonyms VALUES(163,893,'to force',1);
 INSERT INTO Synonyms VALUES(164,894,'bike',0);
 INSERT INTO Synonyms VALUES(165,895,'white people',0);
 INSERT INTO Synonyms VALUES(166,895,'Caucasian',0);
+INSERT INTO Synonyms VALUES(167,897,'disgusting',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -1986,6 +1990,7 @@ INSERT INTO Phrases VALUES(48,'It''s time for me to go meet my friend now',0);
 INSERT INTO Phrases VALUES(49,'Can I borrow two dollars from you?',0);
 INSERT INTO Phrases VALUES(50,'I borrowed two dollars from you',0);
 INSERT INTO Phrases VALUES(51,'I learned one new word',0);
+INSERT INTO Phrases VALUES(52,'I''ve never heard it before',0);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -3376,6 +3381,8 @@ INSERT INTO Translation VALUES(1286,NULL,1292,0);
 INSERT INTO Translation VALUES(1287,894,1293,0);
 INSERT INTO Translation VALUES(1288,253,1294,0);
 INSERT INTO Translation VALUES(1289,895,1295,0);
+INSERT INTO Translation VALUES(1290,896,1296,1);
+INSERT INTO Translation VALUES(1291,897,1297,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4643,6 +4650,8 @@ INSERT INTO Teochew VALUES(1292,'bek4','逼');
 INSERT INTO Teochew VALUES(1293,'ka1 chia1','腳車');
 INSERT INTO Teochew VALUES(1294,'seung1 gio5','酸茄');
 INSERT INTO Teochew VALUES(1295,'beh84 nang5','白人');
+INSERT INTO Teochew VALUES(1296,'gue3','過');
+INSERT INTO Teochew VALUES(1297,'eu32 jeu3','??');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5751,6 +5760,7 @@ INSERT INTO PhraseTranslations VALUES(51,48,'time_(it''s_time)| I to_go to_meet 
 INSERT INTO PhraseTranslations VALUES(53,49,'I good to_borrow you 2 dollar money_(silver,_coins)| no_(don''t_have)');
 INSERT INTO PhraseTranslations VALUES(54,50,'I to_borrow you 2 dollar money_(silver,_coins)');
 INSERT INTO PhraseTranslations VALUES(55,51,'I to_learn 1 classifier_(for_words_and_sentences) new word_(spoken)');
+INSERT INTO PhraseTranslations VALUES(56,52,'I not-m6 to_know_(recognize,_be_familiar_with_someone_or_something) to_hear-tian1giang3| ever');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
 INSERT INTO Tags VALUES(2,'kitchenware');
@@ -5801,6 +5811,7 @@ CREATE TABLE ExtraNotes (
     id integer primary key,
     info text
 );
+INSERT INTO ExtraNotes VALUES(0,replace('You could use this word to describe a person of bad character\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(1,replace('If you are counting the numbers, or you are referring to one of something, you would use **jek8**. **ek4** is typically used when the number 1 is part of another word, like **jap(4) ek4** for the word 11, or **loi(6) bai(2) ek4** for Monday.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(2,replace('The number 2 by itself is pronounced **no6**, but many other words that include a 2 in it will use **yi6(7)**. You may also see the character 两 (兩) for 2. 两 (兩) is only pronounced as "no6", whereas 二 can be pronounced as "no6" or "yi6".\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(3,replace('**chu3** refers to a house as a building, whereas **lai6** is more like a home. I have heard both used interchangeably though.\n','\n',char(10)));
@@ -5917,6 +5928,7 @@ INSERT INTO EnglishExtraNotes VALUES(55,50,7);
 INSERT INTO EnglishExtraNotes VALUES(56,52,8);
 INSERT INTO EnglishExtraNotes VALUES(57,598,34);
 INSERT INTO EnglishExtraNotes VALUES(64,795,61);
+INSERT INTO EnglishExtraNotes VALUES(65,897,0);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
