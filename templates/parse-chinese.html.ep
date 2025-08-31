@@ -1,5 +1,5 @@
 % layout 'wrapper-left';
-<ul class="list-group list-group-horizontal mb-2">
+<ul class="list-group list-group-horizontal mb-2 flex flex-wrap">
 % if (@$chinese) {
     % for my $word (@$chinese) {
         <li class="list-group-item text-center">
