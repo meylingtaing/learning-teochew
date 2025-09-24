@@ -499,16 +499,17 @@ sub insert_extra {
         $sth = $dbh->prepare(
             "update ExtraNotes set info = ? where id = ?"
         );
+        $sth->bind_param(1, $params{info});
+        $sth->bind_param(2, $extra_note_id);
+        $sth->execute;
     }
     else {
-        $sth = $dbh->prepare(
-            "insert into ExtraNotes (info, id) values (?,?)"
-        );
+        $sth = $dbh->prepare("insert into ExtraNotes (info) values (?)");
+        $sth->bind_param(1, $params{info});
+        $sth->execute;
         $extra_note_id = $self->dbh->sqlite_last_insert_rowid;
     }
-    $sth->bind_param(1, $params{info});
-    $sth->bind_param(2, $extra_note_id);
-    $sth->execute;
+
 
     # And make sure the linking tables are good too
     for my $english_id (@english_ids) {
