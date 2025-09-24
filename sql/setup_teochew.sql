@@ -948,6 +948,12 @@ INSERT INTO English VALUES(900,13,'to descend',0,NULL,NULL);
 INSERT INTO English VALUES(901,23,'grass',0,NULL,NULL);
 INSERT INTO English VALUES(902,16,'playing card',0,NULL,NULL);
 INSERT INTO English VALUES(903,5,'family',0,NULL,NULL);
+INSERT INTO English VALUES(904,10,'zongzi',0,NULL,NULL);
+INSERT INTO English VALUES(905,10,'pickled ginger',0,NULL,NULL);
+INSERT INTO English VALUES(906,42,'sesame oil',0,NULL,NULL);
+INSERT INTO English VALUES(907,9,'basket',0,NULL,NULL);
+INSERT INTO English VALUES(908,9,'hitting stick',0,NULL,NULL);
+INSERT INTO English VALUES(909,32,'classifier',0,'for long, thin objects',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1766,6 +1772,11 @@ INSERT INTO Chinese VALUES(819,'过','過','gue3',NULL);
 INSERT INTO Chinese VALUES(820,NULL,'但','dang6',NULL);
 INSERT INTO Chinese VALUES(821,NULL,'牌','bai5',NULL);
 INSERT INTO Chinese VALUES(822,NULL,'庭','teng5',NULL);
+INSERT INTO Chinese VALUES(823,NULL,'粽','jang3',NULL);
+INSERT INTO Chinese VALUES(824,'卤','滷','lou6',NULL);
+INSERT INTO Chinese VALUES(825,NULL,'麻','mua5',NULL);
+INSERT INTO Chinese VALUES(826,'篮','籃','na5',NULL);
+INSERT INTO Chinese VALUES(827,NULL,'藤','deng5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1941,6 +1952,8 @@ INSERT INTO Synonyms VALUES(168,898,'cable',0);
 INSERT INTO Synonyms VALUES(169,156,'light',1);
 INSERT INTO Synonyms VALUES(170,900,'to go down',1);
 INSERT INTO Synonyms VALUES(171,519,'to go up',1);
+INSERT INTO Synonyms VALUES(172,904,'sticky rice dumpling',1);
+INSERT INTO Synonyms VALUES(173,908,'rattan stick',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2106,6 +2119,7 @@ INSERT INTO TeochewAltChinese VALUES(57,1287,'兮浮');
 INSERT INTO TeochewAltChinese VALUES(58,344,'跤');
 INSERT INTO TeochewAltChinese VALUES(59,344,'脚');
 INSERT INTO TeochewAltChinese VALUES(60,1293,'跤車');
+INSERT INTO TeochewAltChinese VALUES(61,1303,'家儂');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -2911,7 +2925,7 @@ INSERT INTO Translation VALUES(802,NULL,812,0);
 INSERT INTO Translation VALUES(803,NULL,813,0);
 INSERT INTO Translation VALUES(804,NULL,814,0);
 INSERT INTO Translation VALUES(805,NULL,815,0);
-INSERT INTO Translation VALUES(806,NULL,816,0);
+INSERT INTO Translation VALUES(806,909,816,0);
 INSERT INTO Translation VALUES(807,NULL,817,0);
 INSERT INTO Translation VALUES(808,NULL,818,0);
 INSERT INTO Translation VALUES(809,NULL,819,0);
@@ -3402,6 +3416,16 @@ INSERT INTO Translation VALUES(1294,900,757,0);
 INSERT INTO Translation VALUES(1295,902,1300,0);
 INSERT INTO Translation VALUES(1296,903,1301,0);
 INSERT INTO Translation VALUES(1297,NULL,1302,0);
+INSERT INTO Translation VALUES(1298,903,1303,0);
+INSERT INTO Translation VALUES(1299,904,1304,0);
+INSERT INTO Translation VALUES(1300,905,1305,0);
+INSERT INTO Translation VALUES(1301,NULL,1306,0);
+INSERT INTO Translation VALUES(1302,906,1307,0);
+INSERT INTO Translation VALUES(1303,NULL,1308,0);
+INSERT INTO Translation VALUES(1304,907,1309,0);
+INSERT INTO Translation VALUES(1305,908,1310,0);
+INSERT INTO Translation VALUES(1306,NULL,1311,0);
+INSERT INTO Translation VALUES(1307,907,1312,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4676,6 +4700,16 @@ INSERT INTO Teochew VALUES(1299,'dang6','但');
 INSERT INTO Teochew VALUES(1300,'bai5','牌');
 INSERT INTO Teochew VALUES(1301,'ge1 teng5','家庭');
 INSERT INTO Teochew VALUES(1302,'teng5','庭');
+INSERT INTO Teochew VALUES(1303,'ge1 nang5','家人');
+INSERT INTO Teochew VALUES(1304,'jang3','粽');
+INSERT INTO Teochew VALUES(1305,'lou67 gion1','滷薑');
+INSERT INTO Teochew VALUES(1306,'lou6','滷');
+INSERT INTO Teochew VALUES(1307,'mua57 iu5','麻油');
+INSERT INTO Teochew VALUES(1308,'mua5','麻');
+INSERT INTO Teochew VALUES(1309,'na5','籃');
+INSERT INTO Teochew VALUES(1310,'deng57 diao5','藤條');
+INSERT INTO Teochew VALUES(1311,'deng5','藤');
+INSERT INTO Teochew VALUES(1312,'deng57 na5','藤籃');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5710,6 +5744,16 @@ INSERT INTO Compound VALUES(1043,1298,1,1293);
 INSERT INTO Compound VALUES(1044,1298,2,721);
 INSERT INTO Compound VALUES(1045,1301,1,1243);
 INSERT INTO Compound VALUES(1046,1301,2,1297);
+INSERT INTO Compound VALUES(1047,1303,1,1243);
+INSERT INTO Compound VALUES(1048,1303,2,34);
+INSERT INTO Compound VALUES(1049,1305,1,1301);
+INSERT INTO Compound VALUES(1050,1305,2,389);
+INSERT INTO Compound VALUES(1051,1307,1,1303);
+INSERT INTO Compound VALUES(1052,1307,2,402);
+INSERT INTO Compound VALUES(1053,1310,1,1306);
+INSERT INTO Compound VALUES(1054,1310,2,806);
+INSERT INTO Compound VALUES(1055,1312,1,1306);
+INSERT INTO Compound VALUES(1056,1312,2,1304);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
