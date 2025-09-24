@@ -5937,6 +5937,7 @@ INSERT INTO ExtraNotes VALUES(58,replace('**gok(8) gheu2** literally means "nati
 INSERT INTO ExtraNotes VALUES(59,replace('**bue1** is a cup used for drinking. **gong2** is used for other cylindrical containers.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(60,replace('**ka3** on its own technically means "to hit" or "to strike", but I''ve used it to mean calling someone on the phone. I realized that if I say "ua2 ka(2) leu2" to people outside my family, they might think I''m saying that I''m hitting them 😅\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(61,replace(' Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(62,replace('You should not use **dang6** to describe people. My family said that dead people are heavy, so it would be improper to say a person is dang6.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6001,6 +6002,7 @@ INSERT INTO EnglishExtraNotes VALUES(56,52,8);
 INSERT INTO EnglishExtraNotes VALUES(57,598,34);
 INSERT INTO EnglishExtraNotes VALUES(64,795,61);
 INSERT INTO EnglishExtraNotes VALUES(65,897,0);
+INSERT INTO EnglishExtraNotes VALUES(66,674,62);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
