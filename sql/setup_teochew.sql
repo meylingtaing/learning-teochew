@@ -960,6 +960,14 @@ INSERT INTO English VALUES(912,38,'bridge',0,NULL,NULL);
 INSERT INTO English VALUES(913,8,'fitting',0,NULL,NULL);
 INSERT INTO English VALUES(914,16,'cigarette',0,NULL,NULL);
 INSERT INTO English VALUES(915,15,'earthworm',0,NULL,NULL);
+INSERT INTO English VALUES(916,13,'to roll up',0,NULL,NULL);
+INSERT INTO English VALUES(917,16,'to get married',0,NULL,NULL);
+INSERT INTO English VALUES(918,9,'hoe',0,NULL,NULL);
+INSERT INTO English VALUES(919,14,'to go on vacation',0,NULL,NULL);
+INSERT INTO English VALUES(920,14,'to get off work',0,NULL,NULL);
+INSERT INTO English VALUES(921,14,'office',0,NULL,NULL);
+INSERT INTO English VALUES(922,28,'persimmon',0,NULL,10);
+INSERT INTO English VALUES(923,8,'quiet',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1787,6 +1795,13 @@ INSERT INTO Chinese VALUES(828,'桥','橋','gio5',NULL);
 INSERT INTO Chinese VALUES(829,NULL,'啱','ngam1',NULL);
 INSERT INTO Chinese VALUES(830,NULL,'蚯','gao6',NULL);
 INSERT INTO Chinese VALUES(831,NULL,'蚓','ung2',NULL);
+INSERT INTO Chinese VALUES(832,'卷','捲','gaoh4',NULL);
+INSERT INTO Chinese VALUES(833,'结','結','gak4',NULL);
+INSERT INTO Chinese VALUES(834,NULL,'婚','hung1',NULL);
+INSERT INTO Chinese VALUES(835,'锄','鋤','deu5',NULL);
+INSERT INTO Chinese VALUES(836,NULL,'假','gia2',NULL);
+INSERT INTO Chinese VALUES(837,NULL,'柿','sai6',NULL);
+INSERT INTO Chinese VALUES(838,'静','靜','jen6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -1965,6 +1980,7 @@ INSERT INTO Synonyms VALUES(171,519,'to go up',1);
 INSERT INTO Synonyms VALUES(172,904,'sticky rice dumpling',1);
 INSERT INTO Synonyms VALUES(173,908,'rattan stick',0);
 INSERT INTO Synonyms VALUES(174,913,'just right',1);
+INSERT INTO Synonyms VALUES(175,919,'to go on break',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3446,6 +3462,16 @@ INSERT INTO Translation VALUES(1313,914,608,0);
 INSERT INTO Translation VALUES(1314,915,1318,0);
 INSERT INTO Translation VALUES(1315,NULL,1319,0);
 INSERT INTO Translation VALUES(1316,NULL,1320,0);
+INSERT INTO Translation VALUES(1317,916,1321,0);
+INSERT INTO Translation VALUES(1318,917,1322,0);
+INSERT INTO Translation VALUES(1319,918,1323,0);
+INSERT INTO Translation VALUES(1320,NULL,1324,0);
+INSERT INTO Translation VALUES(1321,919,1325,0);
+INSERT INTO Translation VALUES(1322,NULL,1326,0);
+INSERT INTO Translation VALUES(1323,920,1327,0);
+INSERT INTO Translation VALUES(1324,921,1328,0);
+INSERT INTO Translation VALUES(1325,922,1329,0);
+INSERT INTO Translation VALUES(1326,923,1330,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4738,6 +4764,16 @@ INSERT INTO Teochew VALUES(1317,'ngam1','啱');
 INSERT INTO Teochew VALUES(1318,'gao67 ung2','蚯蚓');
 INSERT INTO Teochew VALUES(1319,'gao6','蚯');
 INSERT INTO Teochew VALUES(1320,'ung2','蚓');
+INSERT INTO Teochew VALUES(1321,'gaoh4','捲');
+INSERT INTO Teochew VALUES(1322,'gak48 hung1','結婚');
+INSERT INTO Teochew VALUES(1323,'deu57 tao5','鋤頭');
+INSERT INTO Teochew VALUES(1324,'deu5','鋤');
+INSERT INTO Teochew VALUES(1325,'bang32 gia2','放假');
+INSERT INTO Teochew VALUES(1326,'gia2','假');
+INSERT INTO Teochew VALUES(1327,'bang32 gang1','放工');
+INSERT INTO Teochew VALUES(1328,'bhung57 bang5','文房');
+INSERT INTO Teochew VALUES(1329,'sai6','柿');
+INSERT INTO Teochew VALUES(1330,'jen6','靜');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5788,6 +5824,16 @@ INSERT INTO Compound VALUES(1059,1314,1,1212);
 INSERT INTO Compound VALUES(1060,1314,2,603);
 INSERT INTO Compound VALUES(1061,1318,1,1315);
 INSERT INTO Compound VALUES(1062,1318,2,1316);
+INSERT INTO Compound VALUES(1063,1322,1,NULL);
+INSERT INTO Compound VALUES(1064,1322,2,NULL);
+INSERT INTO Compound VALUES(1065,1323,1,1320);
+INSERT INTO Compound VALUES(1066,1323,2,276);
+INSERT INTO Compound VALUES(1067,1325,1,848);
+INSERT INTO Compound VALUES(1068,1325,2,1322);
+INSERT INTO Compound VALUES(1069,1327,1,848);
+INSERT INTO Compound VALUES(1070,1327,2,935);
+INSERT INTO Compound VALUES(1071,1328,1,1077);
+INSERT INTO Compound VALUES(1072,1328,2,132);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5972,6 +6018,7 @@ INSERT INTO ExtraNotes VALUES(59,replace('**bue1** is a cup used for drinking. *
 INSERT INTO ExtraNotes VALUES(60,replace('**ka3** on its own technically means "to hit" or "to strike", but I''ve used it to mean calling someone on the phone. I realized that if I say "ua2 ka(2) leu2" to people outside my family, they might think I''m saying that I''m hitting them 😅\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(61,replace(' Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(62,replace('You should not use **dang6** to describe people. My family said that dead people are heavy, so it would be improper to say a person is dang6.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(63,replace('You can use this to say that you are taking time off from work or that you have a break from school.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6037,6 +6084,7 @@ INSERT INTO EnglishExtraNotes VALUES(57,598,34);
 INSERT INTO EnglishExtraNotes VALUES(64,795,61);
 INSERT INTO EnglishExtraNotes VALUES(65,897,0);
 INSERT INTO EnglishExtraNotes VALUES(66,674,62);
+INSERT INTO EnglishExtraNotes VALUES(67,919,63);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
