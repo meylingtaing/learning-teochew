@@ -591,7 +591,7 @@ INSERT INTO English VALUES(542,7,'part of day',1,NULL,4);
 INSERT INTO English VALUES(543,16,'low',1,NULL,NULL);
 INSERT INTO English VALUES(544,16,'first',1,NULL,NULL);
 INSERT INTO English VALUES(545,34,'stay',1,NULL,NULL);
-INSERT INTO English VALUES(546,18,'to wear',0,NULL,NULL);
+INSERT INTO English VALUES(546,18,'to wear',0,'clothing',NULL);
 INSERT INTO English VALUES(547,5,'aunt',0,'dad''s youngest sister',NULL);
 INSERT INTO English VALUES(548,18,'to wear shoes',0,NULL,NULL);
 INSERT INTO English VALUES(549,43,'to knead',0,NULL,NULL);
@@ -974,6 +974,7 @@ INSERT INTO English VALUES(926,13,'to bump into',0,NULL,NULL);
 INSERT INTO English VALUES(927,13,'to capture',0,NULL,NULL);
 INSERT INTO English VALUES(928,11,'back',0,'body part',NULL);
 INSERT INTO English VALUES(929,23,'thunder',0,NULL,NULL);
+INSERT INTO English VALUES(930,18,'to wear',0,'accessories',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1815,6 +1816,7 @@ INSERT INTO Chinese VALUES(842,NULL,'掠','liah8',NULL);
 INSERT INTO Chinese VALUES(843,NULL,'巴','ba1',NULL);
 INSERT INTO Chinese VALUES(844,NULL,'脊','jiah4',NULL);
 INSERT INTO Chinese VALUES(845,NULL,'雷','lui5',NULL);
+INSERT INTO Chinese VALUES(846,'挂','掛','gua3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3502,6 +3504,7 @@ INSERT INTO Translation VALUES(1335,NULL,1339,0);
 INSERT INTO Translation VALUES(1336,929,1340,0);
 INSERT INTO Translation VALUES(1337,NULL,1341,0);
 INSERT INTO Translation VALUES(1338,929,1342,0);
+INSERT INTO Translation VALUES(1339,930,1343,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4816,6 +4819,7 @@ INSERT INTO Teochew VALUES(1339,'jiah4','脊');
 INSERT INTO Teochew VALUES(1340,'lui57 gong1','雷公');
 INSERT INTO Teochew VALUES(1341,'lui5','雷');
 INSERT INTO Teochew VALUES(1342,'lui57 gong1 lui57 ma2','雷公雷媽');
+INSERT INTO Teochew VALUES(1343,'gua3','掛');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
