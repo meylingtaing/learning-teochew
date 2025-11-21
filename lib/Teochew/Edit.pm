@@ -270,7 +270,7 @@ sub update_teochew {
         my ($simplified, $traditional) = split_out_parens($chinese);
         $self->dbh->do(qq{
             update Teochew set chinese = ? where Teochew.id = ?
-        }, undef, $traditional, $teochew_id);
+        }, undef, $traditional || $simplified, $teochew_id);
     }
 }
 

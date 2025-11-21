@@ -35,6 +35,7 @@ my %options = (
     category_sort => '',
     chinese       => 's',
     alt_chinese   => 's',
+    # should probably add a remove_alt option
     pengim        => 's',
     tag           => 's',
     hidden        => 'i',
@@ -199,13 +200,44 @@ if (my $chinese = $inputs{chinese}) {
         chinese => '?',
     );
 
-    # TODO: Be able to smartly modify the related Chinese entry. Maybe.
-    die "I haven't supported replacing the Chinese character yet\n"
-        unless $teochew_id;
+    if ($teochew_id) {
+        say "Found Teochew row with missing Chinese";
+    }
 
-    say "Adding $chinese as the Chinese for $english->{word}";
-    if (confirm()) {
-        $db->update_teochew($teochew_id, chinese => $chinese);
+    # Also look up existing teochew with the Chinese character
+    if (!$teochew_id) {
+        $teochew_id = $db->_get_teochew_id(
+            pengim  => $teochew->{pengim},
+            chinese => $teochew->{chinese},
+        );
+    }
+
+    if ($teochew_id) {
+        say "Adding $chinese as the Chinese for $english->{word}";
+        if (confirm()) {
+            $db->update_teochew($teochew_id, chinese => $chinese);
+        }
+    }
+
+    my @rows = $db->dbh->selectall_array(qq{
+        select teochew.* from Compound
+        join teochew on parent_teochew_id = teochew.id
+        where translation_id = $teochew->{translation_id}
+    }, { Slice => {} });
+
+    # Look for other words with the same translation id in the compound
+    for my $row (@rows) {
+        my $parent_teochew_id = $row->{id};
+        my $full_chinese = $row->{chinese};
+
+        # Replace chinese character
+        $full_chinese =~ s/$teochew->{chinese}/$chinese/g;
+
+        say "Replacing $row->{chinese} with $full_chinese";
+        if (confirm()) {
+            $db->dbh->do("update teochew set chinese = ? where id = ?",
+                undef, $full_chinese, $parent_teochew_id);
+        }
     }
 }
 
