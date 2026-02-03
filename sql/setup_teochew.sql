@@ -975,6 +975,8 @@ INSERT INTO English VALUES(927,13,'to capture',0,NULL,NULL);
 INSERT INTO English VALUES(928,11,'back',0,'body part',NULL);
 INSERT INTO English VALUES(929,23,'thunder',0,NULL,NULL);
 INSERT INTO English VALUES(930,18,'to wear',0,'accessories',NULL);
+INSERT INTO English VALUES(931,18,'ankle bracelet',0,NULL,NULL);
+INSERT INTO English VALUES(932,16,'percent',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1817,6 +1819,10 @@ INSERT INTO Chinese VALUES(843,NULL,'巴','ba1',NULL);
 INSERT INTO Chinese VALUES(844,NULL,'脊','jiah4',NULL);
 INSERT INTO Chinese VALUES(845,NULL,'雷','lui5',NULL);
 INSERT INTO Chinese VALUES(846,'挂','掛','gua3',NULL);
+INSERT INTO Chinese VALUES(847,NULL,'骹','ka1',NULL);
+INSERT INTO Chinese VALUES(848,'环','環','huang5',NULL);
+INSERT INTO Chinese VALUES(849,NULL,'巴','bo6',NULL);
+INSERT INTO Chinese VALUES(850,NULL,'仙','seng1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2001,6 +2007,7 @@ INSERT INTO Synonyms VALUES(177,924,'consistently',1);
 INSERT INTO Synonyms VALUES(178,926,'to collide',1);
 INSERT INTO Synonyms VALUES(179,926,'to hit',1);
 INSERT INTO Synonyms VALUES(180,927,'to catch',0);
+INSERT INTO Synonyms VALUES(181,931,'anklet',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2166,6 +2173,9 @@ INSERT INTO TeochewAltChinese VALUES(57,1287,'兮浮');
 INSERT INTO TeochewAltChinese VALUES(59,344,'腳');
 INSERT INTO TeochewAltChinese VALUES(60,1293,'腳車');
 INSERT INTO TeochewAltChinese VALUES(61,1303,'家儂');
+INSERT INTO TeochewAltChinese VALUES(62,344,'骹');
+INSERT INTO TeochewAltChinese VALUES(63,1344,'骹環');
+INSERT INTO TeochewAltChinese VALUES(64,1344,'腳環');
 CREATE TABLE Translation (
     id integer primary key,
     english_id integer references English(id),
@@ -3504,6 +3514,11 @@ INSERT INTO Translation VALUES(1336,929,1340,0);
 INSERT INTO Translation VALUES(1337,NULL,1341,0);
 INSERT INTO Translation VALUES(1338,929,1342,0);
 INSERT INTO Translation VALUES(1339,930,1343,0);
+INSERT INTO Translation VALUES(1340,931,1344,0);
+INSERT INTO Translation VALUES(1341,NULL,1345,0);
+INSERT INTO Translation VALUES(1342,932,1346,0);
+INSERT INTO Translation VALUES(1343,NULL,1347,0);
+INSERT INTO Translation VALUES(1344,NULL,1348,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4819,6 +4834,11 @@ INSERT INTO Teochew VALUES(1340,'lui57 gong1','雷公');
 INSERT INTO Teochew VALUES(1341,'lui5','雷');
 INSERT INTO Teochew VALUES(1342,'lui57 gong1 lui57 ma2','雷公雷媽');
 INSERT INTO Teochew VALUES(1343,'gua3','掛');
+INSERT INTO Teochew VALUES(1344,'ka1 huang5','跤環');
+INSERT INTO Teochew VALUES(1345,'huang5','環');
+INSERT INTO Teochew VALUES(1346,'bo6 seng1','巴仙');
+INSERT INTO Teochew VALUES(1347,'bo6','巴');
+INSERT INTO Teochew VALUES(1348,'seng1','仙');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5891,6 +5911,10 @@ INSERT INTO Compound VALUES(1081,1342,1,1337);
 INSERT INTO Compound VALUES(1082,1342,2,45);
 INSERT INTO Compound VALUES(1083,1342,3,1337);
 INSERT INTO Compound VALUES(1084,1342,4,44);
+INSERT INTO Compound VALUES(1085,1344,1,332);
+INSERT INTO Compound VALUES(1086,1344,2,1341);
+INSERT INTO Compound VALUES(1087,1346,1,1343);
+INSERT INTO Compound VALUES(1088,1346,2,1344);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -5911,6 +5935,7 @@ INSERT INTO TranslationExtra VALUES(12,1165,replace('This is a contraction of **
 INSERT INTO TranslationExtra VALUES(13,1174,replace('The 禁 character was taken from [_A pronouncing and defining dictionary of the Swatow dialect, arranged according to syllables and tones_](https://en.wikisource.org/wiki/Dictionary_of_the_Swatow_dialect/him), and means "cover" in this context. If you look up this character in other dictionaries, you''ll probably see other definitions and a different pronunciation.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(14,612,replace('I''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 (撏) is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(15,1281,replace('I suspect this might just be an onomatopoeia, and so there isn''t a perfect match for what Chinese characters should be used here. The characters that you see for "hu5" in this word don''t normally have the reading "hu5".\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(16,1342,replace('The Chinese characters were chosen based on being a close phonetic match, and it has nothing to do with the meanings of the individual characters.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
@@ -6076,6 +6101,7 @@ INSERT INTO ExtraNotes VALUES(60,replace('**ka3** on its own technically means "
 INSERT INTO ExtraNotes VALUES(61,replace(' Growing up, it was common to have rice and soup during dinner, and I would always **nam(7) teung1**, which meant I poured a bunch of soup in my bowl of rice.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(62,replace('You should not use **dang6** to describe people. My family said that dead people are heavy, so it would be improper to say a person is dang6.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(63,replace('You can use this to say that you are taking time off from work or that you have a break from school.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(64,replace('This derived from the English word ''percent''. There are several different variations on how people say this word (ba1 siang1, bo1 seng1, ...), but bo6 seng1 is what my family uses\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6142,6 +6168,7 @@ INSERT INTO EnglishExtraNotes VALUES(64,795,61);
 INSERT INTO EnglishExtraNotes VALUES(65,897,0);
 INSERT INTO EnglishExtraNotes VALUES(66,674,62);
 INSERT INTO EnglishExtraNotes VALUES(67,919,63);
+INSERT INTO EnglishExtraNotes VALUES(68,932,64);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
