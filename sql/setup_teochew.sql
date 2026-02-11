@@ -979,6 +979,7 @@ INSERT INTO English VALUES(931,18,'ankle bracelet',0,NULL,NULL);
 INSERT INTO English VALUES(932,16,'percent',0,NULL,NULL);
 INSERT INTO English VALUES(933,43,'to quickly cook in boiling water',0,NULL,NULL);
 INSERT INTO English VALUES(934,10,'dumpling',0,NULL,NULL);
+INSERT INTO English VALUES(935,16,'10000',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1827,6 +1828,7 @@ INSERT INTO Chinese VALUES(849,NULL,'巴','bo6',NULL);
 INSERT INTO Chinese VALUES(850,NULL,'仙','seng1',NULL);
 INSERT INTO Chinese VALUES(851,NULL,'煠','sah8',NULL);
 INSERT INTO Chinese VALUES(852,'饺','餃','giao2',NULL);
+INSERT INTO Chinese VALUES(853,'万','萬','bhuang7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3526,6 +3528,8 @@ INSERT INTO Translation VALUES(1343,NULL,1347,0);
 INSERT INTO Translation VALUES(1344,NULL,1348,0);
 INSERT INTO Translation VALUES(1345,933,1349,0);
 INSERT INTO Translation VALUES(1346,934,1350,0);
+INSERT INTO Translation VALUES(1347,935,1351,0);
+INSERT INTO Translation VALUES(1348,NULL,1352,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4848,6 +4852,8 @@ INSERT INTO Teochew VALUES(1347,'bo6','巴');
 INSERT INTO Teochew VALUES(1348,'seng1','仙');
 INSERT INTO Teochew VALUES(1349,'sah8','煠');
 INSERT INTO Teochew VALUES(1350,'giao2','餃');
+INSERT INTO Teochew VALUES(1351,'jek84 bhuang7','一萬');
+INSERT INTO Teochew VALUES(1352,'bhuang7','萬');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5924,6 +5930,8 @@ INSERT INTO Compound VALUES(1085,1344,1,332);
 INSERT INTO Compound VALUES(1086,1344,2,1341);
 INSERT INTO Compound VALUES(1087,1346,1,1343);
 INSERT INTO Compound VALUES(1088,1346,2,1344);
+INSERT INTO Compound VALUES(1089,1351,1,6);
+INSERT INTO Compound VALUES(1090,1351,2,1348);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
