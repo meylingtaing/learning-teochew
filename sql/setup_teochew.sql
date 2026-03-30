@@ -980,6 +980,7 @@ INSERT INTO English VALUES(932,16,'percent',0,NULL,NULL);
 INSERT INTO English VALUES(933,43,'to quickly cook in boiling water',0,NULL,NULL);
 INSERT INTO English VALUES(934,10,'dumpling',0,NULL,NULL);
 INSERT INTO English VALUES(935,16,'10000',0,NULL,NULL);
+INSERT INTO English VALUES(936,8,'filled',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1829,6 +1830,7 @@ INSERT INTO Chinese VALUES(850,NULL,'仙','seng1',NULL);
 INSERT INTO Chinese VALUES(851,NULL,'煠','sah8',NULL);
 INSERT INTO Chinese VALUES(852,'饺','餃','giao2',NULL);
 INSERT INTO Chinese VALUES(853,'万','萬','bhuang7',NULL);
+INSERT INTO Chinese VALUES(854,NULL,'滇','din6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3530,6 +3532,7 @@ INSERT INTO Translation VALUES(1345,933,1349,0);
 INSERT INTO Translation VALUES(1346,934,1350,0);
 INSERT INTO Translation VALUES(1347,935,1351,0);
 INSERT INTO Translation VALUES(1348,NULL,1352,0);
+INSERT INTO Translation VALUES(1349,936,1353,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4854,6 +4857,7 @@ INSERT INTO Teochew VALUES(1349,'sah8','煠');
 INSERT INTO Teochew VALUES(1350,'giao2','餃');
 INSERT INTO Teochew VALUES(1351,'jek84 bhuang7','一萬');
 INSERT INTO Teochew VALUES(1352,'bhuang7','萬');
+INSERT INTO Teochew VALUES(1353,'din6','滇');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
