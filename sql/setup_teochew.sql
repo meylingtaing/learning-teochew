@@ -983,6 +983,9 @@ INSERT INTO English VALUES(935,16,'10000',0,NULL,NULL);
 INSERT INTO English VALUES(936,8,'filled',0,NULL,NULL);
 INSERT INTO English VALUES(937,17,'interest',0,'finances',NULL);
 INSERT INTO English VALUES(938,1,'don''t worry',0,NULL,NULL);
+INSERT INTO English VALUES(939,41,'limp',0,NULL,NULL);
+INSERT INTO English VALUES(940,17,'to go to the market',0,NULL,NULL);
+INSERT INTO English VALUES(941,23,'drop',0,'of liquid',NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1836,6 +1839,7 @@ INSERT INTO Chinese VALUES(854,NULL,'滇','din6',NULL);
 INSERT INTO Chinese VALUES(855,'烦','煩','huang5',NULL);
 INSERT INTO Chinese VALUES(856,'恼','惱','lo2',NULL);
 INSERT INTO Chinese VALUES(857,'忆','憶','i3',NULL);
+INSERT INTO Chinese VALUES(858,NULL,'冇','pan3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2022,6 +2026,8 @@ INSERT INTO Synonyms VALUES(179,926,'to hit',1);
 INSERT INTO Synonyms VALUES(180,927,'to catch',0);
 INSERT INTO Synonyms VALUES(181,931,'anklet',0);
 INSERT INTO Synonyms VALUES(182,933,'to blanch',1);
+INSERT INTO Synonyms VALUES(183,939,'airy',1);
+INSERT INTO Synonyms VALUES(184,940,'to grocery shop',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3543,6 +3549,9 @@ INSERT INTO Translation VALUES(1351,938,1355,0);
 INSERT INTO Translation VALUES(1352,NULL,1356,0);
 INSERT INTO Translation VALUES(1353,938,1357,0);
 INSERT INTO Translation VALUES(1354,575,1358,0);
+INSERT INTO Translation VALUES(1355,939,1359,0);
+INSERT INTO Translation VALUES(1356,940,1360,0);
+INSERT INTO Translation VALUES(1357,941,72,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4873,6 +4882,8 @@ INSERT INTO Teochew VALUES(1355,'mai32 huang57 lo2','勿煩惱');
 INSERT INTO Teochew VALUES(1356,'huang5','煩');
 INSERT INTO Teochew VALUES(1357,'bang32 sim1','放心');
 INSERT INTO Teochew VALUES(1358,'i32 dek4','憶得');
+INSERT INTO Teochew VALUES(1359,'pan3','冇');
+INSERT INTO Teochew VALUES(1360,'jion67 chi6','上市');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5958,6 +5969,8 @@ INSERT INTO Compound VALUES(1094,1355,2,1352);
 INSERT INTO Compound VALUES(1095,1355,3,429);
 INSERT INTO Compound VALUES(1096,1357,1,848);
 INSERT INTO Compound VALUES(1097,1357,2,988);
+INSERT INTO Compound VALUES(1098,1360,1,1271);
+INSERT INTO Compound VALUES(1099,1360,2,357);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6145,6 +6158,7 @@ INSERT INTO ExtraNotes VALUES(61,replace(' Growing up, it was common to have ric
 INSERT INTO ExtraNotes VALUES(62,replace('You should not use **dang6** to describe people. My family said that dead people are heavy, so it would be improper to say a person is dang6.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(63,replace('You can use this to say that you are taking time off from work or that you have a break from school.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(64,replace('This derived from the English word ''percent''. There are several different variations on how people say this word (ba1 siang1, bo1 seng1, ...), but bo6 seng1 is what my family uses\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(65,replace('My mom made sweet potato fries, but they came out kind of soggy and sad, and she described them as **pan3(2) pan3**.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6212,6 +6226,7 @@ INSERT INTO EnglishExtraNotes VALUES(65,897,0);
 INSERT INTO EnglishExtraNotes VALUES(66,674,62);
 INSERT INTO EnglishExtraNotes VALUES(67,919,63);
 INSERT INTO EnglishExtraNotes VALUES(68,932,64);
+INSERT INTO EnglishExtraNotes VALUES(69,939,65);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
