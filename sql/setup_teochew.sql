@@ -1852,6 +1852,7 @@ INSERT INTO Chinese VALUES(859,NULL,'方','heung1',NULL);
 INSERT INTO Chinese VALUES(860,NULL,'落','laoh8',NULL);
 INSERT INTO Chinese VALUES(861,NULL,'枝','gi1',NULL);
 INSERT INTO Chinese VALUES(862,NULL,'皮','pue5',NULL);
+INSERT INTO Chinese VALUES(863,NULL,'棚','ben5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3707,7 +3708,7 @@ INSERT INTO Teochew VALUES(133,'ngia2','雅');
 INSERT INTO Teochew VALUES(134,'keh48 tian1','客廳');
 INSERT INTO Teochew VALUES(135,'dou57 bang5','廚房');
 INSERT INTO Teochew VALUES(136,'che32 so2','廁所');
-INSERT INTO Teochew VALUES(137,'ek84 be5','浴扒');
+INSERT INTO Teochew VALUES(137,'ek84 ben5','浴棚');
 INSERT INTO Teochew VALUES(138,'lek8','綠');
 INSERT INTO Teochew VALUES(139,'meung5','門');
 INSERT INTO Teochew VALUES(140,'uk84 bang5','夗房');
