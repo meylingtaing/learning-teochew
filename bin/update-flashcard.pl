@@ -187,70 +187,63 @@ if (my $alt_chinese = $inputs{alt_chinese}) {
     }
 }
 
-if (my $chinese = $inputs{chinese}) {
+my $pengim = $inputs{pengim};
+my $chinese = $inputs{chinese};
+
+if ($pengim // $chinese) {
+
     # First make sure these Chinese characters exist in the database
-    $db->ensure_chinese_is_in_database(
-        chinese => $chinese,
-        pengim  => $teochew->{pengim},
-    );
-
-    # Maybe this one doesn't have any Chinese yet?
-    my $teochew_id = $db->_get_teochew_id(
-        pengim  => $teochew->{pengim},
-        chinese => '?',
-    );
-
-    if ($teochew_id) {
-        say "Found Teochew row with missing Chinese";
-    }
-
-    # Also look up existing teochew with the Chinese character
-    if (!$teochew_id) {
-        $teochew_id = $db->_get_teochew_id(
-            pengim  => $teochew->{pengim},
-            chinese => $teochew->{chinese},
+    if ($chinese) {
+        $db->ensure_chinese_is_in_database(
+            chinese => $chinese,
+            pengim  => $pengim // $teochew->{pengim},
         );
     }
 
-    if ($teochew_id) {
-        say "Adding $chinese as the Chinese for $english->{word}";
-        if (confirm()) {
-            $db->update_teochew($teochew_id, chinese => $chinese);
-        }
-    }
-
-    my @rows = $db->dbh->selectall_array(qq{
-        select teochew.* from Compound
-        join teochew on parent_teochew_id = teochew.id
-        where translation_id = $teochew->{translation_id}
-    }, { Slice => {} });
-
-    # Look for other words with the same translation id in the compound
-    for my $row (@rows) {
-        my $parent_teochew_id = $row->{id};
-        my $full_chinese = $row->{chinese};
-
-        # Replace chinese character
-        $full_chinese =~ s/$teochew->{chinese}/$chinese/g;
-
-        say "Replacing $row->{chinese} with $full_chinese";
-        if (confirm()) {
-            $db->dbh->do("update teochew set chinese = ? where id = ?",
-                undef, $full_chinese, $parent_teochew_id);
-        }
-    }
-}
-
-if (my $pengim = $inputs{pengim}) {
+    # Update the teochew row
     say "Modifying $english->{word} translation from " .
-        "'$teochew->{pengim}' to '$pengim'";
+        "'$teochew->{pengim} $teochew->{chinese}' to '$pengim $chinese'";
     if (confirm()) {
         $db->update_teochew(
             $teochew->{teochew_id},
             pengim => $pengim,
+            chinese => $chinese,
         );
-        say colored("Updated $english->{word} pengim to $pengim!", "green");
+
+        say colored(
+            "Updated $english->{word} pengim to $pengim $chinese!", "green");
     }
+
+    if ($chinese) {
+        # Also look up existing teochew with the Chinese character to see if we
+        # need to fix any compounds that contain it
+        my $teochew_id = $db->_get_teochew_id(
+            pengim  => $teochew->{pengim},
+            chinese => $teochew->{chinese},
+        );
+
+        my @rows = $db->dbh->selectall_array(qq{
+            select teochew.* from Compound
+            join teochew on parent_teochew_id = teochew.id
+            where translation_id = $teochew->{translation_id}
+        }, { Slice => {} });
+
+        # Look for other words with the same translation id in the compound
+        for my $row (@rows) {
+            my $parent_teochew_id = $row->{id};
+            my $full_chinese = $row->{chinese};
+
+            # Replace chinese character
+            $full_chinese =~ s/$teochew->{chinese}/$chinese/g;
+
+            say "Replacing $row->{chinese} with $full_chinese";
+            if (confirm()) {
+                $db->dbh->do("update teochew set chinese = ? where id = ?",
+                    undef, $full_chinese, $parent_teochew_id);
+            }
+        }
+    }
+
 }
 
 if (defined $inputs{hidden_from_flashcards}) {
