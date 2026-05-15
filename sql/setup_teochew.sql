@@ -26,7 +26,7 @@ INSERT INTO Categories VALUES(18,'Clothing',NULL,8);
 INSERT INTO Categories VALUES(19,'','All',NULL);
 INSERT INTO Categories VALUES(20,'Time','Clock Time',11);
 INSERT INTO Categories VALUES(21,'Phrase','Sentences',10);
-INSERT INTO Categories VALUES(22,'Weather',NULL,NULL);
+INSERT INTO Categories VALUES(22,'Weather',NULL,14);
 INSERT INTO Categories VALUES(23,'Outside',NULL,14);
 INSERT INTO Categories VALUES(26,'Months',NULL,3);
 INSERT INTO Categories VALUES(27,'Weekdays','Days of the Week',3);
@@ -410,7 +410,7 @@ INSERT INTO English VALUES(358,16,'movie',0,NULL,NULL);
 INSERT INTO English VALUES(359,23,'outside',0,NULL,NULL);
 INSERT INTO English VALUES(360,16,'park',1,NULL,NULL);
 INSERT INTO English VALUES(361,11,'stomach',0,NULL,NULL);
-INSERT INTO English VALUES(362,23,'to rain',0,NULL,NULL);
+INSERT INTO English VALUES(362,22,'to rain',0,NULL,NULL);
 INSERT INTO English VALUES(363,14,'to write',0,NULL,NULL);
 INSERT INTO English VALUES(364,6,'cell phone',0,NULL,NULL);
 INSERT INTO English VALUES(365,42,'fish sauce',0,NULL,NULL);
@@ -491,7 +491,7 @@ INSERT INTO English VALUES(439,3,'light',0,'shade of color',3);
 INSERT INTO English VALUES(440,3,'light blue',0,NULL,3);
 INSERT INTO English VALUES(441,40,'day after tomorrow',0,NULL,2);
 INSERT INTO English VALUES(442,35,'Cambodia',0,NULL,NULL);
-INSERT INTO English VALUES(443,23,'dark',0,'to describe weather',NULL);
+INSERT INTO English VALUES(443,22,'dark',0,'to describe weather',NULL);
 INSERT INTO English VALUES(444,45,'late',0,'at night',4);
 INSERT INTO English VALUES(445,45,'tonight',0,NULL,4);
 INSERT INTO English VALUES(446,8,'fast',0,NULL,NULL);
@@ -504,8 +504,8 @@ INSERT INTO English VALUES(452,8,'busy',0,NULL,NULL);
 INSERT INTO English VALUES(453,31,'urine',0,NULL,NULL);
 INSERT INTO English VALUES(454,32,'the same',0,NULL,NULL);
 INSERT INTO English VALUES(455,37,'bowl',0,NULL,NULL);
-INSERT INTO English VALUES(456,23,'winter',0,NULL,NULL);
-INSERT INTO English VALUES(457,23,'summer',0,NULL,NULL);
+INSERT INTO English VALUES(456,22,'winter',0,NULL,NULL);
+INSERT INTO English VALUES(457,22,'summer',0,NULL,NULL);
 INSERT INTO English VALUES(458,32,'a little',0,NULL,NULL);
 INSERT INTO English VALUES(459,8,'dry',0,NULL,NULL);
 INSERT INTO English VALUES(460,31,'towel',0,NULL,NULL);
@@ -603,11 +603,11 @@ INSERT INTO English VALUES(554,8,'scared',0,NULL,NULL);
 INSERT INTO English VALUES(555,38,'car',0,NULL,NULL);
 INSERT INTO English VALUES(556,38,'to drive',0,NULL,NULL);
 INSERT INTO English VALUES(557,38,'to drive a car',0,NULL,NULL);
-INSERT INTO English VALUES(558,23,'weather',0,NULL,NULL);
+INSERT INTO English VALUES(558,22,'weather',0,NULL,NULL);
 INSERT INTO English VALUES(559,32,'too',0,'excessively',NULL);
 INSERT INTO English VALUES(560,8,'too hot',0,NULL,NULL);
 INSERT INTO English VALUES(561,8,'quite hot',0,NULL,NULL);
-INSERT INTO English VALUES(562,23,'good weather',0,NULL,NULL);
+INSERT INTO English VALUES(562,22,'good weather',0,NULL,NULL);
 INSERT INTO English VALUES(563,8,'new',0,NULL,NULL);
 INSERT INTO English VALUES(564,13,'to fold',0,NULL,NULL);
 INSERT INTO English VALUES(565,14,'work',0,NULL,NULL);
@@ -637,7 +637,7 @@ INSERT INTO English VALUES(588,23,'rock',0,NULL,NULL);
 INSERT INTO English VALUES(589,23,'mountain',0,NULL,NULL);
 INSERT INTO English VALUES(590,23,'to climb',0,NULL,NULL);
 INSERT INTO English VALUES(591,23,'to go hiking',0,NULL,NULL);
-INSERT INTO English VALUES(592,23,'degrees',0,'temperature',NULL);
+INSERT INTO English VALUES(592,22,'degrees',0,'temperature',NULL);
 INSERT INTO English VALUES(593,10,'restaurant',0,NULL,NULL);
 INSERT INTO English VALUES(594,11,'pain',0,NULL,NULL);
 INSERT INTO English VALUES(595,11,'stomach ache',0,NULL,NULL);
@@ -689,12 +689,12 @@ INSERT INTO English VALUES(640,37,'plate',0,NULL,NULL);
 INSERT INTO English VALUES(641,17,'five dollars',0,NULL,NULL);
 INSERT INTO English VALUES(642,17,'ten dollars',0,NULL,NULL);
 INSERT INTO English VALUES(643,33,'is',0,NULL,NULL);
-INSERT INTO English VALUES(644,23,'drizzle',0,NULL,NULL);
+INSERT INTO English VALUES(644,22,'drizzle',0,NULL,NULL);
 INSERT INTO English VALUES(645,45,'all day',0,NULL,10);
 INSERT INTO English VALUES(646,44,'strength',0,NULL,NULL);
 INSERT INTO English VALUES(647,32,'thing',0,NULL,NULL);
 INSERT INTO English VALUES(648,10,'cake',0,NULL,NULL);
-INSERT INTO English VALUES(649,23,'sunny',0,NULL,NULL);
+INSERT INTO English VALUES(649,22,'sunny',0,NULL,NULL);
 INSERT INTO English VALUES(650,8,'wet',0,NULL,NULL);
 INSERT INTO English VALUES(651,28,'mango',0,NULL,10);
 INSERT INTO English VALUES(652,43,'to peel',0,'with a blade',NULL);
@@ -717,7 +717,7 @@ INSERT INTO English VALUES(668,32,'type',0,'kind',NULL);
 INSERT INTO English VALUES(669,32,'many kinds of things',0,NULL,NULL);
 INSERT INTO English VALUES(670,39,'place',0,NULL,NULL);
 INSERT INTO English VALUES(671,36,'question particle',0,NULL,4);
-INSERT INTO English VALUES(672,23,'how many degrees',0,NULL,NULL);
+INSERT INTO English VALUES(672,22,'how many degrees',0,NULL,NULL);
 INSERT INTO English VALUES(673,37,'pan',0,NULL,NULL);
 INSERT INTO English VALUES(674,8,'heavy',0,NULL,NULL);
 INSERT INTO English VALUES(675,8,'thick',0,NULL,NULL);
@@ -743,12 +743,12 @@ INSERT INTO English VALUES(694,41,'spicy',0,NULL,NULL);
 INSERT INTO English VALUES(695,32,'not that...',0,NULL,NULL);
 INSERT INTO English VALUES(696,32,'some amount over',0,NULL,NULL);
 INSERT INTO English VALUES(697,17,'$2 something',0,NULL,NULL);
-INSERT INTO English VALUES(698,23,'wind',0,NULL,NULL);
+INSERT INTO English VALUES(698,22,'wind',0,NULL,NULL);
 INSERT INTO English VALUES(699,40,'year',0,'a year',1);
 INSERT INTO English VALUES(700,33,'to give',0,NULL,NULL);
 INSERT INTO English VALUES(701,6,'flashlight',0,NULL,NULL);
 INSERT INTO English VALUES(702,2,'50',0,NULL,NULL);
-INSERT INTO English VALUES(703,23,'rain',0,NULL,NULL);
+INSERT INTO English VALUES(703,22,'rain',0,NULL,NULL);
 INSERT INTO English VALUES(704,16,'red envelope',0,NULL,NULL);
 INSERT INTO English VALUES(705,39,'middle',0,NULL,NULL);
 INSERT INTO English VALUES(706,33,'to put',0,NULL,NULL);
@@ -868,7 +868,7 @@ INSERT INTO English VALUES(820,18,'purse',0,NULL,NULL);
 INSERT INTO English VALUES(821,8,'happy',0,NULL,NULL);
 INSERT INTO English VALUES(822,38,'to go back home',0,NULL,NULL);
 INSERT INTO English VALUES(823,10,'pasta',0,NULL,NULL);
-INSERT INTO English VALUES(824,23,'humid',0,NULL,NULL);
+INSERT INTO English VALUES(824,22,'humid',0,NULL,NULL);
 INSERT INTO English VALUES(825,10,'peanut',0,NULL,NULL);
 INSERT INTO English VALUES(826,28,'mung bean',0,NULL,10);
 INSERT INTO English VALUES(827,15,'monkey',0,NULL,NULL);
@@ -878,7 +878,7 @@ INSERT INTO English VALUES(830,43,'to drink',0,NULL,NULL);
 INSERT INTO English VALUES(831,11,'blood',0,NULL,NULL);
 INSERT INTO English VALUES(832,15,'butterfly',0,NULL,NULL);
 INSERT INTO English VALUES(833,43,'to sip soup',0,NULL,NULL);
-INSERT INTO English VALUES(834,23,'cloudy',0,NULL,NULL);
+INSERT INTO English VALUES(834,22,'cloudy',0,NULL,NULL);
 INSERT INTO English VALUES(835,13,'to cover',0,NULL,NULL);
 INSERT INTO English VALUES(836,40,'weekend',0,NULL,2);
 INSERT INTO English VALUES(837,8,'dangerous',0,NULL,NULL);
@@ -973,7 +973,7 @@ INSERT INTO English VALUES(925,10,'pickled radish',0,NULL,NULL);
 INSERT INTO English VALUES(926,13,'to bump into',0,NULL,NULL);
 INSERT INTO English VALUES(927,13,'to capture',0,NULL,NULL);
 INSERT INTO English VALUES(928,11,'back',0,'body part',NULL);
-INSERT INTO English VALUES(929,23,'thunder',0,NULL,NULL);
+INSERT INTO English VALUES(929,22,'thunder',0,NULL,NULL);
 INSERT INTO English VALUES(930,18,'to wear',0,'accessories',NULL);
 INSERT INTO English VALUES(931,18,'ankle bracelet',0,NULL,NULL);
 INSERT INTO English VALUES(932,16,'percent',0,NULL,NULL);
@@ -1003,6 +1003,7 @@ INSERT INTO English VALUES(955,13,'to jump',0,NULL,NULL);
 INSERT INTO English VALUES(956,23,'to sprout',0,NULL,NULL);
 INSERT INTO English VALUES(957,13,'to stick into',0,NULL,NULL);
 INSERT INTO English VALUES(958,23,'dirt',0,NULL,NULL);
+INSERT INTO English VALUES(959,32,'only...',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1868,6 +1869,7 @@ INSERT INTO Chinese VALUES(866,'领','領','nia2',NULL);
 INSERT INTO Chinese VALUES(867,'画','畫','ue7',NULL);
 INSERT INTO Chinese VALUES(868,'发','發','huak4',NULL);
 INSERT INTO Chinese VALUES(869,NULL,'插','chah4',NULL);
+INSERT INTO Chinese VALUES(870,NULL,'咑','da7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3613,6 +3615,8 @@ INSERT INTO Translation VALUES(1378,NULL,1376,0);
 INSERT INTO Translation VALUES(1379,952,1377,0);
 INSERT INTO Translation VALUES(1380,956,1378,0);
 INSERT INTO Translation VALUES(1381,957,1379,0);
+INSERT INTO Translation VALUES(1382,959,1380,1);
+INSERT INTO Translation VALUES(1383,NULL,1381,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4964,6 +4968,8 @@ INSERT INTO Teochew VALUES(1376,'dou5','圖');
 INSERT INTO Teochew VALUES(1377,'beh48 tui1','爬梯');
 INSERT INTO Teochew VALUES(1378,'huak4','發');
 INSERT INTO Teochew VALUES(1379,'chah4','插');
+INSERT INTO Teochew VALUES(1380,'u67 da7','有咑');
+INSERT INTO Teochew VALUES(1381,'da7','咑');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6069,6 +6075,8 @@ INSERT INTO Compound VALUES(1114,1375,1,1378);
 INSERT INTO Compound VALUES(1115,1375,2,1376);
 INSERT INTO Compound VALUES(1116,1377,1,661);
 INSERT INTO Compound VALUES(1117,1377,2,816);
+INSERT INTO Compound VALUES(1118,1380,1,380);
+INSERT INTO Compound VALUES(1119,1380,2,1383);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6261,6 +6269,7 @@ INSERT INTO ExtraNotes VALUES(66,replace('Depending on who you ask, **kou(2) gue
 INSERT INTO ExtraNotes VALUES(67,replace('Depending on who you ask, **kou(2) gueh8** can either mean "shorts" or "underwear"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(68,replace('Not sure if "to sprout" is the best English translation, but I can''t think of a better one. My aunt was talking to me about her basil plants that she tried to grow, but it wasn''t really doing so well, and she said it only "**huak(8) dih(8) gian(6) dih(8) gian2**"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(69,replace('You can use **chah4** in planting, like you would **chah(8)** a stalk of a plant in the ground.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(70,replace('My aunt was telling me how it barely rained, and she said **u(7) da7 no(7) diam2**! to mean "only two drops!"\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6333,6 +6342,7 @@ INSERT INTO EnglishExtraNotes VALUES(70,949,66);
 INSERT INTO EnglishExtraNotes VALUES(71,425,67);
 INSERT INTO EnglishExtraNotes VALUES(72,956,68);
 INSERT INTO EnglishExtraNotes VALUES(73,957,69);
+INSERT INTO EnglishExtraNotes VALUES(74,959,70);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
