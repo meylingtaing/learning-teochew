@@ -1005,6 +1005,7 @@ INSERT INTO English VALUES(957,13,'to stick into',0,NULL,NULL);
 INSERT INTO English VALUES(958,23,'dirt',0,NULL,NULL);
 INSERT INTO English VALUES(959,32,'only...',0,NULL,NULL);
 INSERT INTO English VALUES(960,6,'to pick up the phone',0,NULL,NULL);
+INSERT INTO English VALUES(961,10,'snack',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -3091,7 +3092,7 @@ INSERT INTO Translation VALUES(850,714,860,0);
 INSERT INTO Translation VALUES(851,NULL,861,0);
 INSERT INTO Translation VALUES(852,NULL,862,0);
 INSERT INTO Translation VALUES(853,NULL,863,0);
-INSERT INTO Translation VALUES(854,NULL,864,0);
+INSERT INTO Translation VALUES(854,522,864,0);
 INSERT INTO Translation VALUES(855,NULL,865,0);
 INSERT INTO Translation VALUES(856,NULL,866,0);
 INSERT INTO Translation VALUES(857,NULL,867,0);
@@ -3621,6 +3622,7 @@ INSERT INTO Translation VALUES(1381,957,1379,0);
 INSERT INTO Translation VALUES(1382,959,1380,1);
 INSERT INTO Translation VALUES(1383,NULL,1381,0);
 INSERT INTO Translation VALUES(1384,960,1382,0);
+INSERT INTO Translation VALUES(1385,961,1383,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4975,6 +4977,7 @@ INSERT INTO Teochew VALUES(1379,'chah4','插');
 INSERT INTO Teochew VALUES(1380,'u67 da7','有咑');
 INSERT INTO Teochew VALUES(1381,'da7','咑');
 INSERT INTO Teochew VALUES(1382,'jih48 diang67 ue7','接電話');
+INSERT INTO Teochew VALUES(1383,'diam26 sim1','點心');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
