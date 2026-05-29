@@ -1877,6 +1877,7 @@ INSERT INTO Chinese VALUES(870,NULL,'咑','da7',NULL);
 INSERT INTO Chinese VALUES(871,NULL,'接','jih4',NULL);
 INSERT INTO Chinese VALUES(872,NULL,'褪','teung3',NULL);
 INSERT INTO Chinese VALUES(873,NULL,'偷','tao1',NULL);
+INSERT INTO Chinese VALUES(874,NULL,'撮','choh4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3632,6 +3633,7 @@ INSERT INTO Translation VALUES(1387,NULL,1385,0);
 INSERT INTO Translation VALUES(1388,853,1386,0);
 INSERT INTO Translation VALUES(1389,963,1387,0);
 INSERT INTO Translation VALUES(1390,NULL,1388,0);
+INSERT INTO Translation VALUES(1391,851,1389,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -4992,6 +4994,7 @@ INSERT INTO Teochew VALUES(1385,'teung3','褪');
 INSERT INTO Teochew VALUES(1386,'dih84 gian2','碟囝');
 INSERT INTO Teochew VALUES(1387,'tao1 kioh8','偷挈');
 INSERT INTO Teochew VALUES(1388,'tao1','偷');
+INSERT INTO Teochew VALUES(1389,'choh4','撮');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
