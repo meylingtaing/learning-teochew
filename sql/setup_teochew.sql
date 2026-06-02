@@ -1012,6 +1012,8 @@ INSERT INTO English VALUES(964,44,'to blow your nose',0,NULL,NULL);
 INSERT INTO English VALUES(965,11,'earwax',0,NULL,NULL);
 INSERT INTO English VALUES(966,44,'stuffy nose',0,NULL,NULL);
 INSERT INTO English VALUES(967,44,'to cough',0,NULL,NULL);
+INSERT INTO English VALUES(968,15,'turtle',0,NULL,NULL);
+INSERT INTO English VALUES(969,29,'sunny side up eggs',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1886,6 +1888,7 @@ INSERT INTO Chinese VALUES(875,NULL,'擤','hinh4',NULL);
 INSERT INTO Chinese VALUES(876,NULL,'塞','sak4',NULL);
 INSERT INTO Chinese VALUES(877,NULL,'咳','ga1',NULL);
 INSERT INTO Chinese VALUES(878,NULL,'嗽','sao3',NULL);
+INSERT INTO Chinese VALUES(879,'龟','龜','gu1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3649,6 +3652,8 @@ INSERT INTO Translation VALUES(1395,966,1393,0);
 INSERT INTO Translation VALUES(1396,967,1394,0);
 INSERT INTO Translation VALUES(1397,NULL,1395,0);
 INSERT INTO Translation VALUES(1398,NULL,1396,0);
+INSERT INTO Translation VALUES(1399,968,1397,0);
+INSERT INTO Translation VALUES(1400,969,1398,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5017,6 +5022,8 @@ INSERT INTO Teochew VALUES(1393,'sak48 pin7','塞鼻');
 INSERT INTO Teochew VALUES(1394,'ga1 sao3','咳嗽');
 INSERT INTO Teochew VALUES(1395,'ga1','咳');
 INSERT INTO Teochew VALUES(1396,'sao3','嗽');
+INSERT INTO Teochew VALUES(1397,'gu1','龜');
+INSERT INTO Teochew VALUES(1398,'neung67 gu1','卵龜');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6138,6 +6145,8 @@ INSERT INTO Compound VALUES(1130,1393,1,NULL);
 INSERT INTO Compound VALUES(1131,1393,2,319);
 INSERT INTO Compound VALUES(1132,1394,1,1397);
 INSERT INTO Compound VALUES(1133,1394,2,1398);
+INSERT INTO Compound VALUES(1134,1398,1,115);
+INSERT INTO Compound VALUES(1135,1398,2,1399);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
