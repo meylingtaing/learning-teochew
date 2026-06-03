@@ -335,9 +335,9 @@ sub translate {
             translation_id => $_->{translation_id},
             teochew_id     => $_->{teochew_id},
             chinese        => {
-                traditional  => $_->{traditional} =~ s/\?/[?]/gr,
+                traditional  => $_->{traditional} =~ s/\?/？/gr,
                 $_->{simplified} ?
-                    (simplified => $_->{simplified} =~ s/\?/[?]/gr) : (),
+                    (simplified => $_->{simplified} =~ s/\?/？/gr) : (),
             },
             pronunciations => $pronunciation,
         }
