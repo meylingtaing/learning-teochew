@@ -1014,6 +1014,7 @@ INSERT INTO English VALUES(966,44,'stuffy nose',0,NULL,NULL);
 INSERT INTO English VALUES(967,44,'to cough',0,NULL,NULL);
 INSERT INTO English VALUES(968,15,'turtle',0,NULL,NULL);
 INSERT INTO English VALUES(969,29,'sunny side up eggs',0,NULL,10);
+INSERT INTO English VALUES(970,44,'to sneeze',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1889,6 +1890,8 @@ INSERT INTO Chinese VALUES(876,NULL,'塞','sak4',NULL);
 INSERT INTO Chinese VALUES(877,NULL,'咳','ga1',NULL);
 INSERT INTO Chinese VALUES(878,NULL,'嗽','sao3',NULL);
 INSERT INTO Chinese VALUES(879,'龟','龜','gu1',NULL);
+INSERT INTO Chinese VALUES(880,NULL,'嚏','ti3',NULL);
+INSERT INTO Chinese VALUES(881,NULL,'老','lao2',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3654,6 +3657,12 @@ INSERT INTO Translation VALUES(1397,NULL,1395,0);
 INSERT INTO Translation VALUES(1398,NULL,1396,0);
 INSERT INTO Translation VALUES(1399,968,1397,0);
 INSERT INTO Translation VALUES(1400,969,1398,0);
+INSERT INTO Translation VALUES(1401,970,1399,0);
+INSERT INTO Translation VALUES(1402,NULL,1400,0);
+INSERT INTO Translation VALUES(1403,NULL,1401,0);
+INSERT INTO Translation VALUES(1404,970,1402,0);
+INSERT INTO Translation VALUES(1405,NULL,1403,0);
+INSERT INTO Translation VALUES(1406,170,1404,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5024,6 +5033,12 @@ INSERT INTO Teochew VALUES(1395,'ga1','咳');
 INSERT INTO Teochew VALUES(1396,'sao3','嗽');
 INSERT INTO Teochew VALUES(1397,'gu1','龜');
 INSERT INTO Teochew VALUES(1398,'neung67 gu1','卵龜');
+INSERT INTO Teochew VALUES(1399,'hak8 chiu3','??');
+INSERT INTO Teochew VALUES(1400,'hak8','?');
+INSERT INTO Teochew VALUES(1401,'chiu3','?');
+INSERT INTO Teochew VALUES(1402,'pah48 ga1 ti3','拍咳嚏');
+INSERT INTO Teochew VALUES(1403,'ti3','嚏');
+INSERT INTO Teochew VALUES(1404,'lao26 seu1','老師');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -5393,8 +5408,6 @@ INSERT INTO Compound VALUES(374,189,1,835);
 INSERT INTO Compound VALUES(375,189,2,836);
 INSERT INTO Compound VALUES(376,190,1,837);
 INSERT INTO Compound VALUES(377,190,2,838);
-INSERT INTO Compound VALUES(378,191,1,114);
-INSERT INTO Compound VALUES(379,191,2,839);
 INSERT INTO Compound VALUES(380,192,1,840);
 INSERT INTO Compound VALUES(381,192,2,841);
 INSERT INTO Compound VALUES(382,201,1,842);
@@ -6147,6 +6160,13 @@ INSERT INTO Compound VALUES(1132,1394,1,1397);
 INSERT INTO Compound VALUES(1133,1394,2,1398);
 INSERT INTO Compound VALUES(1134,1398,1,115);
 INSERT INTO Compound VALUES(1135,1398,2,1399);
+INSERT INTO Compound VALUES(1136,1399,1,1402);
+INSERT INTO Compound VALUES(1137,1399,2,1403);
+INSERT INTO Compound VALUES(1138,1402,1,639);
+INSERT INTO Compound VALUES(1139,1402,2,1397);
+INSERT INTO Compound VALUES(1140,1402,3,1405);
+INSERT INTO Compound VALUES(1141,191,1,114);
+INSERT INTO Compound VALUES(1142,191,2,839);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6168,6 +6188,7 @@ INSERT INTO TranslationExtra VALUES(13,1174,replace('The 禁 character was taken
 INSERT INTO TranslationExtra VALUES(14,612,replace('I''m not 100% sure on the appropriate Chinese character for this, but it looks like 挦 (撏) is included in a gekion dictionary. WhatTCSay has 辑 (輯), but it looks like that might be chip4 rather than chip8. And the definitions don''t quite line up in the online dictionaries I check.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(15,1281,replace('I suspect this might just be an onomatopoeia, and so there isn''t a perfect match for what Chinese characters should be used here. The characters that you see for "hu5" in this word don''t normally have the reading "hu5".\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(16,1342,replace('The Chinese characters were chosen based on being a close phonetic match, and it has nothing to do with the meanings of the individual characters.\n','\n',char(10)));
+INSERT INTO TranslationExtra VALUES(17,1401,NULL);
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
@@ -6340,6 +6361,8 @@ INSERT INTO ExtraNotes VALUES(67,replace('Depending on who you ask, **kou(2) gue
 INSERT INTO ExtraNotes VALUES(68,replace('Not sure if "to sprout" is the best English translation, but I can''t think of a better one. My aunt was talking to me about her basil plants that she tried to grow, but it wasn''t really doing so well, and she said it only "**huak(8) dih(8) gian(6) dih(8) gian2**"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(69,replace('You can use **chah4** in planting, like you would **chah(8)** a stalk of a plant in the ground.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(70,replace('My aunt was telling me how it barely rained, and she said **u(7) da7 no(7) diam2**! to mean "only two drops!"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(71,replace('**hak8 chiu3** is just an onomotopoeia, like "achoo" in English. Other people have different variations on this, like **hah8 chiu3** or **hah8 chiu2**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(72,replace('For 老師, a lot of people say **lao(6) seu1**, but my family pronounces it **lao(7) seu1**. But we actually use **seng1 sen1** more often.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6413,6 +6436,8 @@ INSERT INTO EnglishExtraNotes VALUES(71,425,67);
 INSERT INTO EnglishExtraNotes VALUES(72,956,68);
 INSERT INTO EnglishExtraNotes VALUES(73,957,69);
 INSERT INTO EnglishExtraNotes VALUES(74,959,70);
+INSERT INTO EnglishExtraNotes VALUES(75,970,71);
+INSERT INTO EnglishExtraNotes VALUES(76,170,72);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
