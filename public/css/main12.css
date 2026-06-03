@@ -25,6 +25,7 @@ body {
         Arial,
         "Liberation Sans",
         sans-serif,
+        "Noto Sans CJK TC", /* should really set the lang attribute in places... */
         "learning-teochew-custom-font1",
         "Apple Color Emoji",
         "Segoe UI Emoji",
