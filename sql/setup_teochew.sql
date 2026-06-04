@@ -1015,6 +1015,7 @@ INSERT INTO English VALUES(967,44,'to cough',0,NULL,NULL);
 INSERT INTO English VALUES(968,15,'turtle',0,NULL,NULL);
 INSERT INTO English VALUES(969,29,'sunny side up eggs',0,NULL,10);
 INSERT INTO English VALUES(970,44,'to sneeze',0,NULL,NULL);
+INSERT INTO English VALUES(971,1,'bless you',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1892,6 +1893,10 @@ INSERT INTO Chinese VALUES(878,NULL,'嗽','sao3',NULL);
 INSERT INTO Chinese VALUES(879,'龟','龜','gu1',NULL);
 INSERT INTO Chinese VALUES(880,NULL,'嚏','ti3',NULL);
 INSERT INTO Chinese VALUES(881,NULL,'老','lao2',NULL);
+INSERT INTO Chinese VALUES(882,NULL,'利','li6',NULL);
+INSERT INTO Chinese VALUES(883,NULL,'吉','gek4',NULL);
+INSERT INTO Chinese VALUES(884,NULL,'事','seu7',NULL);
+INSERT INTO Chinese VALUES(885,NULL,'如','yu5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3663,6 +3668,10 @@ INSERT INTO Translation VALUES(1403,NULL,1401,0);
 INSERT INTO Translation VALUES(1404,970,1402,0);
 INSERT INTO Translation VALUES(1405,NULL,1403,0);
 INSERT INTO Translation VALUES(1406,170,1404,0);
+INSERT INTO Translation VALUES(1407,971,1405,0);
+INSERT INTO Translation VALUES(1408,971,1406,0);
+INSERT INTO Translation VALUES(1409,NULL,1407,0);
+INSERT INTO Translation VALUES(1410,NULL,1408,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5039,6 +5048,10 @@ INSERT INTO Teochew VALUES(1401,'chiu3','?');
 INSERT INTO Teochew VALUES(1402,'pah48 ga1 ti3','拍咳嚏');
 INSERT INTO Teochew VALUES(1403,'ti3','嚏');
 INSERT INTO Teochew VALUES(1404,'lao26 seu1','老師');
+INSERT INTO Teochew VALUES(1405,'li67 chi6 dai67 gek4','利市大吉');
+INSERT INTO Teochew VALUES(1406,'bhuang7 seu7 yu57 i3','萬事如意');
+INSERT INTO Teochew VALUES(1407,'bhuang7 seu7','萬事');
+INSERT INTO Teochew VALUES(1408,'yu57 i3','如意');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6167,6 +6180,8 @@ INSERT INTO Compound VALUES(1139,1402,2,1397);
 INSERT INTO Compound VALUES(1140,1402,3,1405);
 INSERT INTO Compound VALUES(1141,191,1,114);
 INSERT INTO Compound VALUES(1142,191,2,839);
+INSERT INTO Compound VALUES(1143,1406,1,1409);
+INSERT INTO Compound VALUES(1144,1406,2,1410);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6189,6 +6204,7 @@ INSERT INTO TranslationExtra VALUES(14,612,replace('I''m not 100% sure on the ap
 INSERT INTO TranslationExtra VALUES(15,1281,replace('I suspect this might just be an onomatopoeia, and so there isn''t a perfect match for what Chinese characters should be used here. The characters that you see for "hu5" in this word don''t normally have the reading "hu5".\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(16,1342,replace('The Chinese characters were chosen based on being a close phonetic match, and it has nothing to do with the meanings of the individual characters.\n','\n',char(10)));
 INSERT INTO TranslationExtra VALUES(17,1401,NULL);
+INSERT INTO TranslationExtra VALUES(18,1408,replace('This also more generally means "best wishes", and is something you can say during New Years.\n','\n',char(10)));
 CREATE TABLE PhraseTranslations (
     id integer primary key,
     phrase_id integer,
