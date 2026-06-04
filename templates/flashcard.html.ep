@@ -22,7 +22,7 @@
     line-height: 1.5
 }
 
-#flashcard-navigation > svg {
+#flashcard-navigation > svg, #shuffle-cards {
     color: #6c757d;
     cursor: pointer;
 }
@@ -36,6 +36,10 @@
     line-height: 1.5
 }
 
+#shuffle-cards {
+    font-size: 2em;
+}
+
 </style>
 
   <div class="text-center">
@@ -45,6 +49,7 @@
         <span id="flashcard-navigation">
           %= include 'elements/arrow-prev'
           %= include 'elements/reload-page'
+          %= include 'elements/shuffle-cards'
           %= include 'elements/arrow-next'
         </span>
       </div>
@@ -111,6 +116,16 @@
         $('#extra-notes').show();
 
         resize_teochew_text($('#flashcard-teochew').find('.card-body'));
+    }
+
+    function shuffle_flashcards() {
+        const sort_keys = Object.fromEntries(
+            flashcards.map((x) => [x.english_id, Math.random()])
+        );
+        flashcards = flashcards.sort((a, b) => (
+            sort_keys[a.english_id] - sort_keys[b.english_id]
+        ));
+        show_flashcard(flashcards[0]);
     }
 
     function show_next_flashcard() {
@@ -257,5 +272,6 @@
     $('#arrow-prev').click(show_prev_flashcard);
     $('#arrow-next').click(show_next_flashcard);
     $('#reload-page').click(function() { location.reload() });
+    $('#shuffle-cards').click(shuffle_flashcards);
   </script>
   %= include 'elements/play_teochew', parent_elt => '#flashcard-teochew'
