@@ -125,7 +125,8 @@
         flashcards = flashcards.sort((a, b) => (
             sort_keys[a.english_id] - sort_keys[b.english_id]
         ));
-        show_flashcard(flashcards[0]);
+        index = 0;
+        show_flashcard(flashcards[index]);
     }
 
     function show_next_flashcard() {
