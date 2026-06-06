@@ -1019,6 +1019,7 @@ INSERT INTO English VALUES(970,44,'to sneeze',0,NULL,NULL);
 INSERT INTO English VALUES(971,1,'bless you',0,NULL,NULL);
 INSERT INTO English VALUES(972,48,'group leader',0,NULL,NULL);
 INSERT INTO English VALUES(973,48,'supervisor',0,NULL,NULL);
+INSERT INTO English VALUES(974,11,'fingernail',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1901,6 +1902,7 @@ INSERT INTO Chinese VALUES(883,NULL,'吉','gek4',NULL);
 INSERT INTO Chinese VALUES(884,NULL,'事','seu7',NULL);
 INSERT INTO Chinese VALUES(885,NULL,'如','yu5',NULL);
 INSERT INTO Chinese VALUES(886,'组','組','ju1',NULL);
+INSERT INTO Chinese VALUES(887,NULL,'甲','gah4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3683,6 +3685,8 @@ INSERT INTO Translation VALUES(1411,972,1409,0);
 INSERT INTO Translation VALUES(1412,NULL,1410,0);
 INSERT INTO Translation VALUES(1413,NULL,1411,0);
 INSERT INTO Translation VALUES(1414,973,1412,0);
+INSERT INTO Translation VALUES(1415,974,1413,0);
+INSERT INTO Translation VALUES(1416,NULL,1414,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5067,6 +5071,8 @@ INSERT INTO Teochew VALUES(1409,'ju1 jiang2','組長');
 INSERT INTO Teochew VALUES(1410,'ju1','組');
 INSERT INTO Teochew VALUES(1411,'jiang2','長');
 INSERT INTO Teochew VALUES(1412,'gang1 tao5','工頭');
+INSERT INTO Teochew VALUES(1413,'jain26 gah4','指甲');
+INSERT INTO Teochew VALUES(1414,'gah4','甲');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6201,6 +6207,8 @@ INSERT INTO Compound VALUES(1145,1409,1,1412);
 INSERT INTO Compound VALUES(1146,1409,2,1413);
 INSERT INTO Compound VALUES(1147,1412,1,935);
 INSERT INTO Compound VALUES(1148,1412,2,276);
+INSERT INTO Compound VALUES(1149,1413,1,890);
+INSERT INTO Compound VALUES(1150,1413,2,1416);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
