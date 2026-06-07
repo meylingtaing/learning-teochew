@@ -1020,6 +1020,8 @@ INSERT INTO English VALUES(971,1,'bless you',0,NULL,NULL);
 INSERT INTO English VALUES(972,48,'group leader',0,NULL,NULL);
 INSERT INTO English VALUES(973,48,'supervisor',0,NULL,NULL);
 INSERT INTO English VALUES(974,11,'fingernail',0,NULL,NULL);
+INSERT INTO English VALUES(975,13,'to blink',0,NULL,NULL);
+INSERT INTO English VALUES(976,22,'lightning',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1903,6 +1905,7 @@ INSERT INTO Chinese VALUES(884,NULL,'事','seu7',NULL);
 INSERT INTO Chinese VALUES(885,NULL,'如','yu5',NULL);
 INSERT INTO Chinese VALUES(886,'组','組','ju1',NULL);
 INSERT INTO Chinese VALUES(887,NULL,'甲','gah4',NULL);
+INSERT INTO Chinese VALUES(888,'𱳅','𥍉','nih4',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3687,6 +3690,9 @@ INSERT INTO Translation VALUES(1413,NULL,1411,0);
 INSERT INTO Translation VALUES(1414,973,1412,0);
 INSERT INTO Translation VALUES(1415,974,1413,0);
 INSERT INTO Translation VALUES(1416,NULL,1414,0);
+INSERT INTO Translation VALUES(1417,975,1415,0);
+INSERT INTO Translation VALUES(1418,NULL,1416,0);
+INSERT INTO Translation VALUES(1419,976,1417,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5073,6 +5079,9 @@ INSERT INTO Teochew VALUES(1411,'jiang2','長');
 INSERT INTO Teochew VALUES(1412,'gang1 tao5','工頭');
 INSERT INTO Teochew VALUES(1413,'jain26 gah4','指甲');
 INSERT INTO Teochew VALUES(1414,'gah4','甲');
+INSERT INTO Teochew VALUES(1415,'nih48 mak8','𥍉目');
+INSERT INTO Teochew VALUES(1416,'nih4','𥍉');
+INSERT INTO Teochew VALUES(1417,'gong1 nih48 mak8','公𥍉目');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6209,6 +6218,10 @@ INSERT INTO Compound VALUES(1147,1412,1,935);
 INSERT INTO Compound VALUES(1148,1412,2,276);
 INSERT INTO Compound VALUES(1149,1413,1,890);
 INSERT INTO Compound VALUES(1150,1413,2,1416);
+INSERT INTO Compound VALUES(1151,1415,1,1418);
+INSERT INTO Compound VALUES(1152,1415,2,118);
+INSERT INTO Compound VALUES(1153,1417,1,45);
+INSERT INTO Compound VALUES(1154,1417,2,1417);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6406,6 +6419,7 @@ INSERT INTO ExtraNotes VALUES(69,replace('You can use **chah4** in planting, lik
 INSERT INTO ExtraNotes VALUES(70,replace('My aunt was telling me how it barely rained, and she said **u(7) da7 no(7) diam2**! to mean "only two drops!"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(71,replace('**hak8 chiu3** is just an onomotopoeia, like "achoo" in English. Other people have different variations on this, like **hah8 chiu3** or **hah8 chiu2**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(72,replace('For 老師, a lot of people say **lao(6) seu1**, but my family pronounces it **lao(7) seu1**. But we actually use **seng1 sen1** more often.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(73,replace('I''ve seen some other variations on this, like **a1 gong1 nih(8) mak8** and **lui(7) gong1 nih(8) mak8**\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6481,6 +6495,7 @@ INSERT INTO EnglishExtraNotes VALUES(73,957,69);
 INSERT INTO EnglishExtraNotes VALUES(74,959,70);
 INSERT INTO EnglishExtraNotes VALUES(75,970,71);
 INSERT INTO EnglishExtraNotes VALUES(76,170,72);
+INSERT INTO EnglishExtraNotes VALUES(77,976,73);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
