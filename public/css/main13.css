@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "learning-teochew-custom-font1";
-    src: url("/fonts/learning-teochew-custom-font1.woff2") format("woff2");
+    font-family: "learning-teochew-custom-font2";
+    src: url("/fonts/learning-teochew-custom-font2.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -9,7 +9,7 @@
      * fonts don't seem to include. This is a hack-y way of making sure it will
      * show up (without having to always load the font). I'll
      * probably have to expand this more later */
-    unicode-range: U+20895, U+2E8F6, U+30291;
+    unicode-range: U+20895, U+25349, U+2E8F6, U+30291, U+31CC5;
 }
 
 /* I just took the default font-family from Bootstrap, and modified it to
@@ -26,7 +26,7 @@ body {
         "Liberation Sans",
         sans-serif,
         "Noto Sans CJK TC", /* should really set the lang attribute in places... */
-        "learning-teochew-custom-font1",
+        "learning-teochew-custom-font2",
         "Apple Color Emoji",
         "Segoe UI Emoji",
         "Segoe UI Symbol",
