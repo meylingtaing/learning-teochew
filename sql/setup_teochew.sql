@@ -51,6 +51,7 @@ INSERT INTO Categories VALUES(45,'Timeofday','Time of Day',3);
 INSERT INTO Categories VALUES(46,'People','General People Words',2);
 INSERT INTO Categories VALUES(47,'Bedroom',NULL,4);
 INSERT INTO Categories VALUES(48,'Work',NULL,7);
+INSERT INTO Categories VALUES(49,'Emotions',NULL,2);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -600,7 +601,7 @@ INSERT INTO English VALUES(550,18,'to wash clothes',0,NULL,NULL);
 INSERT INTO English VALUES(551,43,'to wash dishes',0,NULL,NULL);
 INSERT INTO English VALUES(552,32,'with',0,NULL,NULL);
 INSERT INTO English VALUES(553,14,'to add',0,NULL,NULL);
-INSERT INTO English VALUES(554,8,'scared',0,NULL,NULL);
+INSERT INTO English VALUES(554,49,'scared',0,NULL,NULL);
 INSERT INTO English VALUES(555,38,'car',0,NULL,NULL);
 INSERT INTO English VALUES(556,38,'to drive',0,NULL,NULL);
 INSERT INTO English VALUES(557,38,'to drive a car',0,NULL,NULL);
@@ -776,7 +777,7 @@ INSERT INTO English VALUES(727,48,'to retire',0,NULL,NULL);
 INSERT INTO English VALUES(728,13,'to kiss',0,NULL,NULL);
 INSERT INTO English VALUES(729,13,'to take photos',0,NULL,NULL);
 INSERT INTO English VALUES(730,35,'Philadelphia',0,NULL,NULL);
-INSERT INTO English VALUES(731,8,'embarrassed',0,NULL,NULL);
+INSERT INTO English VALUES(731,49,'embarrassed',0,NULL,NULL);
 INSERT INTO English VALUES(732,28,'pickled mustard greens',0,NULL,10);
 INSERT INTO English VALUES(733,13,'to send',0,NULL,NULL);
 INSERT INTO English VALUES(734,16,'to offer good wishes',0,NULL,NULL);
@@ -866,7 +867,7 @@ INSERT INTO English VALUES(817,29,'dried fish',0,NULL,10);
 INSERT INTO English VALUES(818,39,'bottom',0,NULL,NULL);
 INSERT INTO English VALUES(819,35,'China',0,NULL,NULL);
 INSERT INTO English VALUES(820,18,'purse',0,NULL,NULL);
-INSERT INTO English VALUES(821,8,'happy',0,NULL,NULL);
+INSERT INTO English VALUES(821,49,'happy',0,NULL,NULL);
 INSERT INTO English VALUES(822,38,'to go back home',0,NULL,NULL);
 INSERT INTO English VALUES(823,10,'pasta',0,NULL,NULL);
 INSERT INTO English VALUES(824,22,'humid',0,NULL,NULL);
@@ -936,7 +937,7 @@ INSERT INTO English VALUES(887,15,'deer',0,NULL,NULL);
 INSERT INTO English VALUES(888,13,'to drag',0,NULL,NULL);
 INSERT INTO English VALUES(889,43,'to dip in',0,NULL,NULL);
 INSERT INTO English VALUES(890,43,'to scoop',0,NULL,NULL);
-INSERT INTO English VALUES(891,8,'tired',0,NULL,NULL);
+INSERT INTO English VALUES(891,49,'tired',0,NULL,NULL);
 INSERT INTO English VALUES(892,16,'whistle',0,NULL,NULL);
 INSERT INTO English VALUES(893,13,'to pressure someone into doing something',0,NULL,NULL);
 INSERT INTO English VALUES(894,38,'bicycle',0,NULL,NULL);
@@ -1028,6 +1029,11 @@ INSERT INTO English VALUES(979,9,'to mop',0,NULL,NULL);
 INSERT INTO English VALUES(980,8,'weird',0,NULL,NULL);
 INSERT INTO English VALUES(981,35,'India',0,NULL,NULL);
 INSERT INTO English VALUES(982,10,'broth',0,NULL,NULL);
+INSERT INTO English VALUES(983,49,'angry',0,NULL,NULL);
+INSERT INTO English VALUES(984,49,'sad',0,NULL,NULL);
+INSERT INTO English VALUES(985,49,'worried',0,NULL,NULL);
+INSERT INTO English VALUES(986,49,'distressed',0,NULL,NULL);
+INSERT INTO English VALUES(987,49,'content',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1918,6 +1924,8 @@ INSERT INTO Chinese VALUES(891,NULL,'奇','ki5',NULL);
 INSERT INTO Chinese VALUES(892,NULL,'怪','guai3',NULL);
 INSERT INTO Chinese VALUES(893,NULL,'印','eng3',NULL);
 INSERT INTO Chinese VALUES(894,NULL,'肉','nek8',NULL);
+INSERT INTO Chinese VALUES(895,NULL,'激','gek4',NULL);
+INSERT INTO Chinese VALUES(896,NULL,'清','cheng1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2120,6 +2128,12 @@ INSERT INTO Synonyms VALUES(195,871,'boss',0);
 INSERT INTO Synonyms VALUES(196,972,'team lead',0);
 INSERT INTO Synonyms VALUES(197,161,'floor',0);
 INSERT INTO Synonyms VALUES(198,980,'strange',0);
+INSERT INTO Synonyms VALUES(199,983,'mad',0);
+INSERT INTO Synonyms VALUES(200,986,'worried',1);
+INSERT INTO Synonyms VALUES(201,986,'pained',1);
+INSERT INTO Synonyms VALUES(202,986,'troubled',1);
+INSERT INTO Synonyms VALUES(203,987,'at peace',1);
+INSERT INTO Synonyms VALUES(204,987,'stress free',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3117,7 +3131,7 @@ INSERT INTO Translation VALUES(825,NULL,835,0);
 INSERT INTO Translation VALUES(826,958,836,0);
 INSERT INTO Translation VALUES(827,NULL,837,0);
 INSERT INTO Translation VALUES(828,NULL,838,0);
-INSERT INTO Translation VALUES(829,NULL,839,0);
+INSERT INTO Translation VALUES(829,983,839,0);
 INSERT INTO Translation VALUES(830,NULL,840,0);
 INSERT INTO Translation VALUES(831,NULL,841,0);
 INSERT INTO Translation VALUES(832,NULL,842,0);
@@ -3717,6 +3731,12 @@ INSERT INTO Translation VALUES(1426,981,1424,0);
 INSERT INTO Translation VALUES(1427,NULL,1425,0);
 INSERT INTO Translation VALUES(1428,982,1426,0);
 INSERT INTO Translation VALUES(1429,352,1427,0);
+INSERT INTO Translation VALUES(1430,984,1428,0);
+INSERT INTO Translation VALUES(1431,985,1429,0);
+INSERT INTO Translation VALUES(1432,986,1430,0);
+INSERT INTO Translation VALUES(1433,NULL,1431,0);
+INSERT INTO Translation VALUES(1434,987,1432,0);
+INSERT INTO Translation VALUES(1435,NULL,1433,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5116,6 +5136,12 @@ INSERT INTO Teochew VALUES(1424,'eng32 dou7','印度');
 INSERT INTO Teochew VALUES(1425,'eng3','印');
 INSERT INTO Teochew VALUES(1426,'nek84 teung1','肉湯');
 INSERT INTO Teochew VALUES(1427,'nek8','肉');
+INSERT INTO Teochew VALUES(1428,'bhoi67 huan1 hi2','袂歡喜');
+INSERT INTO Teochew VALUES(1429,'huang57 lo2','煩惱');
+INSERT INTO Teochew VALUES(1430,'gek48 sim1','激心');
+INSERT INTO Teochew VALUES(1431,'gek4','激');
+INSERT INTO Teochew VALUES(1432,'cheng1 sim1','清心');
+INSERT INTO Teochew VALUES(1433,'cheng1','清');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6194,9 +6220,6 @@ INSERT INTO Compound VALUES(1089,1351,1,6);
 INSERT INTO Compound VALUES(1090,1351,2,1348);
 INSERT INTO Compound VALUES(1091,1354,1,768);
 INSERT INTO Compound VALUES(1092,1354,2,1215);
-INSERT INTO Compound VALUES(1093,1355,1,442);
-INSERT INTO Compound VALUES(1094,1355,2,1352);
-INSERT INTO Compound VALUES(1095,1355,3,429);
 INSERT INTO Compound VALUES(1096,1357,1,848);
 INSERT INTO Compound VALUES(1097,1357,2,988);
 INSERT INTO Compound VALUES(1098,1360,1,1271);
@@ -6264,6 +6287,16 @@ INSERT INTO Compound VALUES(1159,1424,1,1427);
 INSERT INTO Compound VALUES(1160,1424,2,663);
 INSERT INTO Compound VALUES(1161,1426,1,1429);
 INSERT INTO Compound VALUES(1162,1426,2,341);
+INSERT INTO Compound VALUES(1163,1428,1,549);
+INSERT INTO Compound VALUES(1164,1428,2,1151);
+INSERT INTO Compound VALUES(1165,1429,1,1352);
+INSERT INTO Compound VALUES(1166,1429,2,429);
+INSERT INTO Compound VALUES(1167,1430,1,1433);
+INSERT INTO Compound VALUES(1168,1430,2,988);
+INSERT INTO Compound VALUES(1169,1355,1,442);
+INSERT INTO Compound VALUES(1170,1355,2,1431);
+INSERT INTO Compound VALUES(1171,1432,1,1435);
+INSERT INTO Compound VALUES(1172,1432,2,988);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6462,6 +6495,7 @@ INSERT INTO ExtraNotes VALUES(70,replace('My aunt was telling me how it barely r
 INSERT INTO ExtraNotes VALUES(71,replace('**hak8 chiu3** is just an onomotopoeia, like "achoo" in English. Other people have different variations on this, like **hah8 chiu3** or **hah8 chiu2**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(72,replace('For 老師, a lot of people say **lao(6) seu1**, but my family pronounces it **lao(7) seu1**. But we actually use **seng1 sen1** more often.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(73,replace('I''ve seen some other variations on this, like **a1 gong1 nih(8) mak8** and **lui(7) gong1 nih(8) mak8**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(74,replace('Some people also use **gek(8) sim1** to mean sad, but I think it implies extra worry or anxiousness added on top of the sadness, like your heart is stressed.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6538,6 +6572,7 @@ INSERT INTO EnglishExtraNotes VALUES(74,959,70);
 INSERT INTO EnglishExtraNotes VALUES(75,970,71);
 INSERT INTO EnglishExtraNotes VALUES(76,170,72);
 INSERT INTO EnglishExtraNotes VALUES(77,976,73);
+INSERT INTO EnglishExtraNotes VALUES(78,986,74);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
