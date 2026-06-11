@@ -1034,6 +1034,7 @@ INSERT INTO English VALUES(984,49,'sad',0,NULL,NULL);
 INSERT INTO English VALUES(985,49,'worried',0,NULL,NULL);
 INSERT INTO English VALUES(986,49,'distressed',0,NULL,NULL);
 INSERT INTO English VALUES(987,49,'content',0,NULL,NULL);
+INSERT INTO English VALUES(988,6,'to type',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -3737,6 +3738,7 @@ INSERT INTO Translation VALUES(1432,986,1430,0);
 INSERT INTO Translation VALUES(1433,NULL,1431,0);
 INSERT INTO Translation VALUES(1434,987,1432,0);
 INSERT INTO Translation VALUES(1435,NULL,1433,0);
+INSERT INTO Translation VALUES(1436,988,1434,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5142,6 +5144,7 @@ INSERT INTO Teochew VALUES(1430,'gek48 sim1','激心');
 INSERT INTO Teochew VALUES(1431,'gek4','激');
 INSERT INTO Teochew VALUES(1432,'cheng1 sim1','清心');
 INSERT INTO Teochew VALUES(1433,'cheng1','清');
+INSERT INTO Teochew VALUES(1434,'pah48 yi7','拍字');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6297,6 +6300,8 @@ INSERT INTO Compound VALUES(1169,1355,1,442);
 INSERT INTO Compound VALUES(1170,1355,2,1431);
 INSERT INTO Compound VALUES(1171,1432,1,1435);
 INSERT INTO Compound VALUES(1172,1432,2,988);
+INSERT INTO Compound VALUES(1173,1434,1,639);
+INSERT INTO Compound VALUES(1174,1434,2,655);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6496,6 +6501,7 @@ INSERT INTO ExtraNotes VALUES(71,replace('**hak8 chiu3** is just an onomotopoeia
 INSERT INTO ExtraNotes VALUES(72,replace('For 老師, a lot of people say **lao(6) seu1**, but my family pronounces it **lao(7) seu1**. But we actually use **seng1 sen1** more often.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(73,replace('I''ve seen some other variations on this, like **a1 gong1 nih(8) mak8** and **lui(7) gong1 nih(8) mak8**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(74,replace('Some people also use **gek(8) sim1** to mean sad, but I think it implies extra worry or anxiousness added on top of the sadness, like your heart is stressed.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(75,replace('**dang1 gue1 teung1** (winter melon soup) was one of my favorite things to eat growing up\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6573,6 +6579,7 @@ INSERT INTO EnglishExtraNotes VALUES(75,970,71);
 INSERT INTO EnglishExtraNotes VALUES(76,170,72);
 INSERT INTO EnglishExtraNotes VALUES(77,976,73);
 INSERT INTO EnglishExtraNotes VALUES(78,986,74);
+INSERT INTO EnglishExtraNotes VALUES(79,219,75);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
