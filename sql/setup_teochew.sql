@@ -1035,6 +1035,7 @@ INSERT INTO English VALUES(985,49,'worried',0,NULL,NULL);
 INSERT INTO English VALUES(986,49,'distressed',0,NULL,NULL);
 INSERT INTO English VALUES(987,49,'content',0,NULL,NULL);
 INSERT INTO English VALUES(988,6,'to type',0,NULL,NULL);
+INSERT INTO English VALUES(989,18,'glasses',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1927,6 +1928,7 @@ INSERT INTO Chinese VALUES(893,NULL,'印','eng3',NULL);
 INSERT INTO Chinese VALUES(894,NULL,'肉','nek8',NULL);
 INSERT INTO Chinese VALUES(895,NULL,'激','gek4',NULL);
 INSERT INTO Chinese VALUES(896,NULL,'清','cheng1',NULL);
+INSERT INTO Chinese VALUES(897,'镜','鏡','gian3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3739,6 +3741,8 @@ INSERT INTO Translation VALUES(1433,NULL,1431,0);
 INSERT INTO Translation VALUES(1434,987,1432,0);
 INSERT INTO Translation VALUES(1435,NULL,1433,0);
 INSERT INTO Translation VALUES(1436,988,1434,0);
+INSERT INTO Translation VALUES(1437,989,1435,0);
+INSERT INTO Translation VALUES(1438,NULL,1436,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5145,6 +5149,8 @@ INSERT INTO Teochew VALUES(1431,'gek4','激');
 INSERT INTO Teochew VALUES(1432,'cheng1 sim1','清心');
 INSERT INTO Teochew VALUES(1433,'cheng1','清');
 INSERT INTO Teochew VALUES(1434,'pah48 yi7','拍字');
+INSERT INTO Teochew VALUES(1435,'mak84 gian3','目鏡');
+INSERT INTO Teochew VALUES(1436,'gian3','鏡');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6302,6 +6308,8 @@ INSERT INTO Compound VALUES(1171,1432,1,1435);
 INSERT INTO Compound VALUES(1172,1432,2,988);
 INSERT INTO Compound VALUES(1173,1434,1,639);
 INSERT INTO Compound VALUES(1174,1434,2,655);
+INSERT INTO Compound VALUES(1175,1435,1,118);
+INSERT INTO Compound VALUES(1176,1435,2,1438);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
