@@ -1036,6 +1036,7 @@ INSERT INTO English VALUES(986,49,'distressed',0,NULL,NULL);
 INSERT INTO English VALUES(987,49,'content',0,NULL,NULL);
 INSERT INTO English VALUES(988,6,'to type',0,NULL,NULL);
 INSERT INTO English VALUES(989,18,'glasses',0,NULL,NULL);
+INSERT INTO English VALUES(990,15,'horn',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -3181,7 +3182,7 @@ INSERT INTO Translation VALUES(872,895,882,0);
 INSERT INTO Translation VALUES(873,NULL,883,0);
 INSERT INTO Translation VALUES(874,NULL,884,0);
 INSERT INTO Translation VALUES(875,NULL,885,0);
-INSERT INTO Translation VALUES(876,NULL,886,0);
+INSERT INTO Translation VALUES(876,990,886,0);
 INSERT INTO Translation VALUES(877,NULL,887,0);
 INSERT INTO Translation VALUES(878,NULL,888,0);
 INSERT INTO Translation VALUES(879,NULL,889,0);
@@ -3743,6 +3744,7 @@ INSERT INTO Translation VALUES(1435,NULL,1433,0);
 INSERT INTO Translation VALUES(1436,988,1434,0);
 INSERT INTO Translation VALUES(1437,989,1435,0);
 INSERT INTO Translation VALUES(1438,NULL,1436,0);
+INSERT INTO Translation VALUES(1439,916,1437,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5151,6 +5153,7 @@ INSERT INTO Teochew VALUES(1433,'cheng1','清');
 INSERT INTO Teochew VALUES(1434,'pah48 yi7','拍字');
 INSERT INTO Teochew VALUES(1435,'mak84 gian3','目鏡');
 INSERT INTO Teochew VALUES(1436,'gian3','鏡');
+INSERT INTO Teochew VALUES(1437,'gap4','?');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
