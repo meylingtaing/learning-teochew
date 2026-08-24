@@ -56,8 +56,9 @@
     </div>
 
     <%= include 'elements/flashcard-english',
-            english => $flashcard->{english},
-            notes   => $flashcard->{notes} %>
+            english  => $flashcard->{english},
+            notes    => $flashcard->{notes},
+            category => $flashcard->{category} %>
 
     <%= include 'elements/flashcard-teochew',
             teochew => $flashcard->{teochew} %>
@@ -205,6 +206,10 @@
 
         resize_text(english_elt, $('#flashcard-english').find('.card-body'));
         update_header();
+
+        if (flashcard.category) {
+            $('#flashcard-category').html(flashcard.category);
+        }
 
         // Add the extra notes
         $('#extra-notes').children().first().html(flashcard.extra_notes);

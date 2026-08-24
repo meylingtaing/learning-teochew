@@ -609,6 +609,8 @@ sub generate_translation_word_list {
     my $category = $params{category};
     my $count    = $params{count};
 
+    my $category_in_output = $params{include_category_in_output};
+
     my $for_flashcards = $params{for_flashcards};
 
     my $all_phrases = $for_flashcards ? '' : 'all';
@@ -626,7 +628,8 @@ sub generate_translation_word_list {
                             get_english_from_database(
                                 flashcard_set  => $type,
                                 category       => $category,
-                                for_flashcards => $for_flashcards);
+                                for_flashcards => $for_flashcards,
+                                include_category_in_output => $category_in_output);
 
     @english_list = shuffle @english_list
         if $params{shuffle};
@@ -683,6 +686,8 @@ sub generate_translation_word_list {
             $flashcard{english_link} =~ s/\./_/g;
         }
 
+        $flashcard{category} = $english->{category_display};
+
         push @flashcards, \%flashcard;
     }
 
@@ -710,6 +715,9 @@ sub generate_flashcards {
         $params{flashcard_set} = $type;
         $params{category}      = $subtype;
         $params{subcategory}   = $subtype;
+    }
+    else {
+        $params{include_category_in_output} = 1;
     }
 
     # If we have a specific type of flashcard that we want, just get those

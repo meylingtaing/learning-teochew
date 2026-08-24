@@ -7,3 +7,8 @@
   <span class="english nowrap"><%= $english %></span>
   <div class="notes"><%= $notes %></div>
 </div>
+% if ($category) {
+    <div class="card-header">
+      <span id="flashcard-category"><%= $category %></span>
+    </div>
+% }
