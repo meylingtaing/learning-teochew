@@ -728,7 +728,7 @@ INSERT INTO English VALUES(677,1,'more or less',0,NULL,NULL);
 INSERT INTO English VALUES(678,32,'this way',0,NULL,NULL);
 INSERT INTO English VALUES(679,10,'to accompany',0,'food pairing',NULL);
 INSERT INTO English VALUES(680,10,'rice with eggs',0,NULL,NULL);
-INSERT INTO English VALUES(681,13,'to scratch',0,NULL,NULL);
+INSERT INTO English VALUES(681,13,'to scrape',0,NULL,NULL);
 INSERT INTO English VALUES(682,43,'to cut',0,'with a knife',NULL);
 INSERT INTO English VALUES(683,8,'messy',0,NULL,NULL);
 INSERT INTO English VALUES(684,44,'itchy',0,NULL,NULL);
@@ -1037,6 +1037,8 @@ INSERT INTO English VALUES(987,49,'content',0,NULL,NULL);
 INSERT INTO English VALUES(988,6,'to type',0,NULL,NULL);
 INSERT INTO English VALUES(989,18,'glasses',0,NULL,NULL);
 INSERT INTO English VALUES(990,15,'horn',0,NULL,NULL);
+INSERT INTO English VALUES(991,44,'to scratch an itch',0,NULL,NULL);
+INSERT INTO English VALUES(992,13,'to scratch',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1930,6 +1932,7 @@ INSERT INTO Chinese VALUES(894,NULL,'肉','nek8',NULL);
 INSERT INTO Chinese VALUES(895,NULL,'激','gek4',NULL);
 INSERT INTO Chinese VALUES(896,NULL,'清','cheng1',NULL);
 INSERT INTO Chinese VALUES(897,'镜','鏡','gian3',NULL);
+INSERT INTO Chinese VALUES(898,NULL,'爬','be5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2049,7 +2052,6 @@ INSERT INTO Synonyms VALUES(112,677,'so so',1);
 INSERT INTO Synonyms VALUES(113,677,'sort of',1);
 INSERT INTO Synonyms VALUES(114,677,'kind of',1);
 INSERT INTO Synonyms VALUES(115,678,'like this',1);
-INSERT INTO Synonyms VALUES(116,681,'to scrape',1);
 INSERT INTO Synonyms VALUES(117,681,'to shave off',1);
 INSERT INTO Synonyms VALUES(118,705,'center',0);
 INSERT INTO Synonyms VALUES(119,706,'to place',0);
@@ -2138,6 +2140,7 @@ INSERT INTO Synonyms VALUES(201,986,'pained',1);
 INSERT INTO Synonyms VALUES(202,986,'troubled',1);
 INSERT INTO Synonyms VALUES(203,987,'at peace',1);
 INSERT INTO Synonyms VALUES(204,987,'stress free',1);
+INSERT INTO Synonyms VALUES(206,681,'to scratch',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3745,6 +3748,8 @@ INSERT INTO Translation VALUES(1436,988,1434,0);
 INSERT INTO Translation VALUES(1437,989,1435,0);
 INSERT INTO Translation VALUES(1438,NULL,1436,0);
 INSERT INTO Translation VALUES(1439,916,1437,0);
+INSERT INTO Translation VALUES(1440,992,1438,0);
+INSERT INTO Translation VALUES(1441,991,1439,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5154,6 +5159,8 @@ INSERT INTO Teochew VALUES(1434,'pah48 yi7','拍字');
 INSERT INTO Teochew VALUES(1435,'mak84 gian3','目鏡');
 INSERT INTO Teochew VALUES(1436,'gian3','鏡');
 INSERT INTO Teochew VALUES(1437,'gap4','?');
+INSERT INTO Teochew VALUES(1438,'be5','爬');
+INSERT INTO Teochew VALUES(1439,'be57 jion6','爬癢');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6313,6 +6320,8 @@ INSERT INTO Compound VALUES(1173,1434,1,639);
 INSERT INTO Compound VALUES(1174,1434,2,655);
 INSERT INTO Compound VALUES(1175,1435,1,118);
 INSERT INTO Compound VALUES(1176,1435,2,1438);
+INSERT INTO Compound VALUES(1177,1439,1,1440);
+INSERT INTO Compound VALUES(1178,1439,2,767);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6513,6 +6522,7 @@ INSERT INTO ExtraNotes VALUES(72,replace('For 老師, a lot of people say **lao(
 INSERT INTO ExtraNotes VALUES(73,replace('I''ve seen some other variations on this, like **a1 gong1 nih(8) mak8** and **lui(7) gong1 nih(8) mak8**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(74,replace('Some people also use **gek(8) sim1** to mean sad, but I think it implies extra worry or anxiousness added on top of the sadness, like your heart is stressed.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(75,replace('**dang1 gue1 teung1** (winter melon soup) was one of my favorite things to eat growing up\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(76,replace('If you are scratching an itch, you should use **be5**. **kao1** is more like scraping, like what you would do with a spoon to remove the skin off a piece of ginger.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6591,6 +6601,7 @@ INSERT INTO EnglishExtraNotes VALUES(76,170,72);
 INSERT INTO EnglishExtraNotes VALUES(77,976,73);
 INSERT INTO EnglishExtraNotes VALUES(78,986,74);
 INSERT INTO EnglishExtraNotes VALUES(79,219,75);
+INSERT INTO EnglishExtraNotes VALUES(80,992,76);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
