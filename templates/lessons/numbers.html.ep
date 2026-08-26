@@ -1,16 +1,23 @@
 % layout 'wrapper-left';
 <style>
 .play-teochew { font-size: 1.5em }
+figure { text-align: center }
 </style>
 
 <h1>Numbers (1-100)</h1>
 
 <p>
-Here are the numbers 1-10. If you're familiar with Mandarin, you'll notice that
-the Chinese characters are exactly the same in Teochew.
+Here are the numbers 1-10:
 </p>
 <%= include 'elements/translation-table',
         words => [1,2,3,4,5,6,7,8,9,10] %>
+
+<p>
+I think the easiest way to learn the numbers is similar to how you learn the alphabet, by reciting them together like a song:<br />
+<figure>
+  <audio controls src="/audio/j/jek8no6san1si3ngou6lak8chek4boih4gao2jap8.mp3" />
+</figure>
+</p>
 
 <p>
 And here are the numbers 11-19:
@@ -35,6 +42,10 @@ The numbers 1 and 2 are special and each have two different ways of saying them.
     you use <b>yi6</b>
   </li>
 </ul>
+
+<p class="text-secondary small">
+<em>Okay, I know there are exceptions to that. I won't get into it now.</em>
+</p>
 
 <p>
 Note that if a number has multiple syllables, every syllable except the last
