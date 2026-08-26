@@ -1039,6 +1039,7 @@ INSERT INTO English VALUES(989,18,'glasses',0,NULL,NULL);
 INSERT INTO English VALUES(990,15,'horn',0,NULL,NULL);
 INSERT INTO English VALUES(991,44,'to scratch an itch',0,NULL,NULL);
 INSERT INTO English VALUES(992,13,'to scratch',0,NULL,NULL);
+INSERT INTO English VALUES(993,14,'square',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1933,6 +1934,7 @@ INSERT INTO Chinese VALUES(895,NULL,'激','gek4',NULL);
 INSERT INTO Chinese VALUES(896,NULL,'清','cheng1',NULL);
 INSERT INTO Chinese VALUES(897,'镜','鏡','gian3',NULL);
 INSERT INTO Chinese VALUES(898,NULL,'爬','be5',NULL);
+INSERT INTO Chinese VALUES(899,NULL,'方','bang1',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3750,6 +3752,8 @@ INSERT INTO Translation VALUES(1438,NULL,1436,0);
 INSERT INTO Translation VALUES(1439,916,1437,0);
 INSERT INTO Translation VALUES(1440,992,1438,0);
 INSERT INTO Translation VALUES(1441,991,1439,0);
+INSERT INTO Translation VALUES(1442,993,1440,0);
+INSERT INTO Translation VALUES(1443,NULL,1441,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5161,6 +5165,8 @@ INSERT INTO Teochew VALUES(1436,'gian3','鏡');
 INSERT INTO Teochew VALUES(1437,'gap4','?');
 INSERT INTO Teochew VALUES(1438,'be5','爬');
 INSERT INTO Teochew VALUES(1439,'be57 jion6','爬癢');
+INSERT INTO Teochew VALUES(1440,'si32 bang1','四方');
+INSERT INTO Teochew VALUES(1441,'bang1','方');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6322,6 +6328,8 @@ INSERT INTO Compound VALUES(1175,1435,1,118);
 INSERT INTO Compound VALUES(1176,1435,2,1438);
 INSERT INTO Compound VALUES(1177,1439,1,1440);
 INSERT INTO Compound VALUES(1178,1439,2,767);
+INSERT INTO Compound VALUES(1179,1440,1,9);
+INSERT INTO Compound VALUES(1180,1440,2,1443);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6523,6 +6531,7 @@ INSERT INTO ExtraNotes VALUES(73,replace('I''ve seen some other variations on th
 INSERT INTO ExtraNotes VALUES(74,replace('Some people also use **gek(8) sim1** to mean sad, but I think it implies extra worry or anxiousness added on top of the sadness, like your heart is stressed.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(75,replace('**dang1 gue1 teung1** (winter melon soup) was one of my favorite things to eat growing up\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(76,replace('If you are scratching an itch, you should use **be5**. **kao1** is more like scraping, like what you would do with a spoon to remove the skin off a piece of ginger.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(77,replace('This literally means "4 sides" so I think it could be used for any four sided shape. We were using **si(2) bang1** to refer to the diamond suit in a deck of cards.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6602,6 +6611,7 @@ INSERT INTO EnglishExtraNotes VALUES(77,976,73);
 INSERT INTO EnglishExtraNotes VALUES(78,986,74);
 INSERT INTO EnglishExtraNotes VALUES(79,219,75);
 INSERT INTO EnglishExtraNotes VALUES(80,992,76);
+INSERT INTO EnglishExtraNotes VALUES(81,993,77);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
