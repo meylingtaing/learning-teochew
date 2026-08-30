@@ -72,12 +72,15 @@ my $teochew = $translation{teochew};
 my %update_english_params;
 
 if (my $new_word = $inputs{new_word}) {
-    say "Changing English word '$english->{word}' to '$new_word'";
+    my $english_display = $english->{word};
+    $english_display .= " ($english->{notes})" if $english->{notes};
+    say "Changing English word '$english_display' to '$new_word'";
 
     my ($word, $notes) = split_out_parens($new_word);
     if (confirm()) {
         $update_english_params{word}  = $word;
-        $update_english_params{notes} = $notes if $notes ne '';
+        $update_english_params{notes} = $notes
+            if $notes ne '' || $english->{notes} ne '';
     }
 }
 

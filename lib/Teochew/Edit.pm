@@ -156,7 +156,7 @@ sub update_english {
         push @binds, $params{word};
     }
 
-    if ($params{notes}) {
+    if (defined $params{notes}) {
         push @sets, "notes = ?";
         push @binds, $params{notes};
     }
