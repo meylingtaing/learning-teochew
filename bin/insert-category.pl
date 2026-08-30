@@ -20,6 +20,11 @@ use Input qw(confirm input_from_prompt);
 
 my ($flashcardset, $category, $display_name) = @ARGV;
 
+if (!$flashcardset || !$category) {
+    say colored("Flashcard set and Category required!", "red");
+    exit;
+}
+
 my $db = Teochew::Edit->new;
 
 my %categories = map { $_->{name} => $_->{id} } Teochew::categories;
