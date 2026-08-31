@@ -8,7 +8,7 @@ h1, h2 { margin-bottom: 0 }
 %# The header for the page, which only shows up if there is more than one
 %# subcategory
 % if (scalar @$categories > 1) {
-<div class="container px-0 mb-1 mt-2">
+<div class="container-fluid px-0 mb-1 mt-2">
   <div class="row">
     <div class="col-auto">
     <h1>
@@ -31,7 +31,7 @@ h1, h2 { margin-bottom: 0 }
 
   %# The header for the category
   % my $category = $row->{name};
-  <div class="container px-0 mb-2 mt-3">
+  <div class="container-fluid px-0 mb-2 mt-3">
     <div class="row">
       <div class="col-auto">
       <h2 id="<%= $category %>">
