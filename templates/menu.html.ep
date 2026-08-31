@@ -186,7 +186,8 @@ header { background-color: var(--bs-primary-bg-subtle); }
           <!-- Site settings -->
           <div class="d-none d-md-flex navbar-nav dropdown"
                id="site-settings-button">
-            <a href="#" class="nav-link"
+            <a href="#"
+               class="text-body-secondary link-underline link-underline-opacity-0"
                data-bs-toggle="dropdown" data-bs-auto-close="outside">
               <span class="align-middle d-md-none d-lg-inline">Site settings</span>
               <i class="ion-gear-b settings-icon align-middle"></i>
