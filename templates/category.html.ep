@@ -9,7 +9,7 @@ h1, h2 { margin-bottom: 0 }
 %# subcategory
 % if (scalar @$categories > 1) {
 <div class="container-fluid px-0 mb-1 mt-2">
-  <div class="row">
+  <div class="row align-items-center">
     <div class="col-auto">
     <h1>
       %= $flashcard_set_display
@@ -20,6 +20,15 @@ h1, h2 { margin-bottom: 0 }
          href="/flashcards/<%= $flashcard_set %>"
          role="button">All flashcards</a>
     </div>
+  </div>
+  <div class="mt-3 d-flex flex-wrap">
+    <div class="px-2">Jump to:</div>
+    % for my $row (@$categories) {
+      % my $category = $row->{name};
+      <a href="#<%= $category %>" class="px-2 text-nowrap link-underline link-underline-opacity-0">
+        <%= $category_translations->{$category}{category_name} %>
+      </a>
+    % }
   </div>
 </div>
 
@@ -32,7 +41,7 @@ h1, h2 { margin-bottom: 0 }
   %# The header for the category
   % my $category = $row->{name};
   <div class="container-fluid px-0 mb-2 mt-3">
-    <div class="row">
+    <div class="row align-items-center">
       <div class="col-auto">
       <h2 id="<%= $category %>">
         <%= $category_translations->{$category}{category_name} %>
