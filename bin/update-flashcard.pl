@@ -194,18 +194,19 @@ my $pengim = $inputs{pengim};
 my $chinese = $inputs{chinese};
 
 if ($pengim // $chinese) {
+    my $new_pengim = $pengim // $teochew->{pengim};
 
     # First make sure these Chinese characters exist in the database
     if ($chinese) {
         $db->ensure_chinese_is_in_database(
             chinese => $chinese,
-            pengim  => $pengim // $teochew->{pengim},
+            pengim  => $new_pengim,
         );
     }
 
     # Update the teochew row
     say "Modifying $english->{word} translation from " .
-        "'$teochew->{pengim} $teochew->{chinese}' to '$pengim $chinese'";
+        "'$teochew->{pengim} $teochew->{chinese}' to '$new_pengim $chinese'";
     if (confirm()) {
         $db->update_teochew(
             $teochew->{teochew_id},
@@ -214,7 +215,7 @@ if ($pengim // $chinese) {
         );
 
         say colored(
-            "Updated $english->{word} pengim to $pengim $chinese!", "green");
+            "Updated $english->{word} pengim to $new_pengim $chinese!", "green");
     }
 
     if ($chinese) {
