@@ -1059,6 +1059,8 @@ INSERT INTO English VALUES(1008,39,'at the back',0,NULL,NULL);
 INSERT INTO English VALUES(1009,32,'the most...',0,NULL,10);
 INSERT INTO English VALUES(1010,13,'to spit',0,NULL,NULL);
 INSERT INTO English VALUES(1011,44,'tiger balm',0,NULL,NULL);
+INSERT INTO English VALUES(1012,29,'clam',0,NULL,10);
+INSERT INTO English VALUES(1013,29,'crab',0,'blue crab',10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1961,6 +1963,8 @@ INSERT INTO Chinese VALUES(903,NULL,'邀','giao1',NULL);
 INSERT INTO Chinese VALUES(904,NULL,'沙','sa1',NULL);
 INSERT INTO Chinese VALUES(905,NULL,'上','siang6',NULL);
 INSERT INTO Chinese VALUES(906,NULL,'呸','pui3',NULL);
+INSERT INTO Chinese VALUES(907,NULL,'蚶','ham1',NULL);
+INSERT INTO Chinese VALUES(909,NULL,'蠘','chih8',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3804,6 +3808,8 @@ INSERT INTO Translation VALUES(1461,1009,1457,0);
 INSERT INTO Translation VALUES(1462,1010,1458,0);
 INSERT INTO Translation VALUES(1463,1010,1459,0);
 INSERT INTO Translation VALUES(1464,1011,1460,0);
+INSERT INTO Translation VALUES(1465,1012,1461,0);
+INSERT INTO Translation VALUES(1466,1013,1462,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5236,6 +5242,8 @@ INSERT INTO Teochew VALUES(1457,'siang67','上');
 INSERT INTO Teochew VALUES(1458,'pui3','呸');
 INSERT INTO Teochew VALUES(1459,'pui32 nua6','呸涎');
 INSERT INTO Teochew VALUES(1460,'bhuang7 gim1 iu5','萬金油');
+INSERT INTO Teochew VALUES(1461,'ham1','蚶');
+INSERT INTO Teochew VALUES(1462,'chih8','蠘');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6628,6 +6636,7 @@ INSERT INTO ExtraNotes VALUES(76,replace('If you are scratching an itch, you sho
 INSERT INTO ExtraNotes VALUES(77,replace('This literally means "4 sides" so I think it could be used for any four sided shape. We were using **si(2) bang1** to refer to the diamond suit in a deck of cards.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(78,replace('My family always uses Chinese BBQ sauce as the main flavor in hot pot, so we use this term to refer to the hot pot dish itself: **jiah(4) sa1 de5**!\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(79,replace('You can also place this after a word to mean "to an extreme degree", like saying **hek(4) si2** to mean "extremely tired"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(80,replace('**chih8** can be used for any type of _swimming crab_, which are the small ones. Blue crab is probably the most well known.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6710,6 +6719,7 @@ INSERT INTO EnglishExtraNotes VALUES(80,992,76);
 INSERT INTO EnglishExtraNotes VALUES(81,993,77);
 INSERT INTO EnglishExtraNotes VALUES(82,1006,78);
 INSERT INTO EnglishExtraNotes VALUES(83,746,79);
+INSERT INTO EnglishExtraNotes VALUES(84,1013,80);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
