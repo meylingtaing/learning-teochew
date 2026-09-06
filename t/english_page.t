@@ -60,7 +60,7 @@ check_english_page('bring', {
     english_word     => 'to bring',
     synonyms         => 'to take, to get',
     categories       => ['Linking/Transitive Verbs'],
-    num_translations => 1,
+    num_translations => 2,
 });
 
 # Now check the page for 0...because it's falsy
