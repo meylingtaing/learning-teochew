@@ -676,6 +676,8 @@ sub generate_translation_word_list {
                 $flashcard{english} = $english->{word} || $english->{sentence};
                 $flashcard{notes}   = $english->{notes};
             }
+
+            $flashcard{category} = $english->{category_display};
         }
         else {
             $flashcard{english} = $flashcard{english_link} = $english;
@@ -686,7 +688,6 @@ sub generate_translation_word_list {
             $flashcard{english_link} =~ s/\./_/g;
         }
 
-        $flashcard{category} = $english->{category_display};
 
         push @flashcards, \%flashcard;
     }
