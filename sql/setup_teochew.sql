@@ -1066,6 +1066,8 @@ INSERT INTO English VALUES(1015,7,'half an hour',0,NULL,10);
 INSERT INTO English VALUES(1016,8,'stupid',0,NULL,NULL);
 INSERT INTO English VALUES(1017,11,'ribs',0,NULL,NULL);
 INSERT INTO English VALUES(1018,41,'bland',0,NULL,NULL);
+INSERT INTO English VALUES(1019,22,'hail',0,NULL,NULL);
+INSERT INTO English VALUES(1020,13,'to fight',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1975,6 +1977,7 @@ INSERT INTO Chinese VALUES(911,NULL,'㦙','nga3',NULL);
 INSERT INTO Chinese VALUES(912,NULL,'𩩍','pian1',NULL);
 INSERT INTO Chinese VALUES(913,'篱','籬','li5',NULL);
 INSERT INTO Chinese VALUES(914,'𬲕','䭕','jian2',NULL);
+INSERT INTO Chinese VALUES(915,NULL,'雹','pak8',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2189,6 +2192,7 @@ INSERT INTO Synonyms VALUES(209,1008,'behind',1);
 INSERT INTO Synonyms VALUES(210,1016,'dumb',0);
 INSERT INTO Synonyms VALUES(211,1014,'to grow',1);
 INSERT INTO Synonyms VALUES(212,1018,'tasteless',0);
+INSERT INTO Synonyms VALUES(213,756,'little',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3829,6 +3833,8 @@ INSERT INTO Translation VALUES(1469,1016,1465,0);
 INSERT INTO Translation VALUES(1470,1017,1466,0);
 INSERT INTO Translation VALUES(1471,NULL,1467,0);
 INSERT INTO Translation VALUES(1472,1018,1468,0);
+INSERT INTO Translation VALUES(1473,1019,1469,0);
+INSERT INTO Translation VALUES(1474,1020,1470,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5269,6 +5275,8 @@ INSERT INTO Teochew VALUES(1465,'nga3','㦙');
 INSERT INTO Teochew VALUES(1466,'pian1 li57 guk4','𩩍籬骨');
 INSERT INTO Teochew VALUES(1467,'pian1 li5','𩩍籬');
 INSERT INTO Teochew VALUES(1468,'jian2','䭕');
+INSERT INTO Teochew VALUES(1469,'pak8','雹');
+INSERT INTO Teochew VALUES(1470,'sio1 pah4','相拍');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6461,6 +6469,8 @@ INSERT INTO Compound VALUES(1208,1464,1,70);
 INSERT INTO Compound VALUES(1209,1464,2,587);
 INSERT INTO Compound VALUES(1210,1466,1,1471);
 INSERT INTO Compound VALUES(1211,1466,2,500);
+INSERT INTO Compound VALUES(1212,1470,1,907);
+INSERT INTO Compound VALUES(1213,1470,2,639);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
