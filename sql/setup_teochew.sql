@@ -1069,6 +1069,8 @@ INSERT INTO English VALUES(1018,41,'bland',0,NULL,NULL);
 INSERT INTO English VALUES(1019,22,'hail',0,NULL,NULL);
 INSERT INTO English VALUES(1020,13,'to fight',0,NULL,NULL);
 INSERT INTO English VALUES(1021,49,'hope',0,NULL,NULL);
+INSERT INTO English VALUES(1022,33,'to receive',0,NULL,NULL);
+INSERT INTO English VALUES(1023,37,'cleaver',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -3337,7 +3339,7 @@ INSERT INTO Translation VALUES(967,NULL,977,0);
 INSERT INTO Translation VALUES(968,NULL,978,0);
 INSERT INTO Translation VALUES(969,NULL,979,0);
 INSERT INTO Translation VALUES(970,NULL,980,0);
-INSERT INTO Translation VALUES(971,NULL,981,0);
+INSERT INTO Translation VALUES(971,1022,981,0);
 INSERT INTO Translation VALUES(972,978,982,0);
 INSERT INTO Translation VALUES(973,NULL,983,0);
 INSERT INTO Translation VALUES(974,NULL,984,0);
@@ -3843,6 +3845,7 @@ INSERT INTO Translation VALUES(1474,1020,1470,0);
 INSERT INTO Translation VALUES(1475,1021,1471,0);
 INSERT INTO Translation VALUES(1476,NULL,1472,0);
 INSERT INTO Translation VALUES(1477,NULL,1473,0);
+INSERT INTO Translation VALUES(1478,1023,1474,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5288,6 +5291,7 @@ INSERT INTO Teochew VALUES(1470,'sio1 pah4','相拍');
 INSERT INTO Teochew VALUES(1471,'hi1 mo7','希望');
 INSERT INTO Teochew VALUES(1472,'hi1','希');
 INSERT INTO Teochew VALUES(1473,'mo7','望');
+INSERT INTO Teochew VALUES(1474,'bang1 do1','方刀');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6484,6 +6488,8 @@ INSERT INTO Compound VALUES(1212,1470,1,907);
 INSERT INTO Compound VALUES(1213,1470,2,639);
 INSERT INTO Compound VALUES(1214,1471,1,1476);
 INSERT INTO Compound VALUES(1215,1471,2,1477);
+INSERT INTO Compound VALUES(1216,1474,1,1443);
+INSERT INTO Compound VALUES(1217,1474,2,415);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
