@@ -278,7 +278,7 @@ INSERT INTO English VALUES(218,28,'bean sprouts',0,NULL,10);
 INSERT INTO English VALUES(219,28,'winter melon',0,NULL,10);
 INSERT INTO English VALUES(220,8,'cold',0,NULL,NULL);
 INSERT INTO English VALUES(222,28,'eggplant',0,NULL,10);
-INSERT INTO English VALUES(223,10,'lamb',1,'meat',NULL);
+INSERT INTO English VALUES(223,10,'lamb',0,'meat',NULL);
 INSERT INTO English VALUES(224,10,'turkey',1,'meat',NULL);
 INSERT INTO English VALUES(225,29,'meatball',0,'beef',10);
 INSERT INTO English VALUES(226,29,'meatball',0,NULL,10);
@@ -1071,6 +1071,8 @@ INSERT INTO English VALUES(1020,13,'to fight',0,NULL,NULL);
 INSERT INTO English VALUES(1021,49,'hope',0,NULL,NULL);
 INSERT INTO English VALUES(1022,33,'to receive',0,NULL,NULL);
 INSERT INTO English VALUES(1023,37,'cleaver',0,NULL,NULL);
+INSERT INTO English VALUES(1024,16,'police',0,NULL,NULL);
+INSERT INTO English VALUES(1025,11,'penis',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1983,6 +1985,8 @@ INSERT INTO Chinese VALUES(914,'𬲕','䭕','jian2',NULL);
 INSERT INTO Chinese VALUES(915,NULL,'雹','pak8',NULL);
 INSERT INTO Chinese VALUES(916,NULL,'希','hi1',NULL);
 INSERT INTO Chinese VALUES(917,NULL,'望','mo7',NULL);
+INSERT INTO Chinese VALUES(918,'马','馬','ma1',NULL);
+INSERT INTO Chinese VALUES(919,NULL,'打','da6',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2200,6 +2204,7 @@ INSERT INTO Synonyms VALUES(212,1018,'tasteless',0);
 INSERT INTO Synonyms VALUES(213,756,'little',1);
 INSERT INTO Synonyms VALUES(214,1021,'hopefully',1);
 INSERT INTO Synonyms VALUES(215,1021,'to hope',1);
+INSERT INTO Synonyms VALUES(216,1024,'cop',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -2621,7 +2626,7 @@ INSERT INTO Translation VALUES(245,27,255,0);
 INSERT INTO Translation VALUES(246,29,257,0);
 INSERT INTO Translation VALUES(247,30,258,0);
 INSERT INTO Translation VALUES(248,31,259,0);
-INSERT INTO Translation VALUES(249,223,260,1);
+INSERT INTO Translation VALUES(249,223,260,0);
 INSERT INTO Translation VALUES(250,224,261,1);
 INSERT INTO Translation VALUES(251,224,262,1);
 INSERT INTO Translation VALUES(252,225,263,0);
@@ -3846,6 +3851,9 @@ INSERT INTO Translation VALUES(1475,1021,1471,0);
 INSERT INTO Translation VALUES(1476,NULL,1472,0);
 INSERT INTO Translation VALUES(1477,NULL,1473,0);
 INSERT INTO Translation VALUES(1478,1023,1474,0);
+INSERT INTO Translation VALUES(1479,1024,1475,0);
+INSERT INTO Translation VALUES(1480,NULL,1476,0);
+INSERT INTO Translation VALUES(1481,1025,1477,1);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5292,6 +5300,9 @@ INSERT INTO Teochew VALUES(1471,'hi1 mo7','希望');
 INSERT INTO Teochew VALUES(1472,'hi1','希');
 INSERT INTO Teochew VALUES(1473,'mo7','望');
 INSERT INTO Teochew VALUES(1474,'bang1 do1','方刀');
+INSERT INTO Teochew VALUES(1475,'ma1 da6','馬打');
+INSERT INTO Teochew VALUES(1476,'ma1','馬');
+INSERT INTO Teochew VALUES(1477,'gu1 jiao2','龜鳥');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6490,6 +6501,10 @@ INSERT INTO Compound VALUES(1214,1471,1,1476);
 INSERT INTO Compound VALUES(1215,1471,2,1477);
 INSERT INTO Compound VALUES(1216,1474,1,1443);
 INSERT INTO Compound VALUES(1217,1474,2,415);
+INSERT INTO Compound VALUES(1218,1475,1,1480);
+INSERT INTO Compound VALUES(1219,1475,2,1184);
+INSERT INTO Compound VALUES(1220,1477,1,1399);
+INSERT INTO Compound VALUES(1221,1477,2,422);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6695,6 +6710,8 @@ INSERT INTO ExtraNotes VALUES(77,replace('This literally means "4 sides" so I th
 INSERT INTO ExtraNotes VALUES(78,replace('My family always uses Chinese BBQ sauce as the main flavor in hot pot, so we use this term to refer to the hot pot dish itself: **jiah(4) sa1 de5**!\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(79,replace('You can also place this after a word to mean "to an extreme degree", like saying **hek(4) si2** to mean "extremely tired"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(80,replace('**chih8** can be used for any type of _swimming crab_, which are the small ones. Blue crab is probably the most well known.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(81,replace('**ma1 da6** is derived from the Malay colloquialism for police, _mata-mata_\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(82,replace('**gu1 jiao2** is slang and who knows if it actually is intended to be "turtle bird", but that''s what it sounds like. I know there is a more technical term for it, but I never learned it as a kid.\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6778,6 +6795,8 @@ INSERT INTO EnglishExtraNotes VALUES(81,993,77);
 INSERT INTO EnglishExtraNotes VALUES(82,1006,78);
 INSERT INTO EnglishExtraNotes VALUES(83,746,79);
 INSERT INTO EnglishExtraNotes VALUES(84,1013,80);
+INSERT INTO EnglishExtraNotes VALUES(85,1024,81);
+INSERT INTO EnglishExtraNotes VALUES(86,1025,82);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
