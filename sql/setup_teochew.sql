@@ -258,7 +258,7 @@ INSERT INTO English VALUES(196,29,'beef',0,NULL,10);
 INSERT INTO English VALUES(197,15,'chicken',0,NULL,NULL);
 INSERT INTO English VALUES(198,29,'chicken',0,'meat',10);
 INSERT INTO English VALUES(199,29,'pork',0,NULL,10);
-INSERT INTO English VALUES(200,9,'dryer',1,NULL,NULL);
+INSERT INTO English VALUES(200,9,'dryer',0,NULL,NULL);
 INSERT INTO English VALUES(201,30,'soda',0,NULL,NULL);
 INSERT INTO English VALUES(203,30,'milk tea',0,NULL,NULL);
 INSERT INTO English VALUES(204,28,'coconut',0,NULL,10);
@@ -1076,6 +1076,10 @@ INSERT INTO English VALUES(1025,11,'penis',0,NULL,NULL);
 INSERT INTO English VALUES(1026,16,'Qingming festival',0,NULL,NULL);
 INSERT INTO English VALUES(1027,8,'clear',0,NULL,NULL);
 INSERT INTO English VALUES(1028,16,'Hungry Ghost Festival',0,NULL,NULL);
+INSERT INTO English VALUES(1029,16,'safe and sound',0,NULL,NULL);
+INSERT INTO English VALUES(1030,16,'iron',0,'Fe',NULL);
+INSERT INTO English VALUES(1031,9,'hammer',0,NULL,NULL);
+INSERT INTO English VALUES(1032,23,'wood',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1990,6 +1994,10 @@ INSERT INTO Chinese VALUES(916,NULL,'希','hi1',NULL);
 INSERT INTO Chinese VALUES(917,NULL,'望','mo7',NULL);
 INSERT INTO Chinese VALUES(918,'马','馬','ma1',NULL);
 INSERT INTO Chinese VALUES(919,NULL,'打','da6',NULL);
+INSERT INTO Chinese VALUES(920,NULL,'平','peng5',NULL);
+INSERT INTO Chinese VALUES(921,'铁','鐵','tih4',NULL);
+INSERT INTO Chinese VALUES(922,'锤','錘','tui5',NULL);
+INSERT INTO Chinese VALUES(923,NULL,'柴','cha5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2037,7 +2045,7 @@ INSERT INTO Synonyms VALUES(39,346,'to speak',0);
 INSERT INTO Synonyms VALUES(40,450,'to look',1);
 INSERT INTO Synonyms VALUES(41,450,'to watch',1);
 INSERT INTO Synonyms VALUES(42,450,'to read',1);
-INSERT INTO Synonyms VALUES(43,195,'to try',0);
+INSERT INTO Synonyms VALUES(43,195,'to try',1);
 INSERT INTO Synonyms VALUES(44,451,'availability',0);
 INSERT INTO Synonyms VALUES(45,473,'have to',0);
 INSERT INTO Synonyms VALUES(46,475,'bunny',0);
@@ -2595,7 +2603,7 @@ INSERT INTO Translation VALUES(210,196,220,0);
 INSERT INTO Translation VALUES(211,197,221,0);
 INSERT INTO Translation VALUES(212,198,222,0);
 INSERT INTO Translation VALUES(213,199,223,0);
-INSERT INTO Translation VALUES(214,200,224,1);
+INSERT INTO Translation VALUES(214,200,224,0);
 INSERT INTO Translation VALUES(215,201,225,0);
 INSERT INTO Translation VALUES(216,201,226,0);
 INSERT INTO Translation VALUES(217,203,227,0);
@@ -3245,7 +3253,7 @@ INSERT INTO Translation VALUES(864,901,874,0);
 INSERT INTO Translation VALUES(865,NULL,875,0);
 INSERT INTO Translation VALUES(866,NULL,876,0);
 INSERT INTO Translation VALUES(867,NULL,877,0);
-INSERT INTO Translation VALUES(868,NULL,878,0);
+INSERT INTO Translation VALUES(868,1032,878,0);
 INSERT INTO Translation VALUES(869,NULL,879,0);
 INSERT INTO Translation VALUES(870,NULL,880,0);
 INSERT INTO Translation VALUES(871,NULL,881,0);
@@ -3860,6 +3868,12 @@ INSERT INTO Translation VALUES(1480,NULL,1476,0);
 INSERT INTO Translation VALUES(1481,1025,1477,1);
 INSERT INTO Translation VALUES(1482,1026,1478,0);
 INSERT INTO Translation VALUES(1483,1028,1479,0);
+INSERT INTO Translation VALUES(1484,1029,1480,0);
+INSERT INTO Translation VALUES(1485,NULL,1481,0);
+INSERT INTO Translation VALUES(1486,1030,1482,0);
+INSERT INTO Translation VALUES(1487,1031,1483,0);
+INSERT INTO Translation VALUES(1488,NULL,1484,0);
+INSERT INTO Translation VALUES(1489,1032,1485,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5311,6 +5325,12 @@ INSERT INTO Teochew VALUES(1476,'ma1','馬');
 INSERT INTO Teochew VALUES(1477,'gu1 jiao2','龜鳥');
 INSERT INTO Teochew VALUES(1478,'cheng1 meng5','清明');
 INSERT INTO Teochew VALUES(1479,'chek48 ghueh84 buan3','七月半');
+INSERT INTO Teochew VALUES(1480,'peng57 ang1','平安');
+INSERT INTO Teochew VALUES(1481,'peng5','平');
+INSERT INTO Teochew VALUES(1482,'tih4','鐵');
+INSERT INTO Teochew VALUES(1483,'tih48 tui5','鐵錘');
+INSERT INTO Teochew VALUES(1484,'tui5','錘');
+INSERT INTO Teochew VALUES(1485,'cha5','柴');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6518,6 +6538,10 @@ INSERT INTO Compound VALUES(1223,1478,2,1274);
 INSERT INTO Compound VALUES(1224,1479,1,480);
 INSERT INTO Compound VALUES(1225,1479,2,77);
 INSERT INTO Compound VALUES(1226,1479,3,70);
+INSERT INTO Compound VALUES(1227,1480,1,1485);
+INSERT INTO Compound VALUES(1228,1480,2,791);
+INSERT INTO Compound VALUES(1229,1483,1,1486);
+INSERT INTO Compound VALUES(1230,1483,2,1488);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6725,6 +6749,7 @@ INSERT INTO ExtraNotes VALUES(79,replace('You can also place this after a word t
 INSERT INTO ExtraNotes VALUES(80,replace('**chih8** can be used for any type of _swimming crab_, which are the small ones. Blue crab is probably the most well known.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(81,replace('**ma1 da6** is derived from the Malay colloquialism for police, _mata-mata_\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(82,replace('**gu1 jiao2** is slang and who knows if it actually is intended to be "turtle bird", but that''s what it sounds like. I know there is a more technical term for it, but I never learned it as a kid.\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(83,replace('**chi3** and **chi(2) toin2** generally mean to try or test out something, though I find they are most commonly used when giving something a taste\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6810,6 +6835,7 @@ INSERT INTO EnglishExtraNotes VALUES(83,746,79);
 INSERT INTO EnglishExtraNotes VALUES(84,1013,80);
 INSERT INTO EnglishExtraNotes VALUES(85,1024,81);
 INSERT INTO EnglishExtraNotes VALUES(86,1025,82);
+INSERT INTO EnglishExtraNotes VALUES(87,195,83);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
