@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+<title>learning teochew</title>
+<link>https://learningteochew.com/updates</link>
+<description>documenting my teochew learning journey</description>
+<lastBuildDate><%= $updates->[0]{datetime} %></lastBuildDate>
+
+% for my $update (@$updates) {
+<item>
+<title><%== $update->{simplified_date} %> update</title>
+<guid><%== stash('url_base') %>/entry/<%= $update->{id} %></guid>
+<pubDate><%= $update->{datetime} %></pubDate>
+<description><![CDATA[<%== $update->{content} %>]]></description>
+</item>
+% }
+
+</channel>
+</rss>

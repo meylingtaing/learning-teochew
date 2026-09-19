@@ -1,7 +1,13 @@
 % layout 'wrapper-left';
 
+<div class="mb-2">
+  Want to be notified about updates? Subscribe to my
+  <a href="/rss">RSS feed <i class="ion-social-rss"></i></a>
+</div>
+<hr />
+
 % for my $update (@$updates) {
-<h3><%= $update->{time_stamp} %></h3>
+<h3><%= $update->{date} %></h3>
 <%== $update->{content} %>
 %   unless (\$update == \$updates->[-1]) {
       <hr>
