@@ -10,3 +10,6 @@ requires 'Test::Deep';
 requires 'Set::CrossProduct';
 requires 'URI::Escape';
 requires 'List::MoreUtils';
+requires 'Mojolicious::Plugin::Blog', '0.37',
+    dist   => 'KTAING/Mojolicious-Plugin-Blog-0.37.tar.gz',
+    mirror => 'file:///path/to/repo';
