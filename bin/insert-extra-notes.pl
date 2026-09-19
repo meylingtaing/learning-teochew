@@ -12,7 +12,7 @@ use Data::Dumper;
 use Term::ANSIColor qw(colored);
 use Getopt::Long qw(GetOptionsFromArray);
 
-use Input qw(confirm input_via_editor);
+use Input;
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
@@ -60,7 +60,7 @@ else {
 }
 
 # Check if we already have notes
-my $info = input_via_editor($existing);
+my $info = Input::via_editor($existing);
 
 my $english_words_str = join(", ", ($english, @other_english));
 if ($info eq '') {
@@ -71,7 +71,7 @@ else {
     say "Inserting these notes for $english_words_str:\n$info";
 }
 
-if (confirm()) {
+if (Input::confirm()) {
     if ($edit_translation_note) {
 
         # TODO: handle deleting extra translation notes

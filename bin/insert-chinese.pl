@@ -16,7 +16,6 @@ use Term::ANSIColor qw(colored);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
-use Input qw(confirm input_from_prompt);
 
 # bin/insert-chinese.pl "失 ()" "sek8" "sik8"
 

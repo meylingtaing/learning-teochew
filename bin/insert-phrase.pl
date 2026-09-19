@@ -9,7 +9,7 @@ use Term::ANSIColor qw(colored);
 
 use lib 'lib';
 
-use Input qw(confirm);
+use Input;
 use Teochew;
 use Teochew::Edit;
 
@@ -31,7 +31,7 @@ my @translations = Teochew::translate_phrase({
 say "Inserting phrase \"$sentence\" with translation \"" .
     $translations[0]{pengim} . "\"";
 
-if (confirm()) {
+if (Input::confirm()) {
     Teochew::Edit->insert_phrase(sentence => $sentence, words => $words);
     say colored("Inserted sentence '$sentence'", "green");
 }

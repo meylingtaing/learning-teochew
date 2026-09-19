@@ -16,7 +16,7 @@ use Term::ANSIColor qw(colored);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
-use Input qw(confirm input_from_prompt);
+use Input;
 
 # Usage:
 #   bin/insert-flashcard.pl $category $english $pengim $chinese [other options]
@@ -29,10 +29,10 @@ use Input qw(confirm input_from_prompt);
 # user for them if they weren't provided
 my ($category, $english, $pengim, $chinese, @other_args) = @ARGV;
 
-$category //= input_from_prompt("Category:");
-$english  //= input_from_prompt("English:");
-$pengim   //= input_from_prompt("Pengim:");
-$chinese  //= input_from_prompt("Chinese characters:");
+$category //= Input::from_prompt("Category:");
+$english  //= Input::from_prompt("English:");
+$pengim   //= Input::from_prompt("Pengim:");
+$chinese  //= Input::from_prompt("Chinese characters:");
 
 # Also check and see if the user wanted to hide these words
 my ($hidden, $hidden_from_flashcards, $is_grammar);
@@ -61,7 +61,7 @@ if (scalar @words_by_sort > 1) {
         $_->{sort} //= '';
         say "$_->{sort}: " . substr($_->{words}, 0, 50);
     }
-    $sort = input_from_prompt("Sort order:");
+    $sort = Input::from_prompt("Sort order:");
 }
 
 # Make sure the Chinese characters are in the database
@@ -89,7 +89,7 @@ say "\thidden: 1" if $hidden;
 say "\thidden_from_flashcards: 1" if $hidden_from_flashcards;
 say "\tgrammar_definition: 1" if $is_grammar;
 
-if (confirm()) {
+if (Input::confirm()) {
 
     # Add the translation!!
     my $success = $db->insert_translation(
@@ -142,7 +142,7 @@ if (%potential_breakdown) {
 
     say $confirm_str;
 
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->insert_compound_breakdown(
             parent_teochew_id => $teochew->{teochew_id},
             translation_ids   => $potential_breakdown{child_translation_ids},
@@ -156,7 +156,7 @@ exit if $added_breakdown;
 
 # If not, let's try and add one anyway with some empty bits
 my $compound_breakdown =
-    input_from_prompt("Enter the breakdown for $traditional: ");
+    Input::from_prompt("Enter the breakdown for $traditional: ");
 
 $db->confirm_and_insert_compound_breakdown(
     breakdown         => $compound_breakdown || $teochew->{chinese},

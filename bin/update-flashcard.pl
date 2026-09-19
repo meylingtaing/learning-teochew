@@ -17,7 +17,7 @@ use List::Util qw(any);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
-use Input qw(confirm input_from_prompt);
+use Input;
 
 my $db = Teochew::Edit->new;
 
@@ -77,7 +77,7 @@ if (my $new_word = $inputs{new_word}) {
     say "Changing English word '$english_display' to '$new_word'";
 
     my ($word, $notes) = split_out_parens($new_word);
-    if (confirm()) {
+    if (Input::confirm()) {
         $update_english_params{word}  = $word;
         $update_english_params{notes} = $notes
             if $notes ne '' || $english->{notes} ne '';
@@ -94,7 +94,7 @@ if (my $category = $inputs{category}) {
 
     say sprintf("Changing '%s' category from %s to %s",
         $english->{word}, ucfirst($english->{category_name}), $category);
-    if (confirm()) {
+    if (Input::confirm()) {
         $update_english_params{category_id} = $new_category_id;
         $english->{category_id} = $new_category_id;
     }
@@ -112,9 +112,9 @@ if (my $category_sort = $inputs{category_sort}) {
             $_->{sort} //= '';
             say "$_->{sort}: " . substr($_->{words}, 0, 50);
         }
-        my $sort = input_from_prompt("Sort order:");
+        my $sort = Input::from_prompt("Sort order:");
         say "Changing sort order of '$english->{word}' to $sort";
-        if (confirm()) {
+        if (Input::confirm()) {
             $update_english_params{sort} = $sort;
         }
     }
@@ -124,7 +124,7 @@ if (defined $inputs{hidden}) {
     my $hidden = $inputs{hidden};
     my $hiding = $hidden ? 'Hiding' : 'Un-hiding';
     say "$hiding English word '$english->{word}'";
-    if (confirm()) {
+    if (Input::confirm()) {
         $update_english_params{hidden} = $hidden;
     }
 }
@@ -132,7 +132,7 @@ if (defined $inputs{hidden}) {
 if (defined $inputs{grammar_definition}) {
     my $is_grammar = $inputs{grammar_definition} ? 1 : 0;
     say "Setting grammar definition to $is_grammar";
-    if (confirm()) {
+    if (Input::confirm()) {
         $update_english_params{grammar_definition} = $is_grammar;
     }
 }
@@ -150,7 +150,7 @@ if (my $tag = $inputs{tag}) {
 
     unless ($tag_id) {
         say "Creating new tag '$tag'";
-        if (confirm()) {
+        if (Input::confirm()) {
             $tag_id = $db->insert_tag($tag);
             if ($tag_id) {
                 say colored("Added tag $tag!", "green");
@@ -163,7 +163,7 @@ if (my $tag = $inputs{tag}) {
 
     # Now add the tag to the english word
     say "Adding tag '$tag' to '$english->{word}'";
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->add_tag_to_english(
             english_id => $english->{id},
             tag_id     => $tag_id
@@ -181,7 +181,7 @@ if (my $alt_chinese = $inputs{alt_chinese}) {
     );
 
     say "Adding $alt_chinese as an alternate for $teochew->{chinese}";
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->insert_alt_chinese(
             teochew_id => $teochew->{teochew_id},
             chinese    => $traditional
@@ -207,7 +207,7 @@ if ($pengim // $chinese) {
     # Update the teochew row
     say "Modifying $english->{word} translation from " .
         "'$teochew->{pengim} $teochew->{chinese}' to '$new_pengim $chinese'";
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->update_teochew(
             $teochew->{teochew_id},
             pengim => $pengim,
@@ -241,7 +241,7 @@ if ($pengim // $chinese) {
             $full_chinese =~ s/$teochew->{chinese}/$chinese/g;
 
             say "Replacing $row->{chinese} with $full_chinese";
-            if (confirm()) {
+            if (Input::confirm()) {
                 $db->dbh->do("update teochew set chinese = ? where id = ?",
                     undef, $full_chinese, $parent_teochew_id);
             }
@@ -257,7 +257,7 @@ if (defined $inputs{hidden_from_flashcards}) {
                                                  "shown in flashcards";
 
     say "$msg $hidden_shown";
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->update_translation(
             $teochew->{translation_id},
             hidden_from_flashcards => $hidden_from_flashcards

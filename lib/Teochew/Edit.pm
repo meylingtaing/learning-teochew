@@ -28,7 +28,7 @@ use Teochew::Utils qw(split_out_parens);
 # Needed for interacting with the user
 use feature qw(say);
 use Term::ANSIColor qw(colored);
-use Input qw(confirm input_from_prompt);
+use Input;
 
 use Data::Dumper;
 
@@ -109,7 +109,7 @@ sub insert_translation {
             "Translation already exists with no English entry. Update it?",
             "yellow"
         );
-        if (confirm()) {
+        if (Input::confirm()) {
             $self->dbh->do(qq{
                 update Translation set english_id = ? where id = ?
             }, {}, $english_id, $translation_id);
@@ -656,7 +656,7 @@ sub confirm_and_insert_compound_breakdown {
                 "Need to create empty translation for $chars[$i] $pengim_str",
                 "yellow"
             );
-            if (confirm()) {
+            if (Input::confirm()) {
                 # XXX fill this in...
                 my $translation_id = $self->insert_translation(
                     chinese => $chars[$i],
@@ -679,7 +679,7 @@ sub confirm_and_insert_compound_breakdown {
                 $msg .= " ($rows[$j]{notes})" if $rows[$j]{notes};
                 say $msg;
             }
-            $row_id = input_from_prompt(
+            $row_id = Input::from_prompt(
                 "Which translation to use for $chars[$i] $pengim_str?");
         }
 
@@ -692,7 +692,7 @@ sub confirm_and_insert_compound_breakdown {
     }
 
     say $confirm_str;
-    if (confirm()) {
+    if (Input::confirm()) {
         $self->insert_compound_breakdown(
             parent_teochew_id => $parent_teochew_id,
             translation_ids   => \@child_ids,
@@ -811,7 +811,7 @@ sub choose_translation_from_english {
             push @valid_inputs, $i;
         }
 
-        $row_id = input_from_prompt(
+        $row_id = Input::from_prompt(
             "Which translation would you like to modify?", \@valid_inputs);
     }
 
@@ -915,7 +915,7 @@ sub confirm_and_insert_chinese {
         $prompt .= ", standard pengim '$standard_pengim'" if $standard_pengim;
 
         say $prompt;
-        if (confirm()) {
+        if (Input::confirm()) {
             $self->insert_chinese(
                 simplified      => $insert_simplified,
                 traditional     => $traditional,

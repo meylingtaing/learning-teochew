@@ -17,7 +17,6 @@ use Teochew::Edit;
 
 # need to explicitly include exported functions
 use Teochew::Utils qw();
-use Input qw(confirm input_from_prompt input_via_editor);
 
 use Data::Dumper;
 use Term::ANSIColor qw(colored);

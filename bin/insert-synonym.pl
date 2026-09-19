@@ -10,7 +10,7 @@ use Getopt::Long qw(GetOptionsFromArray);
 
 use lib 'lib';
 
-use Input qw(confirm);
+use Input;
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
@@ -35,7 +35,7 @@ die "$english does not exist!\n" unless $row;
 
 say "Inserting $synonym as synonym for $word";
 say "show_on_flashcard: 1" if $show_on_flashcard;
-if (confirm()) {
+if (Input::confirm()) {
     Teochew::Edit->insert_synonym(
         english_id        => $row->{id},
         synonym           => $synonym,

@@ -14,7 +14,6 @@ use Teochew;
 use Teochew::Edit;
 
 use Teochew::Utils qw();
-use Input qw(confirm input_from_prompt);
 
 use Data::Dumper;
 use Term::ANSIColor qw(colored);

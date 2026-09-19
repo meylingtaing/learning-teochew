@@ -9,7 +9,7 @@ use Term::ANSIColor qw(colored);
 
 use lib 'lib';
 
-use Input qw(confirm);
+use Input;
 use Teochew;
 use Teochew::Edit;
 
@@ -38,7 +38,7 @@ if (scalar @rows > 1) {
     }
 
     # TODO Error check that the user gave a valid output
-    my $row_id = input_from_prompt(
+    my $row_id = Input::from_prompt(
         "Which translation would you like to modify?");
     $translation = $rows[$row_id];
 }
@@ -57,7 +57,7 @@ my @translations = Teochew::translate_phrase({
 say "Updating phrase \"$sentence\" with translation \"" .
     $translations[0]{pengim} . "\"";
 
-if (confirm()) {
+if (Input::confirm()) {
     $db->dbh->do('update PhraseTranslations set words = ? where id = ?',
         undef, $words, $translation->{id});
     say colored("Updated sentence '$sentence'", "green");

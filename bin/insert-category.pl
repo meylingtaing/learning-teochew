@@ -12,7 +12,7 @@ use Term::ANSIColor qw(colored);
 
 use Teochew;
 use Teochew::Edit;
-use Input qw(confirm input_from_prompt);
+use Input;
 
 # Usage:
 #   bin/insert-category.pl "FlashcardSet" "NewCategory" "DisplayName"
@@ -38,7 +38,7 @@ if ($category_id) {
 die "Need a flashcard set!\n" unless $flashcardset;
 
 say "Creating new category $category under $flashcardset";
-if (confirm()) {
+if (Input::confirm()) {
     $category_id = $db->insert_category(
         category      => $category,
         flashcard_set => $flashcardset,

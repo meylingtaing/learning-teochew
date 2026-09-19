@@ -17,7 +17,7 @@ use Term::ANSIColor qw(colored);
 use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(change_tone split_out_parens);
-use Input qw(confirm input_from_prompt);
+use Input;
 
 my $db = Teochew::Edit->new;
 
@@ -48,14 +48,14 @@ if (scalar @$rows > 1) {
         my $row = $rows->[$i];
         say "$i: $row->{pengim}";
     }
-    my $row_id = input_from_prompt(
+    my $row_id = Input::from_prompt(
         "Which translation would you like to modify?");
     $row = $rows->[$row_id];
 }
 
 if ($pengim) {
     say "Updating $traditional to have pengim '$pengim'";
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->dbh->do("update Chinese set pengim = ? where id = ?",
             undef, $pengim, $row->{chinese_id});
         say colored("Updated the chinese character pengim!", 'green');
@@ -98,7 +98,7 @@ if ($pengim) {
         if ($needs_update) {
             my $updated_pengim = join ' ', @teochew_pengim;
             say "Changing pengim from '$teochew->{pengim}' to '$updated_pengim'";
-            if (confirm()) {
+            if (Input::confirm()) {
                 $db->dbh->do("update Teochew set pengim = ? where id = ?",
                     undef, $updated_pengim, $teochew->{id});
                 say colored("Updated the pengim!", 'green');
@@ -113,7 +113,7 @@ if ($standard_pengim) {
     say sprintf "Changing standard pengim from '%s' to '%s'",
         $row->{standard_pengim}, $standard_pengim;
 
-    if (confirm()) {
+    if (Input::confirm()) {
         $db->dbh->do("update Chinese set standard_pengim = ? where id = ?",
             undef, $standard_pengim, $row->{chinese_id});
         say colored("Added standard pengim!", "green");
