@@ -342,35 +342,6 @@ sub chinese {
     }
 }
 
-=head2 updates
-
-The Updates page, which can be accessed via C</updates>
-
-=cut
-
-sub updates {
-    my $c = shift;
-
-    my $page = $c->stash('page');
-    $page = 0 unless $page =~ /^\d+$/;
-
-    # Need to convert the markdown to html
-    my $updates = Updates->new->get_updates($page);
-    $_->{content} = markdown($_->{content}) for @$updates;
-
-    # See if we should add More Recent and Older
-    $c->stash(prev => ($page > 0) ? ($page - 1) : undef);
-    $c->stash(next => undef);
-
-    if (scalar @$updates > 5) {
-        $c->stash(next => ($page + 1));
-        pop @$updates;
-    }
-
-    $c->stash(updates => $updates);
-    $c->render(template => 'updates');
-}
-
 sub lesson {
     my $c = shift;
 

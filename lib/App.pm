@@ -28,6 +28,12 @@ sub startup {
         $c->stash(traditional => $traditional);
     });
 
+    $app->plugin('Mojolicious::Plugin::Blog');
+
+    # Should really rename this to be more blog-specific because this actually
+    # has two database files
+    $app->defaults(db => 'Updates.sqlite');
+
     my $r = $app->routes;
 
     # Flashcards
@@ -44,7 +50,10 @@ sub startup {
     $r->get('/chinese/:characters')->to('root#chinese');
 
     $r->get('/lesson/:lesson')->to('root#lesson');
-    $r->get('/updates/:page')->to('root#updates', page => 0);
+    $r->get('/updates/:page')->to('blog#blog', page => 0, template => 'updates');
+    $r->get('/rss')->to('blog#rss',
+        title => 'Learning Teochew - updates',
+        url_base => 'https://learningteochew.com/updates');
 
     # Static pages
     $r->get('/about')->to('root#about');
