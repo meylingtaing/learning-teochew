@@ -1086,6 +1086,7 @@ INSERT INTO English VALUES(1035,38,'to ride a horse',0,NULL,NULL);
 INSERT INTO English VALUES(1036,5,'brother-in-law',0,'older sister''s husband',NULL);
 INSERT INTO English VALUES(1037,6,'wire',0,NULL,NULL);
 INSERT INTO English VALUES(1038,38,'bus',0,NULL,NULL);
+INSERT INTO English VALUES(1039,8,'easy',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -1128,7 +1129,6 @@ INSERT INTO Chinese VALUES(36,'妈','媽','ma5',NULL);
 INSERT INTO Chinese VALUES(37,NULL,'外','ghua7',NULL);
 INSERT INTO Chinese VALUES(38,NULL,'囝','gian2',NULL);
 INSERT INTO Chinese VALUES(39,NULL,'大','dua7',NULL);
-INSERT INTO Chinese VALUES(40,NULL,'大','da1',NULL);
 INSERT INTO Chinese VALUES(41,NULL,'大','dai6',NULL);
 INSERT INTO Chinese VALUES(42,'学','學','hak8',NULL);
 INSERT INTO Chinese VALUES(43,NULL,'校','hao6',NULL);
@@ -2010,6 +2010,7 @@ INSERT INTO Chinese VALUES(926,'骑','騎','kia5',NULL);
 INSERT INTO Chinese VALUES(927,NULL,'郎','neung5',NULL);
 INSERT INTO Chinese VALUES(928,'线','線','suan3',NULL);
 INSERT INTO Chinese VALUES(929,NULL,'士','seu6',NULL);
+INSERT INTO Chinese VALUES(930,NULL,'易','goi7',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3895,6 +3896,7 @@ INSERT INTO Translation VALUES(1495,1037,1491,0);
 INSERT INTO Translation VALUES(1496,NULL,1492,0);
 INSERT INTO Translation VALUES(1497,1038,1493,0);
 INSERT INTO Translation VALUES(1498,NULL,1494,0);
+INSERT INTO Translation VALUES(1499,1039,1495,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5361,6 +5363,7 @@ INSERT INTO Teochew VALUES(1491,'diang67 suan3','電線');
 INSERT INTO Teochew VALUES(1492,'suan3','線');
 INSERT INTO Teochew VALUES(1493,'ba1 seu6','巴士');
 INSERT INTO Teochew VALUES(1494,'seu6','士');
+INSERT INTO Teochew VALUES(1495,'goi7','易');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
