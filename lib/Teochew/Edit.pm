@@ -381,7 +381,19 @@ sub insert_category {
         select id from FlashcardSet where name = ?
     }, undef, $flashcardset);
 
-    die "Flashcard set $flashcardset does not exist!" unless $flashcardset_id;
+    unless ($flashcardset_id) {
+        say colored(
+            "Need to create new Flashcard Set $flashcardset",
+            "yellow"
+        );
+        if (Input::confirm()) {
+            $dbh->do(qq{
+                insert into FlashcardSet (name, display_name, sort)
+                values (?, ?, ?)
+            }, undef, $flashcardset, $flashcardset, 10);
+            $flashcardset_id = $dbh->sqlite_last_insert_rowid;
+        }
+    }
 
     $dbh->do(qq{
         insert into Categories (name, flashcardset_id, display_name)
