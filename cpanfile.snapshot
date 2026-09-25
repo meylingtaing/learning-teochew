@@ -22,6 +22,16 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Class-Inspector-1.36
+    pathname: P/PL/PLICEASE/Class-Inspector-1.36.tar.gz
+    provides:
+      Class::Inspector 1.36
+      Class::Inspector::Functions 1.36
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Spec 0.80
+      base 0
+      perl 5.008
   DBD-SQLite-1.70
     pathname: I/IS/ISHIGAKI/DBD-SQLite-1.70.tar.gz
     provides:
@@ -143,6 +153,47 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.48
       Test::Simple 0.90
       perl 5.008001
+  Data-Printer-1.002001
+    pathname: G/GA/GARU/Data-Printer-1.002001.tar.gz
+    provides:
+      DDP 1.002001
+      Data::Printer 1.002001
+      Data::Printer::Common undef
+      Data::Printer::Config undef
+      Data::Printer::Filter undef
+      Data::Printer::Filter::ARRAY undef
+      Data::Printer::Filter::CODE undef
+      Data::Printer::Filter::ContentType undef
+      Data::Printer::Filter::DB undef
+      Data::Printer::Filter::DateTime undef
+      Data::Printer::Filter::Digest undef
+      Data::Printer::Filter::FORMAT undef
+      Data::Printer::Filter::GLOB undef
+      Data::Printer::Filter::GenericClass undef
+      Data::Printer::Filter::HASH undef
+      Data::Printer::Filter::OBJECT undef
+      Data::Printer::Filter::REF undef
+      Data::Printer::Filter::Regexp undef
+      Data::Printer::Filter::SCALAR undef
+      Data::Printer::Filter::VSTRING undef
+      Data::Printer::Filter::Web undef
+      Data::Printer::Object undef
+      Data::Printer::Profile undef
+      Data::Printer::Profile::Dumper undef
+      Data::Printer::Profile::JSON undef
+      Data::Printer::Theme undef
+      Data::Printer::Theme::Classic undef
+      Data::Printer::Theme::Material undef
+      Data::Printer::Theme::Monokai undef
+      Data::Printer::Theme::Solarized undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Spec 0
+      File::Temp 0
+      Scalar::Util 0
+      Test::More 0
+      version 0.77
   Encode-Locale-1.05
     pathname: G/GA/GAAS/Encode-Locale-1.05.tar.gz
     provides:
@@ -160,6 +211,99 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
+  ExtUtils-Config-0.010
+    pathname: L/LE/LEONT/ExtUtils-Config-0.010.tar.gz
+    provides:
+      ExtUtils::Config 0.010
+      ExtUtils::Config::MakeMaker 0.010
+    requirements:
+      Data::Dumper 0
+      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker::Config 0
+      perl 5.006
+      strict 0
+      warnings 0
+  ExtUtils-Helpers-0.028
+    pathname: L/LE/LEONT/ExtUtils-Helpers-0.028.tar.gz
+    provides:
+      ExtUtils::Helpers 0.028
+      ExtUtils::Helpers::Unix 0.028
+      ExtUtils::Helpers::VMS 0.028
+      ExtUtils::Helpers::Windows 0.028
+    requirements:
+      Carp 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy 0
+      File::Spec::Functions 0
+      Text::ParseWords 3.24
+      strict 0
+      warnings 0
+  ExtUtils-InstallPaths-0.015
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.015.tar.gz
+    provides:
+      ExtUtils::InstallPaths 0.015
+    requirements:
+      Carp 0
+      ExtUtils::Config 0.009
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      perl 5.008
+      strict 0
+      warnings 0
+  File-Share-0.27
+    pathname: I/IN/INGY/File-Share-0.27.tar.gz
+    provides:
+      File::Share 0.27
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::ShareDir 1.03
+      Readonly 2.05
+      perl 5.008001
+  File-ShareDir-1.118
+    pathname: R/RE/REHSACK/File-ShareDir-1.118.tar.gz
+    provides:
+      File::ShareDir 1.118
+    requirements:
+      Carp 0
+      Class::Inspector 1.12
+      ExtUtils::MakeMaker 0
+      File::ShareDir::Install 0.13
+      File::Spec 0.80
+      perl 5.008001
+      warnings 0
+  File-ShareDir-Install-0.14
+    pathname: E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz
+    provides:
+      File::ShareDir::Install 0.14
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::Dir 0
+      perl 5.006
+      strict 0
+      warnings 0
+  File-Slurp-9999.32
+    pathname: C/CA/CAPOEIRAB/File-Slurp-9999.32.tar.gz
+    provides:
+      File::Slurp 9999.32
+    requirements:
+      B 0
+      Carp 0
+      Errno 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Basename 0
+      File::Spec 3.01
+      File::Temp 0
+      IO::Handle 0
+      POSIX 0
+      strict 0
+      warnings 0
   HTML-Parser-3.78
     pathname: O/OA/OALDERS/HTML-Parser-3.78.tar.gz
     provides:
@@ -307,6 +451,31 @@ DISTRIBUTIONS
       IPC::Cmd 0
       XSLoader 0.22
       base 0
+  Module-Build-Tiny-0.053
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.053.tar.gz
+    provides:
+      Module::Build::Tiny 0.053
+    requirements:
+      CPAN::Meta 0
+      DynaLoader 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::Install 0
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::ParseXS 0
+      File::Basename 0
+      File::Find 0
+      File::Path 0
+      File::Spec::Functions 0
+      Getopt::Long 2.36
+      JSON::PP 2
+      Pod::Man 0
+      TAP::Harness::Env 0
+      perl 5.006
+      strict 0
+      warnings 0
   Mojolicious-9.27
     pathname: S/SR/SRI/Mojolicious-9.27.tar.gz
     provides:
@@ -425,6 +594,33 @@ DISTRIBUTIONS
       IO::Socket::IP 0.37
       Sub::Util 1.41
       perl 5.016
+  Mojolicious-Plugin-Blog-0.37
+    pathname: K/KT/KTAING/Mojolicious-Plugin-Blog-0.37.tar.gz
+    provides:
+      Blog undef
+      Input undef
+      Mojolicious::Plugin::Blog 0.37
+      Mojolicious::Plugin::Blog::Controller::Blog undef
+    requirements:
+      DBD::SQLite 0
+      DBI 0
+      Date::Format 0
+      Date::Parse 0
+      File::Share 0.25
+      File::Slurp 0
+      Module::Build::Tiny 0.035
+      Mojolicious 0
+      Text::MultiMarkdown 0
+  Readonly-2.05
+    pathname: S/SA/SANKO/Readonly-2.05.tar.gz
+    provides:
+      Readonly 2.05
+      Readonly::Array undef
+      Readonly::Hash undef
+      Readonly::Scalar undef
+    requirements:
+      Module::Build::Tiny 0.035
+      perl 5.005
   Set-CrossProduct-2.008
     pathname: B/BD/BDFOY/Set-CrossProduct-2.008.tar.gz
     provides:
