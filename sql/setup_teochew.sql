@@ -6668,7 +6668,7 @@ INSERT INTO PhraseTranslations VALUES(38,38,'tonight| I to_go restaurant| to_eat
 INSERT INTO PhraseTranslations VALUES(39,38,'tonight| I to_go to_eat to_be_at-na7 restaurant');
 INSERT INTO PhraseTranslations VALUES(40,22,'you to_come when');
 INSERT INTO PhraseTranslations VALUES(41,39,'don''t too_(excessively) late_(at_night)| to_go to_sleep');
-INSERT INTO PhraseTranslations VALUES(42,40,'I with I classifier_(generic) friend| to_go to_travel_and_go_on_a_walk');
+INSERT INTO PhraseTranslations VALUES(42,40,'I with I generic_classifier friend| to_go to_travel_and_go_on_a_walk');
 INSERT INTO PhraseTranslations VALUES(43,41,'she to_live_in to_be_at California');
 INSERT INTO PhraseTranslations VALUES(44,41,'she to_live_in to_be_at-na7 California');
 INSERT INTO PhraseTranslations VALUES(45,42,'she not-m6 to_know_(how_to_do_something) to_say Chinese_language');
@@ -6680,7 +6680,7 @@ INSERT INTO PhraseTranslations VALUES(50,47,'I just_now to_come');
 INSERT INTO PhraseTranslations VALUES(51,48,'time_(it''s_time)| I to_go to_meet I friend| already');
 INSERT INTO PhraseTranslations VALUES(53,49,'I good to_borrow you 2 dollar money_(silver,_coins)| no_(don''t_have)');
 INSERT INTO PhraseTranslations VALUES(54,50,'I to_borrow you 2 dollar money_(silver,_coins)');
-INSERT INTO PhraseTranslations VALUES(55,51,'I to_learn 1 classifier_(for_words_and_sentences) new word_(spoken)');
+INSERT INTO PhraseTranslations VALUES(55,51,'I to_learn 1 classifier_for_words_and_sentences new word_(spoken)');
 INSERT INTO PhraseTranslations VALUES(56,52,'I not-m6 to_know_(recognize,_be_familiar_with_someone_or_something) to_hear-tian1giang3| ever');
 CREATE TABLE Tags (id integer primary key, name text);
 INSERT INTO Tags VALUES(1,'question words');
