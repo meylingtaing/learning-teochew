@@ -19,6 +19,10 @@ long, and I don't remember if this is what I did or not:
     cpanm Carton
 
 Then install all the perl dependencies for this project using `carton install`.
+Note that you're going to need a copy of my
+[blog package](https://github.com/meylingtaing/Mojolicious-Plugin-Blog)! I'm a
+little too lazy to give you steps on how to add that locally and include it
+when you install packages, but you can figure it out!
 
 In order to connect to the database, you will also need to install `sqlite3`.
 
