@@ -158,7 +158,7 @@ sub update_english {
 
     if (defined $params{notes}) {
         push @sets, "notes = ?";
-        push @binds, $params{notes};
+        push @binds, $params{notes} || undef;
     }
 
     if ($params{category_id}) {
