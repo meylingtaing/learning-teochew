@@ -192,13 +192,12 @@ sub english {
         next unless scalar @english_rows;
 
         my $english_display = $english;
-        my $is_synonym = 0;
 
-        # It's possible a synonym was used to get to this page, so explicitly
-        # set the English word to the non-synonym for synonym lookups later
+        # It's possible a synonym was used to get to this page, if so, redirect
+        # to the base word page
         if (all { lc($_->{word}) ne lc($english) } @english_rows) {
             $english = $english_rows[0]{word};
-            $is_synonym = 1;
+            $c->redirect_to("/english/$english");
         }
 
         # Organize this by category. Also keep track of translation ids
@@ -212,13 +211,23 @@ sub english {
             # then let's actually display "difficult" in the grayed out note
             # above the translation
             if (scalar(@english_rows) > 1 &&
-                !$is_synonym &&
                 lc($english_row->{word}) ne lc($english))
             {
                 $english_row->{notes} //= $english_row->{word};
             }
 
-            if (scalar @english_rows == 1 && $english_row->{notes}) {
+            # Do the synonym check per english row if there are multiple
+            # English rows and then tack on to the notes
+            elsif (scalar(@english_rows) > 1) {
+                my @synonyms = Teochew::get_synonyms_by_id($english_row->{id});
+                if (@synonyms) {
+                    unshift @synonyms, $english_row->{notes}
+                        if defined $english_row->{notes};
+                    my $combined_notes = join(', ', @synonyms);
+                    $english_row->{notes} = $combined_notes;
+                }
+            }
+            elsif (scalar @english_rows == 1 && $english_row->{notes}) {
                 $english_display .= " ($english_row->{notes})";
                 $english_row->{notes} = undef;
             }
@@ -278,10 +287,9 @@ sub english {
         }
         $c->stash(english  => $english_display);
 
-        my @synonyms = Teochew::get_synonyms($english);
-        if ($is_synonym) {
-            @synonyms = grep { $_ ne $input && $_ ne "to $input" } @synonyms;
-            unshift @synonyms, $english;
+        my @synonyms;
+        if (scalar(@english_rows) == 1) {
+            @synonyms = Teochew::get_synonyms($english);
         }
         $c->stash(synonyms => \@synonyms);
 
