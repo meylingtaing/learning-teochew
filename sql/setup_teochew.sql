@@ -1061,7 +1061,7 @@ INSERT INTO English VALUES(1008,39,'at the back',0,NULL,NULL);
 INSERT INTO English VALUES(1009,32,'the most...',0,NULL,10);
 INSERT INTO English VALUES(1010,13,'to spit',0,NULL,NULL);
 INSERT INTO English VALUES(1011,44,'tiger balm',0,NULL,NULL);
-INSERT INTO English VALUES(1012,29,'clam',0,NULL,10);
+INSERT INTO English VALUES(1012,29,'clam',0,'blood clam',10);
 INSERT INTO English VALUES(1013,29,'crab',0,'blue crab',10);
 INSERT INTO English VALUES(1014,23,'to plant',0,NULL,NULL);
 INSERT INTO English VALUES(1015,7,'half an hour',0,NULL,10);
@@ -1091,6 +1091,8 @@ INSERT INTO English VALUES(1038,38,'bus',0,NULL,NULL);
 INSERT INTO English VALUES(1039,8,'easy',0,NULL,NULL);
 INSERT INTO English VALUES(1040,51,'drums',0,NULL,NULL);
 INSERT INTO English VALUES(1041,52,'classifier for cut up pieces of fruit',0,NULL,10);
+INSERT INTO English VALUES(1042,29,'egg yolk',0,NULL,10);
+INSERT INTO English VALUES(1043,29,'clam',0,'basket clam',10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2018,6 +2020,7 @@ INSERT INTO Chinese VALUES(930,NULL,'易','goi7',NULL);
 INSERT INTO Chinese VALUES(931,'锣','鑼','lo5',NULL);
 INSERT INTO Chinese VALUES(932,NULL,'鼓','gou2',NULL);
 INSERT INTO Chinese VALUES(933,NULL,'捻','niam3',NULL);
+INSERT INTO Chinese VALUES(934,'蚬','蜆','hain2',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2116,7 +2119,6 @@ INSERT INTO Synonyms VALUES(91,601,'to hang out',1);
 INSERT INTO Synonyms VALUES(92,606,'to exit',1);
 INSERT INTO Synonyms VALUES(93,606,'to go out',1);
 INSERT INTO Synonyms VALUES(94,608,'to reside at',0);
-INSERT INTO Synonyms VALUES(95,610,'Cambodia',0);
 INSERT INTO Synonyms VALUES(96,612,'to go in',0);
 INSERT INTO Synonyms VALUES(97,614,'to beckon',0);
 INSERT INTO Synonyms VALUES(98,617,'United States',1);
@@ -2238,6 +2240,8 @@ INSERT INTO Synonyms VALUES(215,1021,'to hope',1);
 INSERT INTO Synonyms VALUES(216,1024,'cop',0);
 INSERT INTO Synonyms VALUES(217,1026,'Tomb Sweeping Day',1);
 INSERT INTO Synonyms VALUES(218,1040,'percussion',0);
+INSERT INTO Synonyms VALUES(219,1012,'ark clam',0);
+INSERT INTO Synonyms VALUES(220,1012,'blood cockle',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3910,6 +3914,8 @@ INSERT INTO Translation VALUES(1500,1040,1496,0);
 INSERT INTO Translation VALUES(1501,NULL,1497,0);
 INSERT INTO Translation VALUES(1502,1040,1498,0);
 INSERT INTO Translation VALUES(1503,1041,1499,0);
+INSERT INTO Translation VALUES(1504,1042,1500,0);
+INSERT INTO Translation VALUES(1505,1043,1501,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5381,6 +5387,8 @@ INSERT INTO Teochew VALUES(1496,'lo57 gou2','鑼鼓');
 INSERT INTO Teochew VALUES(1497,'lo5','鑼');
 INSERT INTO Teochew VALUES(1498,'gou2','鼓');
 INSERT INTO Teochew VALUES(1499,'niam3','捻');
+INSERT INTO Teochew VALUES(1500,'neung67 yeng5','卵仁');
+INSERT INTO Teochew VALUES(1501,'hain2','蜆');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6600,6 +6608,8 @@ INSERT INTO Compound VALUES(1235,1493,1,1334);
 INSERT INTO Compound VALUES(1236,1493,2,1498);
 INSERT INTO Compound VALUES(1237,1496,1,1501);
 INSERT INTO Compound VALUES(1238,1496,2,1502);
+INSERT INTO Compound VALUES(1239,1500,1,115);
+INSERT INTO Compound VALUES(1240,1500,2,1161);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
