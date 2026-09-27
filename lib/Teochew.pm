@@ -884,7 +884,9 @@ sub category_words_by_sort_order {
 
 =head2 get_synonyms
 
-Given an English word, returns the synonyms for that word
+=head2 get_synonyms_by_id
+
+Given an English word (or id), returns the synonyms for that word
 
 =cut
 
@@ -903,6 +905,13 @@ sub get_synonyms {
     }
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, $word);
+    return map { $_->{word} } @rows;
+}
+
+sub get_synonyms_by_id {
+    my ($english_id) = @_;
+    my $sql = 'select word from Synonyms where english_id = ?';
+    my @rows = $dbh->selectall_array($sql, { Slice => {} }, $english_id);
     return map { $_->{word} } @rows;
 }
 
