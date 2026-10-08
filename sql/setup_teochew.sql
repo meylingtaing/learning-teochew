@@ -2247,8 +2247,8 @@ INSERT INTO Synonyms VALUES(217,1026,'Tomb Sweeping Day',1);
 INSERT INTO Synonyms VALUES(218,1040,'percussion',0);
 INSERT INTO Synonyms VALUES(219,1012,'ark clam',0);
 INSERT INTO Synonyms VALUES(220,1012,'blood cockle',0);
-INSERT INTO Synonyms VALUES(221,1044,'stupid',0);
-INSERT INTO Synonyms VALUES(222,1044,'crazy',0);
+INSERT INTO Synonyms VALUES(221,1044,'stupid',1);
+INSERT INTO Synonyms VALUES(222,1044,'crazy',1);
 INSERT INTO Synonyms VALUES(224,1046,'to stumble',1);
 CREATE TABLE SubCategories (
     id integer primary key,
@@ -6839,6 +6839,7 @@ INSERT INTO ExtraNotes VALUES(82,replace('**gu1 jiao2** is slang and who knows i
 INSERT INTO ExtraNotes VALUES(83,replace('**chi3** and **chi(2) toin2** generally mean to try or test out something, though I find they are most commonly used when giving something a taste\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(84,replace('Though I have heard that some people use these words interchangeably, **bhak8** refers to the material wood, whereas **cha5** refers to pieces of wood, like firewood or sticks.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(85,replace('Note that if you are referring to slices of fruit, you should use **niam3**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(86,replace('I don''t know if there is a single word in English that fully captures the meaning of **gong(7) gong5**. Growing up, I thought it meant "stupid". I''ve heard some Gaginang people say it means "confused". My cousin told me he thinks of it as "senile". My mom said it was "a little silly, a little crazy, not all there in the head".\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6927,6 +6928,7 @@ INSERT INTO EnglishExtraNotes VALUES(86,1025,82);
 INSERT INTO EnglishExtraNotes VALUES(87,195,83);
 INSERT INTO EnglishExtraNotes VALUES(88,1032,84);
 INSERT INTO EnglishExtraNotes VALUES(89,750,85);
+INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
