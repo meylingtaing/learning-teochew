@@ -649,10 +649,17 @@ sub generate_translation_word_list {
         # why...why is this a HASH sometimes and a string other times
         if (ref $english eq 'HASH') {
             my $base_word = $english->{word};
+            my $base_word_in_notes =
+                $base_word && ($english->{notes} // '') =~ /\b$base_word\b/;
+
+            if ($base_word_in_notes) {
+                $flashcard{english} = $english->{notes};
+                $flashcard{notes} = undef;
+            }
 
             # Also check if there are any synonyms we want to show on the
             # flashcard
-            if ($for_flashcards && !$english->{notes}) {
+            if ($for_flashcards && ($base_word_in_notes || !$english->{notes})) {
                 my @synonyms =
                     get_synonyms($base_word, show_on_flashcard => 1);
                 if (@synonyms) {
@@ -668,14 +675,8 @@ sub generate_translation_word_list {
             $flashcard{english_link} = $base_word;
             $flashcard{is_definition} = $english->{is_definition};
 
-            if ($base_word && ($english->{notes} // '') =~ /\b$base_word\b/) {
-                $flashcard{english} = $english->{notes};
-                $flashcard{notes} = undef;
-            }
-            else {
-                $flashcard{english} = $english->{word} || $english->{sentence};
-                $flashcard{notes}   = $english->{notes};
-            }
+            $flashcard{english} //= $english->{word} || $english->{sentence};
+            $flashcard{notes}   //= $english->{notes};
 
             $flashcard{category} = $english->{category_display};
         }
