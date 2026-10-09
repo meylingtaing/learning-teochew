@@ -676,7 +676,9 @@ sub generate_translation_word_list {
             $flashcard{is_definition} = $english->{is_definition};
 
             $flashcard{english} //= $english->{word} || $english->{sentence};
-            $flashcard{notes}   //= $english->{notes};
+
+            $flashcard{notes} //= $english->{notes}
+                unless $flashcard{english} eq ($english->{notes} // '');
 
             $flashcard{category} = $english->{category_display};
         }
