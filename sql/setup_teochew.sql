@@ -1097,6 +1097,7 @@ INSERT INTO English VALUES(1044,8,'confused',0,NULL,NULL);
 INSERT INTO English VALUES(1045,9,'garage',0,NULL,NULL);
 INSERT INTO English VALUES(1046,13,'to fall',0,'to fall down',NULL);
 INSERT INTO English VALUES(1047,8,'sticky',0,NULL,NULL);
+INSERT INTO English VALUES(1048,33,'to keep',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2028,6 +2029,7 @@ INSERT INTO Chinese VALUES(934,'蚬','蜆','hain2',NULL);
 INSERT INTO Chinese VALUES(935,'戆','戇','gong5',NULL);
 INSERT INTO Chinese VALUES(936,NULL,'跋','buah8',NULL);
 INSERT INTO Chinese VALUES(937,NULL,'黐','ti1',NULL);
+INSERT INTO Chinese VALUES(938,NULL,'囥','keung3',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2252,6 +2254,8 @@ INSERT INTO Synonyms VALUES(220,1012,'blood cockle',0);
 INSERT INTO Synonyms VALUES(221,1044,'stupid',1);
 INSERT INTO Synonyms VALUES(222,1044,'crazy',1);
 INSERT INTO Synonyms VALUES(224,1046,'to stumble',1);
+INSERT INTO Synonyms VALUES(225,1048,'to put away',1);
+INSERT INTO Synonyms VALUES(226,1048,'to store',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3931,6 +3935,7 @@ INSERT INTO Translation VALUES(1507,1045,1503,0);
 INSERT INTO Translation VALUES(1508,1046,1504,0);
 INSERT INTO Translation VALUES(1509,1047,1505,0);
 INSERT INTO Translation VALUES(1510,1047,1506,0);
+INSERT INTO Translation VALUES(1511,1048,1507,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5409,6 +5414,7 @@ INSERT INTO Teochew VALUES(1503,'chia1 bang5','車房');
 INSERT INTO Teochew VALUES(1504,'buah8','跋');
 INSERT INTO Teochew VALUES(1505,'ti1','黐');
 INSERT INTO Teochew VALUES(1506,'ti1 ti1','黐黐');
+INSERT INTO Teochew VALUES(1507,'keung3','囥');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
