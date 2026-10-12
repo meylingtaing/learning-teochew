@@ -1099,6 +1099,7 @@ INSERT INTO English VALUES(1046,13,'to fall',0,'to fall down',NULL);
 INSERT INTO English VALUES(1047,8,'sticky',0,NULL,NULL);
 INSERT INTO English VALUES(1048,33,'to keep',0,NULL,NULL);
 INSERT INTO English VALUES(1049,17,'diamond',0,NULL,NULL);
+INSERT INTO English VALUES(1050,6,'radio',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -3939,6 +3940,7 @@ INSERT INTO Translation VALUES(1509,1047,1505,0);
 INSERT INTO Translation VALUES(1510,1047,1506,0);
 INSERT INTO Translation VALUES(1511,1048,1507,0);
 INSERT INTO Translation VALUES(1512,1049,1508,0);
+INSERT INTO Translation VALUES(1513,1050,1509,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5419,6 +5421,7 @@ INSERT INTO Teochew VALUES(1505,'ti1','黐');
 INSERT INTO Teochew VALUES(1506,'ti1 ti1','黐黐');
 INSERT INTO Teochew VALUES(1507,'keung3','囥');
 INSERT INTO Teochew VALUES(1508,'suang7','璇');
+INSERT INTO Teochew VALUES(1509,'sim1 gi1','?機');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6644,6 +6647,8 @@ INSERT INTO Compound VALUES(1241,1503,1,620);
 INSERT INTO Compound VALUES(1242,1503,2,132);
 INSERT INTO Compound VALUES(1243,1506,1,1509);
 INSERT INTO Compound VALUES(1244,1506,2,1509);
+INSERT INTO Compound VALUES(1245,1509,1,NULL);
+INSERT INTO Compound VALUES(1246,1509,2,827);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6858,6 +6863,7 @@ INSERT INTO ExtraNotes VALUES(83,replace('**chi3** and **chi(2) toin2** generall
 INSERT INTO ExtraNotes VALUES(84,replace('Though I have heard that some people use these words interchangeably, **bhak8** refers to the material wood, whereas **cha5** refers to pieces of wood, like firewood or sticks.\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(85,replace('Note that if you are referring to slices of fruit, you should use **niam3**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(86,replace('I don''t know if there is a single word in English that fully captures the meaning of **gong(7) gong5**. Growing up, I thought it meant "stupid". I''ve heard some Gaginang people say it means "confused". My cousin told me he thinks of it as "senile". My mom said it was "a little silly, a little crazy, not all there in the head".\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(87,replace('**sim1** is a contraction of 收音 **siu1 im1**\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6947,6 +6953,7 @@ INSERT INTO EnglishExtraNotes VALUES(87,195,83);
 INSERT INTO EnglishExtraNotes VALUES(88,1032,84);
 INSERT INTO EnglishExtraNotes VALUES(89,750,85);
 INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
+INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
