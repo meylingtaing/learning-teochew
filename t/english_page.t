@@ -39,28 +39,20 @@ sub check_english_page {
         "Got $expected->{num_translations} translation(s)");
 }
 
-# Let's check the page for 'hello'
-check_english_page('hello', {
-    english_word     => 'hello',
-    synonyms         => 'hi',
-    categories       => ['Common Phrases'],
-    num_translations => 2,
-});
-
-# 'hi' should be the same, but english word and synonyms are flipped
-check_english_page('hi', {
-    english_word     => 'hi',
-    synonyms         => 'hello',
-    categories       => ['Common Phrases'],
-    num_translations => 2,
-});
-
-# 'bring' should end up pulling up 'to bring'
-check_english_page('bring', {
-    english_word     => 'to bring',
-    synonyms         => 'to take, to get',
+# Check a page with multiple translations
+check_english_page('to hear', {
+    english_word     => 'to hear',
+    synonyms         => 'to listen',
     categories       => ['Linking/Transitive Verbs'],
     num_translations => 2,
+});
+
+# Check a page with synonyms
+check_english_page('to go out and have fun', {
+    english_word     => 'to go out and have fun',
+    synonyms         => 'for leisure, to vacation, for fun, to hang out',
+    categories       => ['Travel'],
+    num_translations => 1,
 });
 
 # Now check the page for 0...because it's falsy
