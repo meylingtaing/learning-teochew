@@ -1101,6 +1101,7 @@ INSERT INTO English VALUES(1048,33,'to keep',0,NULL,NULL);
 INSERT INTO English VALUES(1049,17,'diamond',0,NULL,NULL);
 INSERT INTO English VALUES(1050,6,'radio',0,NULL,NULL);
 INSERT INTO English VALUES(1051,51,'trumpet',0,NULL,NULL);
+INSERT INTO English VALUES(1052,16,'kilogram',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2036,6 +2037,8 @@ INSERT INTO Chinese VALUES(938,NULL,'囥','keung3',NULL);
 INSERT INTO Chinese VALUES(939,NULL,'璇','suang7',NULL);
 INSERT INTO Chinese VALUES(940,NULL,'的','di1',NULL);
 INSERT INTO Chinese VALUES(941,NULL,'禾','da5',NULL);
+INSERT INTO Chinese VALUES(942,NULL,'基','gi1',NULL);
+INSERT INTO Chinese VALUES(943,'罗','羅','lo5',NULL);
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3948,6 +3951,9 @@ INSERT INTO Translation VALUES(1513,1050,1509,0);
 INSERT INTO Translation VALUES(1514,1051,1510,0);
 INSERT INTO Translation VALUES(1515,NULL,1511,0);
 INSERT INTO Translation VALUES(1516,NULL,1512,0);
+INSERT INTO Translation VALUES(1517,1052,1513,0);
+INSERT INTO Translation VALUES(1518,NULL,1514,0);
+INSERT INTO Translation VALUES(1519,NULL,1515,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5432,6 +5438,9 @@ INSERT INTO Teochew VALUES(1509,'sim1 gi1','?機');
 INSERT INTO Teochew VALUES(1510,'di1 da5','的禾');
 INSERT INTO Teochew VALUES(1511,'di1','的');
 INSERT INTO Teochew VALUES(1512,'da5','禾');
+INSERT INTO Teochew VALUES(1513,'gi1 lo5','基羅');
+INSERT INTO Teochew VALUES(1514,'gi1','基');
+INSERT INTO Teochew VALUES(1515,'lo5','羅');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6661,6 +6670,8 @@ INSERT INTO Compound VALUES(1245,1509,1,NULL);
 INSERT INTO Compound VALUES(1246,1509,2,827);
 INSERT INTO Compound VALUES(1247,1510,1,1515);
 INSERT INTO Compound VALUES(1248,1510,2,1516);
+INSERT INTO Compound VALUES(1249,1513,1,1518);
+INSERT INTO Compound VALUES(1250,1513,2,1519);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
