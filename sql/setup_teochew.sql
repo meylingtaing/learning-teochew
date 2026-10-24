@@ -1104,6 +1104,7 @@ INSERT INTO English VALUES(1051,51,'trumpet',0,NULL,NULL);
 INSERT INTO English VALUES(1052,16,'kilogram',0,NULL,NULL);
 INSERT INTO English VALUES(1053,28,'longan',0,NULL,10);
 INSERT INTO English VALUES(1054,13,'to line up',0,NULL,NULL);
+INSERT INTO English VALUES(1055,32,'why...',0,NULL,10);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2275,6 +2276,7 @@ INSERT INTO Synonyms VALUES(226,1048,'to store',1);
 INSERT INTO Synonyms VALUES(227,1051,'horn',0);
 INSERT INTO Synonyms VALUES(228,1054,'to queue up',0);
 INSERT INTO Synonyms VALUES(229,1054,'in line',0);
+INSERT INTO Synonyms VALUES(230,1055,'...for what?',1);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3971,6 +3973,8 @@ INSERT INTO Translation VALUES(1524,NULL,1520,0);
 INSERT INTO Translation VALUES(1525,1054,1521,0);
 INSERT INTO Translation VALUES(1526,NULL,1522,0);
 INSERT INTO Translation VALUES(1527,NULL,1523,0);
+INSERT INTO Translation VALUES(1528,1055,1524,0);
+INSERT INTO Translation VALUES(1529,NULL,1525,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5466,6 +5470,8 @@ INSERT INTO Teochew VALUES(1520,'jian5','情');
 INSERT INTO Teochew VALUES(1521,'bai57 dui7','排隊');
 INSERT INTO Teochew VALUES(1522,'bai5','排');
 INSERT INTO Teochew VALUES(1523,'dui7','隊');
+INSERT INTO Teochew VALUES(1524,'mih48 seu7','乜事');
+INSERT INTO Teochew VALUES(1525,'seu7','事');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6705,6 +6711,8 @@ INSERT INTO Compound VALUES(1255,1519,1,796);
 INSERT INTO Compound VALUES(1256,1519,2,1524);
 INSERT INTO Compound VALUES(1257,1521,1,1526);
 INSERT INTO Compound VALUES(1258,1521,2,1527);
+INSERT INTO Compound VALUES(1259,1524,1,790);
+INSERT INTO Compound VALUES(1260,1524,2,1529);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6921,6 +6929,7 @@ INSERT INTO ExtraNotes VALUES(84,replace('Though I have heard that some people u
 INSERT INTO ExtraNotes VALUES(85,replace('Note that if you are referring to slices of fruit, you should use **niam3**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(86,replace('I don''t know if there is a single word in English that fully captures the meaning of **gong(7) gong5**. Growing up, I thought it meant "stupid". I''ve heard some Gaginang people say it means "confused". My cousin told me he thinks of it as "senile". My mom said it was "a little silly, a little crazy, not all there in the head".\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(87,replace('**sim1** is a contraction of 收音 **siu1 im1**\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(88,replace('You add **mih(8) seu7** to the end of your phrase, to mean something like "for what?" For example, you can say **leu2 mueh(8) mih(8) seu7** to mean "Why are you doing that?"\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -7011,6 +7020,7 @@ INSERT INTO EnglishExtraNotes VALUES(88,1032,84);
 INSERT INTO EnglishExtraNotes VALUES(89,750,85);
 INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
 INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
+INSERT INTO EnglishExtraNotes VALUES(92,1055,88);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
