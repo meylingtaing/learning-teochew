@@ -71,19 +71,6 @@
                 </div>
             % }
 
-            %# If there is a standard "Teochew proper" pronunciation that is
-            %# different than the Gekion one that I use by default, display
-            %# that here
-            % if (my $standard_pronunciation = $row->{pronunciations}[1]) {
-              <div class="teochew-proper-pronunciation">
-              Diojiu Accent: <%= $standard_pronunciation->{pengim} %>
-              % if ($standard_pronunciation->{audio}) {
-                <%= include 'elements/play-teochew',
-                      audio => $standard_pronunciation->{audio} %>
-              % }
-              </div>
-            % }
-
             %# Compound breakdown
             % if ($row->{compound}) {
             <table class="table table-bordered w-auto">
