@@ -36,9 +36,6 @@ Class for accessing the Teochew database
 my $dbh = DBI->connect("DBI:SQLite:dbname=Teochew.sqlite");
 $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_STRICT;
 
-# XXX Make this configurable eventually
-my $preferred_accent = 'gekion';
-
 my %month_numbers = (
     January   => 1,
     February  => 2,
@@ -208,10 +205,11 @@ sub categories {
 =head2 translate
 
     translate('money')
-    translate('money', show_all_accents => 1)
 
 Given any english word, returns the translations. Here is the output for the
-example given, using C<show_all_accents>:
+example given:
+
+XXX: make pronunciations not an arrayref, just a single value
 
     [{
         teochew_id => 1,
@@ -222,7 +220,6 @@ example given, using C<show_all_accents>:
         },
         pronunciations => [
             { pengim => 'ngeng5', audio => 'ngeng5.mp3' },
-            { pengim => 'nging5', audio => 'nging5.mp3' },
         ],
     }, {
         teochew_id => 1,
@@ -242,9 +239,6 @@ example given, using C<show_all_accents>:
         pronunciations => [{ pengim => 'lui1', audio => 'lui1.mp3' }],
     }]
 
-If C<show_all_accents> is not given, each element's C<pronunciation> will only
-have one value.
-
 This is used for the English page, and also for the Flashcards and multi
 translation tables.
 
@@ -253,7 +247,6 @@ translation tables.
 sub translate {
     my ($english, %params) = @_;
 
-    my $show_all_accents = $params{show_all_accents};
     my $for_flashcards   = $params{for_flashcards};
 
     my @translations;
@@ -304,32 +297,11 @@ sub translate {
 
     my @ret;
     for (@translations) {
-        my $alt = _standard_pronunciation(
-            chinese => $_->{traditional},
-            pengim  => $_->{pengim}
-        );
-
         $_->{pengim} =~ s/\d(\d)/($1)/g;
-        $alt =~ s/\d(\d)/($1)/g if $alt;
 
         my $pronunciation = [{
             pengim => $_->{pengim}, audio => find_audio($_->{pengim})
         }];
-
-        # It's possible that I recorded multiple versions of this word, with
-        # different accents. If I have multiple accents recorded, include them
-        if ($alt) {
-            my $audio = find_audio($alt);
-            my $new_pronunciation = { pengim => $alt, audio => $audio };
-            if ($preferred_accent eq 'gekion') {
-                push @$pronunciation, $new_pronunciation;
-            }
-            else {
-                unshift @$pronunciation, $new_pronunciation;
-            }
-        }
-
-        $pronunciation = [$pronunciation->[0]] unless $show_all_accents;
 
         push @ret, {
             translation_id => $_->{translation_id},
@@ -1155,61 +1127,6 @@ sub _generate_english_times {
     return @times;
 }
 
-=head2 _standard_pronunciation
-
-This takes two params in a hash, C<chinese> and C<pengim>, and checks to see if
-the Gekion pronunciation differs from the Teochew proper pronunciation. If it
-does, this returns the pengim for the Teochew accent. If not, this returns
-undef.
-
-=cut
-
-sub _standard_pronunciation {
-    my (%params) = @_;
-
-    my $chinese = $params{chinese};
-    my $pengim  = $params{pengim};
-
-    my $has_alt = 0;
-
-    # Break apart the pengim string into each syllable
-    my @words = split /\s+/, $pengim;
-    my @characters = split //, $chinese;
-    my @new_words;
-
-    for (my $i = 0; $i <= $#words; $i++) {
-
-        my $orig_pengim = $words[$i];
-
-        # Check if there's a tone change -- we just want the base tone for
-        # looking it up
-        my $changed_tone = $words[$i] =~ /\d\d/;
-        $words[$i] =~ s/(\d)\d/$1/g;
-
-        my $alt = $dbh->selectrow_array(qq{
-            select standard_pengim
-            from Chinese
-            where traditional = ? and pengim = ?
-        }, { Slice => {} }, $characters[$i], $words[$i]);
-
-        if ($alt) {
-            $has_alt = 1;
-            if ($changed_tone) {
-                $alt = change_tone($alt);
-            }
-            push @new_words, $alt;
-        }
-        else {
-            push @new_words, $orig_pengim;
-        }
-    }
-
-    return undef unless $has_alt;
-
-    my $standard_pengim = join ' ', @new_words;
-    return $standard_pengim;
-}
-
 =head1 MISCELLANEOUS FUNCTIONS
 
 =head2 replace_variables
@@ -1598,19 +1515,15 @@ multiple for one character, with different pengim associated with it. If you
 supply pengim to this method, it will only look for that specific character
 with that specific pengim
 
-XXX: Add more explanation on the "standard pengim" stuff
-
 Returns undef if it can't find a matching entry in the database
 
 =cut
 
 sub chinese_character_details {
-    my ($character, $pengim, %params) = @_;
-
-    my $no_alt_pengim = $params{no_alt_pengim};
+    my ($character, $pengim) = @_;
 
     my $sql = qq{
-        select id, simplified, traditional, pengim, standard_pengim
+        select id, simplified, traditional, pengim
         from Chinese where (simplified = ? or traditional = ?)
     };
     my @binds = ($character, $character);
@@ -1634,21 +1547,7 @@ sub chinese_character_details {
             pengim      => add_tone_marks($chinese->{pengim}),
             audio       => find_audio($chinese->{pengim}),
         };
-
-        next if $no_alt_pengim;
-        if (my $alt = $chinese->{standard_pengim}) {
-            my $audio = find_audio($alt);
-            push @return, {
-                chinese_id  => $chinese->{id},
-                simplified  => $chinese->{simplified},
-                traditional => $chinese->{traditional},
-                pengim      => add_tone_marks($alt),
-                audio       => $audio,
-            };
-        }
     }
-
-    @return = reverse @return if $preferred_accent ne 'gekion';
 
     return \@return;
 }

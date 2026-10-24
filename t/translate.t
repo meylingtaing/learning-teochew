@@ -58,7 +58,7 @@ is_deeply [ map { $_->{pronunciations}[0]{pengim} } @$translations ],
 # Check translations for sentences
 check_translation(
     { sentence => 'What are you doing?', words => ['you to_do what'] },
-    "leu2 mueh(4) meh(8) gai5"
+    "leu2 mueh(4) mih(8) gai5"
 );
 
 # We can also include a word in a sentence that would have multiple

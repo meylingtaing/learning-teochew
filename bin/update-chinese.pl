@@ -25,18 +25,15 @@ my $db = Teochew::Edit->new;
 my $traditional = shift @ARGV;
 
 # Let's see what the user wants to update
-my ($pengim, $standard_pengim);
+my $pengim;
 GetOptions(
     "pengim=s"          => \$pengim,
-    "standard-pengim=s" => \$standard_pengim,
 );
 
-die colored ("Must provide pengim or standard-pengim!", "red") . "\n"
-    unless $pengim || $standard_pengim;
+die colored ("Must provide pengim!", "red") . "\n" unless $pengim;
 
 # Find the Chinese character in the database
-my $rows = Teochew::chinese_character_details(
-    $traditional, undef, no_alt_pengim => 1);
+my $rows = Teochew::chinese_character_details($traditional);
 
 die colored("Could not find entry in the database for $traditional!", "red") . "\n"
     unless $rows;
@@ -104,18 +101,5 @@ if ($pengim) {
                 say colored("Updated the pengim!", 'green');
             }
         }
-    }
-}
-
-if ($standard_pengim) {
-    $row->{standard_pengim} //= '';
-
-    say sprintf "Changing standard pengim from '%s' to '%s'",
-        $row->{standard_pengim}, $standard_pengim;
-
-    if (Input::confirm()) {
-        $db->dbh->do("update Chinese set standard_pengim = ? where id = ?",
-            undef, $standard_pengim, $row->{chinese_id});
-        say colored("Added standard pengim!", "green");
     }
 }

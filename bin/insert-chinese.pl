@@ -17,9 +17,9 @@ use Teochew;
 use Teochew::Edit;
 use Teochew::Utils qw(split_out_parens);
 
-# bin/insert-chinese.pl "失 ()" "sek8" "sik8"
+# bin/insert-chinese.pl "失 ()" "sek8"
 
-my ($chinese, $pengim, $standard_pengim) = @ARGV;
+my ($chinese, $pengim) = @ARGV;
 
 # Require both Chinese and pengim
 die "Must include chinese and pengim!" unless $chinese and $pengim;
@@ -32,5 +32,4 @@ $db->confirm_and_insert_chinese(
     simplified      => $simplified,
     traditional     => $traditional,
     pengim          => $pengim,
-    standard_pengim => $standard_pengim,
 );

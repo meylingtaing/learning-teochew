@@ -407,7 +407,6 @@ sub insert_category {
 
     $teochew->insert_chinese(
         pengim          => 'chek8', # required
-        standard_pengim => 'chik8', # optional
         simplified      => '',      # optional
         traditional     => '',      # required
     );
@@ -424,11 +423,6 @@ sub insert_chinese {
     if ($params{simplified}) {
         push @columns, 'simplified';
         push @binds, $params{simplified};
-    }
-
-    if ($params{standard_pengim}) {
-        push @columns, 'standard_pengim';
-        push @binds, $params{standard_pengim};
     }
 
     my $col_str  = join ', ', @columns;
@@ -909,7 +903,6 @@ sub confirm_and_insert_chinese {
     my $simplified      = $params{simplified};
     my $traditional     = $params{traditional};
     my $pengim          = $params{pengim};
-    my $standard_pengim = $params{standard_pengim};
 
     unless (scalar Teochew::chinese_character_details($traditional, $pengim))
     {
@@ -924,15 +917,12 @@ sub confirm_and_insert_chinese {
         my $prompt = sprintf "Inserting Chinese [%s, %s]",
             $chinese_string, $pengim;
 
-        $prompt .= ", standard pengim '$standard_pengim'" if $standard_pengim;
-
         say $prompt;
         if (Input::confirm()) {
             $self->insert_chinese(
                 simplified      => $insert_simplified,
                 traditional     => $traditional,
                 pengim          => $pengim,
-                standard_pengim => $standard_pengim,
             );
         }
         else {

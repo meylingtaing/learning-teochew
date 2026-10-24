@@ -239,10 +239,7 @@ sub english {
             };
 
             # Get the translation
-            my $translation_rows = Teochew::translate(
-                $english_row,
-                show_all_accents => 1
-            );
+            my $translation_rows = Teochew::translate($english_row);
 
             for my $translation_row (@$translation_rows) {
                 my $teochew_id = $translation_row->{teochew_id};
