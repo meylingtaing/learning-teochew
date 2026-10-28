@@ -1,5 +1,5 @@
 requires 'DBD::SQLite';
-requires 'Mojolicious';
+requires 'Mojolicious', '9.49';
 requires 'Date::Parse';
 requires 'Date::Format';
 requires 'Text::MultiMarkdown';

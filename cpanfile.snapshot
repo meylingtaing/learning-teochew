@@ -476,14 +476,15 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-9.27
-    pathname: S/SR/SRI/Mojolicious-9.27.tar.gz
+  Mojolicious-9.49
+    pathname: S/SR/SRI/Mojolicious-9.49.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
       Mojo::Asset::File undef
       Mojo::Asset::Memory undef
       Mojo::Base undef
+      Mojo::BaseUtil undef
       Mojo::ByteStream undef
       Mojo::Cache undef
       Mojo::Collection undef
@@ -523,6 +524,7 @@ DISTRIBUTIONS
       Mojo::Reactor undef
       Mojo::Reactor::EV undef
       Mojo::Reactor::Poll undef
+      Mojo::SSE undef
       Mojo::Server undef
       Mojo::Server::CGI undef
       Mojo::Server::Daemon undef
@@ -545,7 +547,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
       Mojo::WebSocket undef
-      Mojolicious 9.27
+      Mojolicious 9.49
       Mojolicious::Command undef
       Mojolicious::Command::Author::cpanify undef
       Mojolicious::Command::Author::generate undef
