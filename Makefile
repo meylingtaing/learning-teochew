@@ -9,7 +9,7 @@ sandbox: setup-db
 	carton exec -- morbo bin/webapp.pl
 
 prod: clean-teochew-db Updates.sqlite
-	carton install
+	carton install --deployment
 	carton exec -- hypnotoad bin/webapp.pl
 
 stop-prod:
