@@ -1107,6 +1107,7 @@ INSERT INTO English VALUES(1054,13,'to line up',0,NULL,NULL);
 INSERT INTO English VALUES(1055,32,'why...',0,NULL,10);
 INSERT INTO English VALUES(1056,36,'which',0,NULL,3);
 INSERT INTO English VALUES(1057,16,'incense',0,NULL,NULL);
+INSERT INTO English VALUES(1058,33,'to pick',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2050,6 +2051,7 @@ INSERT INTO Chinese VALUES(946,NULL,'情','jian5');
 INSERT INTO Chinese VALUES(947,NULL,'排','bai5');
 INSERT INTO Chinese VALUES(948,'队','隊','dui7');
 INSERT INTO Chinese VALUES(949,NULL,'香','hion1');
+INSERT INTO Chinese VALUES(950,'择','擇','doh8');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -2280,6 +2282,8 @@ INSERT INTO Synonyms VALUES(227,1051,'horn',0);
 INSERT INTO Synonyms VALUES(228,1054,'to queue up',0);
 INSERT INTO Synonyms VALUES(229,1054,'in line',0);
 INSERT INTO Synonyms VALUES(230,1055,'...for what?',1);
+INSERT INTO Synonyms VALUES(231,1058,'to choose',0);
+INSERT INTO Synonyms VALUES(232,1058,'to select',0);
 CREATE TABLE SubCategories (
     id integer primary key,
     category_id integer,
@@ -3980,6 +3984,7 @@ INSERT INTO Translation VALUES(1528,1055,1524,0);
 INSERT INTO Translation VALUES(1529,NULL,1525,0);
 INSERT INTO Translation VALUES(1530,1056,1526,0);
 INSERT INTO Translation VALUES(1531,1057,1527,0);
+INSERT INTO Translation VALUES(1532,1058,1528,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5479,6 +5484,7 @@ INSERT INTO Teochew VALUES(1524,'mih48 seu7','乜事');
 INSERT INTO Teochew VALUES(1525,'seu7','事');
 INSERT INTO Teochew VALUES(1526,'di7 gai5','底個');
 INSERT INTO Teochew VALUES(1527,'hion1','香');
+INSERT INTO Teochew VALUES(1528,'doh8','擇');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -7035,6 +7041,7 @@ id integer primary key,
 sentence text,
 hidden boolean default 0
 );
+INSERT INTO EnglishSentence VALUES(1,'I know',0);
 CREATE TABLE SentenceBreakdown (
 id integer primary key,
 sentence_id integer references EnglishSentence(id),
@@ -7042,6 +7049,8 @@ sort integer,
 translation_id integer references Translation(id),
 has_tone_change boolean
 );
+INSERT INTO SentenceBreakdown VALUES(1,1,1,29,0);
+INSERT INTO SentenceBreakdown VALUES(2,1,2,327,0);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
