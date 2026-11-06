@@ -7030,6 +7030,18 @@ INSERT INTO EnglishExtraNotes VALUES(89,750,85);
 INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
 INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
 INSERT INTO EnglishExtraNotes VALUES(92,1055,88);
+CREATE TABLE EnglishSentence (
+id integer primary key,
+sentence text,
+hidden boolean default 0
+);
+CREATE TABLE SentenceBreakdown (
+id integer primary key,
+sentence_id integer references EnglishSentence(id),
+sort integer,
+translation_id integer references Translation(id),
+has_tone_change boolean
+);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
