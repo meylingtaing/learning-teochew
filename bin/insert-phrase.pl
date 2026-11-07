@@ -17,21 +17,18 @@ my ($sentence, $words) = @ARGV;
 
 die "Must include English sentence and words!\n" unless $sentence and $words;
 
-# First check and make sure this is translatable using the words we
-# already have. This will die if we can't translate it.
-my $phrase = Teochew::replace_variables({
-    sentence => $sentence, words => $words
-});
-
-my @translations = Teochew::translate_phrase({
+my @translations = Teochew::translate_string_of_english_words({
     sentence => $sentence,
     words    => [$words],
 });
 
 say "Inserting phrase \"$sentence\" with translation \"" .
-    $translations[0]{pengim} . "\"";
+    $translations[0]{full_translation}{pengim} . "\"";
 
 if (Input::confirm()) {
-    Teochew::Edit->insert_phrase(sentence => $sentence, words => $words);
+    Teochew::Edit->insert_phrase(
+        sentence => $sentence,
+        words => $translations[0]{components}
+    );
     say colored("Inserted sentence '$sentence'", "green");
 }

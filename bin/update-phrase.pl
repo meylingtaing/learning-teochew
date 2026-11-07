@@ -13,6 +13,8 @@ use Input;
 use Teochew;
 use Teochew::Edit;
 
+# XXX: THIS NEEDS TO BE FIXED PER THE SENTENCE REVAMP!!! I'M TOO LAZY TO DO IT NOW
+
 my ($sentence, $words) = @ARGV;
 
 die "Must include English sentence and words!\n" unless $sentence and $words;
@@ -42,12 +44,6 @@ if (scalar @rows > 1) {
         "Which translation would you like to modify?");
     $translation = $rows[$row_id];
 }
-
-# Check and make sure this is translatable using the words we
-# already have. This will die if we can't translate it.
-my $phrase = Teochew::replace_variables({
-    sentence => $sentence, words => $words
-});
 
 my @translations = Teochew::translate_phrase({
     sentence => $sentence,

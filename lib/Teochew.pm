@@ -255,7 +255,7 @@ sub translate {
     # be stored
     if (ref $english eq 'HASH') {
         if ($english->{sentence}) {
-            @translations = translate_phrase($english);
+            @translations = translate_sentence($english);
         }
         elsif ($english->{id}) {
             @translations = get_all_translations_by_id(
@@ -470,7 +470,36 @@ sub translate_time {
     return link_teochew_words(\@components);
 }
 
-=head2 translate_phrase
+=head2 translate_sentence
+
+=cut
+
+sub translate_sentence {
+    my ($english) = @_;
+    my @return;
+
+    for my $breakdown (@{ $english->{breakdowns} }) {
+        my @components;
+
+        for my $row (@$breakdown) {
+            my $translation = _lookup_translation_by_id($row->{translation_id});
+            $translation->{pengim} =~ s/\d(\d)/($1)/;
+            push @components, {
+                pengim => $translation->{pengim},
+                simplified => $translation->{simplified},
+                traditional => $translation->{traditional},
+                no_tone_change => !$row->{has_tone_change},
+            };
+        }
+        push @return, link_teochew_words(\@components, {
+            tone_change_last_word => $breakdown->[-1]{has_tone_change}
+        });
+    }
+
+    return @return;
+}
+
+=head2 translate_string_of_english_words
 
 Translates a phrase. Expects a hashref in the form of
 
@@ -489,11 +518,14 @@ This also will never apply sandhi the words 'I' or 'you'
 
 Returns a list of translations, each in the form of
 
-    { pengim => 'ua2 keu32 chi6', chinese => '我去市' }
+    {
+        full_translation => { pengim => 'ua2 keu32 chi6', chinese => '我去市' },
+        components => [...]
+    }
 
 =cut
 
-sub translate_phrase {
+sub translate_string_of_english_words {
     my ($english) = @_;
     my @return;
 
@@ -537,10 +569,16 @@ sub translate_phrase {
         # "..." indicates that it's an incomplete sentence so we need
         # to make sure all the words go through tone change
         my $incomplete = $english->{sentence} =~ /\.\.\.$/;
-
-        push @return, link_teochew_words(
+        my $linked_words = link_teochew_words(
             \@components, { tone_change_last_word => $incomplete }
         );
+
+        $components[-1]{no_tone_change} = 1 unless $incomplete;
+
+        push @return, {
+            full_translation => $linked_words,
+            components       => \@components,
+        };
     }
 
     return @return;
@@ -1032,78 +1070,60 @@ sub compound_word_components {
 These functions are not typically meant to be called outside of this file, but
 they're documented if you want to.
 
-=head2 _generate_english_in_subcategory
-
-Returns a random English word in a given SubCategory.
-
-=cut
-
-sub _generate_english_in_subcategory {
-    my ($subcategory, $setting) = @_;
-    my $sql = qq{
-        select English.word from SubCategories
-        join CategoryLinks on subcategory_id = SubCategories.id
-        join English on english_id = English.id
-        where name = ?
-    };
-
-    my @rows = $dbh->selectall_array($sql, {}, $subcategory);
-    @rows = shuffle @rows;
-
-    if (($setting || '') eq 'all') {
-        return map { $_->[0] } @rows;
-    }
-    else {
-        return $rows[0]->[0];
-    }
-}
-
 =head2 _generate_english_phrases
-
-Returns a list of random english sentences in the form of
-
-    { sentence => 'I know', words => ['I to_know'] }
 
 =cut
 
 sub _generate_english_phrases {
-    my $setting = shift;
+    my $setting = shift; # XXX: need to understand this better and document
 
     my $sql = qq{
-        select sentence, PhraseTranslations.words from Phrases
-        join PhraseTranslations on Phrases.id = PhraseTranslations.phrase_id
+        select
+            sentence,
+            sentence_translation_id,
+            translation_id,
+            has_tone_change
+        from EnglishSentence
+        join SentenceTranslation
+            on EnglishSentence.id = sentence_id
+        join SentenceBreakdown
+            on SentenceTranslation.id = sentence_translation_id
         where hidden = 0
+        order by sentence_id, sentence_translation_id, sort
     };
+
     my @rows = $dbh->selectall_array($sql, { Slice => {} });
 
-    # Hmm, probably want the 'all' setting for the full translation list page
-    if (($setting || '') eq 'all') {
-        my @replaced_all_variables;
-        for (@rows) {
-            push @replaced_all_variables, replace_variables_all($_);
-        }
-        @rows = @replaced_all_variables;
-    }
-    else {
-        # Replace variables
-        replace_variables($_) for @rows;
-    }
+    my @phrases;
+    my $current_sentence = '';
+    my $sentence_translation_id;
+    my $current_breakdowns;
+    my $current_phrases_row;
 
-    # There might be multiple translations for a single word. Rather than that
-    # showing up as two separate rows in the return value, let's consolidate
-    # those
-    my %phrases;
     for my $row (@rows) {
-        my $sentence = $row->{sentence};
-        if (exists $phrases{$sentence}) {
-            push @{ $phrases{$sentence} }, $row->{words};
+        if ($row->{sentence} ne $current_sentence) {
+            $current_sentence = $row->{sentence};
+            $sentence_translation_id = $row->{sentence_translation_id};
+            $current_phrases_row = [];
+            $current_breakdowns = [$current_phrases_row];
+            push @phrases, {
+                sentence => $current_sentence,
+                breakdowns => $current_breakdowns,
+            };
         }
-        else {
-            $phrases{$sentence} = [$row->{words}];
+        elsif ($row->{sentence_translation_id} ne $sentence_translation_id) {
+            $sentence_translation_id = $row->{sentence_translation_id};
+            $current_phrases_row = [];
+            push @$current_breakdowns, $current_phrases_row;
         }
+
+        push @$current_phrases_row, {
+            translation_id  => $row->{translation_id},
+            has_tone_change => $row->{has_tone_change},
+        };
     }
 
-    return map +{ sentence => $_, words => $phrases{$_} }, sort keys %phrases;
+    return @phrases;
 }
 
 =head2 _generate_english_times
@@ -1126,90 +1146,6 @@ sub _generate_english_times {
 
     return @times;
 }
-
-=head1 MISCELLANEOUS FUNCTIONS
-
-=head2 replace_variables
-
-    Teochew::replace_variables({
-        sentence => 'I am going to the $place',
-        words    => 'I to_go $place'
-    });
-
-Given a hashref with C<sentence> and C<word>, this replaces any variables with
-words in the SubCategories.
-
-=cut
-
-sub replace_variables {
-    my ($row) = @_;
-    my $sentence = $row->{sentence};
-    my $words    = $row->{words};
-
-    my @variables = grep { substr($_, 0, 1) eq '$' }
-                    split / /, $sentence;
-
-    return $row unless scalar @variables;
-
-    for my $var (@variables) {
-        my $variable_str = substr($var, 1);
-        my $word = _generate_english_in_subcategory($variable_str);
-
-        $sentence =~ s/\$$variable_str/$word/;
-        $words    =~ s/\$$variable_str/$word/;
-    }
-
-    $row->{sentence} = $sentence;
-    $row->{words}    = $words;
-
-    return $row;
-}
-
-=head2 replace_variables_all
-
-Similar to L</replace_variables>, but this returns all of the possible
-combinations instead of just picking words at random for each sentence.
-
-=cut
-
-sub replace_variables_all {
-    my ($row, $setting) = @_;
-
-    my $sentence = $row->{sentence};
-    my $words    = $row->{words};
-
-    my @variables = grep { substr($_, 0, 1) eq '$' }
-                    split / /, $sentence;
-
-    return $row unless scalar @variables;
-
-    my %var_sets;
-    for my $var (@variables) {
-        my $variable_str = substr($var, 1);
-        my @words = _generate_english_in_subcategory($variable_str, 'all');
-        $var_sets{$variable_str} = \@words;
-    }
-
-    my $combinations = Set::CrossProduct->new({
-        # XXX: Maybe notify of an issue?
-        # this is dumb, but Set::CrossProduct requires multiple keys
-        fake_key => ['1'],
-
-        %var_sets
-    });
-    my @new_rows;
-    while (my $combo = $combinations->get) {
-        my %new_row = %$row;
-        while (my ($var, $word) = each %$combo) {
-            $new_row{sentence} =~ s/\$$var/$word/;
-            $new_row{words}    =~ s/\$$var/$word/;
-        }
-        push @new_rows, \%new_row;
-    }
-
-    return @new_rows;
-}
-
 
 =head1 DATABASE/FILESYSTEM FUNCTIONS
 
@@ -1265,7 +1201,7 @@ sub _lookup_all {
     }
 
     my $sql = qq{
-        select pengim, chinese
+        select pengim, chinese, Translation.id
         from Teochew
         join Translation on Teochew.id = Translation.teochew_id
         join English on English.id = Translation.english_id
@@ -1274,11 +1210,28 @@ sub _lookup_all {
 
     my @rows = $dbh->selectall_array($sql, { Slice => {} }, @binds);
     for my $row (@rows) {
-        $row->{traditional}  = $row->{chinese};
-        $row->{simplified} = get_simplified($row->{chinese});
+        $row->{traditional} = $row->{chinese};
+        $row->{simplified}  = get_simplified($row->{chinese});
+        $row->{translation_id} = delete $row->{id};
     }
 
     return @rows;
+}
+
+sub _lookup_translation_by_id {
+    my $translation_id = shift;
+
+    my $sql = qq{
+        select pengim, chinese
+        from Teochew
+        join Translation on Teochew.id = Translation.teochew_id
+        where Translation.id = ?
+    };
+    my $row = $dbh->selectrow_hashref($sql, { Slice => {} }, $translation_id);
+    $row->{traditional} = $row->{chinese};
+    $row->{simplified}  = get_simplified($row->{chinese});
+
+    return $row;
 }
 
 =head2 extra_information_by_id
@@ -1852,10 +1805,12 @@ sub _is_date {
     return 1;
 }
 
+# XXX: I'd like to have a more detailed breakdown of this, words and sentences
+# should be separate
 =head2 get_approx_num_translations
 
 Returns the number of non-hidden translations in both the Translation and the
-Phrases table. This isn't actually the number of translations because some
+Sentences table. This isn't actually the number of translations because some
 sentences get expanded more, and this completely ignores all the number and
 clock time stuff. But it's I<at least> this much
 
@@ -1870,7 +1825,7 @@ sub get_approx_num_translations {
     });
 
     my $sentence_count = $dbh->selectrow_array(qq{
-        select count(*) from Phrases where hidden = 0
+        select count(*) from EnglishSentence where hidden = 0
     });
 
     return $word_count + $sentence_count;

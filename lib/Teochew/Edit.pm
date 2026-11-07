@@ -539,9 +539,11 @@ sub insert_extra {
 
 =head2 insert_phrase
 
+You should pass the C<components> from C<translate_phrase>
+
     $teochew->insert_phrase(
         sentence => '',
-        words    => '',
+        words    => \@components,
     );
 
 =cut
@@ -550,27 +552,42 @@ sub insert_phrase {
     my ($self, %params) = @_;
     $self = $self->new unless ref $self;
 
-    # First insert into the Phrases table if necessary
-    my $phrase_id = $self->dbh->selectrow_array(
-        "select id from Phrases where sentence = ?",
+    # First insert into the EnglishSentences table if necessary
+    my $sentence_id = $self->dbh->selectrow_array(
+        "select id from EnglishSentence where sentence = ?",
         undef, $params{sentence}
     );
 
-    unless ($phrase_id) {
+    unless ($sentence_id) {
         my $sth = $self->dbh->prepare(
-            "insert into Phrases (sentence) values (?)"
+            "insert into EnglishSentence (sentence) values (?)"
         );
         $sth->bind_param(1, $params{sentence});
         $sth->execute;
 
-        $phrase_id = $self->dbh->sqlite_last_insert_rowid;
+        $sentence_id = $self->dbh->sqlite_last_insert_rowid;
     }
 
-    # And then insert into PhraseTranslations
+    # Then add to the SentenceTranslation table
     $self->dbh->do(qq{
-        insert into PhraseTranslations (phrase_id, words)
-        values (?, ?)
-    }, undef, $phrase_id, $params{words});
+        insert into SentenceTranslation (sentence_id) values (?)
+    }, undef, $sentence_id);
+
+    my $sentence_translation_id = $self->dbh->sqlite_last_insert_rowid;
+
+    my $sort = 1;
+    for my $word (@{ $params{words} }) {
+        $self->dbh->do(qq{
+            insert into SentenceBreakdown
+            (sentence_translation_id, sort, translation_id, has_tone_change)
+            values (?, ?, ?, ?)
+        }, undef,
+            $sentence_translation_id,
+            $sort++,
+            $word->{translation_id},
+            $word->{no_tone_change} ? 0 : 1
+        );
+    }
 }
 
 =head2 update_translation
