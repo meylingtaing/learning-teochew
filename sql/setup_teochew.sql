@@ -1109,6 +1109,10 @@ INSERT INTO English VALUES(1056,36,'which',0,NULL,3);
 INSERT INTO English VALUES(1057,16,'incense',0,NULL,NULL);
 INSERT INTO English VALUES(1058,33,'to pick',0,NULL,NULL);
 INSERT INTO English VALUES(1059,2,'thirty',0,NULL,NULL);
+INSERT INTO English VALUES(1060,16,'upside down',0,NULL,NULL);
+INSERT INTO English VALUES(1061,52,'classifier for fish',0,NULL,10);
+INSERT INTO English VALUES(1062,32,'end',0,NULL,10);
+INSERT INTO English VALUES(1063,15,'tail',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2053,6 +2057,8 @@ INSERT INTO Chinese VALUES(947,NULL,'排','bai5');
 INSERT INTO Chinese VALUES(948,'队','隊','dui7');
 INSERT INTO Chinese VALUES(949,NULL,'香','hion1');
 INSERT INTO Chinese VALUES(950,'择','擇','doh8');
+INSERT INTO Chinese VALUES(951,'颠','顛','deng1');
+INSERT INTO Chinese VALUES(952,NULL,'倒','dao2');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3570,7 +3576,7 @@ INSERT INTO Translation VALUES(1175,NULL,1182,0);
 INSERT INTO Translation VALUES(1176,NULL,1183,0);
 INSERT INTO Translation VALUES(1177,835,1184,0);
 INSERT INTO Translation VALUES(1178,836,1185,0);
-INSERT INTO Translation VALUES(1179,NULL,1186,0);
+INSERT INTO Translation VALUES(1179,1062,1186,0);
 INSERT INTO Translation VALUES(1180,837,1187,0);
 INSERT INTO Translation VALUES(1181,NULL,1188,0);
 INSERT INTO Translation VALUES(1182,NULL,1189,0);
@@ -3924,6 +3930,12 @@ INSERT INTO Translation VALUES(1530,1056,1526,0);
 INSERT INTO Translation VALUES(1531,1057,1527,0);
 INSERT INTO Translation VALUES(1532,1058,1528,0);
 INSERT INTO Translation VALUES(1533,1059,1529,0);
+INSERT INTO Translation VALUES(1534,1060,1530,0);
+INSERT INTO Translation VALUES(1535,NULL,1531,0);
+INSERT INTO Translation VALUES(1536,NULL,1532,0);
+INSERT INTO Translation VALUES(1537,1061,1186,0);
+INSERT INTO Translation VALUES(1538,836,1533,0);
+INSERT INTO Translation VALUES(1539,1063,1186,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5425,6 +5437,10 @@ INSERT INTO Teochew VALUES(1526,'di7 gai5','底個');
 INSERT INTO Teochew VALUES(1527,'hion1','香');
 INSERT INTO Teochew VALUES(1528,'doh8','擇');
 INSERT INTO Teochew VALUES(1529,'san1 jap8','三十');
+INSERT INTO Teochew VALUES(1530,'deng1 do32 dao2','顛倒倒');
+INSERT INTO Teochew VALUES(1531,'deng1','顛');
+INSERT INTO Teochew VALUES(1532,'dao2','倒');
+INSERT INTO Teochew VALUES(1533,'loi26 bai32 bhue2','禮拜尾');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6670,6 +6686,11 @@ INSERT INTO Compound VALUES(1261,1526,1,881);
 INSERT INTO Compound VALUES(1262,1526,2,683);
 INSERT INTO Compound VALUES(1263,1529,1,8);
 INSERT INTO Compound VALUES(1264,1529,2,14);
+INSERT INTO Compound VALUES(1265,1530,1,1535);
+INSERT INTO Compound VALUES(1266,1530,2,1110);
+INSERT INTO Compound VALUES(1267,1530,3,1536);
+INSERT INTO Compound VALUES(1268,1533,1,76);
+INSERT INTO Compound VALUES(1269,1533,2,1179);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
@@ -6743,6 +6764,7 @@ INSERT INTO GrammarDefinitions VALUES(11,814);
 INSERT INTO GrammarDefinitions VALUES(12,1041);
 INSERT INTO GrammarDefinitions VALUES(13,883);
 INSERT INTO GrammarDefinitions VALUES(14,909);
+INSERT INTO GrammarDefinitions VALUES(15,1061);
 CREATE TABLE ExtraNotes (
     id integer primary key,
     info text
@@ -6979,6 +7001,7 @@ INSERT INTO EnglishSentence VALUES(53,'Can I borrow two dollars from you?',0);
 INSERT INTO EnglishSentence VALUES(54,'I borrowed two dollars from you',0);
 INSERT INTO EnglishSentence VALUES(55,'I learned one new word',0);
 INSERT INTO EnglishSentence VALUES(56,'I''ve never heard it before',0);
+INSERT INTO EnglishSentence VALUES(57,'She didn''t pick up the phone',0);
 CREATE TABLE SentenceBreakdown (
 id integer primary key,
 sort integer,
@@ -7207,6 +7230,9 @@ INSERT INTO SentenceBreakdown VALUES(221,2,580,1,59);
 INSERT INTO SentenceBreakdown VALUES(222,3,748,1,59);
 INSERT INTO SentenceBreakdown VALUES(223,4,983,0,59);
 INSERT INTO SentenceBreakdown VALUES(224,5,1290,0,59);
+INSERT INTO SentenceBreakdown VALUES(225,1,31,0,60);
+INSERT INTO SentenceBreakdown VALUES(226,2,381,1,60);
+INSERT INTO SentenceBreakdown VALUES(227,3,1384,0,60);
 CREATE TABLE SentenceTranslation (
 id integer primary key,
 sentence_id integer references EnglishSentence(id));
@@ -7268,6 +7294,7 @@ INSERT INTO SentenceTranslation VALUES(56,53);
 INSERT INTO SentenceTranslation VALUES(57,54);
 INSERT INTO SentenceTranslation VALUES(58,55);
 INSERT INTO SentenceTranslation VALUES(59,56);
+INSERT INTO SentenceTranslation VALUES(60,57);
 CREATE UNIQUE INDEX translation_english_teochew on Translation(english_id, teochew_id);
 CREATE UNIQUE INDEX tag_id ON Tags(id);
 CREATE UNIQUE INDEX english_tag_id ON EnglishTags(english_id, tag_id);
