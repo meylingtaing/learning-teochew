@@ -64,7 +64,13 @@ sub change_tone {
     my ($input, %params) = @_;
 
     # Use parentheses by default, but the user can decide to omit them
+    # XXX: do I need this parens option?
     my $parens = $params{parens} // 1;
+
+    # If this already ends in parens, just leave it
+    if ($input =~ /\)$/) {
+        return $input;
+    }
 
     my @syllables = split / /, $input;
     my $pengim = pop @syllables;
