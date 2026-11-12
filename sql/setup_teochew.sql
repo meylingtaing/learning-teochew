@@ -55,6 +55,7 @@ INSERT INTO Categories VALUES(49,'Emotions',NULL,2);
 INSERT INTO Categories VALUES(50,'Games','Sports and Games',15);
 INSERT INTO Categories VALUES(51,'Music',NULL,15);
 INSERT INTO Categories VALUES(52,'Classifiers',NULL,12);
+INSERT INTO Categories VALUES(53,'Occasions','Special Occasions',15);
 CREATE TABLE English (
     id integer primary key,
     category_id integer,
@@ -653,7 +654,7 @@ INSERT INTO English VALUES(599,39,'top',0,NULL,NULL);
 INSERT INTO English VALUES(600,23,'mountain top',0,NULL,NULL);
 INSERT INTO English VALUES(601,38,'to go out and have fun',0,NULL,NULL);
 INSERT INTO English VALUES(602,38,'to travel and go on a walk',0,NULL,NULL);
-INSERT INTO English VALUES(603,16,'birthday',0,NULL,NULL);
+INSERT INTO English VALUES(603,53,'birthday',0,NULL,NULL);
 INSERT INTO English VALUES(604,1,'happy birthday',0,NULL,NULL);
 INSERT INTO English VALUES(605,52,'generic classifier',0,NULL,1);
 INSERT INTO English VALUES(606,13,'to leave',0,NULL,NULL);
@@ -754,7 +755,7 @@ INSERT INTO English VALUES(700,33,'to give',0,NULL,NULL);
 INSERT INTO English VALUES(701,6,'flashlight',0,NULL,NULL);
 INSERT INTO English VALUES(702,2,'50',0,NULL,NULL);
 INSERT INTO English VALUES(703,22,'rain',0,NULL,NULL);
-INSERT INTO English VALUES(704,16,'red envelope',0,NULL,NULL);
+INSERT INTO English VALUES(704,53,'red envelope',0,NULL,NULL);
 INSERT INTO English VALUES(705,39,'middle',0,NULL,NULL);
 INSERT INTO English VALUES(706,33,'to put',0,NULL,NULL);
 INSERT INTO English VALUES(707,7,'the first time',0,NULL,10);
@@ -783,7 +784,7 @@ INSERT INTO English VALUES(730,35,'Philadelphia',0,NULL,NULL);
 INSERT INTO English VALUES(731,49,'embarrassed',0,NULL,NULL);
 INSERT INTO English VALUES(732,28,'pickled mustard greens',0,NULL,10);
 INSERT INTO English VALUES(733,13,'to send',0,NULL,NULL);
-INSERT INTO English VALUES(734,16,'to offer good wishes',0,NULL,NULL);
+INSERT INTO English VALUES(734,53,'to offer good wishes',0,NULL,NULL);
 INSERT INTO English VALUES(735,23,'to water',0,NULL,NULL);
 INSERT INTO English VALUES(736,35,'Pennsylvania',1,NULL,NULL);
 INSERT INTO English VALUES(737,35,'Texas',0,NULL,NULL);
@@ -966,7 +967,7 @@ INSERT INTO English VALUES(913,8,'fitting',0,NULL,NULL);
 INSERT INTO English VALUES(914,16,'cigarette',0,NULL,NULL);
 INSERT INTO English VALUES(915,15,'earthworm',0,NULL,NULL);
 INSERT INTO English VALUES(916,13,'to roll up',0,NULL,NULL);
-INSERT INTO English VALUES(917,16,'to get married',0,NULL,NULL);
+INSERT INTO English VALUES(917,53,'to get married',0,NULL,NULL);
 INSERT INTO English VALUES(918,9,'hoe',0,NULL,NULL);
 INSERT INTO English VALUES(919,14,'to go on vacation',0,NULL,NULL);
 INSERT INTO English VALUES(920,48,'to get off work',0,NULL,NULL);
@@ -1075,9 +1076,9 @@ INSERT INTO English VALUES(1022,33,'to receive',0,NULL,NULL);
 INSERT INTO English VALUES(1023,37,'cleaver',0,NULL,NULL);
 INSERT INTO English VALUES(1024,16,'police',0,NULL,NULL);
 INSERT INTO English VALUES(1025,11,'penis',0,NULL,NULL);
-INSERT INTO English VALUES(1026,16,'Qingming festival',0,NULL,NULL);
+INSERT INTO English VALUES(1026,53,'Qingming festival',0,NULL,NULL);
 INSERT INTO English VALUES(1027,8,'clear',0,NULL,NULL);
-INSERT INTO English VALUES(1028,16,'Hungry Ghost Festival',0,NULL,NULL);
+INSERT INTO English VALUES(1028,53,'Hungry Ghost Festival',0,NULL,NULL);
 INSERT INTO English VALUES(1029,16,'safe and sound',0,NULL,NULL);
 INSERT INTO English VALUES(1030,16,'iron',0,'Fe',NULL);
 INSERT INTO English VALUES(1031,9,'hammer',0,NULL,NULL);
@@ -1106,7 +1107,7 @@ INSERT INTO English VALUES(1053,28,'longan',0,NULL,10);
 INSERT INTO English VALUES(1054,13,'to line up',0,NULL,NULL);
 INSERT INTO English VALUES(1055,32,'why...',0,NULL,10);
 INSERT INTO English VALUES(1056,36,'which',0,NULL,3);
-INSERT INTO English VALUES(1057,16,'incense',0,NULL,NULL);
+INSERT INTO English VALUES(1057,53,'incense',0,NULL,NULL);
 INSERT INTO English VALUES(1058,33,'to pick',0,NULL,NULL);
 INSERT INTO English VALUES(1059,2,'thirty',0,NULL,NULL);
 INSERT INTO English VALUES(1060,16,'upside down',0,NULL,NULL);
@@ -1117,6 +1118,8 @@ INSERT INTO English VALUES(1064,50,'fun',0,NULL,2);
 INSERT INTO English VALUES(1065,9,'thread',0,NULL,NULL);
 INSERT INTO English VALUES(1066,46,'association',0,NULL,NULL);
 INSERT INTO English VALUES(1067,7,'until',0,NULL,10);
+INSERT INTO English VALUES(1068,51,'to play the drums',0,NULL,NULL);
+INSERT INTO English VALUES(1069,51,'to play the flute',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2298,6 +2301,7 @@ INSERT INTO Synonyms VALUES(231,1058,'to choose',0);
 INSERT INTO Synonyms VALUES(232,1058,'to select',0);
 INSERT INTO Synonyms VALUES(233,1066,'club',1);
 INSERT INTO Synonyms VALUES(234,1066,'group',1);
+INSERT INTO Synonyms VALUES(235,1069,'to blow a whistle',1);
 CREATE TABLE CategoryLinks (
     id integer primary key,
     subcategory_id integer,
@@ -2323,9 +2327,9 @@ CREATE TABLE FlashcardSet (
     sort integer);
 INSERT INTO FlashcardSet VALUES(1,'Colors','Colors',0,3);
 INSERT INTO FlashcardSet VALUES(2,'People','People',0,2);
-INSERT INTO FlashcardSet VALUES(3,'Datetime','Date/Time',0,4);
+INSERT INTO FlashcardSet VALUES(3,'Datetime','Date & Time',0,4);
 INSERT INTO FlashcardSet VALUES(4,'House','Around the House',0,6);
-INSERT INTO FlashcardSet VALUES(5,'Food','Food/Drink',0,5);
+INSERT INTO FlashcardSet VALUES(5,'Food','Food & Drink',0,5);
 INSERT INTO FlashcardSet VALUES(6,'Body','Human Body',0,10);
 INSERT INTO FlashcardSet VALUES(7,'Places','Other Places',0,7);
 INSERT INTO FlashcardSet VALUES(8,'Misc','Miscellaneous',0,11);
@@ -2335,7 +2339,7 @@ INSERT INTO FlashcardSet VALUES(11,'Time','Clock Time',1,10);
 INSERT INTO FlashcardSet VALUES(12,'Basics','Basics',0,1);
 INSERT INTO FlashcardSet VALUES(13,'Number','Numbers',1,NULL);
 INSERT INTO FlashcardSet VALUES(14,'Nature','Nature',0,10);
-INSERT INTO FlashcardSet VALUES(15,'Activities','Activities',0,10);
+INSERT INTO FlashcardSet VALUES(15,'Activities','Activities & Events',0,10);
 CREATE TABLE TeochewAltChinese (
     id integer primary key,
     teochew_id integer references Teochew(id),
@@ -3946,6 +3950,8 @@ INSERT INTO Translation VALUES(1539,1063,1186,0);
 INSERT INTO Translation VALUES(1540,1064,1534,0);
 INSERT INTO Translation VALUES(1541,1066,1535,0);
 INSERT INTO Translation VALUES(1542,1067,718,0);
+INSERT INTO Translation VALUES(1543,1068,1536,0);
+INSERT INTO Translation VALUES(1544,1069,1537,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5453,6 +5459,8 @@ INSERT INTO Teochew VALUES(1532,'dao2','倒');
 INSERT INTO Teochew VALUES(1533,'loi26 bai32 bhue2','禮拜尾');
 INSERT INTO Teochew VALUES(1534,'ho26 seung2','好耍');
 INSERT INTO Teochew VALUES(1535,'hue6','會');
+INSERT INTO Teochew VALUES(1536,'pah48 gou2','拍鼓');
+INSERT INTO Teochew VALUES(1537,'bung57 hi1 hu5','歕兮呼');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6705,6 +6713,10 @@ INSERT INTO Compound VALUES(1268,1533,1,76);
 INSERT INTO Compound VALUES(1269,1533,2,1179);
 INSERT INTO Compound VALUES(1270,1534,1,344);
 INSERT INTO Compound VALUES(1271,1534,2,451);
+INSERT INTO Compound VALUES(1272,1536,1,639);
+INSERT INTO Compound VALUES(1273,1536,2,1502);
+INSERT INTO Compound VALUES(1274,1537,1,1117);
+INSERT INTO Compound VALUES(1275,1537,2,1281);
 CREATE TABLE TranslationExtra (
     id integer primary key,
     translation_id integer,
