@@ -6876,6 +6876,7 @@ INSERT INTO ExtraNotes VALUES(85,replace('Note that if you are referring to slic
 INSERT INTO ExtraNotes VALUES(86,replace('I don''t know if there is a single word in English that fully captures the meaning of **gong(7) gong5**. Growing up, I thought it meant "stupid". I''ve heard some Gaginang people say it means "confused". My cousin told me he thinks of it as "senile". My mom said it was "a little silly, a little crazy, not all there in the head".\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(87,replace('**sim1** is a contraction of 收音 **siu1 im1**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(88,replace('You add **mih(8) seu7** to the end of your phrase, to mean something like "for what?" For example, you can say **leu2 mueh(8) mih(8) seu7** to mean "Why are you doing that?"\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(89,replace('My dad told me to say **mue(7) chiah8** (porridge ladle) or **teung1 chiah8** (soup ladle) to be more specific, and that people might not know what you''re talking about if you just say chiah8\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6967,6 +6968,7 @@ INSERT INTO EnglishExtraNotes VALUES(89,750,85);
 INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
 INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
 INSERT INTO EnglishExtraNotes VALUES(92,1055,88);
+INSERT INTO EnglishExtraNotes VALUES(93,870,89);
 CREATE TABLE EnglishSentence (
 id integer primary key,
 sentence text,
