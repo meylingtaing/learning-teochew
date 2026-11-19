@@ -60,7 +60,7 @@ else {
 }
 
 # Check if we already have notes
-my $info = Input::via_editor($existing);
+my $info = Input::via_editor($existing || '');
 
 my $english_words_str = join(", ", ($english, @other_english));
 if ($info eq '') {

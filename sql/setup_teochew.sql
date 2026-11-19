@@ -6877,6 +6877,7 @@ INSERT INTO ExtraNotes VALUES(86,replace('I don''t know if there is a single wor
 INSERT INTO ExtraNotes VALUES(87,replace('**sim1** is a contraction of 收音 **siu1 im1**\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(88,replace('You add **mih(8) seu7** to the end of your phrase, to mean something like "for what?" For example, you can say **leu2 mueh(8) mih(8) seu7** to mean "Why are you doing that?"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(89,replace('My dad told me to say **mue(7) chiah8** (porridge ladle) or **teung1 chiah8** (soup ladle) to be more specific, and that people might not know what you''re talking about if you just say chiah8\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(90,replace('You would typically use **guang3** for a plastic bottle and **jung1** for a glass bottle\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6969,6 +6970,7 @@ INSERT INTO EnglishExtraNotes VALUES(90,1044,86);
 INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
 INSERT INTO EnglishExtraNotes VALUES(92,1055,88);
 INSERT INTO EnglishExtraNotes VALUES(93,870,89);
+INSERT INTO EnglishExtraNotes VALUES(94,875,90);
 CREATE TABLE EnglishSentence (
 id integer primary key,
 sentence text,
