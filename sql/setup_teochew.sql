@@ -1130,7 +1130,6 @@ INSERT INTO Chinese VALUES(2,NULL,'好','ho2');
 INSERT INTO Chinese VALUES(3,NULL,'㩼','joi7');
 INSERT INTO Chinese VALUES(5,'谢','謝','sia7');
 INSERT INTO Chinese VALUES(6,'对','對','dui3');
-INSERT INTO Chinese VALUES(7,NULL,'唔','im6');
 INSERT INTO Chinese VALUES(8,NULL,'住','ju6');
 INSERT INTO Chinese VALUES(9,'内','內','lai6');
 INSERT INTO Chinese VALUES(10,NULL,'孬','mo2');
