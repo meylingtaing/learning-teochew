@@ -1120,6 +1120,7 @@ INSERT INTO English VALUES(1066,46,'association',0,NULL,NULL);
 INSERT INTO English VALUES(1067,7,'until',0,NULL,10);
 INSERT INTO English VALUES(1068,51,'to play the drums',0,NULL,NULL);
 INSERT INTO English VALUES(1069,51,'to play the flute',0,NULL,NULL);
+INSERT INTO English VALUES(1070,51,'zither',0,NULL,NULL);
 CREATE TABLE Chinese (
     id          integer primary key,
     simplified  text,
@@ -2066,6 +2067,7 @@ INSERT INTO Chinese VALUES(950,'择','擇','doh8');
 INSERT INTO Chinese VALUES(951,'颠','顛','deng1');
 INSERT INTO Chinese VALUES(952,NULL,'倒','dao2');
 INSERT INTO Chinese VALUES(953,'会','會','hue6');
+INSERT INTO Chinese VALUES(954,NULL,'琴','kim5');
 CREATE TABLE Synonyms (
     id          integer primary key,
     english_id  integer,
@@ -3951,6 +3953,7 @@ INSERT INTO Translation VALUES(1541,1066,1535,0);
 INSERT INTO Translation VALUES(1542,1067,718,0);
 INSERT INTO Translation VALUES(1543,1068,1536,0);
 INSERT INTO Translation VALUES(1544,1069,1537,0);
+INSERT INTO Translation VALUES(1545,1070,1538,0);
 CREATE TABLE IF NOT EXISTS "Teochew" (
     id         integer primary key,
     pengim     text,
@@ -5460,6 +5463,7 @@ INSERT INTO Teochew VALUES(1534,'ho26 seung2','好耍');
 INSERT INTO Teochew VALUES(1535,'hue6','會');
 INSERT INTO Teochew VALUES(1536,'pah48 gou2','拍鼓');
 INSERT INTO Teochew VALUES(1537,'bung57 hi1 hu5','歕兮呼');
+INSERT INTO Teochew VALUES(1538,'kim5','琴');
 CREATE TABLE IF NOT EXISTS "Compound" (
     id integer primary key,
     parent_teochew_id integer references Teochew(id),
@@ -6877,6 +6881,7 @@ INSERT INTO ExtraNotes VALUES(87,replace('**sim1** is a contraction of 收音 **
 INSERT INTO ExtraNotes VALUES(88,replace('You add **mih(8) seu7** to the end of your phrase, to mean something like "for what?" For example, you can say **leu2 mueh(8) mih(8) seu7** to mean "Why are you doing that?"\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(89,replace('My dad told me to say **mue(7) chiah8** (porridge ladle) or **teung1 chiah8** (soup ladle) to be more specific, and that people might not know what you''re talking about if you just say chiah8\n','\n',char(10)));
 INSERT INTO ExtraNotes VALUES(90,replace('You would typically use **guang3** for a plastic bottle and **jung1** for a glass bottle\n','\n',char(10)));
+INSERT INTO ExtraNotes VALUES(91,replace('I think this technically refers to a _[guqin](https://en.wikipedia.org/wiki/Guqin)_, but people also use **kim5** to more collectively mean stringed or keyboard instruments\n','\n',char(10)));
 CREATE TABLE EnglishExtraNotes (
     id integer PRIMARY KEY,
     english_id integer,
@@ -6970,6 +6975,7 @@ INSERT INTO EnglishExtraNotes VALUES(91,1050,87);
 INSERT INTO EnglishExtraNotes VALUES(92,1055,88);
 INSERT INTO EnglishExtraNotes VALUES(93,870,89);
 INSERT INTO EnglishExtraNotes VALUES(94,875,90);
+INSERT INTO EnglishExtraNotes VALUES(95,1070,91);
 CREATE TABLE EnglishSentence (
 id integer primary key,
 sentence text,
