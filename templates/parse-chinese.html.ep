@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => "$characters - learningteochew.com";
 <ul class="list-group list-group-horizontal mb-2 flex flex-wrap">
 % if (@$chinese) {
     % for my $word (@$chinese) {

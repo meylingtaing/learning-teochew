@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => "$characters - learningteochew.com";
 
 % if ($chinese and scalar @$chinese) {
   <div class="text-sm-start text-center">

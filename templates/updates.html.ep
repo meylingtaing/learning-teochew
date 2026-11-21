@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => 'Updates - learningteochew.com';
 
 <div class="mb-2">
   Want to be notified about updates? Subscribe to my

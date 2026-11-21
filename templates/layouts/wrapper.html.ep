@@ -14,7 +14,7 @@
   <script src="/js/bootstrap5.bundle.min.js"></script>
   <script src="/js/load-settings.js"></script>
 
-  <title>Teochew Flashcards</title>
+  <title><%= stash('title') || 'Teochew Flashcards' %></title>
 
 </head>
 

@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => 'Months and Dates - learningteochew.com';
 <style>
 .table .play-teochew { font-size: 1.5em }
 .large-translation { margin-bottom: 2rem; }

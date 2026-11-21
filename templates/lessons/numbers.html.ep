@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => 'Numbers Lesson - learningteochew.com';
 <style>
 .play-teochew { font-size: 1.5em }
 figure { text-align: center }

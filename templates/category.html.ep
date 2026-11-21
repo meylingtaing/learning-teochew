@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => "$flashcard_set_display - learningteochew.com";
 <style>
 /* uh, for some reason the margin messes with the vertical alignment of the
    flashcards button next to each header */

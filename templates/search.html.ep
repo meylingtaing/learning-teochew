@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => "Search '$search' - learningteochew.com";
 % if (scalar @$results) {
   <h5>
     <%= scalar @$results %> result<%= scalar @$results == 1 ? '' : 's' %>

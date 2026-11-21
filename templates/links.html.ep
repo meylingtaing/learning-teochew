@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => 'Links - learningteochew.com';
 <h2>Resources for learning</h2>
 <ul>
   <li>

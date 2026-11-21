@@ -1,4 +1,4 @@
-% layout 'wrapper-left';
+% layout 'wrapper-left', title => "Translation for '$english' - learningteochew.com";
 <style>
 .translation {
     font-size: 2em;
